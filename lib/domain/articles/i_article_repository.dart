@@ -6,9 +6,9 @@ import 'package:kt_dart/kt.dart';
 
 abstract class IArticleRepository {
   // get articles
-  Either<ArticleFailure, KtList<Article>> getAll();
+  Stream<Either<ArticleFailure, KtList<Article>>> watchAll();
 
   // get articles from source
-  Either<ArticleFailure, KtList<Article>> getFromSource(
+  Stream<Either<ArticleFailure, KtList<Article>>> watchFromSource(
       ArticleSource articleSource);
 }

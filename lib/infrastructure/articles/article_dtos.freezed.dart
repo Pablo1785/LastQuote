@@ -159,12 +159,13 @@ class __$ArticleSourceDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ArticleSourceDto implements _ArticleSourceDto {
+class _$_ArticleSourceDto extends _ArticleSourceDto {
   const _$_ArticleSourceDto(
       {required this.id,
       required this.articleSourceName,
       required this.url,
-      required this.articles});
+      required this.articles})
+      : super._();
 
   factory _$_ArticleSourceDto.fromJson(Map<String, dynamic> json) =>
       _$$_ArticleSourceDtoFromJson(json);
@@ -210,12 +211,13 @@ class _$_ArticleSourceDto implements _ArticleSourceDto {
   }
 }
 
-abstract class _ArticleSourceDto implements ArticleSourceDto {
+abstract class _ArticleSourceDto extends ArticleSourceDto {
   const factory _ArticleSourceDto(
       {required String id,
       required String articleSourceName,
       required String url,
       required List<ArticleDto> articles}) = _$_ArticleSourceDto;
+  const _ArticleSourceDto._() : super._();
 
   factory _ArticleSourceDto.fromJson(Map<String, dynamic> json) =
       _$_ArticleSourceDto.fromJson;

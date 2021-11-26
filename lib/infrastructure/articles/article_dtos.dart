@@ -3,12 +3,16 @@ import 'package:ddd/domain/articles/article_source.dart';
 import 'package:ddd/domain/articles/value_objects.dart';
 import 'package:ddd/domain/core/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kt_dart/kt.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 part 'article_dtos.freezed.dart';
 part 'article_dtos.g.dart'; // JsonSerializable generated code
 
 @freezed
-abstract class ArticleSourceDto with _$ArticleSourceDto {
+abstract class ArticleSourceDto implements _$ArticleSourceDto {
+  const ArticleSourceDto._();
+
   const factory ArticleSourceDto({
     required String id,
     required String articleSourceName,
@@ -28,8 +32,26 @@ abstract class ArticleSourceDto with _$ArticleSourceDto {
     );
   }
 
+  ArticleSource toDomain() {
+    return ArticleSource(
+      id: UniqueId.fromUniqueString(id),
+      name: ArticleSourceName(articleSourceName),
+      url: ArticleSourceUrl(url),
+      articles: KtList.from(
+        articles.map(
+          (articleDto) => articleDto.toDomain(),
+        ),
+      ),
+    );
+  }
+
   factory ArticleSourceDto.fromJson(Map<String, dynamic> json) =>
       _$ArticleSourceDtoFromJson(json);
+
+  factory ArticleSourceDto.fromFirestore(DocumentSnapshot doc) {
+    return ArticleSourceDto.fromJson(doc.data() as Map<String, dynamic>)
+        .copyWith(id: doc.id);
+  }
 }
 
 @freezed
