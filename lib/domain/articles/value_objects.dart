@@ -43,9 +43,9 @@ class ArticleMediaType extends ValueObject<String> {
   static const maxLength = 100;
 
   static const List<String> predefinedMediaTypes = [
-    'social-media-post',
-    'news-article',
-    'encyclopedia-entry',
+    'social_media_post',
+    'news_article',
+    'encyclopedia_entry',
   ];
 
   factory ArticleMediaType(String input) {

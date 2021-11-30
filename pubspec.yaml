@@ -51,7 +51,9 @@ dependencies:
   auto_route: 
   kt_dart: 
   json_serializable:
+  json_annotation: ^4.3.0
   cloud_firestore:
+  rxdart: ^0.27.3
   
 
 dev_dependencies:

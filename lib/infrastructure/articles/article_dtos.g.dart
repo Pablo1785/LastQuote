@@ -14,6 +14,8 @@ _$_ArticleSourceDto _$$_ArticleSourceDtoFromJson(Map<String, dynamic> json) =>
       articles: (json['articles'] as List<dynamic>)
           .map((e) => ArticleDto.fromJson(e as Map<String, dynamic>))
           .toList(),
+      serverTimestamp: const ServerTimestampConverter()
+          .fromJson(json['serverTimestamp'] as Object),
     );
 
 Map<String, dynamic> _$$_ArticleSourceDtoToJson(_$_ArticleSourceDto instance) =>
@@ -22,6 +24,8 @@ Map<String, dynamic> _$$_ArticleSourceDtoToJson(_$_ArticleSourceDto instance) =>
       'articleSourceName': instance.articleSourceName,
       'url': instance.url,
       'articles': instance.articles,
+      'serverTimestamp':
+          const ServerTimestampConverter().toJson(instance.serverTimestamp),
     };
 
 _$_ArticleDto _$$_ArticleDtoFromJson(Map<String, dynamic> json) =>
@@ -31,6 +35,8 @@ _$_ArticleDto _$$_ArticleDtoFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String,
       url: json['url'] as String,
       mediaType: json['mediaType'] as String,
+      serverTimeStamp: const ServerTimestampConverter()
+          .fromJson(json['serverTimeStamp'] as Object),
     );
 
 Map<String, dynamic> _$$_ArticleDtoToJson(_$_ArticleDto instance) =>
@@ -40,4 +46,6 @@ Map<String, dynamic> _$$_ArticleDtoToJson(_$_ArticleDto instance) =>
       'title': instance.title,
       'url': instance.url,
       'mediaType': instance.mediaType,
+      'serverTimeStamp':
+          const ServerTimestampConverter().toJson(instance.serverTimeStamp),
     };

@@ -18,6 +18,7 @@ abstract class ArticleSourceDto implements _$ArticleSourceDto {
     required String articleSourceName,
     required String url,
     required List<ArticleDto> articles,
+    @ServerTimestampConverter() required FieldValue serverTimestamp,
   }) = _ArticleSourceDto;
 
   factory ArticleSourceDto.fromDomain(ArticleSource articleSource) {
@@ -29,6 +30,7 @@ abstract class ArticleSourceDto implements _$ArticleSourceDto {
           .asList()
           .map((article) => ArticleDto.fromDomain(article))
           .toList(),
+      serverTimestamp: FieldValue.serverTimestamp(),
     );
   }
 
@@ -64,6 +66,7 @@ abstract class ArticleDto implements _$ArticleDto {
     required String title,
     required String url,
     required String mediaType,
+    @ServerTimestampConverter() required FieldValue serverTimeStamp,
   }) = _ArticleDto;
 
   factory ArticleDto.fromDomain(Article article) {
@@ -73,6 +76,7 @@ abstract class ArticleDto implements _$ArticleDto {
       title: article.title.getOrCrash(),
       url: article.url.getOrCrash(),
       mediaType: article.mediaType.getOrCrash(),
+      serverTimeStamp: FieldValue.serverTimestamp(),
     );
   }
 
@@ -88,4 +92,21 @@ abstract class ArticleDto implements _$ArticleDto {
 
   factory ArticleDto.fromJson(Map<String, dynamic> json) =>
       _$ArticleDtoFromJson(json);
+
+  factory ArticleDto.fromFirestore(DocumentSnapshot doc) {
+    return ArticleDto.fromJson(doc.data() as Map<String, dynamic>)
+        .copyWith(id: doc.id);
+  }
+}
+
+class ServerTimestampConverter implements JsonConverter<FieldValue, Object> {
+  const ServerTimestampConverter(); // in order to use this class as an annotation it needs a const constructor
+
+  @override
+  FieldValue fromJson(Object json) {
+    return FieldValue.serverTimestamp();
+  }
+
+  @override
+  Object toJson(FieldValue fieldValue) => fieldValue;
 }

@@ -25,12 +25,14 @@ class _$ArticleSourceDtoTearOff {
       {required String id,
       required String articleSourceName,
       required String url,
-      required List<ArticleDto> articles}) {
+      required List<ArticleDto> articles,
+      @ServerTimestampConverter() required FieldValue serverTimestamp}) {
     return _ArticleSourceDto(
       id: id,
       articleSourceName: articleSourceName,
       url: url,
       articles: articles,
+      serverTimestamp: serverTimestamp,
     );
   }
 
@@ -48,6 +50,8 @@ mixin _$ArticleSourceDto {
   String get articleSourceName => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
   List<ArticleDto> get articles => throw _privateConstructorUsedError;
+  @ServerTimestampConverter()
+  FieldValue get serverTimestamp => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -64,7 +68,8 @@ abstract class $ArticleSourceDtoCopyWith<$Res> {
       {String id,
       String articleSourceName,
       String url,
-      List<ArticleDto> articles});
+      List<ArticleDto> articles,
+      @ServerTimestampConverter() FieldValue serverTimestamp});
 }
 
 /// @nodoc
@@ -82,6 +87,7 @@ class _$ArticleSourceDtoCopyWithImpl<$Res>
     Object? articleSourceName = freezed,
     Object? url = freezed,
     Object? articles = freezed,
+    Object? serverTimestamp = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -100,6 +106,10 @@ class _$ArticleSourceDtoCopyWithImpl<$Res>
           ? _value.articles
           : articles // ignore: cast_nullable_to_non_nullable
               as List<ArticleDto>,
+      serverTimestamp: serverTimestamp == freezed
+          ? _value.serverTimestamp
+          : serverTimestamp // ignore: cast_nullable_to_non_nullable
+              as FieldValue,
     ));
   }
 }
@@ -115,7 +125,8 @@ abstract class _$ArticleSourceDtoCopyWith<$Res>
       {String id,
       String articleSourceName,
       String url,
-      List<ArticleDto> articles});
+      List<ArticleDto> articles,
+      @ServerTimestampConverter() FieldValue serverTimestamp});
 }
 
 /// @nodoc
@@ -135,6 +146,7 @@ class __$ArticleSourceDtoCopyWithImpl<$Res>
     Object? articleSourceName = freezed,
     Object? url = freezed,
     Object? articles = freezed,
+    Object? serverTimestamp = freezed,
   }) {
     return _then(_ArticleSourceDto(
       id: id == freezed
@@ -153,6 +165,10 @@ class __$ArticleSourceDtoCopyWithImpl<$Res>
           ? _value.articles
           : articles // ignore: cast_nullable_to_non_nullable
               as List<ArticleDto>,
+      serverTimestamp: serverTimestamp == freezed
+          ? _value.serverTimestamp
+          : serverTimestamp // ignore: cast_nullable_to_non_nullable
+              as FieldValue,
     ));
   }
 }
@@ -164,7 +180,8 @@ class _$_ArticleSourceDto extends _ArticleSourceDto {
       {required this.id,
       required this.articleSourceName,
       required this.url,
-      required this.articles})
+      required this.articles,
+      @ServerTimestampConverter() required this.serverTimestamp})
       : super._();
 
   factory _$_ArticleSourceDto.fromJson(Map<String, dynamic> json) =>
@@ -178,10 +195,13 @@ class _$_ArticleSourceDto extends _ArticleSourceDto {
   final String url;
   @override
   final List<ArticleDto> articles;
+  @override
+  @ServerTimestampConverter()
+  final FieldValue serverTimestamp;
 
   @override
   String toString() {
-    return 'ArticleSourceDto(id: $id, articleSourceName: $articleSourceName, url: $url, articles: $articles)';
+    return 'ArticleSourceDto(id: $id, articleSourceName: $articleSourceName, url: $url, articles: $articles, serverTimestamp: $serverTimestamp)';
   }
 
   @override
@@ -193,12 +213,14 @@ class _$_ArticleSourceDto extends _ArticleSourceDto {
             (identical(other.articleSourceName, articleSourceName) ||
                 other.articleSourceName == articleSourceName) &&
             (identical(other.url, url) || other.url == url) &&
-            const DeepCollectionEquality().equals(other.articles, articles));
+            const DeepCollectionEquality().equals(other.articles, articles) &&
+            (identical(other.serverTimestamp, serverTimestamp) ||
+                other.serverTimestamp == serverTimestamp));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, id, articleSourceName, url,
-      const DeepCollectionEquality().hash(articles));
+      const DeepCollectionEquality().hash(articles), serverTimestamp);
 
   @JsonKey(ignore: true)
   @override
@@ -213,10 +235,12 @@ class _$_ArticleSourceDto extends _ArticleSourceDto {
 
 abstract class _ArticleSourceDto extends ArticleSourceDto {
   const factory _ArticleSourceDto(
-      {required String id,
-      required String articleSourceName,
-      required String url,
-      required List<ArticleDto> articles}) = _$_ArticleSourceDto;
+          {required String id,
+          required String articleSourceName,
+          required String url,
+          required List<ArticleDto> articles,
+          @ServerTimestampConverter() required FieldValue serverTimestamp}) =
+      _$_ArticleSourceDto;
   const _ArticleSourceDto._() : super._();
 
   factory _ArticleSourceDto.fromJson(Map<String, dynamic> json) =
@@ -230,6 +254,9 @@ abstract class _ArticleSourceDto extends ArticleSourceDto {
   String get url;
   @override
   List<ArticleDto> get articles;
+  @override
+  @ServerTimestampConverter()
+  FieldValue get serverTimestamp;
   @override
   @JsonKey(ignore: true)
   _$ArticleSourceDtoCopyWith<_ArticleSourceDto> get copyWith =>
@@ -249,13 +276,15 @@ class _$ArticleDtoTearOff {
       required String sourceId,
       required String title,
       required String url,
-      required String mediaType}) {
+      required String mediaType,
+      @ServerTimestampConverter() required FieldValue serverTimeStamp}) {
     return _ArticleDto(
       id: id,
       sourceId: sourceId,
       title: title,
       url: url,
       mediaType: mediaType,
+      serverTimeStamp: serverTimeStamp,
     );
   }
 
@@ -274,6 +303,8 @@ mixin _$ArticleDto {
   String get title => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
   String get mediaType => throw _privateConstructorUsedError;
+  @ServerTimestampConverter()
+  FieldValue get serverTimeStamp => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -287,7 +318,12 @@ abstract class $ArticleDtoCopyWith<$Res> {
           ArticleDto value, $Res Function(ArticleDto) then) =
       _$ArticleDtoCopyWithImpl<$Res>;
   $Res call(
-      {String id, String sourceId, String title, String url, String mediaType});
+      {String id,
+      String sourceId,
+      String title,
+      String url,
+      String mediaType,
+      @ServerTimestampConverter() FieldValue serverTimeStamp});
 }
 
 /// @nodoc
@@ -305,6 +341,7 @@ class _$ArticleDtoCopyWithImpl<$Res> implements $ArticleDtoCopyWith<$Res> {
     Object? title = freezed,
     Object? url = freezed,
     Object? mediaType = freezed,
+    Object? serverTimeStamp = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -327,6 +364,10 @@ class _$ArticleDtoCopyWithImpl<$Res> implements $ArticleDtoCopyWith<$Res> {
           ? _value.mediaType
           : mediaType // ignore: cast_nullable_to_non_nullable
               as String,
+      serverTimeStamp: serverTimeStamp == freezed
+          ? _value.serverTimeStamp
+          : serverTimeStamp // ignore: cast_nullable_to_non_nullable
+              as FieldValue,
     ));
   }
 }
@@ -338,7 +379,12 @@ abstract class _$ArticleDtoCopyWith<$Res> implements $ArticleDtoCopyWith<$Res> {
       __$ArticleDtoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id, String sourceId, String title, String url, String mediaType});
+      {String id,
+      String sourceId,
+      String title,
+      String url,
+      String mediaType,
+      @ServerTimestampConverter() FieldValue serverTimeStamp});
 }
 
 /// @nodoc
@@ -358,6 +404,7 @@ class __$ArticleDtoCopyWithImpl<$Res> extends _$ArticleDtoCopyWithImpl<$Res>
     Object? title = freezed,
     Object? url = freezed,
     Object? mediaType = freezed,
+    Object? serverTimeStamp = freezed,
   }) {
     return _then(_ArticleDto(
       id: id == freezed
@@ -380,6 +427,10 @@ class __$ArticleDtoCopyWithImpl<$Res> extends _$ArticleDtoCopyWithImpl<$Res>
           ? _value.mediaType
           : mediaType // ignore: cast_nullable_to_non_nullable
               as String,
+      serverTimeStamp: serverTimeStamp == freezed
+          ? _value.serverTimeStamp
+          : serverTimeStamp // ignore: cast_nullable_to_non_nullable
+              as FieldValue,
     ));
   }
 }
@@ -392,7 +443,8 @@ class _$_ArticleDto extends _ArticleDto {
       required this.sourceId,
       required this.title,
       required this.url,
-      required this.mediaType})
+      required this.mediaType,
+      @ServerTimestampConverter() required this.serverTimeStamp})
       : super._();
 
   factory _$_ArticleDto.fromJson(Map<String, dynamic> json) =>
@@ -408,10 +460,13 @@ class _$_ArticleDto extends _ArticleDto {
   final String url;
   @override
   final String mediaType;
+  @override
+  @ServerTimestampConverter()
+  final FieldValue serverTimeStamp;
 
   @override
   String toString() {
-    return 'ArticleDto(id: $id, sourceId: $sourceId, title: $title, url: $url, mediaType: $mediaType)';
+    return 'ArticleDto(id: $id, sourceId: $sourceId, title: $title, url: $url, mediaType: $mediaType, serverTimeStamp: $serverTimeStamp)';
   }
 
   @override
@@ -425,12 +480,14 @@ class _$_ArticleDto extends _ArticleDto {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.mediaType, mediaType) ||
-                other.mediaType == mediaType));
+                other.mediaType == mediaType) &&
+            (identical(other.serverTimeStamp, serverTimeStamp) ||
+                other.serverTimeStamp == serverTimeStamp));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, sourceId, title, url, mediaType);
+  int get hashCode => Object.hash(
+      runtimeType, id, sourceId, title, url, mediaType, serverTimeStamp);
 
   @JsonKey(ignore: true)
   @override
@@ -445,11 +502,13 @@ class _$_ArticleDto extends _ArticleDto {
 
 abstract class _ArticleDto extends ArticleDto {
   const factory _ArticleDto(
-      {required String id,
-      required String sourceId,
-      required String title,
-      required String url,
-      required String mediaType}) = _$_ArticleDto;
+          {required String id,
+          required String sourceId,
+          required String title,
+          required String url,
+          required String mediaType,
+          @ServerTimestampConverter() required FieldValue serverTimeStamp}) =
+      _$_ArticleDto;
   const _ArticleDto._() : super._();
 
   factory _ArticleDto.fromJson(Map<String, dynamic> json) =
@@ -465,6 +524,9 @@ abstract class _ArticleDto extends ArticleDto {
   String get url;
   @override
   String get mediaType;
+  @override
+  @ServerTimestampConverter()
+  FieldValue get serverTimeStamp;
   @override
   @JsonKey(ignore: true)
   _$ArticleDtoCopyWith<_ArticleDto> get copyWith =>
