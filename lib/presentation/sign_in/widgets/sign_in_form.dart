@@ -1,4 +1,6 @@
 import 'package:another_flushbar/flushbar_helper.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:ddd/application/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -128,8 +130,12 @@ class SignInForm extends StatelessWidget {
                     ),
                   ).show(context);
                 },
-                (r) {
-                  // TODO: Navigate
+                (_) {
+                  AutoRouter.of(context)
+                      .replaceNamed('/articles-overview-page');
+                  context
+                      .read<AuthBloc>()
+                      .add(const AuthEvent.authCheckRequested());
                 },
               ),
             );
