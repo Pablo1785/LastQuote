@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:ddd/application/articles/article_actor/article_actor_bloc.dart';
 import 'package:ddd/application/articles/article_watcher/article_watcher_bloc.dart';
@@ -30,6 +31,26 @@ class ArticlesOverviewPage extends StatelessWidget {
               state.maybeMap(
                 unAuthenticated: (_) =>
                     AutoRouter.of(context).pushNamed('/sign-in-page'),
+                orElse: () {},
+              );
+            },
+          ),
+          BlocListener<ArticleActorBloc, ArticleActorState>(
+            listener: (context, state) {
+              state.maybeMap(
+                likeFailure: (likeFailure) {
+                  FlushbarHelper.createError(
+                    duration: const Duration(seconds: 5),
+                    message: likeFailure.articleFailure.map(
+                      unexpected: (_) =>
+                          ':smile: Unexpected error occured. Please restart the app or IMPLEMENT ArticleActorBloc.',
+                      insufficientPermissions: (_) =>
+                          'You don\'t have sufficient permissions to Like this content.',
+                      sourceDisabled: (_) =>
+                          'You can\'ot Like recommendations from disabled sources',
+                    ),
+                  ).show(context);
+                },
                 orElse: () {},
               );
             },

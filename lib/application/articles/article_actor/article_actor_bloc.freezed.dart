@@ -20,6 +20,10 @@ class _$ArticleActorEventTearOff {
   _Started started() {
     return const _Started();
   }
+
+  _Liked liked() {
+    return const _Liked();
+  }
 }
 
 /// @nodoc
@@ -30,32 +34,38 @@ mixin _$ArticleActorEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
+    required TResult Function() liked,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function()? liked,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function()? liked,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
+    required TResult Function(_Liked value) liked,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_Liked value)? liked,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_Liked value)? liked,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -117,6 +127,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
+    required TResult Function() liked,
   }) {
     return started();
   }
@@ -125,6 +136,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function()? liked,
   }) {
     return started?.call();
   }
@@ -133,6 +145,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function()? liked,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -145,6 +158,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
+    required TResult Function(_Liked value) liked,
   }) {
     return started(this);
   }
@@ -153,6 +167,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_Liked value)? liked,
   }) {
     return started?.call(this);
   }
@@ -161,6 +176,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_Liked value)? liked,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -175,11 +191,119 @@ abstract class _Started implements ArticleActorEvent {
 }
 
 /// @nodoc
+abstract class _$LikedCopyWith<$Res> {
+  factory _$LikedCopyWith(_Liked value, $Res Function(_Liked) then) =
+      __$LikedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$LikedCopyWithImpl<$Res> extends _$ArticleActorEventCopyWithImpl<$Res>
+    implements _$LikedCopyWith<$Res> {
+  __$LikedCopyWithImpl(_Liked _value, $Res Function(_Liked) _then)
+      : super(_value, (v) => _then(v as _Liked));
+
+  @override
+  _Liked get _value => super._value as _Liked;
+}
+
+/// @nodoc
+
+class _$_Liked implements _Liked {
+  const _$_Liked();
+
+  @override
+  String toString() {
+    return 'ArticleActorEvent.liked()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Liked);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() liked,
+  }) {
+    return liked();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? liked,
+  }) {
+    return liked?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? liked,
+    required TResult orElse(),
+  }) {
+    if (liked != null) {
+      return liked();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_Liked value) liked,
+  }) {
+    return liked(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Liked value)? liked,
+  }) {
+    return liked?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Liked value)? liked,
+    required TResult orElse(),
+  }) {
+    if (liked != null) {
+      return liked(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Liked implements ArticleActorEvent {
+  const factory _Liked() = _$_Liked;
+}
+
+/// @nodoc
 class _$ArticleActorStateTearOff {
   const _$ArticleActorStateTearOff();
 
   _Initial initial() {
     return const _Initial();
+  }
+
+  _LikeFailure likeFailure(ArticleFailure articleFailure) {
+    return _LikeFailure(
+      articleFailure,
+    );
   }
 
   _ActionInProgress actionInProgress() {
@@ -195,18 +319,21 @@ mixin _$ArticleActorState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function(ArticleFailure articleFailure) likeFailure,
     required TResult Function() actionInProgress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function(ArticleFailure articleFailure)? likeFailure,
     TResult Function()? actionInProgress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function(ArticleFailure articleFailure)? likeFailure,
     TResult Function()? actionInProgress,
     required TResult orElse(),
   }) =>
@@ -214,18 +341,21 @@ mixin _$ArticleActorState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_LikeFailure value) likeFailure,
     required TResult Function(_ActionInProgress value) actionInProgress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_ActionInProgress value)? actionInProgress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_ActionInProgress value)? actionInProgress,
     required TResult orElse(),
   }) =>
@@ -288,6 +418,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function(ArticleFailure articleFailure) likeFailure,
     required TResult Function() actionInProgress,
   }) {
     return initial();
@@ -297,6 +428,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function(ArticleFailure articleFailure)? likeFailure,
     TResult Function()? actionInProgress,
   }) {
     return initial?.call();
@@ -306,6 +438,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function(ArticleFailure articleFailure)? likeFailure,
     TResult Function()? actionInProgress,
     required TResult orElse(),
   }) {
@@ -319,6 +452,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_LikeFailure value) likeFailure,
     required TResult Function(_ActionInProgress value) actionInProgress,
   }) {
     return initial(this);
@@ -328,6 +462,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_ActionInProgress value)? actionInProgress,
   }) {
     return initial?.call(this);
@@ -337,6 +472,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_ActionInProgress value)? actionInProgress,
     required TResult orElse(),
   }) {
@@ -349,6 +485,155 @@ class _$_Initial implements _Initial {
 
 abstract class _Initial implements ArticleActorState {
   const factory _Initial() = _$_Initial;
+}
+
+/// @nodoc
+abstract class _$LikeFailureCopyWith<$Res> {
+  factory _$LikeFailureCopyWith(
+          _LikeFailure value, $Res Function(_LikeFailure) then) =
+      __$LikeFailureCopyWithImpl<$Res>;
+  $Res call({ArticleFailure articleFailure});
+
+  $ArticleFailureCopyWith<$Res> get articleFailure;
+}
+
+/// @nodoc
+class __$LikeFailureCopyWithImpl<$Res>
+    extends _$ArticleActorStateCopyWithImpl<$Res>
+    implements _$LikeFailureCopyWith<$Res> {
+  __$LikeFailureCopyWithImpl(
+      _LikeFailure _value, $Res Function(_LikeFailure) _then)
+      : super(_value, (v) => _then(v as _LikeFailure));
+
+  @override
+  _LikeFailure get _value => super._value as _LikeFailure;
+
+  @override
+  $Res call({
+    Object? articleFailure = freezed,
+  }) {
+    return _then(_LikeFailure(
+      articleFailure == freezed
+          ? _value.articleFailure
+          : articleFailure // ignore: cast_nullable_to_non_nullable
+              as ArticleFailure,
+    ));
+  }
+
+  @override
+  $ArticleFailureCopyWith<$Res> get articleFailure {
+    return $ArticleFailureCopyWith<$Res>(_value.articleFailure, (value) {
+      return _then(_value.copyWith(articleFailure: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_LikeFailure implements _LikeFailure {
+  const _$_LikeFailure(this.articleFailure);
+
+  @override
+  final ArticleFailure articleFailure;
+
+  @override
+  String toString() {
+    return 'ArticleActorState.likeFailure(articleFailure: $articleFailure)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _LikeFailure &&
+            (identical(other.articleFailure, articleFailure) ||
+                other.articleFailure == articleFailure));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, articleFailure);
+
+  @JsonKey(ignore: true)
+  @override
+  _$LikeFailureCopyWith<_LikeFailure> get copyWith =>
+      __$LikeFailureCopyWithImpl<_LikeFailure>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(ArticleFailure articleFailure) likeFailure,
+    required TResult Function() actionInProgress,
+  }) {
+    return likeFailure(articleFailure);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(ArticleFailure articleFailure)? likeFailure,
+    TResult Function()? actionInProgress,
+  }) {
+    return likeFailure?.call(articleFailure);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(ArticleFailure articleFailure)? likeFailure,
+    TResult Function()? actionInProgress,
+    required TResult orElse(),
+  }) {
+    if (likeFailure != null) {
+      return likeFailure(articleFailure);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LikeFailure value) likeFailure,
+    required TResult Function(_ActionInProgress value) actionInProgress,
+  }) {
+    return likeFailure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LikeFailure value)? likeFailure,
+    TResult Function(_ActionInProgress value)? actionInProgress,
+  }) {
+    return likeFailure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LikeFailure value)? likeFailure,
+    TResult Function(_ActionInProgress value)? actionInProgress,
+    required TResult orElse(),
+  }) {
+    if (likeFailure != null) {
+      return likeFailure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LikeFailure implements ArticleActorState {
+  const factory _LikeFailure(ArticleFailure articleFailure) = _$_LikeFailure;
+
+  ArticleFailure get articleFailure;
+  @JsonKey(ignore: true)
+  _$LikeFailureCopyWith<_LikeFailure> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -393,6 +678,7 @@ class _$_ActionInProgress implements _ActionInProgress {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function(ArticleFailure articleFailure) likeFailure,
     required TResult Function() actionInProgress,
   }) {
     return actionInProgress();
@@ -402,6 +688,7 @@ class _$_ActionInProgress implements _ActionInProgress {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function(ArticleFailure articleFailure)? likeFailure,
     TResult Function()? actionInProgress,
   }) {
     return actionInProgress?.call();
@@ -411,6 +698,7 @@ class _$_ActionInProgress implements _ActionInProgress {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function(ArticleFailure articleFailure)? likeFailure,
     TResult Function()? actionInProgress,
     required TResult orElse(),
   }) {
@@ -424,6 +712,7 @@ class _$_ActionInProgress implements _ActionInProgress {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_LikeFailure value) likeFailure,
     required TResult Function(_ActionInProgress value) actionInProgress,
   }) {
     return actionInProgress(this);
@@ -433,6 +722,7 @@ class _$_ActionInProgress implements _ActionInProgress {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_ActionInProgress value)? actionInProgress,
   }) {
     return actionInProgress?.call(this);
@@ -442,6 +732,7 @@ class _$_ActionInProgress implements _ActionInProgress {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_ActionInProgress value)? actionInProgress,
     required TResult orElse(),
   }) {
