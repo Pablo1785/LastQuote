@@ -15,28 +15,29 @@ extension FirebaseFirestoreX on FirebaseFirestore {
         .doc(user.id.getOrCrash());
   }
 
-  Future<List<DocumentSnapshot<ArticleSourceDto>>>
-      userEnabledArticleSources() async {
-    final userOption = await getIt<IAuthFacade>().getSignedInUser();
-    final user = userOption.getOrElse(() => throw NotAuthenticatedError());
+  Future<List<DocumentReference>> userEnabledArticleSources() async {
+    final userDocRef = await FirebaseFirestore.instance.userDocument();
     final userArticleSourceStatuses = await FirebaseFirestore.instance
         .collection('user_article_source_statuses')
-        .where('user_id', isEqualTo: user.id.getOrCrash())
+        .where('user_id', isEqualTo: userDocRef)
         .where('is_enabled', isEqualTo: true)
         .get();
-    final enabledArticleSources = await Future.wait(
-      userArticleSourceStatuses.docs.where((junction) => junction.exists).map(
-            (junction) => FirebaseFirestore.instance
-                .doc('article_sources/${junction.data()["source_id"]}')
-                .withConverter<ArticleSourceDto>(
-                    fromFirestore: (doc, options) =>
-                        ArticleSourceDto.fromFirestore(doc),
-                    toFirestore: (articleSourceDto, options) =>
-                        articleSourceDto.toJson())
-                .get(),
-          ),
-    );
-    return enabledArticleSources;
+    final enabledSourceIds = userArticleSourceStatuses.docs
+        .where((doc) => doc.exists)
+        .map((doc) => (doc.data()['article_source_id'] as DocumentReference).id)
+        .toList();
+
+    if (enabledSourceIds.isEmpty) {
+      return List.empty();
+    } else {
+      final articleSourceQuery =
+          await FirebaseFirestore.instance.collection('article_sources').get();
+      return articleSourceQuery.docs
+          .where((doc) => doc.exists)
+          .where((doc) => enabledSourceIds.contains(doc.id))
+          .map((doc) => doc.reference)
+          .toList(); // if this returns List.empty then there are source_ids in user_article_source_statuses that arent in article_sources
+    }
   }
 }
 

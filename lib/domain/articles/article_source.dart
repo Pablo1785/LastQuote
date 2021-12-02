@@ -12,6 +12,5 @@ abstract class ArticleSource with _$ArticleSource {
     required UniqueId id,
     required ArticleSourceName name,
     required ArticleSourceUrl url,
-    required KtList<Article> articles,
   }) = _ArticleSource;
 }

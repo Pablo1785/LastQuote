@@ -6,46 +6,63 @@ part of 'article_dtos.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+_$_ArticleSourceStatusDto _$$_ArticleSourceStatusDtoFromJson(
+        Map<String, dynamic> json) =>
+    _$_ArticleSourceStatusDto(
+      id: json['id'] as String?,
+      articleSourceId: const ReferenceConverter()
+          .fromJson(json['article_source_id'] as Object),
+      userId: const ReferenceConverter().fromJson(json['user_id'] as Object),
+      isEnabled: json['is_enabled'] as bool,
+    );
+
+Map<String, dynamic> _$$_ArticleSourceStatusDtoToJson(
+        _$_ArticleSourceStatusDto instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'article_source_id':
+          const ReferenceConverter().toJson(instance.articleSourceId),
+      'user_id': const ReferenceConverter().toJson(instance.userId),
+      'is_enabled': instance.isEnabled,
+    };
+
 _$_ArticleSourceDto _$$_ArticleSourceDtoFromJson(Map<String, dynamic> json) =>
     _$_ArticleSourceDto(
-      id: json['id'] as String,
-      articleSourceName: json['articleSourceName'] as String,
+      id: json['id'] as String?,
+      articleSourceName: json['name'] as String,
       url: json['url'] as String,
-      articles: (json['articles'] as List<dynamic>)
-          .map((e) => ArticleDto.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      serverTimestamp: const ServerTimestampConverter()
-          .fromJson(json['serverTimestamp'] as Object),
+      serverTimestamp:
+          const ServerTimestampConverter().fromJson(json['serverTimestamp']),
     );
 
 Map<String, dynamic> _$$_ArticleSourceDtoToJson(_$_ArticleSourceDto instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'articleSourceName': instance.articleSourceName,
+      'name': instance.articleSourceName,
       'url': instance.url,
-      'articles': instance.articles,
       'serverTimestamp':
           const ServerTimestampConverter().toJson(instance.serverTimestamp),
     };
 
 _$_ArticleDto _$$_ArticleDtoFromJson(Map<String, dynamic> json) =>
     _$_ArticleDto(
-      id: json['id'] as String,
-      sourceId: json['sourceId'] as String,
+      id: json['id'] as String?,
+      sourceId:
+          const ReferenceConverter().fromJson(json['source_id'] as Object),
       title: json['title'] as String,
       url: json['url'] as String,
-      mediaType: json['mediaType'] as String,
-      serverTimeStamp: const ServerTimestampConverter()
-          .fromJson(json['serverTimeStamp'] as Object),
+      mediaType: json['media_type'] as String,
+      serverTimestamp:
+          const ServerTimestampConverter().fromJson(json['serverTimestamp']),
     );
 
 Map<String, dynamic> _$$_ArticleDtoToJson(_$_ArticleDto instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'sourceId': instance.sourceId,
+      'source_id': const ReferenceConverter().toJson(instance.sourceId),
       'title': instance.title,
       'url': instance.url,
-      'mediaType': instance.mediaType,
-      'serverTimeStamp':
-          const ServerTimestampConverter().toJson(instance.serverTimeStamp),
+      'media_type': instance.mediaType,
+      'serverTimestamp':
+          const ServerTimestampConverter().toJson(instance.serverTimestamp),
     };

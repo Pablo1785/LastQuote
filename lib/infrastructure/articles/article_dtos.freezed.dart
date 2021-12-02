@@ -13,6 +13,272 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+ArticleSourceStatusDto _$ArticleSourceStatusDtoFromJson(
+    Map<String, dynamic> json) {
+  return _ArticleSourceStatusDto.fromJson(json);
+}
+
+/// @nodoc
+class _$ArticleSourceStatusDtoTearOff {
+  const _$ArticleSourceStatusDtoTearOff();
+
+  _ArticleSourceStatusDto call(
+      {required String? id,
+      @JsonKey(name: 'article_source_id')
+      @ReferenceConverter()
+          required String articleSourceId,
+      @JsonKey(name: 'user_id')
+      @ReferenceConverter()
+          required String userId,
+      @JsonKey(name: 'is_enabled')
+          required bool isEnabled}) {
+    return _ArticleSourceStatusDto(
+      id: id,
+      articleSourceId: articleSourceId,
+      userId: userId,
+      isEnabled: isEnabled,
+    );
+  }
+
+  ArticleSourceStatusDto fromJson(Map<String, Object?> json) {
+    return ArticleSourceStatusDto.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $ArticleSourceStatusDto = _$ArticleSourceStatusDtoTearOff();
+
+/// @nodoc
+mixin _$ArticleSourceStatusDto {
+  String? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'article_source_id')
+  @ReferenceConverter()
+  String get articleSourceId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user_id')
+  @ReferenceConverter()
+  String get userId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_enabled')
+  bool get isEnabled => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ArticleSourceStatusDtoCopyWith<ArticleSourceStatusDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ArticleSourceStatusDtoCopyWith<$Res> {
+  factory $ArticleSourceStatusDtoCopyWith(ArticleSourceStatusDto value,
+          $Res Function(ArticleSourceStatusDto) then) =
+      _$ArticleSourceStatusDtoCopyWithImpl<$Res>;
+  $Res call(
+      {String? id,
+      @JsonKey(name: 'article_source_id')
+      @ReferenceConverter()
+          String articleSourceId,
+      @JsonKey(name: 'user_id')
+      @ReferenceConverter()
+          String userId,
+      @JsonKey(name: 'is_enabled')
+          bool isEnabled});
+}
+
+/// @nodoc
+class _$ArticleSourceStatusDtoCopyWithImpl<$Res>
+    implements $ArticleSourceStatusDtoCopyWith<$Res> {
+  _$ArticleSourceStatusDtoCopyWithImpl(this._value, this._then);
+
+  final ArticleSourceStatusDto _value;
+  // ignore: unused_field
+  final $Res Function(ArticleSourceStatusDto) _then;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? articleSourceId = freezed,
+    Object? userId = freezed,
+    Object? isEnabled = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      articleSourceId: articleSourceId == freezed
+          ? _value.articleSourceId
+          : articleSourceId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      isEnabled: isEnabled == freezed
+          ? _value.isEnabled
+          : isEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$ArticleSourceStatusDtoCopyWith<$Res>
+    implements $ArticleSourceStatusDtoCopyWith<$Res> {
+  factory _$ArticleSourceStatusDtoCopyWith(_ArticleSourceStatusDto value,
+          $Res Function(_ArticleSourceStatusDto) then) =
+      __$ArticleSourceStatusDtoCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String? id,
+      @JsonKey(name: 'article_source_id')
+      @ReferenceConverter()
+          String articleSourceId,
+      @JsonKey(name: 'user_id')
+      @ReferenceConverter()
+          String userId,
+      @JsonKey(name: 'is_enabled')
+          bool isEnabled});
+}
+
+/// @nodoc
+class __$ArticleSourceStatusDtoCopyWithImpl<$Res>
+    extends _$ArticleSourceStatusDtoCopyWithImpl<$Res>
+    implements _$ArticleSourceStatusDtoCopyWith<$Res> {
+  __$ArticleSourceStatusDtoCopyWithImpl(_ArticleSourceStatusDto _value,
+      $Res Function(_ArticleSourceStatusDto) _then)
+      : super(_value, (v) => _then(v as _ArticleSourceStatusDto));
+
+  @override
+  _ArticleSourceStatusDto get _value => super._value as _ArticleSourceStatusDto;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? articleSourceId = freezed,
+    Object? userId = freezed,
+    Object? isEnabled = freezed,
+  }) {
+    return _then(_ArticleSourceStatusDto(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      articleSourceId: articleSourceId == freezed
+          ? _value.articleSourceId
+          : articleSourceId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      isEnabled: isEnabled == freezed
+          ? _value.isEnabled
+          : isEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_ArticleSourceStatusDto extends _ArticleSourceStatusDto {
+  const _$_ArticleSourceStatusDto(
+      {required this.id,
+      @JsonKey(name: 'article_source_id')
+      @ReferenceConverter()
+          required this.articleSourceId,
+      @JsonKey(name: 'user_id')
+      @ReferenceConverter()
+          required this.userId,
+      @JsonKey(name: 'is_enabled')
+          required this.isEnabled})
+      : super._();
+
+  factory _$_ArticleSourceStatusDto.fromJson(Map<String, dynamic> json) =>
+      _$$_ArticleSourceStatusDtoFromJson(json);
+
+  @override
+  final String? id;
+  @override
+  @JsonKey(name: 'article_source_id')
+  @ReferenceConverter()
+  final String articleSourceId;
+  @override
+  @JsonKey(name: 'user_id')
+  @ReferenceConverter()
+  final String userId;
+  @override
+  @JsonKey(name: 'is_enabled')
+  final bool isEnabled;
+
+  @override
+  String toString() {
+    return 'ArticleSourceStatusDto(id: $id, articleSourceId: $articleSourceId, userId: $userId, isEnabled: $isEnabled)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _ArticleSourceStatusDto &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.articleSourceId, articleSourceId) ||
+                other.articleSourceId == articleSourceId) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.isEnabled, isEnabled) ||
+                other.isEnabled == isEnabled));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, articleSourceId, userId, isEnabled);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ArticleSourceStatusDtoCopyWith<_ArticleSourceStatusDto> get copyWith =>
+      __$ArticleSourceStatusDtoCopyWithImpl<_ArticleSourceStatusDto>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ArticleSourceStatusDtoToJson(this);
+  }
+}
+
+abstract class _ArticleSourceStatusDto extends ArticleSourceStatusDto {
+  const factory _ArticleSourceStatusDto(
+      {required String? id,
+      @JsonKey(name: 'article_source_id')
+      @ReferenceConverter()
+          required String articleSourceId,
+      @JsonKey(name: 'user_id')
+      @ReferenceConverter()
+          required String userId,
+      @JsonKey(name: 'is_enabled')
+          required bool isEnabled}) = _$_ArticleSourceStatusDto;
+  const _ArticleSourceStatusDto._() : super._();
+
+  factory _ArticleSourceStatusDto.fromJson(Map<String, dynamic> json) =
+      _$_ArticleSourceStatusDto.fromJson;
+
+  @override
+  String? get id;
+  @override
+  @JsonKey(name: 'article_source_id')
+  @ReferenceConverter()
+  String get articleSourceId;
+  @override
+  @JsonKey(name: 'user_id')
+  @ReferenceConverter()
+  String get userId;
+  @override
+  @JsonKey(name: 'is_enabled')
+  bool get isEnabled;
+  @override
+  @JsonKey(ignore: true)
+  _$ArticleSourceStatusDtoCopyWith<_ArticleSourceStatusDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 ArticleSourceDto _$ArticleSourceDtoFromJson(Map<String, dynamic> json) {
   return _ArticleSourceDto.fromJson(json);
 }
@@ -22,16 +288,14 @@ class _$ArticleSourceDtoTearOff {
   const _$ArticleSourceDtoTearOff();
 
   _ArticleSourceDto call(
-      {required String id,
-      required String articleSourceName,
+      {required String? id,
+      @JsonKey(name: 'name') required String articleSourceName,
       required String url,
-      required List<ArticleDto> articles,
-      @ServerTimestampConverter() required FieldValue serverTimestamp}) {
+      @ServerTimestampConverter() required FieldValue? serverTimestamp}) {
     return _ArticleSourceDto(
       id: id,
       articleSourceName: articleSourceName,
       url: url,
-      articles: articles,
       serverTimestamp: serverTimestamp,
     );
   }
@@ -46,12 +310,12 @@ const $ArticleSourceDto = _$ArticleSourceDtoTearOff();
 
 /// @nodoc
 mixin _$ArticleSourceDto {
-  String get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'name')
   String get articleSourceName => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
-  List<ArticleDto> get articles => throw _privateConstructorUsedError;
   @ServerTimestampConverter()
-  FieldValue get serverTimestamp => throw _privateConstructorUsedError;
+  FieldValue? get serverTimestamp => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -65,11 +329,10 @@ abstract class $ArticleSourceDtoCopyWith<$Res> {
           ArticleSourceDto value, $Res Function(ArticleSourceDto) then) =
       _$ArticleSourceDtoCopyWithImpl<$Res>;
   $Res call(
-      {String id,
-      String articleSourceName,
+      {String? id,
+      @JsonKey(name: 'name') String articleSourceName,
       String url,
-      List<ArticleDto> articles,
-      @ServerTimestampConverter() FieldValue serverTimestamp});
+      @ServerTimestampConverter() FieldValue? serverTimestamp});
 }
 
 /// @nodoc
@@ -86,14 +349,13 @@ class _$ArticleSourceDtoCopyWithImpl<$Res>
     Object? id = freezed,
     Object? articleSourceName = freezed,
     Object? url = freezed,
-    Object? articles = freezed,
     Object? serverTimestamp = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       articleSourceName: articleSourceName == freezed
           ? _value.articleSourceName
           : articleSourceName // ignore: cast_nullable_to_non_nullable
@@ -102,14 +364,10 @@ class _$ArticleSourceDtoCopyWithImpl<$Res>
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      articles: articles == freezed
-          ? _value.articles
-          : articles // ignore: cast_nullable_to_non_nullable
-              as List<ArticleDto>,
       serverTimestamp: serverTimestamp == freezed
           ? _value.serverTimestamp
           : serverTimestamp // ignore: cast_nullable_to_non_nullable
-              as FieldValue,
+              as FieldValue?,
     ));
   }
 }
@@ -122,11 +380,10 @@ abstract class _$ArticleSourceDtoCopyWith<$Res>
       __$ArticleSourceDtoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id,
-      String articleSourceName,
+      {String? id,
+      @JsonKey(name: 'name') String articleSourceName,
       String url,
-      List<ArticleDto> articles,
-      @ServerTimestampConverter() FieldValue serverTimestamp});
+      @ServerTimestampConverter() FieldValue? serverTimestamp});
 }
 
 /// @nodoc
@@ -145,14 +402,13 @@ class __$ArticleSourceDtoCopyWithImpl<$Res>
     Object? id = freezed,
     Object? articleSourceName = freezed,
     Object? url = freezed,
-    Object? articles = freezed,
     Object? serverTimestamp = freezed,
   }) {
     return _then(_ArticleSourceDto(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       articleSourceName: articleSourceName == freezed
           ? _value.articleSourceName
           : articleSourceName // ignore: cast_nullable_to_non_nullable
@@ -161,14 +417,10 @@ class __$ArticleSourceDtoCopyWithImpl<$Res>
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      articles: articles == freezed
-          ? _value.articles
-          : articles // ignore: cast_nullable_to_non_nullable
-              as List<ArticleDto>,
       serverTimestamp: serverTimestamp == freezed
           ? _value.serverTimestamp
           : serverTimestamp // ignore: cast_nullable_to_non_nullable
-              as FieldValue,
+              as FieldValue?,
     ));
   }
 }
@@ -178,9 +430,8 @@ class __$ArticleSourceDtoCopyWithImpl<$Res>
 class _$_ArticleSourceDto extends _ArticleSourceDto {
   const _$_ArticleSourceDto(
       {required this.id,
-      required this.articleSourceName,
+      @JsonKey(name: 'name') required this.articleSourceName,
       required this.url,
-      required this.articles,
       @ServerTimestampConverter() required this.serverTimestamp})
       : super._();
 
@@ -188,20 +439,19 @@ class _$_ArticleSourceDto extends _ArticleSourceDto {
       _$$_ArticleSourceDtoFromJson(json);
 
   @override
-  final String id;
+  final String? id;
   @override
+  @JsonKey(name: 'name')
   final String articleSourceName;
   @override
   final String url;
   @override
-  final List<ArticleDto> articles;
-  @override
   @ServerTimestampConverter()
-  final FieldValue serverTimestamp;
+  final FieldValue? serverTimestamp;
 
   @override
   String toString() {
-    return 'ArticleSourceDto(id: $id, articleSourceName: $articleSourceName, url: $url, articles: $articles, serverTimestamp: $serverTimestamp)';
+    return 'ArticleSourceDto(id: $id, articleSourceName: $articleSourceName, url: $url, serverTimestamp: $serverTimestamp)';
   }
 
   @override
@@ -213,14 +463,13 @@ class _$_ArticleSourceDto extends _ArticleSourceDto {
             (identical(other.articleSourceName, articleSourceName) ||
                 other.articleSourceName == articleSourceName) &&
             (identical(other.url, url) || other.url == url) &&
-            const DeepCollectionEquality().equals(other.articles, articles) &&
             (identical(other.serverTimestamp, serverTimestamp) ||
                 other.serverTimestamp == serverTimestamp));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, articleSourceName, url,
-      const DeepCollectionEquality().hash(articles), serverTimestamp);
+  int get hashCode =>
+      Object.hash(runtimeType, id, articleSourceName, url, serverTimestamp);
 
   @JsonKey(ignore: true)
   @override
@@ -235,11 +484,10 @@ class _$_ArticleSourceDto extends _ArticleSourceDto {
 
 abstract class _ArticleSourceDto extends ArticleSourceDto {
   const factory _ArticleSourceDto(
-          {required String id,
-          required String articleSourceName,
+          {required String? id,
+          @JsonKey(name: 'name') required String articleSourceName,
           required String url,
-          required List<ArticleDto> articles,
-          @ServerTimestampConverter() required FieldValue serverTimestamp}) =
+          @ServerTimestampConverter() required FieldValue? serverTimestamp}) =
       _$_ArticleSourceDto;
   const _ArticleSourceDto._() : super._();
 
@@ -247,16 +495,15 @@ abstract class _ArticleSourceDto extends ArticleSourceDto {
       _$_ArticleSourceDto.fromJson;
 
   @override
-  String get id;
+  String? get id;
   @override
+  @JsonKey(name: 'name')
   String get articleSourceName;
   @override
   String get url;
   @override
-  List<ArticleDto> get articles;
-  @override
   @ServerTimestampConverter()
-  FieldValue get serverTimestamp;
+  FieldValue? get serverTimestamp;
   @override
   @JsonKey(ignore: true)
   _$ArticleSourceDtoCopyWith<_ArticleSourceDto> get copyWith =>
@@ -272,19 +519,23 @@ class _$ArticleDtoTearOff {
   const _$ArticleDtoTearOff();
 
   _ArticleDto call(
-      {required String id,
-      required String sourceId,
+      {required String? id,
+      @JsonKey(name: 'source_id')
+      @ReferenceConverter()
+          required String sourceId,
       required String title,
       required String url,
-      required String mediaType,
-      @ServerTimestampConverter() required FieldValue serverTimeStamp}) {
+      @JsonKey(name: 'media_type')
+          required String mediaType,
+      @ServerTimestampConverter()
+          required FieldValue? serverTimestamp}) {
     return _ArticleDto(
       id: id,
       sourceId: sourceId,
       title: title,
       url: url,
       mediaType: mediaType,
-      serverTimeStamp: serverTimeStamp,
+      serverTimestamp: serverTimestamp,
     );
   }
 
@@ -298,13 +549,16 @@ const $ArticleDto = _$ArticleDtoTearOff();
 
 /// @nodoc
 mixin _$ArticleDto {
-  String get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'source_id')
+  @ReferenceConverter()
   String get sourceId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
+  @JsonKey(name: 'media_type')
   String get mediaType => throw _privateConstructorUsedError;
   @ServerTimestampConverter()
-  FieldValue get serverTimeStamp => throw _privateConstructorUsedError;
+  FieldValue? get serverTimestamp => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -318,12 +572,12 @@ abstract class $ArticleDtoCopyWith<$Res> {
           ArticleDto value, $Res Function(ArticleDto) then) =
       _$ArticleDtoCopyWithImpl<$Res>;
   $Res call(
-      {String id,
-      String sourceId,
+      {String? id,
+      @JsonKey(name: 'source_id') @ReferenceConverter() String sourceId,
       String title,
       String url,
-      String mediaType,
-      @ServerTimestampConverter() FieldValue serverTimeStamp});
+      @JsonKey(name: 'media_type') String mediaType,
+      @ServerTimestampConverter() FieldValue? serverTimestamp});
 }
 
 /// @nodoc
@@ -341,13 +595,13 @@ class _$ArticleDtoCopyWithImpl<$Res> implements $ArticleDtoCopyWith<$Res> {
     Object? title = freezed,
     Object? url = freezed,
     Object? mediaType = freezed,
-    Object? serverTimeStamp = freezed,
+    Object? serverTimestamp = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       sourceId: sourceId == freezed
           ? _value.sourceId
           : sourceId // ignore: cast_nullable_to_non_nullable
@@ -364,10 +618,10 @@ class _$ArticleDtoCopyWithImpl<$Res> implements $ArticleDtoCopyWith<$Res> {
           ? _value.mediaType
           : mediaType // ignore: cast_nullable_to_non_nullable
               as String,
-      serverTimeStamp: serverTimeStamp == freezed
-          ? _value.serverTimeStamp
-          : serverTimeStamp // ignore: cast_nullable_to_non_nullable
-              as FieldValue,
+      serverTimestamp: serverTimestamp == freezed
+          ? _value.serverTimestamp
+          : serverTimestamp // ignore: cast_nullable_to_non_nullable
+              as FieldValue?,
     ));
   }
 }
@@ -379,12 +633,12 @@ abstract class _$ArticleDtoCopyWith<$Res> implements $ArticleDtoCopyWith<$Res> {
       __$ArticleDtoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id,
-      String sourceId,
+      {String? id,
+      @JsonKey(name: 'source_id') @ReferenceConverter() String sourceId,
       String title,
       String url,
-      String mediaType,
-      @ServerTimestampConverter() FieldValue serverTimeStamp});
+      @JsonKey(name: 'media_type') String mediaType,
+      @ServerTimestampConverter() FieldValue? serverTimestamp});
 }
 
 /// @nodoc
@@ -404,13 +658,13 @@ class __$ArticleDtoCopyWithImpl<$Res> extends _$ArticleDtoCopyWithImpl<$Res>
     Object? title = freezed,
     Object? url = freezed,
     Object? mediaType = freezed,
-    Object? serverTimeStamp = freezed,
+    Object? serverTimestamp = freezed,
   }) {
     return _then(_ArticleDto(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       sourceId: sourceId == freezed
           ? _value.sourceId
           : sourceId // ignore: cast_nullable_to_non_nullable
@@ -427,10 +681,10 @@ class __$ArticleDtoCopyWithImpl<$Res> extends _$ArticleDtoCopyWithImpl<$Res>
           ? _value.mediaType
           : mediaType // ignore: cast_nullable_to_non_nullable
               as String,
-      serverTimeStamp: serverTimeStamp == freezed
-          ? _value.serverTimeStamp
-          : serverTimeStamp // ignore: cast_nullable_to_non_nullable
-              as FieldValue,
+      serverTimestamp: serverTimestamp == freezed
+          ? _value.serverTimestamp
+          : serverTimestamp // ignore: cast_nullable_to_non_nullable
+              as FieldValue?,
     ));
   }
 }
@@ -440,33 +694,36 @@ class __$ArticleDtoCopyWithImpl<$Res> extends _$ArticleDtoCopyWithImpl<$Res>
 class _$_ArticleDto extends _ArticleDto {
   const _$_ArticleDto(
       {required this.id,
-      required this.sourceId,
+      @JsonKey(name: 'source_id') @ReferenceConverter() required this.sourceId,
       required this.title,
       required this.url,
-      required this.mediaType,
-      @ServerTimestampConverter() required this.serverTimeStamp})
+      @JsonKey(name: 'media_type') required this.mediaType,
+      @ServerTimestampConverter() required this.serverTimestamp})
       : super._();
 
   factory _$_ArticleDto.fromJson(Map<String, dynamic> json) =>
       _$$_ArticleDtoFromJson(json);
 
   @override
-  final String id;
+  final String? id;
   @override
+  @JsonKey(name: 'source_id')
+  @ReferenceConverter()
   final String sourceId;
   @override
   final String title;
   @override
   final String url;
   @override
+  @JsonKey(name: 'media_type')
   final String mediaType;
   @override
   @ServerTimestampConverter()
-  final FieldValue serverTimeStamp;
+  final FieldValue? serverTimestamp;
 
   @override
   String toString() {
-    return 'ArticleDto(id: $id, sourceId: $sourceId, title: $title, url: $url, mediaType: $mediaType, serverTimeStamp: $serverTimeStamp)';
+    return 'ArticleDto(id: $id, sourceId: $sourceId, title: $title, url: $url, mediaType: $mediaType, serverTimestamp: $serverTimestamp)';
   }
 
   @override
@@ -481,13 +738,13 @@ class _$_ArticleDto extends _ArticleDto {
             (identical(other.url, url) || other.url == url) &&
             (identical(other.mediaType, mediaType) ||
                 other.mediaType == mediaType) &&
-            (identical(other.serverTimeStamp, serverTimeStamp) ||
-                other.serverTimeStamp == serverTimeStamp));
+            (identical(other.serverTimestamp, serverTimestamp) ||
+                other.serverTimestamp == serverTimestamp));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, sourceId, title, url, mediaType, serverTimeStamp);
+      runtimeType, id, sourceId, title, url, mediaType, serverTimestamp);
 
   @JsonKey(ignore: true)
   @override
@@ -502,31 +759,37 @@ class _$_ArticleDto extends _ArticleDto {
 
 abstract class _ArticleDto extends ArticleDto {
   const factory _ArticleDto(
-          {required String id,
+      {required String? id,
+      @JsonKey(name: 'source_id')
+      @ReferenceConverter()
           required String sourceId,
-          required String title,
-          required String url,
+      required String title,
+      required String url,
+      @JsonKey(name: 'media_type')
           required String mediaType,
-          @ServerTimestampConverter() required FieldValue serverTimeStamp}) =
-      _$_ArticleDto;
+      @ServerTimestampConverter()
+          required FieldValue? serverTimestamp}) = _$_ArticleDto;
   const _ArticleDto._() : super._();
 
   factory _ArticleDto.fromJson(Map<String, dynamic> json) =
       _$_ArticleDto.fromJson;
 
   @override
-  String get id;
+  String? get id;
   @override
+  @JsonKey(name: 'source_id')
+  @ReferenceConverter()
   String get sourceId;
   @override
   String get title;
   @override
   String get url;
   @override
+  @JsonKey(name: 'media_type')
   String get mediaType;
   @override
   @ServerTimestampConverter()
-  FieldValue get serverTimeStamp;
+  FieldValue? get serverTimestamp;
   @override
   @JsonKey(ignore: true)
   _$ArticleDtoCopyWith<_ArticleDto> get copyWith =>

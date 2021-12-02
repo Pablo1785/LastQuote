@@ -20,13 +20,11 @@ class _$ArticleSourceTearOff {
   _ArticleSource call(
       {required UniqueId id,
       required ArticleSourceName name,
-      required ArticleSourceUrl url,
-      required KtList<Article> articles}) {
+      required ArticleSourceUrl url}) {
     return _ArticleSource(
       id: id,
       name: name,
       url: url,
-      articles: articles,
     );
   }
 }
@@ -39,7 +37,6 @@ mixin _$ArticleSource {
   UniqueId get id => throw _privateConstructorUsedError;
   ArticleSourceName get name => throw _privateConstructorUsedError;
   ArticleSourceUrl get url => throw _privateConstructorUsedError;
-  KtList<Article> get articles => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ArticleSourceCopyWith<ArticleSource> get copyWith =>
@@ -51,11 +48,7 @@ abstract class $ArticleSourceCopyWith<$Res> {
   factory $ArticleSourceCopyWith(
           ArticleSource value, $Res Function(ArticleSource) then) =
       _$ArticleSourceCopyWithImpl<$Res>;
-  $Res call(
-      {UniqueId id,
-      ArticleSourceName name,
-      ArticleSourceUrl url,
-      KtList<Article> articles});
+  $Res call({UniqueId id, ArticleSourceName name, ArticleSourceUrl url});
 }
 
 /// @nodoc
@@ -72,7 +65,6 @@ class _$ArticleSourceCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? url = freezed,
-    Object? articles = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -87,10 +79,6 @@ class _$ArticleSourceCopyWithImpl<$Res>
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as ArticleSourceUrl,
-      articles: articles == freezed
-          ? _value.articles
-          : articles // ignore: cast_nullable_to_non_nullable
-              as KtList<Article>,
     ));
   }
 }
@@ -102,11 +90,7 @@ abstract class _$ArticleSourceCopyWith<$Res>
           _ArticleSource value, $Res Function(_ArticleSource) then) =
       __$ArticleSourceCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {UniqueId id,
-      ArticleSourceName name,
-      ArticleSourceUrl url,
-      KtList<Article> articles});
+  $Res call({UniqueId id, ArticleSourceName name, ArticleSourceUrl url});
 }
 
 /// @nodoc
@@ -125,7 +109,6 @@ class __$ArticleSourceCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? url = freezed,
-    Object? articles = freezed,
   }) {
     return _then(_ArticleSource(
       id: id == freezed
@@ -140,10 +123,6 @@ class __$ArticleSourceCopyWithImpl<$Res>
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as ArticleSourceUrl,
-      articles: articles == freezed
-          ? _value.articles
-          : articles // ignore: cast_nullable_to_non_nullable
-              as KtList<Article>,
     ));
   }
 }
@@ -152,10 +131,7 @@ class __$ArticleSourceCopyWithImpl<$Res>
 
 class _$_ArticleSource implements _ArticleSource {
   const _$_ArticleSource(
-      {required this.id,
-      required this.name,
-      required this.url,
-      required this.articles});
+      {required this.id, required this.name, required this.url});
 
   @override
   final UniqueId id;
@@ -163,12 +139,10 @@ class _$_ArticleSource implements _ArticleSource {
   final ArticleSourceName name;
   @override
   final ArticleSourceUrl url;
-  @override
-  final KtList<Article> articles;
 
   @override
   String toString() {
-    return 'ArticleSource(id: $id, name: $name, url: $url, articles: $articles)';
+    return 'ArticleSource(id: $id, name: $name, url: $url)';
   }
 
   @override
@@ -178,13 +152,11 @@ class _$_ArticleSource implements _ArticleSource {
             other is _ArticleSource &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.url, url) || other.url == url) &&
-            (identical(other.articles, articles) ||
-                other.articles == articles));
+            (identical(other.url, url) || other.url == url));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, url, articles);
+  int get hashCode => Object.hash(runtimeType, id, name, url);
 
   @JsonKey(ignore: true)
   @override
@@ -196,8 +168,7 @@ abstract class _ArticleSource implements ArticleSource {
   const factory _ArticleSource(
       {required UniqueId id,
       required ArticleSourceName name,
-      required ArticleSourceUrl url,
-      required KtList<Article> articles}) = _$_ArticleSource;
+      required ArticleSourceUrl url}) = _$_ArticleSource;
 
   @override
   UniqueId get id;
@@ -205,8 +176,6 @@ abstract class _ArticleSource implements ArticleSource {
   ArticleSourceName get name;
   @override
   ArticleSourceUrl get url;
-  @override
-  KtList<Article> get articles;
   @override
   @JsonKey(ignore: true)
   _$ArticleSourceCopyWith<_ArticleSource> get copyWith =>

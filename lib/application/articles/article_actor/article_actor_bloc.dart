@@ -1,11 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:ddd/domain/articles/article_failure.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 
 part 'article_actor_event.dart';
 part 'article_actor_state.dart';
 part 'article_actor_bloc.freezed.dart';
 
+@injectable
 class ArticleActorBloc extends Bloc<ArticleActorEvent, ArticleActorState> {
   ArticleActorBloc() : super(_Initial()) {
     on<ArticleActorEvent>((event, emit) async {

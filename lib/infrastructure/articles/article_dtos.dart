@@ -1,5 +1,6 @@
 import 'package:ddd/domain/articles/article.dart';
 import 'package:ddd/domain/articles/article_source.dart';
+import 'package:ddd/domain/articles/article_source_status.dart';
 import 'package:ddd/domain/articles/value_objects.dart';
 import 'package:ddd/domain/core/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -10,15 +11,55 @@ part 'article_dtos.freezed.dart';
 part 'article_dtos.g.dart'; // JsonSerializable generated code
 
 @freezed
+abstract class ArticleSourceStatusDto implements _$ArticleSourceStatusDto {
+  const ArticleSourceStatusDto._();
+
+  const factory ArticleSourceStatusDto({
+    required String? id,
+    @JsonKey(name: 'article_source_id')
+    @ReferenceConverter()
+        required String articleSourceId,
+    @JsonKey(name: 'user_id') @ReferenceConverter() required String userId,
+    @JsonKey(name: 'is_enabled') required bool isEnabled,
+  }) = _ArticleSourceStatusDto;
+
+  factory ArticleSourceStatusDto.fromDomain(
+      ArticleSourceStatus articleSourceStatus) {
+    return ArticleSourceStatusDto(
+      id: articleSourceStatus.id.getOrCrash(),
+      articleSourceId: articleSourceStatus.articleSourceId.getOrCrash(),
+      userId: articleSourceStatus.userId.getOrCrash(),
+      isEnabled: articleSourceStatus.isEnabled,
+    );
+  }
+
+  ArticleSourceStatus toDomain() {
+    return ArticleSourceStatus(
+      id: UniqueId.fromUniqueString(id!),
+      articleSourceId: UniqueId.fromUniqueString(articleSourceId),
+      userId: UniqueId.fromUniqueString(userId),
+      isEnabled: isEnabled,
+    );
+  }
+
+  factory ArticleSourceStatusDto.fromJson(Map<String, dynamic> json) =>
+      _$ArticleSourceStatusDtoFromJson(json);
+
+  factory ArticleSourceStatusDto.fromFirestore(DocumentSnapshot doc) {
+    return ArticleSourceStatusDto.fromJson(doc.data() as Map<String, dynamic>)
+        .copyWith(id: doc.id);
+  }
+}
+
+@freezed
 abstract class ArticleSourceDto implements _$ArticleSourceDto {
   const ArticleSourceDto._();
 
   const factory ArticleSourceDto({
-    required String id,
-    required String articleSourceName,
+    required String? id,
+    @JsonKey(name: 'name') required String articleSourceName,
     required String url,
-    required List<ArticleDto> articles,
-    @ServerTimestampConverter() required FieldValue serverTimestamp,
+    @ServerTimestampConverter() required FieldValue? serverTimestamp,
   }) = _ArticleSourceDto;
 
   factory ArticleSourceDto.fromDomain(ArticleSource articleSource) {
@@ -26,24 +67,15 @@ abstract class ArticleSourceDto implements _$ArticleSourceDto {
       id: articleSource.id.getOrCrash(),
       articleSourceName: articleSource.name.getOrCrash(),
       url: articleSource.url.getOrCrash(),
-      articles: articleSource.articles
-          .asList()
-          .map((article) => ArticleDto.fromDomain(article))
-          .toList(),
       serverTimestamp: FieldValue.serverTimestamp(),
     );
   }
 
   ArticleSource toDomain() {
     return ArticleSource(
-      id: UniqueId.fromUniqueString(id),
+      id: UniqueId.fromUniqueString(id!),
       name: ArticleSourceName(articleSourceName),
       url: ArticleSourceUrl(url),
-      articles: KtList.from(
-        articles.map(
-          (articleDto) => articleDto.toDomain(),
-        ),
-      ),
     );
   }
 
@@ -61,12 +93,12 @@ abstract class ArticleDto implements _$ArticleDto {
   const ArticleDto._();
 
   const factory ArticleDto({
-    required String id,
-    required String sourceId,
+    required String? id,
+    @JsonKey(name: 'source_id') @ReferenceConverter() required String sourceId,
     required String title,
     required String url,
-    required String mediaType,
-    @ServerTimestampConverter() required FieldValue serverTimeStamp,
+    @JsonKey(name: 'media_type') required String mediaType,
+    @ServerTimestampConverter() required FieldValue? serverTimestamp,
   }) = _ArticleDto;
 
   factory ArticleDto.fromDomain(Article article) {
@@ -76,13 +108,13 @@ abstract class ArticleDto implements _$ArticleDto {
       title: article.title.getOrCrash(),
       url: article.url.getOrCrash(),
       mediaType: article.mediaType.getOrCrash(),
-      serverTimeStamp: FieldValue.serverTimestamp(),
+      serverTimestamp: FieldValue.serverTimestamp(),
     );
   }
 
   Article toDomain() {
     return Article(
-      id: UniqueId.fromUniqueString(id),
+      id: UniqueId.fromUniqueString(id!),
       sourceId: UniqueId.fromUniqueString(sourceId),
       title: ArticleTitle(title),
       url: ArticleUrl(url),
@@ -99,14 +131,28 @@ abstract class ArticleDto implements _$ArticleDto {
   }
 }
 
-class ServerTimestampConverter implements JsonConverter<FieldValue, Object> {
+class ServerTimestampConverter implements JsonConverter<FieldValue?, Object?> {
   const ServerTimestampConverter(); // in order to use this class as an annotation it needs a const constructor
 
   @override
-  FieldValue fromJson(Object json) {
-    return FieldValue.serverTimestamp();
+  FieldValue? fromJson(Object? json) {
+    return FieldValue?.serverTimestamp();
   }
 
   @override
-  Object toJson(FieldValue fieldValue) => fieldValue;
+  Object? toJson(FieldValue? fieldValue) => fieldValue;
+}
+
+class ReferenceConverter implements JsonConverter<String, Object> {
+  const ReferenceConverter();
+
+  @override
+  String fromJson(Object json) {
+    return (json as DocumentReference).id;
+  }
+
+  @override
+  Object toJson(String object) {
+    return object;
+  }
 }

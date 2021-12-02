@@ -22,59 +22,62 @@ class ArticleRepository implements IArticleRepository {
   @override
   Stream<Either<ArticleFailure, KtList<Article>>> watchAll() async* {
     // articles/{uass = getUserArticleSourceByIdAndUserId(article.source_id, currentUser.id) && uass.is_enabled == true}
-    final userEnabledArticleSourceDtos =
+    final userEnabledArticleSourceDocRefs =
         await _firestore.userEnabledArticleSources();
-    final sourceIds = userEnabledArticleSourceDtos
-        .where((doc) => doc.exists)
-        .map((doc) => doc.data())
-        .map((articleSourceDto) => articleSourceDto?.toDomain().id.getOrCrash())
-        .toList();
-    yield* _firestore
-        .collection('articles')
-        .where('source_id', whereIn: sourceIds)
-        .snapshots()
-        .map(
-          (snapshot) => right<ArticleFailure, KtList<Article>>(
-            snapshot.docs
-                .map(
-                  (doc) => ArticleDto.fromFirestore(doc).toDomain(),
-                )
-                .toImmutableList(),
-          ),
-        )
-        .onErrorReturnWith(
-      (exception, stacktrace) {
-        if (exception is PlatformException &&
-            exception.message!.contains('PERMISSION_DENIED')) {
-          return left(const ArticleFailure.insufficientPermissions());
-        } else {
-          // log.error(exception.toString())
-          return left(const ArticleFailure.unexpected());
-        }
-      },
-    );
+    if (userEnabledArticleSourceDocRefs.isEmpty) {
+      yield left(const ArticleFailure.noActiveSource());
+    } else {
+      yield* _firestore
+          .collection('articles')
+          .where('source_id', whereIn: userEnabledArticleSourceDocRefs)
+          .snapshots()
+          .map(
+            (snapshot) => right<ArticleFailure, KtList<Article>>(
+              snapshot.docs
+                  .map(
+                    (doc) => ArticleDto.fromFirestore(doc).toDomain(),
+                  )
+                  .toImmutableList(),
+            ),
+          )
+          .onErrorReturnWith(
+        (exception, stacktrace) {
+          if (exception is PlatformException &&
+              exception.message!.contains('PERMISSION_DENIED')) {
+            return left(const ArticleFailure.insufficientPermissions());
+          } else {
+            print(exception.toString());
+            print(stacktrace.toString());
+            return left(const ArticleFailure.unexpected());
+          }
+        },
+      );
+    }
   }
 
   @override
   Stream<Either<ArticleFailure, KtList<Article>>> watchFromSource(
       ArticleSource articleSource) async* {
     // articles/{uass = getUserArticleSourceByIdAndUserId(articleSource.id, currentUser.id) uass.is_enabled == true}
-    final userEnabledArticleSourceDtos =
-        await _firestore.userEnabledArticleSources();
 
-    final pickedSourceId = userEnabledArticleSourceDtos
-        .where((doc) => doc.exists)
-        .map((doc) => doc.id)
-        .firstWhere(
-          (sourceId) => sourceId == articleSource.id.getOrCrash(),
-          orElse: () => '',
-        );
-    if (pickedSourceId == '') {
-      yield left(const ArticleFailure.sourceDisabled());
+    // Make sure there are active sources
+    final userEnabledArticleSourceDocRefs =
+        await _firestore.userEnabledArticleSources();
+    if (userEnabledArticleSourceDocRefs.isEmpty) {
+      yield left(const ArticleFailure.noActiveSource());
+    }
+
+    // Make sure queried source was found (exists)
+    final pickedSourceIndex = userEnabledArticleSourceDocRefs
+        .indexWhere((docRef) => docRef.id == articleSource.id.getOrCrash());
+    if (pickedSourceIndex == -1) {
+      // This should not happen as ArticleSources are picked from a list presented to a user, so it shouldnt contain disabled/nonexistant sources
+      yield left(const ArticleFailure.unexpected());
     } else {
       yield* _firestore
           .collection('articles')
-          .where('source_id', isEqualTo: pickedSourceId)
+          .where('source_id',
+              isEqualTo: userEnabledArticleSourceDocRefs[pickedSourceIndex])
           .snapshots()
           .map(
             (snapshot) => right<ArticleFailure, KtList<Article>>(
@@ -92,6 +95,7 @@ class ArticleRepository implements IArticleRepository {
             return left(const ArticleFailure.insufficientPermissions());
           } else {
             // log.error(exception.toString())
+            print(exception.toString());
             return left(const ArticleFailure.unexpected());
           }
         },

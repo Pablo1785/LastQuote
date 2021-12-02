@@ -4,6 +4,7 @@ import 'package:ddd/application/articles/article_actor/article_actor_bloc.dart';
 import 'package:ddd/application/articles/article_watcher/article_watcher_bloc.dart';
 import 'package:ddd/application/auth/auth_bloc.dart';
 import 'package:ddd/injection.dart';
+import 'package:ddd/presentation/articles/articles_overview/widgets/articles_overview_body_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -42,13 +43,14 @@ class ArticlesOverviewPage extends StatelessWidget {
                   FlushbarHelper.createError(
                     duration: const Duration(seconds: 5),
                     message: likeFailure.articleFailure.map(
-                      unexpected: (_) =>
-                          ':smile: Unexpected error occured. Please restart the app or IMPLEMENT ArticleActorBloc.',
-                      insufficientPermissions: (_) =>
-                          'You don\'t have sufficient permissions to Like this content.',
-                      sourceDisabled: (_) =>
-                          'You can\'ot Like recommendations from disabled sources',
-                    ),
+                        unexpected: (_) =>
+                            ':smile: Unexpected error occured. Please restart the app or IMPLEMENT ArticleActorBloc.',
+                        insufficientPermissions: (_) =>
+                            'You don\'t have sufficient permissions to Like this content.',
+                        sourceDisabled: (_) =>
+                            'You can\'ot Like recommendations from disabled sources',
+                        noActiveSource: (_) =>
+                            'You don\'t have any recommendations sources enabled. This should not happen. Try restarting the app.'),
                   ).show(context);
                 },
                 orElse: () {},
@@ -72,6 +74,7 @@ class ArticlesOverviewPage extends StatelessWidget {
               ),
             ],
           ),
+          body: ArticlesOverviewBody(),
         ),
       ),
     );
