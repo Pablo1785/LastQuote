@@ -1,17 +1,39 @@
 import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../application/article_sources/article_source_picker/article_source_picker_bloc.dart';
 import '../../../application/articles/article_actor/article_actor_bloc.dart';
 import '../../../application/articles/article_watcher/article_watcher_bloc.dart';
 import '../../../application/auth/auth_bloc.dart';
 import '../../../injection.dart';
-import 'widgets/article_source_switch.dart';
+import 'widgets/article_source_picker_drawer.dart';
 import 'widgets/articles_overview_body_widget.dart';
-import '../../routes/app_router.gr.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ArticlesOverviewPage extends StatelessWidget {
+class ArticlesOverviewPage extends StatefulWidget {
   const ArticlesOverviewPage({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _ArticlesOverviewPageState();
+}
+
+class _ArticlesOverviewPageState extends State<ArticlesOverviewPage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  bool drawerOpen = false;
+  int currentArticleSourceIndex = -1;
+
+  void _openEndDrawer() {
+    _scaffoldKey.currentState!.openEndDrawer();
+  }
+
+  void _closeEndDrawer() {
+    Navigator.of(context).pop();
+    setState(() {
+      drawerOpen = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +47,12 @@ class ArticlesOverviewPage extends StatelessWidget {
         ),
         BlocProvider<ArticleActorBloc>(
           create: (context) => getIt<ArticleActorBloc>(),
+        ),
+        BlocProvider<ArticleSourcePickerBloc>(
+          create: (context) => getIt<ArticleSourcePickerBloc>()
+            ..add(
+              const ArticleSourcePickerEvent.initialLoadStarted(),
+            ),
         ),
       ],
       child: MultiBlocListener(
@@ -62,6 +90,7 @@ class ArticlesOverviewPage extends StatelessWidget {
           ),
         ],
         child: Scaffold(
+          key: _scaffoldKey,
           appBar: AppBar(
             title: const Text('Articles'),
             leading: IconButton(
@@ -71,10 +100,14 @@ class ArticlesOverviewPage extends StatelessWidget {
               icon: const Icon(Icons.exit_to_app),
             ),
             actions: <Widget>[
-              ArticleSourceSwitch(),
+              IconButton(
+                icon: const Icon(Icons.filter_alt_outlined),
+                onPressed: () => _openEndDrawer(),
+              ),
             ],
           ),
-          body: ArticlesOverviewBody(),
+          body: const ArticlesOverviewBody(),
+          endDrawer: const ArticleSourcePickerDrawer(),
         ),
       ),
     );

@@ -63,7 +63,8 @@ class ArticleSourceRepository implements IArticleSourceRepository {
                 (articleSourceStatus) => articleSourceStatus.isEnabled,
               )
               .map(
-                (articleSourceStatus) => articleSourceStatus.id.getOrCrash(),
+                (articleSourceStatus) =>
+                    articleSourceStatus.articleSourceId.getOrCrash(),
               )
               .toList();
           final articleSourceQuery =

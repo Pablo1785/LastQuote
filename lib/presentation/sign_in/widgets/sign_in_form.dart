@@ -1,5 +1,6 @@
 import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:ddd/presentation/core/fun_logo.dart';
 import '../../../application/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -23,10 +24,8 @@ class SignInForm extends StatelessWidget {
           child: ListView(
             padding: const EdgeInsets.all(8),
             children: [
-              const Text(
-                'My App',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 130),
+              const Center(
+                child: FunLogo(),
               ),
               const SizedBox(
                 height: 8,

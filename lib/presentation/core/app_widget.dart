@@ -33,13 +33,12 @@ class MyApp extends StatelessWidget {
             ),
           ),
           colorScheme: ColorScheme.fromSwatch().copyWith(
-            primary: Colors.green[800],
-            secondary: Colors.blueAccent,
+            primary: Colors.indigo[400],
+            secondary: Colors.blue[200],
           ),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.all<Color>(Colors.lightBlue),
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.indigo),
             ),
           ),
         ),

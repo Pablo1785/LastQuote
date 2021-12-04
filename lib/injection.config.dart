@@ -10,6 +10,8 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:google_sign_in/google_sign_in.dart' as _i6;
 import 'package:injectable/injectable.dart' as _i2;
 
+import 'application/article_sources/article_source_picker/article_source_picker_bloc.dart'
+    as _i18;
 import 'application/articles/article_actor/article_actor_bloc.dart' as _i3;
 import 'application/articles/article_watcher/article_watcher_bloc.dart' as _i14;
 import 'application/auth/auth_bloc.dart' as _i15;
@@ -24,7 +26,7 @@ import 'infrastructure/article_sources/article_source_status_repository.dart'
 import 'infrastructure/articles/article_repository.dart' as _i8;
 import 'infrastructure/auth/firebase_auth_facade.dart' as _i12;
 import 'infrastructure/core/firebase_injectable_module.dart'
-    as _i18; // ignore_for_file: unnecessary_lambdas
+    as _i19; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -53,7 +55,9 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i16.IArticleSourceRepository>(() =>
       _i17.ArticleSourceRepository(get<_i5.FirebaseFirestore>(),
           get<_i9.IArticleSourceStatusRepository>()));
+  gh.factory<_i18.ArticleSourcePickerBloc>(
+      () => _i18.ArticleSourcePickerBloc(get<_i16.IArticleSourceRepository>()));
   return get;
 }
 
-class _$FirebaseInjectableModule extends _i18.FirebaseInjectableModule {}
+class _$FirebaseInjectableModule extends _i19.FirebaseInjectableModule {}

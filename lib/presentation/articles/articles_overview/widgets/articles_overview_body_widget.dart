@@ -26,31 +26,35 @@ class ArticlesOverviewBody extends StatelessWidget {
                     height: 100,
                   );
                 } else {
-                  return Container(
-                    color: Colors.green,
-                    width: 100,
-                    height: 100,
-                    child: Column(
-                      children: [
-                        Text(
-                          article.title.getOrCrash(),
+                  return Card(
+                    child: ListTile(
+                      leading: () {
+                        switch (article.mediaType.getOrCrash()) {
+                          case 'social_media_post':
+                            return const Icon(Icons.group_outlined);
+                            break;
+                          case 'encyclopedia_entry':
+                            return const Icon(Icons.article_outlined);
+                            break;
+                          default:
+                            return const Icon(Icons.article_outlined);
+                            break;
+                        }
+                      }(),
+                      title: Text(
+                        article.title.getOrCrash(),
+                      ),
+                      subtitle: Text(
+                        article.url.getOrCrash(),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      trailing: IconButton(
+                        icon: const Icon(Icons.open_in_browser),
+                        onPressed: () => launch(
+                          article.url.getOrCrash(),
                         ),
-                        Text(
-                          article.mediaType.getOrCrash(),
-                        ),
-                        Expanded(
-                          child: InkWell(
-                            child: const Center(
-                              child: Text(
-                                'Open in Browser',
-                              ),
-                            ),
-                            onTap: () => launch(
-                              article.url.getOrCrash(),
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   );
                 }
@@ -59,14 +63,20 @@ class ArticlesOverviewBody extends StatelessWidget {
             );
           },
           loadFailure: (loadFailureState) {
-            return Container(
-              color: Colors.yellow,
-              width: 100,
-              height: 100,
-              child: Center(
-                child: Text(
-                  loadFailureState.articleFailure.toString(),
-                ),
+            return Center(
+              child: Column(
+                children: [
+                  const Icon(
+                    Icons.error_outline,
+                    size: 72,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    loadFailureState.articleFailure.toString(),
+                  ),
+                ],
               ),
             );
           },
