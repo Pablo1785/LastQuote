@@ -1,8 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:ddd/domain/articles/article_source.dart';
-import 'package:ddd/domain/articles/value_objects.dart';
-import 'package:ddd/domain/core/failures.dart';
-import 'package:ddd/domain/core/value_objects.dart';
+import 'value_objects.dart';
+import '../core/failures.dart';
+import '../core/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'article.freezed.dart';

@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ddd/domain/articles/article_source.dart';
-import 'package:ddd/domain/auth/i_auth_facade.dart';
-import 'package:ddd/domain/core/errors.dart';
-import 'package:ddd/infrastructure/articles/article_dtos.dart';
+import '../../domain/article_sources/article_source.dart';
+import '../../domain/auth/i_auth_facade.dart';
+import '../../domain/core/errors.dart';
+import '../articles/article_dtos.dart';
 
 import '../../injection.dart';
 

@@ -1,5 +1,6 @@
-import 'package:ddd/domain/articles/article_source.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../article_sources/article_source.dart';
 
 part 'article_failure.freezed.dart';
 

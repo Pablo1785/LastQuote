@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:ddd/domain/auth/i_auth_facade.dart';
+import '../../domain/auth/i_auth_facade.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 

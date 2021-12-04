@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:ddd/domain/core/failures.dart';
-import 'package:ddd/domain/core/value_objects.dart';
+import 'failures.dart';
+import 'value_objects.dart';
 import 'package:kt_dart/kt.dart';
 
 Either<ValueFailure<String>, String> validateEmailAddress(String input) {

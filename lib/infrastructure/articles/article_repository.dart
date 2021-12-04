@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ddd/domain/articles/article_source.dart';
-import 'package:ddd/domain/articles/article_failure.dart';
-import 'package:ddd/domain/articles/article.dart';
+import '../../domain/article_sources/article_source.dart';
+import '../../domain/articles/article_failure.dart';
+import '../../domain/articles/article.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ddd/domain/articles/i_article_repository.dart';
-import 'package:ddd/infrastructure/articles/article_dtos.dart';
+import '../../domain/articles/i_article_repository.dart';
+import 'article_dtos.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/src/collection/interop.dart';
 import 'package:kt_dart/src/collection/kt_list.dart';
-import 'package:ddd/infrastructure/core/firestore_helpers.dart';
+import '../core/firestore_helpers.dart';
 import 'package:rxdart/rxdart.dart';
 
 @LazySingleton(as: IArticleRepository)

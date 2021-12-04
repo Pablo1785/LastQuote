@@ -1,11 +1,11 @@
-import 'package:ddd/domain/auth/auth_failure.dart';
+import '../../domain/auth/auth_failure.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ddd/domain/auth/i_auth_facade.dart';
-import 'package:ddd/domain/auth/user.dart';
-import 'package:ddd/domain/auth/value_objects.dart';
-import 'package:ddd/domain/core/errors.dart';
-import 'package:ddd/domain/core/value_objects.dart';
-import 'package:ddd/infrastructure/auth/firebase_user_mapper.dart';
+import '../../domain/auth/i_auth_facade.dart';
+import '../../domain/auth/user.dart';
+import '../../domain/auth/value_objects.dart';
+import '../../domain/core/errors.dart';
+import '../../domain/core/value_objects.dart';
+import 'firebase_user_mapper.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb;
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';

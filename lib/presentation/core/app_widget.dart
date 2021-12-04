@@ -1,6 +1,6 @@
-import 'package:ddd/application/auth/auth_bloc.dart';
-import 'package:ddd/presentation/routes/app_router.gr.dart';
-import 'package:ddd/presentation/sign_in/sign_in_page.dart';
+import '../../application/auth/auth_bloc.dart';
+import '../routes/app_router.gr.dart';
+import '../sign_in/sign_in_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,5 +1,5 @@
-import 'package:ddd/domain/auth/user.dart';
-import 'package:ddd/domain/core/value_objects.dart';
+import '../../domain/auth/user.dart';
+import '../../domain/core/value_objects.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb;
 
 extension FirebaseUserDomainX on fb.User {

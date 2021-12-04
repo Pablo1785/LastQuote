@@ -2,17 +2,18 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ddd/domain/articles/article.dart';
-import 'package:ddd/domain/articles/article_failure.dart';
-import 'package:ddd/domain/articles/article_source.dart';
-import 'package:ddd/domain/articles/i_article_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/kt.dart';
 
+import '../../../domain/article_sources/article_source.dart';
+import '../../../domain/articles/article.dart';
+import '../../../domain/articles/article_failure.dart';
+import '../../../domain/articles/i_article_repository.dart';
+
+part 'article_watcher_bloc.freezed.dart';
 part 'article_watcher_event.dart';
 part 'article_watcher_state.dart';
-part 'article_watcher_bloc.freezed.dart';
 
 @injectable
 class ArticleWatcherBloc

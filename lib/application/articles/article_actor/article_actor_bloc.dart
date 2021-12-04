@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:ddd/domain/articles/article_failure.dart';
+import '../../../domain/articles/article_failure.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 

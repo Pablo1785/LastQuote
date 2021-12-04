@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ddd/domain/auth/auth_failure.dart';
-import 'package:ddd/domain/auth/i_auth_facade.dart';
-import 'package:ddd/domain/auth/value_objects.dart';
-import 'package:ddd/domain/core/value_validators.dart';
+import '../../../domain/auth/auth_failure.dart';
+import '../../../domain/auth/i_auth_facade.dart';
+import '../../../domain/auth/value_objects.dart';
+import '../../../domain/core/value_validators.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';

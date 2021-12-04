@@ -1,10 +1,12 @@
 import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:ddd/application/articles/article_actor/article_actor_bloc.dart';
-import 'package:ddd/application/articles/article_watcher/article_watcher_bloc.dart';
-import 'package:ddd/application/auth/auth_bloc.dart';
-import 'package:ddd/injection.dart';
-import 'package:ddd/presentation/articles/articles_overview/widgets/articles_overview_body_widget.dart';
+import '../../../application/articles/article_actor/article_actor_bloc.dart';
+import '../../../application/articles/article_watcher/article_watcher_bloc.dart';
+import '../../../application/auth/auth_bloc.dart';
+import '../../../injection.dart';
+import 'widgets/article_source_switch.dart';
+import 'widgets/articles_overview_body_widget.dart';
+import '../../routes/app_router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,8 +32,9 @@ class ArticlesOverviewPage extends StatelessWidget {
           BlocListener<AuthBloc, AuthState>(
             listener: (context, state) {
               state.maybeMap(
-                unAuthenticated: (_) =>
-                    AutoRouter.of(context).pushNamed('/sign-in-page'),
+                unAuthenticated: (_) {
+                  AutoRouter.of(context).replaceNamed('/sign-in-page');
+                },
                 orElse: () {},
               );
             },
@@ -48,7 +51,7 @@ class ArticlesOverviewPage extends StatelessWidget {
                         insufficientPermissions: (_) =>
                             'You don\'t have sufficient permissions to Like this content.',
                         sourceDisabled: (_) =>
-                            'You can\'ot Like recommendations from disabled sources',
+                            'You can\'t Like recommendations from disabled sources',
                         noActiveSource: (_) =>
                             'You don\'t have any recommendations sources enabled. This should not happen. Try restarting the app.'),
                   ).show(context);
@@ -68,10 +71,7 @@ class ArticlesOverviewPage extends StatelessWidget {
               icon: const Icon(Icons.exit_to_app),
             ),
             actions: <Widget>[
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.filter_list_rounded),
-              ),
+              ArticleSourceSwitch(),
             ],
           ),
           body: ArticlesOverviewBody(),

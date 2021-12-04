@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:ddd/domain/articles/article.dart';
-import 'package:ddd/domain/core/failures.dart';
-import 'package:ddd/domain/core/value_objects.dart';
-import 'package:ddd/domain/core/value_validators.dart';
+import 'article.dart';
+import '../core/failures.dart';
+import '../core/value_objects.dart';
+import '../core/value_validators.dart';
 import 'package:kt_dart/kt.dart';
 
 class ArticleUrl extends ValueObject<String> {

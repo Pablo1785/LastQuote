@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:ddd/domain/core/errors.dart';
-import 'package:ddd/domain/core/failures.dart';
+import 'errors.dart';
+import 'failures.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
 
