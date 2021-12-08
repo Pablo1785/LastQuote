@@ -253,6 +253,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
+  fake_cloud_firestore:
+    dependency: "direct dev"
+    description:
+      name: fake_cloud_firestore
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   file:
     dependency: transitive
     description:

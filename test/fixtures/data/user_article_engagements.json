@@ -1,0 +1,9 @@
+{
+    "id": "userArticleEngagementUniqueIdString",
+    "article_id": "articleUniqueIdString",
+    "is_dismissed": false,
+    "is_liked": false,
+    "is_opened": false,
+    "is_shared": false,
+    "user_id": "userUniqueIdString"
+}

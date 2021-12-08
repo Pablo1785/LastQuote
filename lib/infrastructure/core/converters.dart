@@ -18,7 +18,7 @@ class ReferenceConverter implements JsonConverter<String, Object> {
 
   @override
   String fromJson(Object json) {
-    return (json as DocumentReference).id;
+    return json as String;
   }
 
   @override
