@@ -1,3 +1,7 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:ddd/presentation/articles/article_detail/article_detail_page.dart';
+import 'package:ddd/presentation/routes/app_router.gr.dart';
+
 import '../../../../application/articles/article_watcher/article_watcher_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,6 +59,13 @@ class ArticlesOverviewBody extends StatelessWidget {
                           article.url.getOrCrash(),
                         ),
                       ),
+                      onTap: () {
+                        AutoRouter.of(context).push(
+                          ArticleDetailRoute(
+                            article: article,
+                          ),
+                        );
+                      },
                     ),
                   );
                 }

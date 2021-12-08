@@ -3,17 +3,17 @@ import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ddd/application/article_sources/article_source_picker/article_source_picker_bloc.dart';
 import 'package:ddd/application/articles/article_watcher/article_watcher_bloc.dart';
+import 'package:ddd/domain/article_sources/article_source.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:kt_dart/kt.dart';
 
 class ArticleSourcePickerDrawer extends HookWidget {
   const ArticleSourcePickerDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final selectedArticleSourceIndex = useState(-1);
-
     return Drawer(
       child: Center(
         child: BlocBuilder<ArticleSourcePickerBloc, ArticleSourcePickerState>(
@@ -37,8 +37,8 @@ class ArticleSourcePickerDrawer extends HookWidget {
               loadInProgress: (_) => const LinearProgressIndicator(),
               loadSuccess: (loadSuccessState) {
                 return ArticleSourceFilterOrLoadSuccessList(
-                  loadSuccessState,
-                  false,
+                  loadSuccessState.articleSources,
+                  -1,
                 );
               },
               filterInProgress: (_) => const CircularProgressIndicator(
@@ -61,8 +61,8 @@ class ArticleSourcePickerDrawer extends HookWidget {
                           : const ArticleWatcherEvent.watchAllStarted(),
                     );
                 return ArticleSourceFilterOrLoadSuccessList(
-                  filterSuccessState,
-                  true,
+                  filterSuccessState.articleSources,
+                  filterSuccessState.pickedSourceIndex,
                 );
               },
             );
@@ -71,34 +71,24 @@ class ArticleSourcePickerDrawer extends HookWidget {
       ),
     );
   }
-
-  void _selectArticleSource(
-      articleSourcePickerBlocState, BuildContext context, int index) {
-    context.read<ArticleSourcePickerBloc>().add(
-          ArticleSourcePickerEvent.filterClicked(
-            right(articleSourcePickerBlocState.articleSources),
-            index,
-          ),
-        );
-  }
 }
 
 class ArticleSourceFilterOrLoadSuccessList extends StatelessWidget {
-  final successState;
-  final bool hasIndex;
+  final KtList<ArticleSource> _articleSources;
+  final int _index;
 
-  const ArticleSourceFilterOrLoadSuccessList(this.successState, this.hasIndex,
+  const ArticleSourceFilterOrLoadSuccessList(this._articleSources, this._index,
       {Key? key})
       : super(key: key);
 
   void _selectArticleSource(
-    articleSourcePickerBlocState,
+    KtList<ArticleSource> articleSources,
     BuildContext context,
     int index,
   ) =>
       context.read<ArticleSourcePickerBloc>().add(
             ArticleSourcePickerEvent.filterClicked(
-              right(articleSourcePickerBlocState.articleSources),
+              right(articleSources),
               index,
             ),
           );
@@ -116,7 +106,7 @@ class ArticleSourceFilterOrLoadSuccessList extends StatelessWidget {
               context.read<ArticleSourcePickerBloc>().add(
                     ArticleSourcePickerEvent.clearFiltersClicked(
                       right(
-                        successState.articleSources,
+                        _articleSources,
                       ),
                     ),
                   );
@@ -132,18 +122,15 @@ class ArticleSourceFilterOrLoadSuccessList extends StatelessWidget {
               int _localIndex = articleSourceIndex;
               return ListTile(
                 onTap: () =>
-                    _selectArticleSource(successState, context, _localIndex),
-                selected: hasIndex
-                    ? successState.pickedSourceIndex == _localIndex
-                    : false,
+                    _selectArticleSource(_articleSources, context, _localIndex),
+                selected: _index == _localIndex,
                 title: Text(
                   "Article source: " +
-                      successState.articleSources[articleSourceIndex].name
-                          .getOrCrash(),
+                      _articleSources[articleSourceIndex].name.getOrCrash(),
                 ),
               );
             },
-            itemCount: successState.articleSources.size,
+            itemCount: _articleSources.size,
           ),
         ],
       ),

@@ -21,18 +21,8 @@ class ArticlesOverviewPage extends StatefulWidget {
 class _ArticlesOverviewPageState extends State<ArticlesOverviewPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  bool drawerOpen = false;
-  int currentArticleSourceIndex = -1;
-
   void _openEndDrawer() {
     _scaffoldKey.currentState!.openEndDrawer();
-  }
-
-  void _closeEndDrawer() {
-    Navigator.of(context).pop();
-    setState(() {
-      drawerOpen = false;
-    });
   }
 
   @override
