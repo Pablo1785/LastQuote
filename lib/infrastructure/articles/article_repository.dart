@@ -4,6 +4,7 @@ import '../../domain/articles/article_failure.dart';
 import '../../domain/articles/article.dart';
 import 'package:dartz/dartz.dart';
 import '../../domain/articles/i_article_repository.dart';
+import '../../injection.dart';
 import 'article_dtos.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
@@ -23,7 +24,7 @@ class ArticleRepository implements IArticleRepository {
   Stream<Either<ArticleFailure, KtList<Article>>> watchAll() async* {
     // articles/{uass = getUserArticleSourceByIdAndUserId(article.source_id, currentUser.id) && uass.is_enabled == true}
     final userEnabledArticleSourceDocRefs =
-        await _firestore.userEnabledArticleSources();
+        await getIt<FirestoreHelper>().userEnabledArticleSources();
     if (userEnabledArticleSourceDocRefs.isEmpty) {
       yield left(const ArticleFailure.noActiveSource());
     } else {
@@ -62,7 +63,7 @@ class ArticleRepository implements IArticleRepository {
 
     // Make sure there are active sources
     final userEnabledArticleSourceDocRefs =
-        await _firestore.userEnabledArticleSources();
+        await getIt<FirestoreHelper>().userEnabledArticleSources();
     if (userEnabledArticleSourceDocRefs.isEmpty) {
       yield left(const ArticleFailure.noActiveSource());
     }

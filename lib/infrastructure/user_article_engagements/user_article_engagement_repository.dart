@@ -14,6 +14,8 @@ import 'package:kt_dart/src/collection/kt_list.dart';
 import 'package:ddd/infrastructure/core/firestore_helpers.dart';
 import 'package:rxdart/src/transformers/on_error_resume.dart';
 
+import '../../injection.dart';
+
 @LazySingleton(as: IUserArticleEngagementRepository)
 class UserArticleEngagementRepository
     implements IUserArticleEngagementRepository {
@@ -24,7 +26,7 @@ class UserArticleEngagementRepository
   Future<Either<UserArticleEngagementFailure, UserArticleEngagement>>
       getForCurrentUserAndArticle(Article article) async {
     try {
-      final userDocRef = await _firestore.userDocument();
+      final userDocRef = await getIt<FirestoreHelper>().userDocument();
       final articleDocRef =
           _firestore.collection('articles').doc(article.id.getOrCrash());
       final userArticleDocs = (await _firestore
@@ -63,7 +65,7 @@ class UserArticleEngagementRepository
           KtMap<String, UserArticleEngagement>>> getForCurrentUserAndArticles(
       KtList<Article> articles) async* {
     try {
-      final userDocRef = await _firestore.userDocument();
+      final userDocRef = await getIt<FirestoreHelper>().userDocument();
       final articleIds = articles.iter
           .map(
             (article) => article.id.getOrCrash(),
