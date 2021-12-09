@@ -17,6 +17,11 @@ class FirestoreHelper {
     this._firestore,
   );
 
+  Future<DocumentReference<Map<String, dynamic>>> articleDocument(
+    String id,
+  ) async =>
+      _firestore.collection('articles').doc(id);
+
   Future<DocumentReference<Map<String, dynamic>>> userDocument() async {
     final userOption = await _authFacade.getSignedInUser();
     final user = userOption.getOrElse(() => throw NotAuthenticatedError());

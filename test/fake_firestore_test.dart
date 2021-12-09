@@ -5,6 +5,29 @@ import 'fake_firestore.dart';
 
 void main() async {
   test(
+    'should create documents with matching DocumentReferences',
+    () async {
+      // arrange
+      final firestore = FakeFirebaseFirestore();
+      await setupFirestoreDocuments(firestore);
+      final user = await getUserFromFirestore(firestore);
+      final article = await getArticleFromFirestore(firestore);
+      final userDocRef =
+          firestore.collection('users').doc(user.id.getOrCrash());
+      final articleDocRef =
+          firestore.collection('articles').doc(article.id.getOrCrash());
+
+      // act
+      final userArticleDoc =
+          (await firestore.collection('user_article_engagement').get())
+              .docs
+              .first;
+      // assert
+      expect(userArticleDoc.data()['user_id'], userDocRef);
+      expect(userArticleDoc.data()['article_id'], articleDocRef);
+    },
+  );
+  test(
     'should create objects with matching id fields',
     () async {
       // arrange

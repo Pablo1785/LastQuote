@@ -27,8 +27,8 @@ class UserArticleEngagementRepository
       getForCurrentUserAndArticle(Article article) async {
     try {
       final userDocRef = await getIt<FirestoreHelper>().userDocument();
-      final articleDocRef =
-          _firestore.collection('articles').doc(article.id.getOrCrash());
+      final articleDocRef = await getIt<FirestoreHelper>()
+          .articleDocument(article.id.getOrCrash());
       final userArticleDocs = (await _firestore
               .collection('user_article_engagement')
               .where('user_id', isEqualTo: userDocRef)
@@ -66,16 +66,17 @@ class UserArticleEngagementRepository
       KtList<Article> articles) async* {
     try {
       final userDocRef = await getIt<FirestoreHelper>().userDocument();
-      final articleIds = articles.iter
+      final articleDocRefs = articles.iter
           .map(
-            (article) => article.id.getOrCrash(),
+            (article) => getIt<FirestoreHelper>()
+                .articleDocument(article.id.getOrCrash()),
           )
           .toList();
 
       yield* _firestore
           .collection('user_article_engagements')
           .where('user_id', isEqualTo: userDocRef)
-          .where('article_id', whereIn: articleIds)
+          .where('article_id', whereIn: articleDocRefs)
           .snapshots()
           .map(
         (snapshot) {

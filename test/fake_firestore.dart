@@ -12,6 +12,21 @@ import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 
 import 'fixtures/fixture_reader.dart';
 
+Future<void> addUserArticleEngagementToFirestore(
+  FakeFirebaseFirestore firestore,
+) async {
+  // UserArticleEngagement from fixture & Firestore
+  var userArticleEngagementMap = (json
+      .decode(fixture('user_article_engagement.json')) as Map<String, dynamic>);
+  userArticleEngagementMap['user_id'] =
+      (await firestore.collection('users').get()).docs.first.reference;
+  userArticleEngagementMap['article_id'] =
+      (await firestore.collection('articles').get()).docs.first.reference;
+  await firestore
+      .collection('user_article_engagement')
+      .add(userArticleEngagementMap);
+}
+
 Future<void> addValuesToFirestore(
   FakeFirebaseFirestore firestore,
 ) async {
@@ -27,19 +42,14 @@ Future<void> addValuesToFirestore(
   var articleMap =
       (json.decode(fixture('articles.json')) as Map<String, dynamic>);
   articleMap['source_id'] =
-      (await firestore.collection('article_sources').get()).docs.first.id;
+      (await firestore.collection('article_sources').get())
+          .docs
+          .first
+          .reference;
   await firestore.collection('articles').add(articleMap);
 
   // UserArticleEngagement from fixture & Firestore
-  var userArticleEngagementMap = (json
-      .decode(fixture('user_article_engagement.json')) as Map<String, dynamic>);
-  userArticleEngagementMap['user_id'] =
-      (await firestore.collection('users').get()).docs.first.id;
-  userArticleEngagementMap['article_id'] =
-      (await firestore.collection('articles').get()).docs.first.id;
-  await firestore
-      .collection('user_article_engagement')
-      .add(userArticleEngagementMap);
+  await addUserArticleEngagementToFirestore(firestore);
 }
 
 Future<User> getUserFromFirestore(
