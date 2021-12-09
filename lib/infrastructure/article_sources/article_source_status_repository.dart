@@ -9,6 +9,7 @@ import '../../domain/article_sources/article_source_status.dart';
 import '../../domain/article_sources/i_article_source_status_repository.dart';
 import '../../domain/auth/user.dart';
 import '../../infrastructure/core/firestore_helpers.dart';
+import '../../injection.dart';
 import 'article_source_dtos.dart';
 
 @LazySingleton(as: IArticleSourceStatusRepository)
@@ -23,7 +24,7 @@ class ArticleSourceStatusRepository implements IArticleSourceStatusRepository {
   Future<Either<ArticleSourceFailure, KtList<ArticleSourceStatus>>>
       getForCurrentUser() async {
     try {
-      final userDocRef = await _firestore.userDocument();
+      final userDocRef = await getIt<FirestoreHelper>().userDocument();
       final userArticleSourceStatuses = await _firestore
           .collection('user_article_source_statuses')
           .where('user_id', isEqualTo: userDocRef)

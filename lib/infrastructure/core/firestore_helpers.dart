@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:injectable/injectable.dart';
 import '../../domain/article_sources/article_source.dart';
 import '../../domain/auth/i_auth_facade.dart';
 import '../../domain/core/errors.dart';
@@ -6,32 +7,55 @@ import '../articles/article_dtos.dart';
 
 import '../../injection.dart';
 
-extension FirebaseFirestoreX on FirebaseFirestore {
-  Future<DocumentReference> userDocument() async {
-    final userOption = await getIt<IAuthFacade>().getSignedInUser();
+@injectable
+class FirestoreHelper {
+  final IAuthFacade _authFacade;
+  final FirebaseFirestore _firestore;
+
+  FirestoreHelper(
+    this._authFacade,
+    this._firestore,
+  );
+
+  Future<DocumentReference<Map<String, dynamic>>> articleDocument(
+    String id,
+  ) async =>
+      _firestore.collection('articles').doc(id);
+
+  Future<DocumentReference<Map<String, dynamic>>> userDocument() async {
+    final userOption = await _authFacade.getSignedInUser();
     final user = userOption.getOrElse(() => throw NotAuthenticatedError());
-    return FirebaseFirestore.instance
-        .collection('users')
-        .doc(user.id.getOrCrash());
+    return _firestore.collection('users').doc(user.id.getOrCrash());
   }
 
-  Future<List<DocumentReference>> userEnabledArticleSources() async {
-    final userDocRef = await FirebaseFirestore.instance.userDocument();
-    final userArticleSourceStatuses = await FirebaseFirestore.instance
+  Future<List<DocumentReference<Map<String, dynamic>>>>
+      userEnabledArticleSources() async {
+    final userDocRef = await userDocument();
+    final userArticleSourceStatuses = await _firestore
         .collection('user_article_source_statuses')
-        .where('user_id', isEqualTo: userDocRef)
-        .where('is_enabled', isEqualTo: true)
+        .where(
+          'user_id',
+          isEqualTo: userDocRef,
+        )
+        .where(
+          'is_enabled',
+          isEqualTo: true,
+        )
         .get();
     final enabledSourceIds = userArticleSourceStatuses.docs
-        .where((doc) => doc.exists)
-        .map((doc) => (doc.data()['article_source_id'] as DocumentReference).id)
+        .where(
+          (doc) => doc.exists,
+        )
+        .map(
+          (doc) => (doc.data()['article_source_id'] as DocumentReference).id,
+        )
         .toList();
 
     if (enabledSourceIds.isEmpty) {
       return List.empty();
     } else {
       final articleSourceQuery =
-          await FirebaseFirestore.instance.collection('article_sources').get();
+          await _firestore.collection('article_sources').get();
       return articleSourceQuery.docs
           .where((doc) => doc.exists)
           .where((doc) => enabledSourceIds.contains(doc.id))
@@ -39,13 +63,4 @@ extension FirebaseFirestoreX on FirebaseFirestore {
           .toList(); // if this returns List.empty then there are source_ids in user_article_source_statuses that arent in article_sources
     }
   }
-}
-
-extension DocumentReferenceX on DocumentReference {
-  CollectionReference get userCollection => collection('users');
-  CollectionReference get articleCollection => collection('articles');
-  CollectionReference get termCollection => collection('terms');
-  CollectionReference get articleSourceCollection =>
-      collection('article_sources');
-  CollectionReference get dataSourceCollection => collection('data_sources');
 }

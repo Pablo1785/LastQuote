@@ -1,7 +1,5 @@
 {
-    "id": "articleUniqueIdString",
     "media_type": "encyclopedia_entry",
-    "source_id": "sourceUniqueIdString",
     "title": "Article Title String",
     "url": "https://www.example.com"
 }
