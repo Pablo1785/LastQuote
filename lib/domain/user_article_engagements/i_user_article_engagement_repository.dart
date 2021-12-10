@@ -15,7 +15,14 @@ abstract class IUserArticleEngagementRepository {
   // return ArticleId->UserArticleEngagement mapping for current User
   Stream<
       Either<UserArticleEngagementFailure,
-          KtMap<String, UserArticleEngagement>>> getForCurrentUserAndArticles(
+          KtMap<String, UserArticleEngagement>>> watchForCurrentUserAndArticles(
     KtList<Article> articles,
   );
+
+  Future<Either<UserArticleEngagementFailure, Unit>> create(
+    UserArticleEngagement userArticleEngagement,
+  );
+
+  Future<Either<UserArticleEngagementFailure, Unit>> update(
+      UserArticleEngagement userArticleEngagement);
 }

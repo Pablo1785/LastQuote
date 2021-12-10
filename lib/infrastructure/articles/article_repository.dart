@@ -44,7 +44,7 @@ class ArticleRepository implements IArticleRepository {
           .onErrorReturnWith(
         (exception, stacktrace) {
           if (exception is PlatformException &&
-              exception.message!.contains('PERMISSION_DENIED')) {
+              exception.message!.contains('permission')) {
             return left(const ArticleFailure.insufficientPermissions());
           } else {
             print(exception.toString());
@@ -92,7 +92,7 @@ class ArticleRepository implements IArticleRepository {
           .onErrorReturnWith(
         (exception, stacktrace) {
           if (exception is PlatformException &&
-              exception.message!.contains('PERMISSION_DENIED')) {
+              exception.message!.contains('permission')) {
             return left(const ArticleFailure.insufficientPermissions());
           } else {
             // log.error(exception.toString())

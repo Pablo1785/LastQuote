@@ -28,6 +28,10 @@ class _$UserArticleEngagementFailureTearOff {
   _NoEngagement noEngagement() {
     return const _NoEngagement();
   }
+
+  _DocumentNotFound documentNotFound() {
+    return const _DocumentNotFound();
+  }
 }
 
 /// @nodoc
@@ -40,6 +44,7 @@ mixin _$UserArticleEngagementFailure {
     required TResult Function() unexpected,
     required TResult Function() insufficientPermissions,
     required TResult Function() noEngagement,
+    required TResult Function() documentNotFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,6 +52,7 @@ mixin _$UserArticleEngagementFailure {
     TResult Function()? unexpected,
     TResult Function()? insufficientPermissions,
     TResult Function()? noEngagement,
+    TResult Function()? documentNotFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,6 +60,7 @@ mixin _$UserArticleEngagementFailure {
     TResult Function()? unexpected,
     TResult Function()? insufficientPermissions,
     TResult Function()? noEngagement,
+    TResult Function()? documentNotFound,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -63,6 +70,7 @@ mixin _$UserArticleEngagementFailure {
     required TResult Function(_InsufficientPermissions value)
         insufficientPermissions,
     required TResult Function(_NoEngagement value) noEngagement,
+    required TResult Function(_DocumentNotFound value) documentNotFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,6 +78,7 @@ mixin _$UserArticleEngagementFailure {
     TResult Function(_Unexpected value)? unexpected,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
     TResult Function(_NoEngagement value)? noEngagement,
+    TResult Function(_DocumentNotFound value)? documentNotFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -77,6 +86,7 @@ mixin _$UserArticleEngagementFailure {
     TResult Function(_Unexpected value)? unexpected,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
     TResult Function(_NoEngagement value)? noEngagement,
+    TResult Function(_DocumentNotFound value)? documentNotFound,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -144,6 +154,7 @@ class _$_Unexpected implements _Unexpected {
     required TResult Function() unexpected,
     required TResult Function() insufficientPermissions,
     required TResult Function() noEngagement,
+    required TResult Function() documentNotFound,
   }) {
     return unexpected();
   }
@@ -154,6 +165,7 @@ class _$_Unexpected implements _Unexpected {
     TResult Function()? unexpected,
     TResult Function()? insufficientPermissions,
     TResult Function()? noEngagement,
+    TResult Function()? documentNotFound,
   }) {
     return unexpected?.call();
   }
@@ -164,6 +176,7 @@ class _$_Unexpected implements _Unexpected {
     TResult Function()? unexpected,
     TResult Function()? insufficientPermissions,
     TResult Function()? noEngagement,
+    TResult Function()? documentNotFound,
     required TResult orElse(),
   }) {
     if (unexpected != null) {
@@ -179,6 +192,7 @@ class _$_Unexpected implements _Unexpected {
     required TResult Function(_InsufficientPermissions value)
         insufficientPermissions,
     required TResult Function(_NoEngagement value) noEngagement,
+    required TResult Function(_DocumentNotFound value) documentNotFound,
   }) {
     return unexpected(this);
   }
@@ -189,6 +203,7 @@ class _$_Unexpected implements _Unexpected {
     TResult Function(_Unexpected value)? unexpected,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
     TResult Function(_NoEngagement value)? noEngagement,
+    TResult Function(_DocumentNotFound value)? documentNotFound,
   }) {
     return unexpected?.call(this);
   }
@@ -199,6 +214,7 @@ class _$_Unexpected implements _Unexpected {
     TResult Function(_Unexpected value)? unexpected,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
     TResult Function(_NoEngagement value)? noEngagement,
+    TResult Function(_DocumentNotFound value)? documentNotFound,
     required TResult orElse(),
   }) {
     if (unexpected != null) {
@@ -257,6 +273,7 @@ class _$_InsufficientPermissions implements _InsufficientPermissions {
     required TResult Function() unexpected,
     required TResult Function() insufficientPermissions,
     required TResult Function() noEngagement,
+    required TResult Function() documentNotFound,
   }) {
     return insufficientPermissions();
   }
@@ -267,6 +284,7 @@ class _$_InsufficientPermissions implements _InsufficientPermissions {
     TResult Function()? unexpected,
     TResult Function()? insufficientPermissions,
     TResult Function()? noEngagement,
+    TResult Function()? documentNotFound,
   }) {
     return insufficientPermissions?.call();
   }
@@ -277,6 +295,7 @@ class _$_InsufficientPermissions implements _InsufficientPermissions {
     TResult Function()? unexpected,
     TResult Function()? insufficientPermissions,
     TResult Function()? noEngagement,
+    TResult Function()? documentNotFound,
     required TResult orElse(),
   }) {
     if (insufficientPermissions != null) {
@@ -292,6 +311,7 @@ class _$_InsufficientPermissions implements _InsufficientPermissions {
     required TResult Function(_InsufficientPermissions value)
         insufficientPermissions,
     required TResult Function(_NoEngagement value) noEngagement,
+    required TResult Function(_DocumentNotFound value) documentNotFound,
   }) {
     return insufficientPermissions(this);
   }
@@ -302,6 +322,7 @@ class _$_InsufficientPermissions implements _InsufficientPermissions {
     TResult Function(_Unexpected value)? unexpected,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
     TResult Function(_NoEngagement value)? noEngagement,
+    TResult Function(_DocumentNotFound value)? documentNotFound,
   }) {
     return insufficientPermissions?.call(this);
   }
@@ -312,6 +333,7 @@ class _$_InsufficientPermissions implements _InsufficientPermissions {
     TResult Function(_Unexpected value)? unexpected,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
     TResult Function(_NoEngagement value)? noEngagement,
+    TResult Function(_DocumentNotFound value)? documentNotFound,
     required TResult orElse(),
   }) {
     if (insufficientPermissions != null) {
@@ -370,6 +392,7 @@ class _$_NoEngagement implements _NoEngagement {
     required TResult Function() unexpected,
     required TResult Function() insufficientPermissions,
     required TResult Function() noEngagement,
+    required TResult Function() documentNotFound,
   }) {
     return noEngagement();
   }
@@ -380,6 +403,7 @@ class _$_NoEngagement implements _NoEngagement {
     TResult Function()? unexpected,
     TResult Function()? insufficientPermissions,
     TResult Function()? noEngagement,
+    TResult Function()? documentNotFound,
   }) {
     return noEngagement?.call();
   }
@@ -390,6 +414,7 @@ class _$_NoEngagement implements _NoEngagement {
     TResult Function()? unexpected,
     TResult Function()? insufficientPermissions,
     TResult Function()? noEngagement,
+    TResult Function()? documentNotFound,
     required TResult orElse(),
   }) {
     if (noEngagement != null) {
@@ -405,6 +430,7 @@ class _$_NoEngagement implements _NoEngagement {
     required TResult Function(_InsufficientPermissions value)
         insufficientPermissions,
     required TResult Function(_NoEngagement value) noEngagement,
+    required TResult Function(_DocumentNotFound value) documentNotFound,
   }) {
     return noEngagement(this);
   }
@@ -415,6 +441,7 @@ class _$_NoEngagement implements _NoEngagement {
     TResult Function(_Unexpected value)? unexpected,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
     TResult Function(_NoEngagement value)? noEngagement,
+    TResult Function(_DocumentNotFound value)? documentNotFound,
   }) {
     return noEngagement?.call(this);
   }
@@ -425,6 +452,7 @@ class _$_NoEngagement implements _NoEngagement {
     TResult Function(_Unexpected value)? unexpected,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
     TResult Function(_NoEngagement value)? noEngagement,
+    TResult Function(_DocumentNotFound value)? documentNotFound,
     required TResult orElse(),
   }) {
     if (noEngagement != null) {
@@ -436,4 +464,122 @@ class _$_NoEngagement implements _NoEngagement {
 
 abstract class _NoEngagement implements UserArticleEngagementFailure {
   const factory _NoEngagement() = _$_NoEngagement;
+}
+
+/// @nodoc
+abstract class _$DocumentNotFoundCopyWith<$Res> {
+  factory _$DocumentNotFoundCopyWith(
+          _DocumentNotFound value, $Res Function(_DocumentNotFound) then) =
+      __$DocumentNotFoundCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$DocumentNotFoundCopyWithImpl<$Res>
+    extends _$UserArticleEngagementFailureCopyWithImpl<$Res>
+    implements _$DocumentNotFoundCopyWith<$Res> {
+  __$DocumentNotFoundCopyWithImpl(
+      _DocumentNotFound _value, $Res Function(_DocumentNotFound) _then)
+      : super(_value, (v) => _then(v as _DocumentNotFound));
+
+  @override
+  _DocumentNotFound get _value => super._value as _DocumentNotFound;
+}
+
+/// @nodoc
+
+class _$_DocumentNotFound implements _DocumentNotFound {
+  const _$_DocumentNotFound();
+
+  @override
+  String toString() {
+    return 'UserArticleEngagementFailure.documentNotFound()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _DocumentNotFound);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() unexpected,
+    required TResult Function() insufficientPermissions,
+    required TResult Function() noEngagement,
+    required TResult Function() documentNotFound,
+  }) {
+    return documentNotFound();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? unexpected,
+    TResult Function()? insufficientPermissions,
+    TResult Function()? noEngagement,
+    TResult Function()? documentNotFound,
+  }) {
+    return documentNotFound?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? unexpected,
+    TResult Function()? insufficientPermissions,
+    TResult Function()? noEngagement,
+    TResult Function()? documentNotFound,
+    required TResult orElse(),
+  }) {
+    if (documentNotFound != null) {
+      return documentNotFound();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Unexpected value) unexpected,
+    required TResult Function(_InsufficientPermissions value)
+        insufficientPermissions,
+    required TResult Function(_NoEngagement value) noEngagement,
+    required TResult Function(_DocumentNotFound value) documentNotFound,
+  }) {
+    return documentNotFound(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_InsufficientPermissions value)? insufficientPermissions,
+    TResult Function(_NoEngagement value)? noEngagement,
+    TResult Function(_DocumentNotFound value)? documentNotFound,
+  }) {
+    return documentNotFound?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_InsufficientPermissions value)? insufficientPermissions,
+    TResult Function(_NoEngagement value)? noEngagement,
+    TResult Function(_DocumentNotFound value)? documentNotFound,
+    required TResult orElse(),
+  }) {
+    if (documentNotFound != null) {
+      return documentNotFound(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DocumentNotFound implements UserArticleEngagementFailure {
+  const factory _DocumentNotFound() = _$_DocumentNotFound;
 }

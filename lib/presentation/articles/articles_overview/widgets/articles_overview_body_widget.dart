@@ -1,11 +1,16 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:ddd/presentation/articles/article_detail/article_detail_page.dart';
+import 'package:ddd/application/user_article_engagement/user_article_engagement_actor/user_article_engagement_actor_bloc.dart';
+import 'package:ddd/application/user_article_engagement/user_article_engagement_watcher/user_article_engagement_watcher_bloc.dart';
+import 'package:ddd/domain/articles/article.dart';
+import 'package:ddd/domain/articles/article_failure.dart';
+import 'package:ddd/domain/user_article_engagements/user_article_engagement.dart';
+import 'package:ddd/domain/user_article_engagements/user_article_engagement_failure.dart';
 import 'package:ddd/presentation/routes/app_router.gr.dart';
+import 'package:kt_dart/kt.dart';
 
 import '../../../../application/articles/article_watcher/article_watcher_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ArticlesOverviewBody extends StatelessWidget {
   const ArticlesOverviewBody({Key? key}) : super(key: key);
@@ -20,79 +25,176 @@ class ArticlesOverviewBody extends StatelessWidget {
             child: CircularProgressIndicator(),
           ),
           loadSuccess: (loadSuccessState) {
-            return ListView.builder(
-              itemBuilder: (context, index) {
-                final article = loadSuccessState.articles[index];
-                if (article.failureOption.isSome()) {
-                  return Container(
-                    color: Colors.red,
-                    width: 100,
-                    height: 100,
-                  );
-                } else {
-                  return Card(
-                    child: ListTile(
-                      leading: () {
-                        switch (article.mediaType.getOrCrash()) {
-                          case 'social_media_post':
-                            return const Icon(Icons.group_outlined);
-                            break;
-                          case 'encyclopedia_entry':
-                            return const Icon(Icons.article_outlined);
-                            break;
-                          default:
-                            return const Icon(Icons.article_outlined);
-                            break;
-                        }
-                      }(),
-                      title: Text(
-                        article.title.getOrCrash(),
-                      ),
-                      subtitle: Text(
-                        article.url.getOrCrash(),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.open_in_browser),
-                        onPressed: () => launch(
-                          article.url.getOrCrash(),
-                        ),
-                      ),
-                      onTap: () {
-                        AutoRouter.of(context).push(
-                          ArticleDetailRoute(
-                            article: article,
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                }
+            context.read<UserArticleEngagementWatcherBloc>().add(
+                  UserArticleEngagementWatcherEvent
+                      .watchForCurrentUserAndArticlesStarted(
+                    loadSuccessState.articles,
+                  ),
+                );
+            return BlocBuilder<UserArticleEngagementWatcherBloc,
+                UserArticleEngagementWatcherState>(
+              builder: (context, userArticleEngagementState) {
+                return userArticleEngagementState.map(
+                  initial: (_) => Container(),
+                  loadInProgress: (_) => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  loadSuccess: (userArticleEngagementLoadSuccessState) {
+                    return ArticleLoadSuccessWidget(
+                      articles: loadSuccessState.articles,
+                      userArticleEngagements:
+                          userArticleEngagementLoadSuccessState
+                              .userArticleEngagements,
+                    );
+                  },
+                  loadFailure: (userArticleEngagementLoadFailureState) {
+                    return UserArticleEngagementLoadFailureWidget(
+                      userArticleEngagementFailure:
+                          userArticleEngagementLoadFailureState
+                              .userArticleEngagementFailure,
+                    );
+                  },
+                );
               },
-              itemCount: loadSuccessState.articles.size,
             );
           },
           loadFailure: (loadFailureState) {
-            return Center(
-              child: Column(
-                children: [
-                  const Icon(
-                    Icons.error_outline,
-                    size: 72,
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    loadFailureState.articleFailure.toString(),
-                  ),
-                ],
-              ),
+            return ArticleLoadFailureWidget(
+              articleFailure: loadFailureState.articleFailure,
             );
           },
         );
       },
+    );
+  }
+}
+
+class ArticleLoadFailureWidget extends StatelessWidget {
+  const ArticleLoadFailureWidget({
+    Key? key,
+    required this.articleFailure,
+  }) : super(key: key);
+
+  final ArticleFailure articleFailure;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: [
+          const Icon(
+            Icons.error_outline,
+            size: 72,
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Text(
+            articleFailure.toString(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class UserArticleEngagementLoadFailureWidget extends StatelessWidget {
+  const UserArticleEngagementLoadFailureWidget({
+    Key? key,
+    required this.userArticleEngagementFailure,
+  }) : super(key: key);
+
+  final UserArticleEngagementFailure userArticleEngagementFailure;
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: [
+          const Icon(
+            Icons.error_outline,
+            size: 72,
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Text(
+            userArticleEngagementFailure.toString(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ArticleLoadSuccessWidget extends StatelessWidget {
+  const ArticleLoadSuccessWidget({
+    Key? key,
+    required this.articles,
+    required this.userArticleEngagements,
+  }) : super(key: key);
+
+  final KtList<Article> articles;
+  final KtMap<String, UserArticleEngagement> userArticleEngagements;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        final article = articles[index];
+        if (article.failureOption.isSome()) {
+          return Container(
+            color: Colors.red,
+            width: 100,
+            height: 100,
+          );
+        } else {
+          final userArticleEngagement =
+              userArticleEngagements[article.id.getOrCrash()];
+          return Card(
+            child: ListTile(
+              leading: IconButton(
+                icon: userArticleEngagement!.isLiked
+                    ? const Icon(Icons.thumb_up_alt)
+                    : const Icon(Icons.thumb_up_alt_outlined),
+                onPressed: () =>
+                    context.read<UserArticleEngagementActorBloc>().add(
+                          UserArticleEngagementActorEvent.likePressed(
+                              userArticleEngagement),
+                        ),
+              ),
+              title: Text(
+                article.title.getOrCrash(),
+              ),
+              subtitle: Text(
+                article.url.getOrCrash(),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              trailing: () {
+                switch (article.mediaType.getOrCrash()) {
+                  case 'social_media_post':
+                    return const Icon(Icons.group_outlined);
+                    break;
+                  case 'encyclopedia_entry':
+                    return const Icon(Icons.article_outlined);
+                    break;
+                  default:
+                    return const Icon(Icons.article_outlined);
+                    break;
+                }
+              }(),
+              onTap: () {
+                AutoRouter.of(context).push(
+                  ArticleDetailRoute(
+                    article: article,
+                  ),
+                );
+              },
+            ),
+          );
+        }
+      },
+      itemCount: articles.size,
     );
   }
 }

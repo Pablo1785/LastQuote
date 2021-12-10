@@ -9,4 +9,6 @@ abstract class UserArticleEngagementFailure
   const factory UserArticleEngagementFailure.insufficientPermissions() =
       _InsufficientPermissions;
   const factory UserArticleEngagementFailure.noEngagement() = _NoEngagement;
+  const factory UserArticleEngagementFailure.documentNotFound() =
+      _DocumentNotFound;
 }

@@ -12,8 +12,16 @@ import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 
 import 'fixtures/fixture_reader.dart';
 
+Future<void> addUserToFirestore(
+  FakeFirebaseFirestore firestore,
+  String uid,
+) async {
+  await firestore.collection('users').doc(uid).set({});
+}
+
 Future<void> addUserArticleEngagementToFirestore(
   FakeFirebaseFirestore firestore,
+  String uid,
 ) async {
   // UserArticleEngagement from fixture & Firestore
   var userArticleEngagementMap = (json
@@ -24,14 +32,15 @@ Future<void> addUserArticleEngagementToFirestore(
       (await firestore.collection('articles').get()).docs.first.reference;
   await firestore
       .collection('user_article_engagement')
-      .add(userArticleEngagementMap);
+      .doc(uid)
+      .set(userArticleEngagementMap);
 }
 
 Future<void> addValuesToFirestore(
   FakeFirebaseFirestore firestore,
 ) async {
   // User from fixture
-  await firestore.collection('users').add({});
+  await addUserToFirestore(firestore, 'dummyUidUser0');
 
   // ArticleSource from fixture
   await firestore.collection('article_sources').add(
@@ -49,16 +58,18 @@ Future<void> addValuesToFirestore(
   await firestore.collection('articles').add(articleMap);
 
   // UserArticleEngagement from fixture & Firestore
-  await addUserArticleEngagementToFirestore(firestore);
+  await addUserArticleEngagementToFirestore(
+      firestore, 'dummyUidUserArticleEngagement0');
 }
 
 Future<User> getUserFromFirestore(
   FakeFirebaseFirestore firestore,
+  String uid,
 ) async {
   // User from Firestore
   final userQuerySnapshot = await firestore.collection('users').get();
   final userQueryDocSnap =
-      userQuerySnapshot.docs.where((doc) => doc.exists).first;
+      userQuerySnapshot.docs.where((doc) => doc.exists && doc.id == uid).first;
   return User(
     id: UniqueId.fromUniqueString(userQueryDocSnap.id),
   );
@@ -66,33 +77,40 @@ Future<User> getUserFromFirestore(
 
 Future<ArticleSource> getArticleSourceFromFirestore(
   FakeFirebaseFirestore firestore,
+  String uid,
 ) async {
   // ArticleSource from Firestore
   final articleSourceQuerySnapshot =
       await firestore.collection('article_sources').get();
-  final articleSourceQueryDocSnap =
-      articleSourceQuerySnapshot.docs.where((doc) => doc.exists).first;
+  final articleSourceQueryDocSnap = articleSourceQuerySnapshot.docs
+      .where((doc) => doc.exists && doc.id == uid)
+      .first;
   return ArticleSourceDto.fromFirestore(articleSourceQueryDocSnap).toDomain();
 }
 
 Future<Article> getArticleFromFirestore(
   FakeFirebaseFirestore firestore,
+  String uid,
 ) async {
   // Article from Firestore
   final articleQuerySnapshot = await firestore.collection('articles').get();
-  final articleQueryDocSnap =
-      articleQuerySnapshot.docs.where((doc) => doc.exists).first;
+  final articleQueryDocSnap = articleQuerySnapshot.docs
+      .where((doc) => doc.exists && doc.id == uid)
+      .first;
   return ArticleDto.fromFirestore(articleQueryDocSnap).toDomain();
 }
 
 Future<UserArticleEngagement> getUserArticleEngagementFromFirestore(
   FakeFirebaseFirestore firestore,
+  String uid,
 ) async {
   // UserArticleEngagement from Firestore
   final userArticleEngagementQuerySnapshot =
       await firestore.collection('user_article_engagement').get();
-  final userArticleEngagementQueryDocSnap =
-      userArticleEngagementQuerySnapshot.docs.where((doc) => doc.exists).first;
+  final userArticleEngagementQueryDocSnap = userArticleEngagementQuerySnapshot
+      .docs
+      .where((doc) => doc.exists && doc.id == uid)
+      .first;
   return UserArticleEngagementDto.fromFirestore(
           userArticleEngagementQueryDocSnap)
       .toDomain();
