@@ -27,12 +27,10 @@ class UserArticleEngagementRepository
       getForCurrentUserAndArticle(Article article) async {
     try {
       final userDocRef = await getIt<FirestoreHelper>().userDocument();
-      final articleDocRef = await getIt<FirestoreHelper>()
-          .articleDocument(article.id.getOrCrash());
       final userArticleDocs = (await _firestore
               .collection('user_article_engagement')
-              .where('user_id', isEqualTo: userDocRef)
-              .where('article_id', isEqualTo: articleDocRef)
+              .where('user_id', isEqualTo: userDocRef.id)
+              .where('article_id', isEqualTo: article.id.getOrCrash())
               .get())
           .docs
           .where((doc) => doc.exists)
@@ -66,18 +64,16 @@ class UserArticleEngagementRepository
       KtList<Article> articles) async* {
     try {
       final userDocRef = await getIt<FirestoreHelper>().userDocument();
-      final articleDocRefs = (await Future.wait(
-        articles.iter.map(
-          (article) =>
-              getIt<FirestoreHelper>().articleDocument(article.id.getOrCrash()),
-        ),
-      ))
+      final articleIds = articles.iter
+          .map(
+            (article) => article.id.getOrCrash(),
+          )
           .toList();
 
       yield* _firestore
           .collection('user_article_engagements')
-          .where('user_id', isEqualTo: userDocRef)
-          .where('article_id', whereIn: articleDocRefs)
+          .where('user_id', isEqualTo: userDocRef.id)
+          .where('article_id', whereIn: articleIds)
           .snapshots()
           .asyncMap(
         (snapshot) async {
@@ -98,15 +94,15 @@ class UserArticleEngagementRepository
           );
 
           // check articles that do not have a junction with current user
-          final newUserArticleEngagements = articleDocRefs
+          final newUserArticleEngagements = articleIds
               .where(
-                (articleDocRef) => !uidUserArticleEngagementMap.keys
-                    .contains(articleDocRef.id),
+                (articleId) =>
+                    !uidUserArticleEngagementMap.keys.contains(articleId),
               )
               .map(
-                (articleDocRef) => UserArticleEngagement.empty().copyWith(
+                (articleId) => UserArticleEngagement.empty().copyWith(
                   articleId: UniqueId.fromUniqueString(
-                    articleDocRef.id,
+                    articleId,
                   ),
                 ),
               )
@@ -194,12 +190,13 @@ class UserArticleEngagementRepository
         userArticleEngagement,
       );
 
+      final userArticleEngagementDtoJson = userArticleEngagementDto.toJson();
       await _firestore
           .collection('user_article_engagement')
           .doc(userArticleEngagementDto.id)
           // update() differs from set() in that it preserves fields that aren't present in new data
           .update(
-            userArticleEngagementDto.toJson(),
+            userArticleEngagementDtoJson,
           );
       return right(unit);
     } on PlatformException catch (e, stacktrace) {

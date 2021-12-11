@@ -23,14 +23,16 @@ class ArticleRepository implements IArticleRepository {
   @override
   Stream<Either<ArticleFailure, KtList<Article>>> watchAll() async* {
     // articles/{uass = getUserArticleSourceByIdAndUserId(article.source_id, currentUser.id) && uass.is_enabled == true}
-    final userEnabledArticleSourceDocRefs =
-        await getIt<FirestoreHelper>().userEnabledArticleSources();
-    if (userEnabledArticleSourceDocRefs.isEmpty) {
+    final userEnabledArticleSourceIds =
+        (await getIt<FirestoreHelper>().userEnabledArticleSources())
+            .map((docRef) => docRef.id)
+            .toList();
+    if (userEnabledArticleSourceIds.isEmpty) {
       yield left(const ArticleFailure.noActiveSource());
     } else {
       yield* _firestore
           .collection('articles')
-          .where('source_id', whereIn: userEnabledArticleSourceDocRefs)
+          .where('source_id', whereIn: userEnabledArticleSourceIds)
           .snapshots()
           .map(
             (snapshot) => right<ArticleFailure, KtList<Article>>(
@@ -62,23 +64,28 @@ class ArticleRepository implements IArticleRepository {
     // articles/{uass = getUserArticleSourceByIdAndUserId(articleSource.id, currentUser.id) uass.is_enabled == true}
 
     // Make sure there are active sources
-    final userEnabledArticleSourceDocRefs =
-        await getIt<FirestoreHelper>().userEnabledArticleSources();
-    if (userEnabledArticleSourceDocRefs.isEmpty) {
+    final userEnabledArticleSourceIds =
+        (await getIt<FirestoreHelper>().userEnabledArticleSources())
+            .map((docRef) => docRef.id)
+            .toList();
+    if (userEnabledArticleSourceIds.isEmpty) {
       yield left(const ArticleFailure.noActiveSource());
     }
 
     // Make sure queried source was found (exists)
-    final pickedSourceIndex = userEnabledArticleSourceDocRefs
-        .indexWhere((docRef) => docRef.id == articleSource.id.getOrCrash());
+    final pickedSourceIndex = userEnabledArticleSourceIds.indexWhere(
+      (sourceId) => sourceId == articleSource.id.getOrCrash(),
+    );
     if (pickedSourceIndex == -1) {
       // This should not happen as ArticleSources are picked from a list presented to a user, so it shouldnt contain disabled/nonexistant sources
       yield left(const ArticleFailure.unexpected());
     } else {
       yield* _firestore
           .collection('articles')
-          .where('source_id',
-              isEqualTo: userEnabledArticleSourceDocRefs[pickedSourceIndex])
+          .where(
+            'source_id',
+            isEqualTo: userEnabledArticleSourceIds[pickedSourceIndex],
+          )
           .snapshots()
           .map(
             (snapshot) => right<ArticleFailure, KtList<Article>>(

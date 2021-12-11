@@ -35,7 +35,7 @@ class FirestoreHelper {
         .collection('user_article_source_statuses')
         .where(
           'user_id',
-          isEqualTo: userDocRef,
+          isEqualTo: userDocRef.id,
         )
         .where(
           'is_enabled',
@@ -47,7 +47,7 @@ class FirestoreHelper {
           (doc) => doc.exists,
         )
         .map(
-          (doc) => (doc.data()['article_source_id'] as DocumentReference).id,
+          (doc) => doc.data()['article_source_id'],
         )
         .toList();
 
