@@ -12,20 +12,3 @@ class ServerTimestampConverter implements JsonConverter<FieldValue?, Object?> {
   @override
   Object? toJson(FieldValue? fieldValue) => fieldValue;
 }
-
-class ReferenceConverter implements JsonConverter<String, Object> {
-  const ReferenceConverter();
-
-  @override
-  String fromJson(Object json) {
-    if (json is String) {
-      return json;
-    }
-    return (json as DocumentReference).id;
-  }
-
-  @override
-  Object toJson(String object) {
-    return object;
-  }
-}

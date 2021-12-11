@@ -17,10 +17,8 @@ abstract class ArticleSourceStatusDto implements _$ArticleSourceStatusDto {
 
   const factory ArticleSourceStatusDto({
     required String? id,
-    @JsonKey(name: 'article_source_id')
-    @ReferenceConverter()
-        required String articleSourceId,
-    @JsonKey(name: 'user_id') @ReferenceConverter() required String userId,
+    @JsonKey(name: 'article_source_id') required String articleSourceId,
+    @JsonKey(name: 'user_id') required String userId,
     @JsonKey(name: 'is_enabled') required bool isEnabled,
   }) = _ArticleSourceStatusDto;
 

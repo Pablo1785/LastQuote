@@ -10,9 +10,8 @@ _$_ArticleSourceStatusDto _$$_ArticleSourceStatusDtoFromJson(
         Map<String, dynamic> json) =>
     _$_ArticleSourceStatusDto(
       id: json['id'] as String?,
-      articleId:
-          const ReferenceConverter().fromJson(json['article_id'] as Object),
-      userId: const ReferenceConverter().fromJson(json['user_id'] as Object),
+      articleId: json['article_id'] as String,
+      userId: json['user_id'] as String,
       isDismissed: json['is_dismissed'] as bool,
       isLiked: json['is_liked'] as bool,
       isOpened: json['is_opened'] as bool,
@@ -23,8 +22,8 @@ Map<String, dynamic> _$$_ArticleSourceStatusDtoToJson(
         _$_ArticleSourceStatusDto instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'article_id': const ReferenceConverter().toJson(instance.articleId),
-      'user_id': const ReferenceConverter().toJson(instance.userId),
+      'article_id': instance.articleId,
+      'user_id': instance.userId,
       'is_dismissed': instance.isDismissed,
       'is_liked': instance.isLiked,
       'is_opened': instance.isOpened,

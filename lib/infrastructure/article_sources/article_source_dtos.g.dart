@@ -10,9 +10,8 @@ _$_ArticleSourceStatusDto _$$_ArticleSourceStatusDtoFromJson(
         Map<String, dynamic> json) =>
     _$_ArticleSourceStatusDto(
       id: json['id'] as String?,
-      articleSourceId: const ReferenceConverter()
-          .fromJson(json['article_source_id'] as Object),
-      userId: const ReferenceConverter().fromJson(json['user_id'] as Object),
+      articleSourceId: json['article_source_id'] as String,
+      userId: json['user_id'] as String,
       isEnabled: json['is_enabled'] as bool,
     );
 
@@ -20,9 +19,8 @@ Map<String, dynamic> _$$_ArticleSourceStatusDtoToJson(
         _$_ArticleSourceStatusDto instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'article_source_id':
-          const ReferenceConverter().toJson(instance.articleSourceId),
-      'user_id': const ReferenceConverter().toJson(instance.userId),
+      'article_source_id': instance.articleSourceId,
+      'user_id': instance.userId,
       'is_enabled': instance.isEnabled,
     };
 

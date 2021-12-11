@@ -18,10 +18,8 @@ abstract class UserArticleEngagementDto implements _$UserArticleEngagementDto {
 
   const factory UserArticleEngagementDto({
     required String? id,
-    @JsonKey(name: 'article_id')
-    @ReferenceConverter()
-        required String articleId,
-    @JsonKey(name: 'user_id') @ReferenceConverter() required String userId,
+    @JsonKey(name: 'article_id') required String articleId,
+    @JsonKey(name: 'user_id') required String userId,
     @JsonKey(name: 'is_dismissed') required bool isDismissed,
     @JsonKey(name: 'is_liked') required bool isLiked,
     @JsonKey(name: 'is_opened') required bool isOpened,

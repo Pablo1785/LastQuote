@@ -10,8 +10,9 @@
 
 import 'package:auto_route/auto_route.dart' as _i5;
 import 'package:flutter/material.dart' as _i6;
+import 'package:flutter/widgets.dart' as _i7;
 
-import '../../domain/articles/article.dart' as _i7;
+import '../../domain/articles/article.dart' as _i8;
 import '../articles/article_detail/article_detail_page.dart' as _i4;
 import '../articles/articles_overview/articles_overview_page.dart' as _i3;
 import '../sign_in/sign_in_page.dart' as _i2;
@@ -76,7 +77,7 @@ class ArticlesOverviewRoute extends _i5.PageRouteInfo<void> {
 
 /// generated route for [_i4.ArticleDetailPage]
 class ArticleDetailRoute extends _i5.PageRouteInfo<ArticleDetailRouteArgs> {
-  ArticleDetailRoute({_i6.Key? key, required _i7.Article article})
+  ArticleDetailRoute({_i7.Key? key, required _i8.Article article})
       : super(name,
             path: '/article-detail-page',
             args: ArticleDetailRouteArgs(key: key, article: article));
@@ -87,9 +88,9 @@ class ArticleDetailRoute extends _i5.PageRouteInfo<ArticleDetailRouteArgs> {
 class ArticleDetailRouteArgs {
   const ArticleDetailRouteArgs({this.key, required this.article});
 
-  final _i6.Key? key;
+  final _i7.Key? key;
 
-  final _i7.Article article;
+  final _i8.Article article;
 
   @override
   String toString() {

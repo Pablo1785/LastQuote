@@ -24,20 +24,12 @@ class _$UserArticleEngagementDtoTearOff {
 
   _ArticleSourceStatusDto call(
       {required String? id,
-      @JsonKey(name: 'article_id')
-      @ReferenceConverter()
-          required String articleId,
-      @JsonKey(name: 'user_id')
-      @ReferenceConverter()
-          required String userId,
-      @JsonKey(name: 'is_dismissed')
-          required bool isDismissed,
-      @JsonKey(name: 'is_liked')
-          required bool isLiked,
-      @JsonKey(name: 'is_opened')
-          required bool isOpened,
-      @JsonKey(name: 'is_shared')
-          required bool isShared}) {
+      @JsonKey(name: 'article_id') required String articleId,
+      @JsonKey(name: 'user_id') required String userId,
+      @JsonKey(name: 'is_dismissed') required bool isDismissed,
+      @JsonKey(name: 'is_liked') required bool isLiked,
+      @JsonKey(name: 'is_opened') required bool isOpened,
+      @JsonKey(name: 'is_shared') required bool isShared}) {
     return _ArticleSourceStatusDto(
       id: id,
       articleId: articleId,
@@ -61,10 +53,8 @@ const $UserArticleEngagementDto = _$UserArticleEngagementDtoTearOff();
 mixin _$UserArticleEngagementDto {
   String? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'article_id')
-  @ReferenceConverter()
   String get articleId => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_id')
-  @ReferenceConverter()
   String get userId => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_dismissed')
   bool get isDismissed => throw _privateConstructorUsedError;
@@ -88,8 +78,8 @@ abstract class $UserArticleEngagementDtoCopyWith<$Res> {
       _$UserArticleEngagementDtoCopyWithImpl<$Res>;
   $Res call(
       {String? id,
-      @JsonKey(name: 'article_id') @ReferenceConverter() String articleId,
-      @JsonKey(name: 'user_id') @ReferenceConverter() String userId,
+      @JsonKey(name: 'article_id') String articleId,
+      @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'is_dismissed') bool isDismissed,
       @JsonKey(name: 'is_liked') bool isLiked,
       @JsonKey(name: 'is_opened') bool isOpened,
@@ -157,8 +147,8 @@ abstract class _$ArticleSourceStatusDtoCopyWith<$Res>
   @override
   $Res call(
       {String? id,
-      @JsonKey(name: 'article_id') @ReferenceConverter() String articleId,
-      @JsonKey(name: 'user_id') @ReferenceConverter() String userId,
+      @JsonKey(name: 'article_id') String articleId,
+      @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'is_dismissed') bool isDismissed,
       @JsonKey(name: 'is_liked') bool isLiked,
       @JsonKey(name: 'is_opened') bool isOpened,
@@ -224,20 +214,12 @@ class __$ArticleSourceStatusDtoCopyWithImpl<$Res>
 class _$_ArticleSourceStatusDto extends _ArticleSourceStatusDto {
   const _$_ArticleSourceStatusDto(
       {required this.id,
-      @JsonKey(name: 'article_id')
-      @ReferenceConverter()
-          required this.articleId,
-      @JsonKey(name: 'user_id')
-      @ReferenceConverter()
-          required this.userId,
-      @JsonKey(name: 'is_dismissed')
-          required this.isDismissed,
-      @JsonKey(name: 'is_liked')
-          required this.isLiked,
-      @JsonKey(name: 'is_opened')
-          required this.isOpened,
-      @JsonKey(name: 'is_shared')
-          required this.isShared})
+      @JsonKey(name: 'article_id') required this.articleId,
+      @JsonKey(name: 'user_id') required this.userId,
+      @JsonKey(name: 'is_dismissed') required this.isDismissed,
+      @JsonKey(name: 'is_liked') required this.isLiked,
+      @JsonKey(name: 'is_opened') required this.isOpened,
+      @JsonKey(name: 'is_shared') required this.isShared})
       : super._();
 
   factory _$_ArticleSourceStatusDto.fromJson(Map<String, dynamic> json) =>
@@ -247,11 +229,9 @@ class _$_ArticleSourceStatusDto extends _ArticleSourceStatusDto {
   final String? id;
   @override
   @JsonKey(name: 'article_id')
-  @ReferenceConverter()
   final String articleId;
   @override
   @JsonKey(name: 'user_id')
-  @ReferenceConverter()
   final String userId;
   @override
   @JsonKey(name: 'is_dismissed')
@@ -307,21 +287,14 @@ class _$_ArticleSourceStatusDto extends _ArticleSourceStatusDto {
 
 abstract class _ArticleSourceStatusDto extends UserArticleEngagementDto {
   const factory _ArticleSourceStatusDto(
-      {required String? id,
-      @JsonKey(name: 'article_id')
-      @ReferenceConverter()
-          required String articleId,
-      @JsonKey(name: 'user_id')
-      @ReferenceConverter()
-          required String userId,
-      @JsonKey(name: 'is_dismissed')
-          required bool isDismissed,
-      @JsonKey(name: 'is_liked')
-          required bool isLiked,
-      @JsonKey(name: 'is_opened')
-          required bool isOpened,
-      @JsonKey(name: 'is_shared')
-          required bool isShared}) = _$_ArticleSourceStatusDto;
+          {required String? id,
+          @JsonKey(name: 'article_id') required String articleId,
+          @JsonKey(name: 'user_id') required String userId,
+          @JsonKey(name: 'is_dismissed') required bool isDismissed,
+          @JsonKey(name: 'is_liked') required bool isLiked,
+          @JsonKey(name: 'is_opened') required bool isOpened,
+          @JsonKey(name: 'is_shared') required bool isShared}) =
+      _$_ArticleSourceStatusDto;
   const _ArticleSourceStatusDto._() : super._();
 
   factory _ArticleSourceStatusDto.fromJson(Map<String, dynamic> json) =
@@ -331,11 +304,9 @@ abstract class _ArticleSourceStatusDto extends UserArticleEngagementDto {
   String? get id;
   @override
   @JsonKey(name: 'article_id')
-  @ReferenceConverter()
   String get articleId;
   @override
   @JsonKey(name: 'user_id')
-  @ReferenceConverter()
   String get userId;
   @override
   @JsonKey(name: 'is_dismissed')
