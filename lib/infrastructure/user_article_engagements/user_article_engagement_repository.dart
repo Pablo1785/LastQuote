@@ -104,6 +104,9 @@ class UserArticleEngagementRepository
                   articleId: UniqueId.fromUniqueString(
                     articleId,
                   ),
+                  userId: UniqueId.fromUniqueString(
+                    userDocRef.id,
+                  ),
                 ),
               )
               .toList();
@@ -125,10 +128,20 @@ class UserArticleEngagementRepository
           return someFailureOrUnit.fold(
             (failure) => left<UserArticleEngagementFailure,
                 KtMap<String, UserArticleEngagement>>(failure),
-            (_) => right<UserArticleEngagementFailure,
-                KtMap<String, UserArticleEngagement>>(
-              uidUserArticleEngagementMap.toImmutableMap(),
-            ),
+            (_) {
+              newUserArticleEngagements.forEach(
+                (newEngagement) {
+                  uidUserArticleEngagementMap.putIfAbsent(
+                    newEngagement.articleId.getOrCrash(),
+                    () => newEngagement,
+                  );
+                },
+              );
+              return right<UserArticleEngagementFailure,
+                  KtMap<String, UserArticleEngagement>>(
+                uidUserArticleEngagementMap.toImmutableMap(),
+              );
+            },
           );
         },
       ).onErrorReturnWith(

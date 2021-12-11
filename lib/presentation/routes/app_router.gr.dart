@@ -10,9 +10,10 @@
 
 import 'package:auto_route/auto_route.dart' as _i5;
 import 'package:flutter/material.dart' as _i6;
-import 'package:flutter/widgets.dart' as _i7;
 
-import '../../domain/articles/article.dart' as _i8;
+import '../../domain/articles/article.dart' as _i7;
+import '../../domain/user_article_engagements/user_article_engagement.dart'
+    as _i8;
 import '../articles/article_detail/article_detail_page.dart' as _i4;
 import '../articles/articles_overview/articles_overview_page.dart' as _i3;
 import '../sign_in/sign_in_page.dart' as _i2;
@@ -40,7 +41,10 @@ class AppRouter extends _i5.RootStackRouter {
       final args = routeData.argsAs<ArticleDetailRouteArgs>();
       return _i5.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i4.ArticleDetailPage(key: args.key, article: args.article));
+          child: _i4.ArticleDetailPage(
+              key: args.key,
+              article: args.article,
+              userArticleEngagement: args.userArticleEngagement));
     }
   };
 
@@ -77,23 +81,32 @@ class ArticlesOverviewRoute extends _i5.PageRouteInfo<void> {
 
 /// generated route for [_i4.ArticleDetailPage]
 class ArticleDetailRoute extends _i5.PageRouteInfo<ArticleDetailRouteArgs> {
-  ArticleDetailRoute({_i7.Key? key, required _i8.Article article})
+  ArticleDetailRoute(
+      {_i6.Key? key,
+      required _i7.Article article,
+      required _i8.UserArticleEngagement userArticleEngagement})
       : super(name,
             path: '/article-detail-page',
-            args: ArticleDetailRouteArgs(key: key, article: article));
+            args: ArticleDetailRouteArgs(
+                key: key,
+                article: article,
+                userArticleEngagement: userArticleEngagement));
 
   static const String name = 'ArticleDetailRoute';
 }
 
 class ArticleDetailRouteArgs {
-  const ArticleDetailRouteArgs({this.key, required this.article});
+  const ArticleDetailRouteArgs(
+      {this.key, required this.article, required this.userArticleEngagement});
 
-  final _i7.Key? key;
+  final _i6.Key? key;
 
-  final _i8.Article article;
+  final _i7.Article article;
+
+  final _i8.UserArticleEngagement userArticleEngagement;
 
   @override
   String toString() {
-    return 'ArticleDetailRouteArgs{key: $key, article: $article}';
+    return 'ArticleDetailRouteArgs{key: $key, article: $article, userArticleEngagement: $userArticleEngagement}';
   }
 }

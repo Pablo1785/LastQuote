@@ -5,6 +5,7 @@ import 'package:ddd/domain/articles/article.dart';
 import 'package:ddd/domain/articles/article_failure.dart';
 import 'package:ddd/domain/user_article_engagements/user_article_engagement.dart';
 import 'package:ddd/domain/user_article_engagements/user_article_engagement_failure.dart';
+import 'package:ddd/presentation/articles/widgets/like_button.dart';
 import 'package:ddd/presentation/routes/app_router.gr.dart';
 import 'package:kt_dart/kt.dart';
 
@@ -152,15 +153,8 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
               userArticleEngagements[article.id.getOrCrash()];
           return Card(
             child: ListTile(
-              leading: IconButton(
-                icon: userArticleEngagement!.isLiked
-                    ? const Icon(Icons.thumb_up_alt)
-                    : const Icon(Icons.thumb_up_alt_outlined),
-                onPressed: () =>
-                    context.read<UserArticleEngagementActorBloc>().add(
-                          UserArticleEngagementActorEvent.likePressed(
-                              userArticleEngagement),
-                        ),
+              leading: LikeButton(
+                userArticleEngagement: userArticleEngagement!,
               ),
               title: Text(
                 article.title.getOrCrash(),
@@ -186,8 +180,8 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
               onTap: () {
                 AutoRouter.of(context).push(
                   ArticleDetailRoute(
-                    article: article,
-                  ),
+                      article: article,
+                      userArticleEngagement: userArticleEngagement),
                 );
               },
             ),

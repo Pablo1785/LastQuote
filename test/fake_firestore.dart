@@ -27,9 +27,9 @@ Future<void> addUserArticleEngagementToFirestore(
   var userArticleEngagementMap = (json
       .decode(fixture('user_article_engagement.json')) as Map<String, dynamic>);
   userArticleEngagementMap['user_id'] =
-      (await firestore.collection('users').get()).docs.first.reference;
+      (await firestore.collection('users').get()).docs.first.id;
   userArticleEngagementMap['article_id'] =
-      (await firestore.collection('articles').get()).docs.first.reference;
+      (await firestore.collection('articles').get()).docs.first.id;
   await firestore
       .collection('user_article_engagement')
       .doc(uid)
@@ -51,10 +51,7 @@ Future<void> addValuesToFirestore(
   var articleMap =
       (json.decode(fixture('articles.json')) as Map<String, dynamic>);
   articleMap['source_id'] =
-      (await firestore.collection('article_sources').get())
-          .docs
-          .first
-          .reference;
+      (await firestore.collection('article_sources').get()).docs.first.id;
   await firestore.collection('articles').add(articleMap);
 
   // UserArticleEngagement from fixture & Firestore
