@@ -196,7 +196,8 @@ void main() {
       'should create a new user-article junction',
       () async {
         // arrange
-        final user = ;
+        final user =
+            await getUserFromFirestore(fakeFirebaseFirestore, 'dummyUserUid0');
         when(
           () => getIt<FirestoreHelper>().userDocument(),
         ).thenAnswer(

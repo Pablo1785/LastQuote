@@ -168,16 +168,16 @@ class UserArticleEngagementRepository
     UserArticleEngagement userArticleEngagement,
   ) async {
     try {
-      final userDoc = await getIt<FirestoreHelper>().userDocument();
       final userArticleEngagementDto = UserArticleEngagementDto.fromDomain(
         userArticleEngagement,
       );
 
-      await userDoc
+      final userArticleEngagementDtoJson = userArticleEngagementDto.toJson();
+      await _firestore
           .collection('user_article_engagement')
           .doc(userArticleEngagementDto.id)
           .set(
-            userArticleEngagementDto.toJson(),
+            userArticleEngagementDtoJson,
           );
       return right(unit);
     } on PlatformException catch (e, stacktrace) {
@@ -190,12 +190,11 @@ class UserArticleEngagementRepository
     UserArticleEngagement userArticleEngagement,
   ) async {
     try {
-      final userDoc = await getIt<FirestoreHelper>().userDocument();
       final userArticleEngagementDto = UserArticleEngagementDto.fromDomain(
         userArticleEngagement,
       );
 
-      await userDoc
+      await _firestore
           .collection('user_article_engagement')
           .doc(userArticleEngagementDto.id)
           // update() differs from set() in that it preserves fields that aren't present in new data

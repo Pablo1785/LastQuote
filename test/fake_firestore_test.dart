@@ -35,11 +35,13 @@ void main() async {
       await setupFirestoreDocuments(firestore);
 
       // act
-      final user = await getUserFromFirestore(firestore);
-      final articleSource = await getArticleSourceFromFirestore(firestore);
-      final article = await getArticleFromFirestore(firestore);
-      final userArticleEngagement =
-          await getUserArticleEngagementFromFirestore(firestore);
+      final user = await getUserFromFirestore(firestore, 'dummyUidUser0');
+      final articleSource = await getArticleSourceFromFirestore(
+          firestore, 'dummyUidArticleSource0');
+      final article =
+          await getArticleFromFirestore(firestore, 'dummyUidArticle0');
+      final userArticleEngagement = await getUserArticleEngagementFromFirestore(
+          firestore, 'dummyUidUserArticleEngagement0');
 
       // assert
       expect(article.sourceId.getOrCrash(), articleSource.id.getOrCrash());
