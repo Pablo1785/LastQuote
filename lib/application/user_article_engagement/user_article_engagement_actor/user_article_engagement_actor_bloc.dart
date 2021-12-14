@@ -40,7 +40,9 @@ class UserArticleEngagementActorBloc extends Bloc<
               ),
             ),
             (_) => emit(
-              const UserArticleEngagementActorState.likeSuccess(),
+              UserArticleEngagementActorState.likeSuccess(
+                updatedUserArticleEngagement,
+              ),
             ),
           );
         },

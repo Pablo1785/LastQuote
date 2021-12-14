@@ -8,7 +8,9 @@ class UserArticleEngagementActorState with _$UserArticleEngagementActorState {
   const factory UserArticleEngagementActorState.likeFailure(
     UserArticleEngagementFailure userArticleEngagementFailure,
   ) = _LikeFailure;
-  const factory UserArticleEngagementActorState.likeSuccess() = _LikeSuccess;
+  const factory UserArticleEngagementActorState.likeSuccess(
+    updatedUserArticleEngagement,
+  ) = _LikeSuccess;
   const factory UserArticleEngagementActorState.shareOpened(
     UserArticleEngagement userArticleEngagement,
   ) = _ShareOpened;

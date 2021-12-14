@@ -168,11 +168,12 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
           );
         } else {
           final userArticleEngagement =
-              userArticleEngagements[article.id.getOrCrash()];
+              userArticleEngagements[article.id.getOrCrash()] ??
+                  UserArticleEngagement.empty();
           return Card(
             child: ListTile(
               leading: LikeButton(
-                userArticleEngagement: userArticleEngagement!,
+                userArticleEngagement: userArticleEngagement,
               ),
               title: Text(
                 article.title.getOrCrash(),
@@ -200,8 +201,6 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
                   ArticleDetailRoute(
                     article: article,
                     userArticleEngagement: userArticleEngagement,
-                    userArticleEngagementActorBloc:
-                        context.read<UserArticleEngagementActorBloc>(),
                   ),
                 );
               },

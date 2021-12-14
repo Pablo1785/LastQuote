@@ -15,22 +15,17 @@ class LikeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserArticleEngagementActorBloc,
-        UserArticleEngagementActorState>(
-      builder: (context, state) {
-        return IconButton(
-          icon: Icon(
-            userArticleEngagement.isLiked
-                ? Icons.thumb_up_alt
-                : Icons.thumb_up_alt_outlined,
+    return IconButton(
+      icon: Icon(
+        userArticleEngagement.isLiked
+            ? Icons.thumb_up_alt
+            : Icons.thumb_up_alt_outlined,
+      ),
+      onPressed: () => context.read<UserArticleEngagementActorBloc>().add(
+            UserArticleEngagementActorEvent.likePressed(
+              userArticleEngagement,
+            ),
           ),
-          onPressed: () => context.read<UserArticleEngagementActorBloc>().add(
-                UserArticleEngagementActorEvent.likePressed(
-                  userArticleEngagement,
-                ),
-              ),
-        );
-      },
     );
   }
 }

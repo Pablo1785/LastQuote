@@ -16,25 +16,39 @@ class ArticleDetailPage extends HookWidget {
     Key? key,
     required this.article,
     required this.userArticleEngagement,
-    required this.userArticleEngagementActorBloc,
   }) : super(key: key);
 
   final Article article;
   final UserArticleEngagement userArticleEngagement;
-  final UserArticleEngagementActorBloc userArticleEngagementActorBloc;
 
   @override
   Widget build(BuildContext context) {
     final loadingProgress = useState(0.0);
     final isLoading = useState(true);
+    final statefulUserArticleEngagement = useState(userArticleEngagement);
 
     return BlocProvider(
       create: (context) => getIt<UserArticleEngagementActorBloc>(),
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
-          child: LikeButton(
-            userArticleEngagement: userArticleEngagement,
+          child: BlocListener<UserArticleEngagementActorBloc,
+              UserArticleEngagementActorState>(
+            listener: (context, state) {
+              state.maybeMap(
+                likeSuccess: (successState) {
+                  statefulUserArticleEngagement.value =
+                      successState.updatedUserArticleEngagement;
+                  return LikeButton(
+                    userArticleEngagement: statefulUserArticleEngagement.value,
+                  );
+                },
+                orElse: () {},
+              );
+            },
+            child: LikeButton(
+              userArticleEngagement: statefulUserArticleEngagement.value,
+            ),
           ),
         ),
         appBar: AppBar(
