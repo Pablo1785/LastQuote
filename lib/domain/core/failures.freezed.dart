@@ -39,6 +39,12 @@ class _$ValueFailureTearOff {
     );
   }
 
+  NotJunctionId<T> notJunctionId<T>({required T failedValue}) {
+    return NotJunctionId<T>(
+      failedValue: failedValue,
+    );
+  }
+
   InvalidEmail<T> invalidEmail<T>({required T failedValue}) {
     return InvalidEmail<T>(
       failedValue: failedValue,
@@ -62,6 +68,7 @@ mixin _$ValueFailure<T> {
     required TResult Function(T failedValue, int maxLength) exceedingLength,
     required TResult Function(T failedValue, int minLength) shortLength,
     required TResult Function(T failedValues) invalidListContents,
+    required TResult Function(T failedValue) notJunctionId,
     required TResult Function(T failedValue) invalidEmail,
     required TResult Function(T failedValue) invalidUrl,
   }) =>
@@ -71,6 +78,7 @@ mixin _$ValueFailure<T> {
     TResult Function(T failedValue, int maxLength)? exceedingLength,
     TResult Function(T failedValue, int minLength)? shortLength,
     TResult Function(T failedValues)? invalidListContents,
+    TResult Function(T failedValue)? notJunctionId,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUrl,
   }) =>
@@ -80,6 +88,7 @@ mixin _$ValueFailure<T> {
     TResult Function(T failedValue, int maxLength)? exceedingLength,
     TResult Function(T failedValue, int minLength)? shortLength,
     TResult Function(T failedValues)? invalidListContents,
+    TResult Function(T failedValue)? notJunctionId,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUrl,
     required TResult orElse(),
@@ -90,6 +99,7 @@ mixin _$ValueFailure<T> {
     required TResult Function(ExceedingLength<T> value) exceedingLength,
     required TResult Function(ShortLength<T> value) shortLength,
     required TResult Function(InvalidListContents<T> value) invalidListContents,
+    required TResult Function(NotJunctionId<T> value) notJunctionId,
     required TResult Function(InvalidEmail<T> value) invalidEmail,
     required TResult Function(InvalidUrl<T> value) invalidUrl,
   }) =>
@@ -99,6 +109,7 @@ mixin _$ValueFailure<T> {
     TResult Function(ExceedingLength<T> value)? exceedingLength,
     TResult Function(ShortLength<T> value)? shortLength,
     TResult Function(InvalidListContents<T> value)? invalidListContents,
+    TResult Function(NotJunctionId<T> value)? notJunctionId,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUrl<T> value)? invalidUrl,
   }) =>
@@ -108,6 +119,7 @@ mixin _$ValueFailure<T> {
     TResult Function(ExceedingLength<T> value)? exceedingLength,
     TResult Function(ShortLength<T> value)? shortLength,
     TResult Function(InvalidListContents<T> value)? invalidListContents,
+    TResult Function(NotJunctionId<T> value)? notJunctionId,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUrl<T> value)? invalidUrl,
     required TResult orElse(),
@@ -210,6 +222,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     required TResult Function(T failedValue, int maxLength) exceedingLength,
     required TResult Function(T failedValue, int minLength) shortLength,
     required TResult Function(T failedValues) invalidListContents,
+    required TResult Function(T failedValue) notJunctionId,
     required TResult Function(T failedValue) invalidEmail,
     required TResult Function(T failedValue) invalidUrl,
   }) {
@@ -222,6 +235,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     TResult Function(T failedValue, int maxLength)? exceedingLength,
     TResult Function(T failedValue, int minLength)? shortLength,
     TResult Function(T failedValues)? invalidListContents,
+    TResult Function(T failedValue)? notJunctionId,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUrl,
   }) {
@@ -234,6 +248,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     TResult Function(T failedValue, int maxLength)? exceedingLength,
     TResult Function(T failedValue, int minLength)? shortLength,
     TResult Function(T failedValues)? invalidListContents,
+    TResult Function(T failedValue)? notJunctionId,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUrl,
     required TResult orElse(),
@@ -250,6 +265,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     required TResult Function(ExceedingLength<T> value) exceedingLength,
     required TResult Function(ShortLength<T> value) shortLength,
     required TResult Function(InvalidListContents<T> value) invalidListContents,
+    required TResult Function(NotJunctionId<T> value) notJunctionId,
     required TResult Function(InvalidEmail<T> value) invalidEmail,
     required TResult Function(InvalidUrl<T> value) invalidUrl,
   }) {
@@ -262,6 +278,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     TResult Function(ExceedingLength<T> value)? exceedingLength,
     TResult Function(ShortLength<T> value)? shortLength,
     TResult Function(InvalidListContents<T> value)? invalidListContents,
+    TResult Function(NotJunctionId<T> value)? notJunctionId,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUrl<T> value)? invalidUrl,
   }) {
@@ -274,6 +291,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     TResult Function(ExceedingLength<T> value)? exceedingLength,
     TResult Function(ShortLength<T> value)? shortLength,
     TResult Function(InvalidListContents<T> value)? invalidListContents,
+    TResult Function(NotJunctionId<T> value)? notJunctionId,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUrl<T> value)? invalidUrl,
     required TResult orElse(),
@@ -374,6 +392,7 @@ class _$ShortLength<T> implements ShortLength<T> {
     required TResult Function(T failedValue, int maxLength) exceedingLength,
     required TResult Function(T failedValue, int minLength) shortLength,
     required TResult Function(T failedValues) invalidListContents,
+    required TResult Function(T failedValue) notJunctionId,
     required TResult Function(T failedValue) invalidEmail,
     required TResult Function(T failedValue) invalidUrl,
   }) {
@@ -386,6 +405,7 @@ class _$ShortLength<T> implements ShortLength<T> {
     TResult Function(T failedValue, int maxLength)? exceedingLength,
     TResult Function(T failedValue, int minLength)? shortLength,
     TResult Function(T failedValues)? invalidListContents,
+    TResult Function(T failedValue)? notJunctionId,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUrl,
   }) {
@@ -398,6 +418,7 @@ class _$ShortLength<T> implements ShortLength<T> {
     TResult Function(T failedValue, int maxLength)? exceedingLength,
     TResult Function(T failedValue, int minLength)? shortLength,
     TResult Function(T failedValues)? invalidListContents,
+    TResult Function(T failedValue)? notJunctionId,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUrl,
     required TResult orElse(),
@@ -414,6 +435,7 @@ class _$ShortLength<T> implements ShortLength<T> {
     required TResult Function(ExceedingLength<T> value) exceedingLength,
     required TResult Function(ShortLength<T> value) shortLength,
     required TResult Function(InvalidListContents<T> value) invalidListContents,
+    required TResult Function(NotJunctionId<T> value) notJunctionId,
     required TResult Function(InvalidEmail<T> value) invalidEmail,
     required TResult Function(InvalidUrl<T> value) invalidUrl,
   }) {
@@ -426,6 +448,7 @@ class _$ShortLength<T> implements ShortLength<T> {
     TResult Function(ExceedingLength<T> value)? exceedingLength,
     TResult Function(ShortLength<T> value)? shortLength,
     TResult Function(InvalidListContents<T> value)? invalidListContents,
+    TResult Function(NotJunctionId<T> value)? notJunctionId,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUrl<T> value)? invalidUrl,
   }) {
@@ -438,6 +461,7 @@ class _$ShortLength<T> implements ShortLength<T> {
     TResult Function(ExceedingLength<T> value)? exceedingLength,
     TResult Function(ShortLength<T> value)? shortLength,
     TResult Function(InvalidListContents<T> value)? invalidListContents,
+    TResult Function(NotJunctionId<T> value)? notJunctionId,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUrl<T> value)? invalidUrl,
     required TResult orElse(),
@@ -530,6 +554,7 @@ class _$InvalidListContents<T> implements InvalidListContents<T> {
     required TResult Function(T failedValue, int maxLength) exceedingLength,
     required TResult Function(T failedValue, int minLength) shortLength,
     required TResult Function(T failedValues) invalidListContents,
+    required TResult Function(T failedValue) notJunctionId,
     required TResult Function(T failedValue) invalidEmail,
     required TResult Function(T failedValue) invalidUrl,
   }) {
@@ -542,6 +567,7 @@ class _$InvalidListContents<T> implements InvalidListContents<T> {
     TResult Function(T failedValue, int maxLength)? exceedingLength,
     TResult Function(T failedValue, int minLength)? shortLength,
     TResult Function(T failedValues)? invalidListContents,
+    TResult Function(T failedValue)? notJunctionId,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUrl,
   }) {
@@ -554,6 +580,7 @@ class _$InvalidListContents<T> implements InvalidListContents<T> {
     TResult Function(T failedValue, int maxLength)? exceedingLength,
     TResult Function(T failedValue, int minLength)? shortLength,
     TResult Function(T failedValues)? invalidListContents,
+    TResult Function(T failedValue)? notJunctionId,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUrl,
     required TResult orElse(),
@@ -570,6 +597,7 @@ class _$InvalidListContents<T> implements InvalidListContents<T> {
     required TResult Function(ExceedingLength<T> value) exceedingLength,
     required TResult Function(ShortLength<T> value) shortLength,
     required TResult Function(InvalidListContents<T> value) invalidListContents,
+    required TResult Function(NotJunctionId<T> value) notJunctionId,
     required TResult Function(InvalidEmail<T> value) invalidEmail,
     required TResult Function(InvalidUrl<T> value) invalidUrl,
   }) {
@@ -582,6 +610,7 @@ class _$InvalidListContents<T> implements InvalidListContents<T> {
     TResult Function(ExceedingLength<T> value)? exceedingLength,
     TResult Function(ShortLength<T> value)? shortLength,
     TResult Function(InvalidListContents<T> value)? invalidListContents,
+    TResult Function(NotJunctionId<T> value)? notJunctionId,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUrl<T> value)? invalidUrl,
   }) {
@@ -594,6 +623,7 @@ class _$InvalidListContents<T> implements InvalidListContents<T> {
     TResult Function(ExceedingLength<T> value)? exceedingLength,
     TResult Function(ShortLength<T> value)? shortLength,
     TResult Function(InvalidListContents<T> value)? invalidListContents,
+    TResult Function(NotJunctionId<T> value)? notJunctionId,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUrl<T> value)? invalidUrl,
     required TResult orElse(),
@@ -612,6 +642,165 @@ abstract class InvalidListContents<T> implements ValueFailure<T> {
   T get failedValues;
   @JsonKey(ignore: true)
   $InvalidListContentsCopyWith<T, InvalidListContents<T>> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $NotJunctionIdCopyWith<T, $Res> {
+  factory $NotJunctionIdCopyWith(
+          NotJunctionId<T> value, $Res Function(NotJunctionId<T>) then) =
+      _$NotJunctionIdCopyWithImpl<T, $Res>;
+  $Res call({T failedValue});
+}
+
+/// @nodoc
+class _$NotJunctionIdCopyWithImpl<T, $Res>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
+    implements $NotJunctionIdCopyWith<T, $Res> {
+  _$NotJunctionIdCopyWithImpl(
+      NotJunctionId<T> _value, $Res Function(NotJunctionId<T>) _then)
+      : super(_value, (v) => _then(v as NotJunctionId<T>));
+
+  @override
+  NotJunctionId<T> get _value => super._value as NotJunctionId<T>;
+
+  @override
+  $Res call({
+    Object? failedValue = freezed,
+  }) {
+    return _then(NotJunctionId<T>(
+      failedValue: failedValue == freezed
+          ? _value.failedValue
+          : failedValue // ignore: cast_nullable_to_non_nullable
+              as T,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$NotJunctionId<T> implements NotJunctionId<T> {
+  const _$NotJunctionId({required this.failedValue});
+
+  @override
+  final T failedValue;
+
+  @override
+  String toString() {
+    return 'ValueFailure<$T>.notJunctionId(failedValue: $failedValue)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is NotJunctionId<T> &&
+            const DeepCollectionEquality()
+                .equals(other.failedValue, failedValue));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(failedValue));
+
+  @JsonKey(ignore: true)
+  @override
+  $NotJunctionIdCopyWith<T, NotJunctionId<T>> get copyWith =>
+      _$NotJunctionIdCopyWithImpl<T, NotJunctionId<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(T failedValue, int maxLength) exceedingLength,
+    required TResult Function(T failedValue, int minLength) shortLength,
+    required TResult Function(T failedValues) invalidListContents,
+    required TResult Function(T failedValue) notJunctionId,
+    required TResult Function(T failedValue) invalidEmail,
+    required TResult Function(T failedValue) invalidUrl,
+  }) {
+    return notJunctionId(failedValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(T failedValue, int maxLength)? exceedingLength,
+    TResult Function(T failedValue, int minLength)? shortLength,
+    TResult Function(T failedValues)? invalidListContents,
+    TResult Function(T failedValue)? notJunctionId,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? invalidUrl,
+  }) {
+    return notJunctionId?.call(failedValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(T failedValue, int maxLength)? exceedingLength,
+    TResult Function(T failedValue, int minLength)? shortLength,
+    TResult Function(T failedValues)? invalidListContents,
+    TResult Function(T failedValue)? notJunctionId,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? invalidUrl,
+    required TResult orElse(),
+  }) {
+    if (notJunctionId != null) {
+      return notJunctionId(failedValue);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ExceedingLength<T> value) exceedingLength,
+    required TResult Function(ShortLength<T> value) shortLength,
+    required TResult Function(InvalidListContents<T> value) invalidListContents,
+    required TResult Function(NotJunctionId<T> value) notJunctionId,
+    required TResult Function(InvalidEmail<T> value) invalidEmail,
+    required TResult Function(InvalidUrl<T> value) invalidUrl,
+  }) {
+    return notJunctionId(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(ShortLength<T> value)? shortLength,
+    TResult Function(InvalidListContents<T> value)? invalidListContents,
+    TResult Function(NotJunctionId<T> value)? notJunctionId,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(InvalidUrl<T> value)? invalidUrl,
+  }) {
+    return notJunctionId?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(ShortLength<T> value)? shortLength,
+    TResult Function(InvalidListContents<T> value)? invalidListContents,
+    TResult Function(NotJunctionId<T> value)? notJunctionId,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(InvalidUrl<T> value)? invalidUrl,
+    required TResult orElse(),
+  }) {
+    if (notJunctionId != null) {
+      return notJunctionId(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NotJunctionId<T> implements ValueFailure<T> {
+  const factory NotJunctionId({required T failedValue}) = _$NotJunctionId<T>;
+
+  T get failedValue;
+  @JsonKey(ignore: true)
+  $NotJunctionIdCopyWith<T, NotJunctionId<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -684,6 +873,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     required TResult Function(T failedValue, int maxLength) exceedingLength,
     required TResult Function(T failedValue, int minLength) shortLength,
     required TResult Function(T failedValues) invalidListContents,
+    required TResult Function(T failedValue) notJunctionId,
     required TResult Function(T failedValue) invalidEmail,
     required TResult Function(T failedValue) invalidUrl,
   }) {
@@ -696,6 +886,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     TResult Function(T failedValue, int maxLength)? exceedingLength,
     TResult Function(T failedValue, int minLength)? shortLength,
     TResult Function(T failedValues)? invalidListContents,
+    TResult Function(T failedValue)? notJunctionId,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUrl,
   }) {
@@ -708,6 +899,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     TResult Function(T failedValue, int maxLength)? exceedingLength,
     TResult Function(T failedValue, int minLength)? shortLength,
     TResult Function(T failedValues)? invalidListContents,
+    TResult Function(T failedValue)? notJunctionId,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUrl,
     required TResult orElse(),
@@ -724,6 +916,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     required TResult Function(ExceedingLength<T> value) exceedingLength,
     required TResult Function(ShortLength<T> value) shortLength,
     required TResult Function(InvalidListContents<T> value) invalidListContents,
+    required TResult Function(NotJunctionId<T> value) notJunctionId,
     required TResult Function(InvalidEmail<T> value) invalidEmail,
     required TResult Function(InvalidUrl<T> value) invalidUrl,
   }) {
@@ -736,6 +929,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     TResult Function(ExceedingLength<T> value)? exceedingLength,
     TResult Function(ShortLength<T> value)? shortLength,
     TResult Function(InvalidListContents<T> value)? invalidListContents,
+    TResult Function(NotJunctionId<T> value)? notJunctionId,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUrl<T> value)? invalidUrl,
   }) {
@@ -748,6 +942,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     TResult Function(ExceedingLength<T> value)? exceedingLength,
     TResult Function(ShortLength<T> value)? shortLength,
     TResult Function(InvalidListContents<T> value)? invalidListContents,
+    TResult Function(NotJunctionId<T> value)? notJunctionId,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUrl<T> value)? invalidUrl,
     required TResult orElse(),
@@ -837,6 +1032,7 @@ class _$InvalidUrl<T> implements InvalidUrl<T> {
     required TResult Function(T failedValue, int maxLength) exceedingLength,
     required TResult Function(T failedValue, int minLength) shortLength,
     required TResult Function(T failedValues) invalidListContents,
+    required TResult Function(T failedValue) notJunctionId,
     required TResult Function(T failedValue) invalidEmail,
     required TResult Function(T failedValue) invalidUrl,
   }) {
@@ -849,6 +1045,7 @@ class _$InvalidUrl<T> implements InvalidUrl<T> {
     TResult Function(T failedValue, int maxLength)? exceedingLength,
     TResult Function(T failedValue, int minLength)? shortLength,
     TResult Function(T failedValues)? invalidListContents,
+    TResult Function(T failedValue)? notJunctionId,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUrl,
   }) {
@@ -861,6 +1058,7 @@ class _$InvalidUrl<T> implements InvalidUrl<T> {
     TResult Function(T failedValue, int maxLength)? exceedingLength,
     TResult Function(T failedValue, int minLength)? shortLength,
     TResult Function(T failedValues)? invalidListContents,
+    TResult Function(T failedValue)? notJunctionId,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUrl,
     required TResult orElse(),
@@ -877,6 +1075,7 @@ class _$InvalidUrl<T> implements InvalidUrl<T> {
     required TResult Function(ExceedingLength<T> value) exceedingLength,
     required TResult Function(ShortLength<T> value) shortLength,
     required TResult Function(InvalidListContents<T> value) invalidListContents,
+    required TResult Function(NotJunctionId<T> value) notJunctionId,
     required TResult Function(InvalidEmail<T> value) invalidEmail,
     required TResult Function(InvalidUrl<T> value) invalidUrl,
   }) {
@@ -889,6 +1088,7 @@ class _$InvalidUrl<T> implements InvalidUrl<T> {
     TResult Function(ExceedingLength<T> value)? exceedingLength,
     TResult Function(ShortLength<T> value)? shortLength,
     TResult Function(InvalidListContents<T> value)? invalidListContents,
+    TResult Function(NotJunctionId<T> value)? notJunctionId,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUrl<T> value)? invalidUrl,
   }) {
@@ -901,6 +1101,7 @@ class _$InvalidUrl<T> implements InvalidUrl<T> {
     TResult Function(ExceedingLength<T> value)? exceedingLength,
     TResult Function(ShortLength<T> value)? shortLength,
     TResult Function(InvalidListContents<T> value)? invalidListContents,
+    TResult Function(NotJunctionId<T> value)? notJunctionId,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUrl<T> value)? invalidUrl,
     required TResult orElse(),

@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ddd/domain/core/value_validators.dart';
 import 'errors.dart';
 import 'failures.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -57,4 +58,27 @@ class UniqueId extends ValueObject<String> {
   }
 
   const UniqueId._(this.value);
+}
+
+class JunctionUniqueId extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory JunctionUniqueId.fromUniqueString(String uniqueId) {
+    return JunctionUniqueId._(
+      validateJunctionId(
+        uniqueId,
+      ),
+    );
+  }
+
+  factory JunctionUniqueId(List<String> listOfUniqueIds) {
+    return JunctionUniqueId._(
+      right(
+        listOfUniqueIds.join('_'),
+      ),
+    );
+  }
+
+  const JunctionUniqueId._(this.value);
 }

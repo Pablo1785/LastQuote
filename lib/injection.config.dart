@@ -57,8 +57,9 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => _i13.UserArticleEngagementRepository(get<_i4.FirebaseFirestore>()));
   gh.factory<_i14.SignInFormBloc>(
       () => _i14.SignInFormBloc(get<_i10.IAuthFacade>()));
-  gh.factory<_i15.UserArticleEngagementActorBloc>(
-      () => _i15.UserArticleEngagementActorBloc());
+  gh.factory<_i15.UserArticleEngagementActorBloc>(() =>
+      _i15.UserArticleEngagementActorBloc(
+          get<_i12.IUserArticleEngagementRepository>()));
   gh.factory<_i16.UserArticleEngagementWatcherBloc>(() =>
       _i16.UserArticleEngagementWatcherBloc(
           get<_i12.IUserArticleEngagementRepository>()));

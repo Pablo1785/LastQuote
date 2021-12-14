@@ -20,6 +20,10 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
     required T failedValues,
   }) = InvalidListContents<T>;
 
+  const factory ValueFailure.notJunctionId({
+    required T failedValue,
+  }) = NotJunctionId<T>;
+
   // Auth Failures
   const factory ValueFailure.invalidEmail({
     required T failedValue,

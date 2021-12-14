@@ -11,6 +11,8 @@
 import 'package:auto_route/auto_route.dart' as _i5;
 import 'package:flutter/material.dart' as _i6;
 
+import '../../application/user_article_engagement/user_article_engagement_actor/user_article_engagement_actor_bloc.dart'
+    as _i9;
 import '../../domain/articles/article.dart' as _i7;
 import '../../domain/user_article_engagements/user_article_engagement.dart'
     as _i8;
@@ -44,7 +46,9 @@ class AppRouter extends _i5.RootStackRouter {
           child: _i4.ArticleDetailPage(
               key: args.key,
               article: args.article,
-              userArticleEngagement: args.userArticleEngagement));
+              userArticleEngagement: args.userArticleEngagement,
+              userArticleEngagementActorBloc:
+                  args.userArticleEngagementActorBloc));
     }
   };
 
@@ -84,20 +88,27 @@ class ArticleDetailRoute extends _i5.PageRouteInfo<ArticleDetailRouteArgs> {
   ArticleDetailRoute(
       {_i6.Key? key,
       required _i7.Article article,
-      required _i8.UserArticleEngagement userArticleEngagement})
+      required _i8.UserArticleEngagement userArticleEngagement,
+      required _i9.UserArticleEngagementActorBloc
+          userArticleEngagementActorBloc})
       : super(name,
             path: '/article-detail-page',
             args: ArticleDetailRouteArgs(
                 key: key,
                 article: article,
-                userArticleEngagement: userArticleEngagement));
+                userArticleEngagement: userArticleEngagement,
+                userArticleEngagementActorBloc:
+                    userArticleEngagementActorBloc));
 
   static const String name = 'ArticleDetailRoute';
 }
 
 class ArticleDetailRouteArgs {
   const ArticleDetailRouteArgs(
-      {this.key, required this.article, required this.userArticleEngagement});
+      {this.key,
+      required this.article,
+      required this.userArticleEngagement,
+      required this.userArticleEngagementActorBloc});
 
   final _i6.Key? key;
 
@@ -105,8 +116,10 @@ class ArticleDetailRouteArgs {
 
   final _i8.UserArticleEngagement userArticleEngagement;
 
+  final _i9.UserArticleEngagementActorBloc userArticleEngagementActorBloc;
+
   @override
   String toString() {
-    return 'ArticleDetailRouteArgs{key: $key, article: $article, userArticleEngagement: $userArticleEngagement}';
+    return 'ArticleDetailRouteArgs{key: $key, article: $article, userArticleEngagement: $userArticleEngagement, userArticleEngagementActorBloc: $userArticleEngagementActorBloc}';
   }
 }

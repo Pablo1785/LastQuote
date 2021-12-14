@@ -17,9 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$UserArticleEngagementActorEventTearOff {
   const _$UserArticleEngagementActorEventTearOff();
 
-  _SharePressed sharePressed(UserArticleEngagement userArticleEngagement) {
+  _SharePressed sharePressed(
+      Either<UserArticleEngagementFailure, UserArticleEngagement>
+          failureOrUserArticleEngagement) {
     return _SharePressed(
-      userArticleEngagement,
+      failureOrUserArticleEngagement,
     );
   }
 
@@ -29,15 +31,19 @@ class _$UserArticleEngagementActorEventTearOff {
     );
   }
 
-  _DismissPressed dismissPressed(UserArticleEngagement userArticleEngagement) {
+  _DismissPressed dismissPressed(
+      Either<UserArticleEngagementFailure, UserArticleEngagement>
+          failureOrUserArticleEngagement) {
     return _DismissPressed(
-      userArticleEngagement,
+      failureOrUserArticleEngagement,
     );
   }
 
-  _OpenPressed openPressed(UserArticleEngagement userArticleEngagement) {
+  _OpenPressed openPressed(
+      Either<UserArticleEngagementFailure, UserArticleEngagement>
+          failureOrUserArticleEngagement) {
     return _OpenPressed(
-      userArticleEngagement,
+      failureOrUserArticleEngagement,
     );
   }
 }
@@ -48,37 +54,56 @@ const $UserArticleEngagementActorEvent =
 
 /// @nodoc
 mixin _$UserArticleEngagementActorEvent {
-  UserArticleEngagement get userArticleEngagement =>
-      throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UserArticleEngagement userArticleEngagement)
+    required TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)
         sharePressed,
     required TResult Function(UserArticleEngagement userArticleEngagement)
         likePressed,
-    required TResult Function(UserArticleEngagement userArticleEngagement)
+    required TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)
         dismissPressed,
-    required TResult Function(UserArticleEngagement userArticleEngagement)
+    required TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)
         openPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(UserArticleEngagement userArticleEngagement)? sharePressed,
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
+        sharePressed,
     TResult Function(UserArticleEngagement userArticleEngagement)? likePressed,
-    TResult Function(UserArticleEngagement userArticleEngagement)?
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
         dismissPressed,
-    TResult Function(UserArticleEngagement userArticleEngagement)? openPressed,
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
+        openPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UserArticleEngagement userArticleEngagement)? sharePressed,
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
+        sharePressed,
     TResult Function(UserArticleEngagement userArticleEngagement)? likePressed,
-    TResult Function(UserArticleEngagement userArticleEngagement)?
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
         dismissPressed,
-    TResult Function(UserArticleEngagement userArticleEngagement)? openPressed,
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
+        openPressed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -107,10 +132,6 @@ mixin _$UserArticleEngagementActorEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $UserArticleEngagementActorEventCopyWith<UserArticleEngagementActorEvent>
-      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -119,9 +140,6 @@ abstract class $UserArticleEngagementActorEventCopyWith<$Res> {
           UserArticleEngagementActorEvent value,
           $Res Function(UserArticleEngagementActorEvent) then) =
       _$UserArticleEngagementActorEventCopyWithImpl<$Res>;
-  $Res call({UserArticleEngagement userArticleEngagement});
-
-  $UserArticleEngagementCopyWith<$Res> get userArticleEngagement;
 }
 
 /// @nodoc
@@ -132,39 +150,16 @@ class _$UserArticleEngagementActorEventCopyWithImpl<$Res>
   final UserArticleEngagementActorEvent _value;
   // ignore: unused_field
   final $Res Function(UserArticleEngagementActorEvent) _then;
-
-  @override
-  $Res call({
-    Object? userArticleEngagement = freezed,
-  }) {
-    return _then(_value.copyWith(
-      userArticleEngagement: userArticleEngagement == freezed
-          ? _value.userArticleEngagement
-          : userArticleEngagement // ignore: cast_nullable_to_non_nullable
-              as UserArticleEngagement,
-    ));
-  }
-
-  @override
-  $UserArticleEngagementCopyWith<$Res> get userArticleEngagement {
-    return $UserArticleEngagementCopyWith<$Res>(_value.userArticleEngagement,
-        (value) {
-      return _then(_value.copyWith(userArticleEngagement: value));
-    });
-  }
 }
 
 /// @nodoc
-abstract class _$SharePressedCopyWith<$Res>
-    implements $UserArticleEngagementActorEventCopyWith<$Res> {
+abstract class _$SharePressedCopyWith<$Res> {
   factory _$SharePressedCopyWith(
           _SharePressed value, $Res Function(_SharePressed) then) =
       __$SharePressedCopyWithImpl<$Res>;
-  @override
-  $Res call({UserArticleEngagement userArticleEngagement});
-
-  @override
-  $UserArticleEngagementCopyWith<$Res> get userArticleEngagement;
+  $Res call(
+      {Either<UserArticleEngagementFailure, UserArticleEngagement>
+          failureOrUserArticleEngagement});
 }
 
 /// @nodoc
@@ -180,13 +175,13 @@ class __$SharePressedCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? userArticleEngagement = freezed,
+    Object? failureOrUserArticleEngagement = freezed,
   }) {
     return _then(_SharePressed(
-      userArticleEngagement == freezed
-          ? _value.userArticleEngagement
-          : userArticleEngagement // ignore: cast_nullable_to_non_nullable
-              as UserArticleEngagement,
+      failureOrUserArticleEngagement == freezed
+          ? _value.failureOrUserArticleEngagement
+          : failureOrUserArticleEngagement // ignore: cast_nullable_to_non_nullable
+              as Either<UserArticleEngagementFailure, UserArticleEngagement>,
     ));
   }
 }
@@ -194,14 +189,15 @@ class __$SharePressedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SharePressed implements _SharePressed {
-  const _$_SharePressed(this.userArticleEngagement);
+  const _$_SharePressed(this.failureOrUserArticleEngagement);
 
   @override
-  final UserArticleEngagement userArticleEngagement;
+  final Either<UserArticleEngagementFailure, UserArticleEngagement>
+      failureOrUserArticleEngagement;
 
   @override
   String toString() {
-    return 'UserArticleEngagementActorEvent.sharePressed(userArticleEngagement: $userArticleEngagement)';
+    return 'UserArticleEngagementActorEvent.sharePressed(failureOrUserArticleEngagement: $failureOrUserArticleEngagement)';
   }
 
   @override
@@ -209,12 +205,14 @@ class _$_SharePressed implements _SharePressed {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _SharePressed &&
-            (identical(other.userArticleEngagement, userArticleEngagement) ||
-                other.userArticleEngagement == userArticleEngagement));
+            (identical(other.failureOrUserArticleEngagement,
+                    failureOrUserArticleEngagement) ||
+                other.failureOrUserArticleEngagement ==
+                    failureOrUserArticleEngagement));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userArticleEngagement);
+  int get hashCode => Object.hash(runtimeType, failureOrUserArticleEngagement);
 
   @JsonKey(ignore: true)
   @override
@@ -224,42 +222,64 @@ class _$_SharePressed implements _SharePressed {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UserArticleEngagement userArticleEngagement)
+    required TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)
         sharePressed,
     required TResult Function(UserArticleEngagement userArticleEngagement)
         likePressed,
-    required TResult Function(UserArticleEngagement userArticleEngagement)
+    required TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)
         dismissPressed,
-    required TResult Function(UserArticleEngagement userArticleEngagement)
+    required TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)
         openPressed,
   }) {
-    return sharePressed(userArticleEngagement);
+    return sharePressed(failureOrUserArticleEngagement);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(UserArticleEngagement userArticleEngagement)? sharePressed,
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
+        sharePressed,
     TResult Function(UserArticleEngagement userArticleEngagement)? likePressed,
-    TResult Function(UserArticleEngagement userArticleEngagement)?
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
         dismissPressed,
-    TResult Function(UserArticleEngagement userArticleEngagement)? openPressed,
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
+        openPressed,
   }) {
-    return sharePressed?.call(userArticleEngagement);
+    return sharePressed?.call(failureOrUserArticleEngagement);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UserArticleEngagement userArticleEngagement)? sharePressed,
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
+        sharePressed,
     TResult Function(UserArticleEngagement userArticleEngagement)? likePressed,
-    TResult Function(UserArticleEngagement userArticleEngagement)?
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
         dismissPressed,
-    TResult Function(UserArticleEngagement userArticleEngagement)? openPressed,
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
+        openPressed,
     required TResult orElse(),
   }) {
     if (sharePressed != null) {
-      return sharePressed(userArticleEngagement);
+      return sharePressed(failureOrUserArticleEngagement);
     }
     return orElse();
   }
@@ -303,27 +323,24 @@ class _$_SharePressed implements _SharePressed {
 }
 
 abstract class _SharePressed implements UserArticleEngagementActorEvent {
-  const factory _SharePressed(UserArticleEngagement userArticleEngagement) =
-      _$_SharePressed;
+  const factory _SharePressed(
+      Either<UserArticleEngagementFailure, UserArticleEngagement>
+          failureOrUserArticleEngagement) = _$_SharePressed;
 
-  @override
-  UserArticleEngagement get userArticleEngagement;
-  @override
+  Either<UserArticleEngagementFailure, UserArticleEngagement>
+      get failureOrUserArticleEngagement;
   @JsonKey(ignore: true)
   _$SharePressedCopyWith<_SharePressed> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$LikePressedCopyWith<$Res>
-    implements $UserArticleEngagementActorEventCopyWith<$Res> {
+abstract class _$LikePressedCopyWith<$Res> {
   factory _$LikePressedCopyWith(
           _LikePressed value, $Res Function(_LikePressed) then) =
       __$LikePressedCopyWithImpl<$Res>;
-  @override
   $Res call({UserArticleEngagement userArticleEngagement});
 
-  @override
   $UserArticleEngagementCopyWith<$Res> get userArticleEngagement;
 }
 
@@ -348,6 +365,14 @@ class __$LikePressedCopyWithImpl<$Res>
           : userArticleEngagement // ignore: cast_nullable_to_non_nullable
               as UserArticleEngagement,
     ));
+  }
+
+  @override
+  $UserArticleEngagementCopyWith<$Res> get userArticleEngagement {
+    return $UserArticleEngagementCopyWith<$Res>(_value.userArticleEngagement,
+        (value) {
+      return _then(_value.copyWith(userArticleEngagement: value));
+    });
   }
 }
 
@@ -384,13 +409,19 @@ class _$_LikePressed implements _LikePressed {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UserArticleEngagement userArticleEngagement)
+    required TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)
         sharePressed,
     required TResult Function(UserArticleEngagement userArticleEngagement)
         likePressed,
-    required TResult Function(UserArticleEngagement userArticleEngagement)
+    required TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)
         dismissPressed,
-    required TResult Function(UserArticleEngagement userArticleEngagement)
+    required TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)
         openPressed,
   }) {
     return likePressed(userArticleEngagement);
@@ -399,11 +430,19 @@ class _$_LikePressed implements _LikePressed {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(UserArticleEngagement userArticleEngagement)? sharePressed,
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
+        sharePressed,
     TResult Function(UserArticleEngagement userArticleEngagement)? likePressed,
-    TResult Function(UserArticleEngagement userArticleEngagement)?
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
         dismissPressed,
-    TResult Function(UserArticleEngagement userArticleEngagement)? openPressed,
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
+        openPressed,
   }) {
     return likePressed?.call(userArticleEngagement);
   }
@@ -411,11 +450,19 @@ class _$_LikePressed implements _LikePressed {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UserArticleEngagement userArticleEngagement)? sharePressed,
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
+        sharePressed,
     TResult Function(UserArticleEngagement userArticleEngagement)? likePressed,
-    TResult Function(UserArticleEngagement userArticleEngagement)?
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
         dismissPressed,
-    TResult Function(UserArticleEngagement userArticleEngagement)? openPressed,
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
+        openPressed,
     required TResult orElse(),
   }) {
     if (likePressed != null) {
@@ -466,25 +513,20 @@ abstract class _LikePressed implements UserArticleEngagementActorEvent {
   const factory _LikePressed(UserArticleEngagement userArticleEngagement) =
       _$_LikePressed;
 
-  @override
   UserArticleEngagement get userArticleEngagement;
-  @override
   @JsonKey(ignore: true)
   _$LikePressedCopyWith<_LikePressed> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$DismissPressedCopyWith<$Res>
-    implements $UserArticleEngagementActorEventCopyWith<$Res> {
+abstract class _$DismissPressedCopyWith<$Res> {
   factory _$DismissPressedCopyWith(
           _DismissPressed value, $Res Function(_DismissPressed) then) =
       __$DismissPressedCopyWithImpl<$Res>;
-  @override
-  $Res call({UserArticleEngagement userArticleEngagement});
-
-  @override
-  $UserArticleEngagementCopyWith<$Res> get userArticleEngagement;
+  $Res call(
+      {Either<UserArticleEngagementFailure, UserArticleEngagement>
+          failureOrUserArticleEngagement});
 }
 
 /// @nodoc
@@ -500,13 +542,13 @@ class __$DismissPressedCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? userArticleEngagement = freezed,
+    Object? failureOrUserArticleEngagement = freezed,
   }) {
     return _then(_DismissPressed(
-      userArticleEngagement == freezed
-          ? _value.userArticleEngagement
-          : userArticleEngagement // ignore: cast_nullable_to_non_nullable
-              as UserArticleEngagement,
+      failureOrUserArticleEngagement == freezed
+          ? _value.failureOrUserArticleEngagement
+          : failureOrUserArticleEngagement // ignore: cast_nullable_to_non_nullable
+              as Either<UserArticleEngagementFailure, UserArticleEngagement>,
     ));
   }
 }
@@ -514,14 +556,15 @@ class __$DismissPressedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_DismissPressed implements _DismissPressed {
-  const _$_DismissPressed(this.userArticleEngagement);
+  const _$_DismissPressed(this.failureOrUserArticleEngagement);
 
   @override
-  final UserArticleEngagement userArticleEngagement;
+  final Either<UserArticleEngagementFailure, UserArticleEngagement>
+      failureOrUserArticleEngagement;
 
   @override
   String toString() {
-    return 'UserArticleEngagementActorEvent.dismissPressed(userArticleEngagement: $userArticleEngagement)';
+    return 'UserArticleEngagementActorEvent.dismissPressed(failureOrUserArticleEngagement: $failureOrUserArticleEngagement)';
   }
 
   @override
@@ -529,12 +572,14 @@ class _$_DismissPressed implements _DismissPressed {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _DismissPressed &&
-            (identical(other.userArticleEngagement, userArticleEngagement) ||
-                other.userArticleEngagement == userArticleEngagement));
+            (identical(other.failureOrUserArticleEngagement,
+                    failureOrUserArticleEngagement) ||
+                other.failureOrUserArticleEngagement ==
+                    failureOrUserArticleEngagement));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userArticleEngagement);
+  int get hashCode => Object.hash(runtimeType, failureOrUserArticleEngagement);
 
   @JsonKey(ignore: true)
   @override
@@ -544,42 +589,64 @@ class _$_DismissPressed implements _DismissPressed {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UserArticleEngagement userArticleEngagement)
+    required TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)
         sharePressed,
     required TResult Function(UserArticleEngagement userArticleEngagement)
         likePressed,
-    required TResult Function(UserArticleEngagement userArticleEngagement)
+    required TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)
         dismissPressed,
-    required TResult Function(UserArticleEngagement userArticleEngagement)
+    required TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)
         openPressed,
   }) {
-    return dismissPressed(userArticleEngagement);
+    return dismissPressed(failureOrUserArticleEngagement);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(UserArticleEngagement userArticleEngagement)? sharePressed,
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
+        sharePressed,
     TResult Function(UserArticleEngagement userArticleEngagement)? likePressed,
-    TResult Function(UserArticleEngagement userArticleEngagement)?
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
         dismissPressed,
-    TResult Function(UserArticleEngagement userArticleEngagement)? openPressed,
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
+        openPressed,
   }) {
-    return dismissPressed?.call(userArticleEngagement);
+    return dismissPressed?.call(failureOrUserArticleEngagement);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UserArticleEngagement userArticleEngagement)? sharePressed,
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
+        sharePressed,
     TResult Function(UserArticleEngagement userArticleEngagement)? likePressed,
-    TResult Function(UserArticleEngagement userArticleEngagement)?
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
         dismissPressed,
-    TResult Function(UserArticleEngagement userArticleEngagement)? openPressed,
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
+        openPressed,
     required TResult orElse(),
   }) {
     if (dismissPressed != null) {
-      return dismissPressed(userArticleEngagement);
+      return dismissPressed(failureOrUserArticleEngagement);
     }
     return orElse();
   }
@@ -623,28 +690,25 @@ class _$_DismissPressed implements _DismissPressed {
 }
 
 abstract class _DismissPressed implements UserArticleEngagementActorEvent {
-  const factory _DismissPressed(UserArticleEngagement userArticleEngagement) =
-      _$_DismissPressed;
+  const factory _DismissPressed(
+      Either<UserArticleEngagementFailure, UserArticleEngagement>
+          failureOrUserArticleEngagement) = _$_DismissPressed;
 
-  @override
-  UserArticleEngagement get userArticleEngagement;
-  @override
+  Either<UserArticleEngagementFailure, UserArticleEngagement>
+      get failureOrUserArticleEngagement;
   @JsonKey(ignore: true)
   _$DismissPressedCopyWith<_DismissPressed> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$OpenPressedCopyWith<$Res>
-    implements $UserArticleEngagementActorEventCopyWith<$Res> {
+abstract class _$OpenPressedCopyWith<$Res> {
   factory _$OpenPressedCopyWith(
           _OpenPressed value, $Res Function(_OpenPressed) then) =
       __$OpenPressedCopyWithImpl<$Res>;
-  @override
-  $Res call({UserArticleEngagement userArticleEngagement});
-
-  @override
-  $UserArticleEngagementCopyWith<$Res> get userArticleEngagement;
+  $Res call(
+      {Either<UserArticleEngagementFailure, UserArticleEngagement>
+          failureOrUserArticleEngagement});
 }
 
 /// @nodoc
@@ -660,13 +724,13 @@ class __$OpenPressedCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? userArticleEngagement = freezed,
+    Object? failureOrUserArticleEngagement = freezed,
   }) {
     return _then(_OpenPressed(
-      userArticleEngagement == freezed
-          ? _value.userArticleEngagement
-          : userArticleEngagement // ignore: cast_nullable_to_non_nullable
-              as UserArticleEngagement,
+      failureOrUserArticleEngagement == freezed
+          ? _value.failureOrUserArticleEngagement
+          : failureOrUserArticleEngagement // ignore: cast_nullable_to_non_nullable
+              as Either<UserArticleEngagementFailure, UserArticleEngagement>,
     ));
   }
 }
@@ -674,14 +738,15 @@ class __$OpenPressedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_OpenPressed implements _OpenPressed {
-  const _$_OpenPressed(this.userArticleEngagement);
+  const _$_OpenPressed(this.failureOrUserArticleEngagement);
 
   @override
-  final UserArticleEngagement userArticleEngagement;
+  final Either<UserArticleEngagementFailure, UserArticleEngagement>
+      failureOrUserArticleEngagement;
 
   @override
   String toString() {
-    return 'UserArticleEngagementActorEvent.openPressed(userArticleEngagement: $userArticleEngagement)';
+    return 'UserArticleEngagementActorEvent.openPressed(failureOrUserArticleEngagement: $failureOrUserArticleEngagement)';
   }
 
   @override
@@ -689,12 +754,14 @@ class _$_OpenPressed implements _OpenPressed {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _OpenPressed &&
-            (identical(other.userArticleEngagement, userArticleEngagement) ||
-                other.userArticleEngagement == userArticleEngagement));
+            (identical(other.failureOrUserArticleEngagement,
+                    failureOrUserArticleEngagement) ||
+                other.failureOrUserArticleEngagement ==
+                    failureOrUserArticleEngagement));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userArticleEngagement);
+  int get hashCode => Object.hash(runtimeType, failureOrUserArticleEngagement);
 
   @JsonKey(ignore: true)
   @override
@@ -704,42 +771,64 @@ class _$_OpenPressed implements _OpenPressed {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UserArticleEngagement userArticleEngagement)
+    required TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)
         sharePressed,
     required TResult Function(UserArticleEngagement userArticleEngagement)
         likePressed,
-    required TResult Function(UserArticleEngagement userArticleEngagement)
+    required TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)
         dismissPressed,
-    required TResult Function(UserArticleEngagement userArticleEngagement)
+    required TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)
         openPressed,
   }) {
-    return openPressed(userArticleEngagement);
+    return openPressed(failureOrUserArticleEngagement);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(UserArticleEngagement userArticleEngagement)? sharePressed,
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
+        sharePressed,
     TResult Function(UserArticleEngagement userArticleEngagement)? likePressed,
-    TResult Function(UserArticleEngagement userArticleEngagement)?
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
         dismissPressed,
-    TResult Function(UserArticleEngagement userArticleEngagement)? openPressed,
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
+        openPressed,
   }) {
-    return openPressed?.call(userArticleEngagement);
+    return openPressed?.call(failureOrUserArticleEngagement);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UserArticleEngagement userArticleEngagement)? sharePressed,
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
+        sharePressed,
     TResult Function(UserArticleEngagement userArticleEngagement)? likePressed,
-    TResult Function(UserArticleEngagement userArticleEngagement)?
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
         dismissPressed,
-    TResult Function(UserArticleEngagement userArticleEngagement)? openPressed,
+    TResult Function(
+            Either<UserArticleEngagementFailure, UserArticleEngagement>
+                failureOrUserArticleEngagement)?
+        openPressed,
     required TResult orElse(),
   }) {
     if (openPressed != null) {
-      return openPressed(userArticleEngagement);
+      return openPressed(failureOrUserArticleEngagement);
     }
     return orElse();
   }
@@ -783,12 +872,12 @@ class _$_OpenPressed implements _OpenPressed {
 }
 
 abstract class _OpenPressed implements UserArticleEngagementActorEvent {
-  const factory _OpenPressed(UserArticleEngagement userArticleEngagement) =
-      _$_OpenPressed;
+  const factory _OpenPressed(
+      Either<UserArticleEngagementFailure, UserArticleEngagement>
+          failureOrUserArticleEngagement) = _$_OpenPressed;
 
-  @override
-  UserArticleEngagement get userArticleEngagement;
-  @override
+  Either<UserArticleEngagementFailure, UserArticleEngagement>
+      get failureOrUserArticleEngagement;
   @JsonKey(ignore: true)
   _$OpenPressedCopyWith<_OpenPressed> get copyWith =>
       throw _privateConstructorUsedError;
@@ -802,12 +891,21 @@ class _$UserArticleEngagementActorStateTearOff {
     return const _Initial();
   }
 
-  _LikeFailure likeFailure() {
-    return const _LikeFailure();
+  _ActionInProgress actionInProgress() {
+    return const _ActionInProgress();
   }
 
-  _LikeSuccess likeSuccess() {
-    return const _LikeSuccess();
+  _LikeFailure likeFailure(
+      UserArticleEngagementFailure userArticleEngagementFailure) {
+    return _LikeFailure(
+      userArticleEngagementFailure,
+    );
+  }
+
+  _LikeSuccess likeSuccess(UserArticleEngagement userArticleEngagement) {
+    return _LikeSuccess(
+      userArticleEngagement,
+    );
   }
 
   _ShareOpened shareOpened(UserArticleEngagement userArticleEngagement) {
@@ -826,8 +924,12 @@ mixin _$UserArticleEngagementActorState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() likeFailure,
-    required TResult Function() likeSuccess,
+    required TResult Function() actionInProgress,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        likeFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        likeSuccess,
     required TResult Function(UserArticleEngagement userArticleEngagement)
         shareOpened,
   }) =>
@@ -835,16 +937,20 @@ mixin _$UserArticleEngagementActorState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? likeFailure,
-    TResult Function()? likeSuccess,
+    TResult Function()? actionInProgress,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        likeFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? likeFailure,
-    TResult Function()? likeSuccess,
+    TResult Function()? actionInProgress,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        likeFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
     required TResult orElse(),
   }) =>
@@ -852,6 +958,7 @@ mixin _$UserArticleEngagementActorState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_ActionInProgress value) actionInProgress,
     required TResult Function(_LikeFailure value) likeFailure,
     required TResult Function(_LikeSuccess value) likeSuccess,
     required TResult Function(_ShareOpened value) shareOpened,
@@ -860,6 +967,7 @@ mixin _$UserArticleEngagementActorState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_ActionInProgress value)? actionInProgress,
     TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_LikeSuccess value)? likeSuccess,
     TResult Function(_ShareOpened value)? shareOpened,
@@ -868,6 +976,7 @@ mixin _$UserArticleEngagementActorState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_ActionInProgress value)? actionInProgress,
     TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_LikeSuccess value)? likeSuccess,
     TResult Function(_ShareOpened value)? shareOpened,
@@ -934,8 +1043,12 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() likeFailure,
-    required TResult Function() likeSuccess,
+    required TResult Function() actionInProgress,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        likeFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        likeSuccess,
     required TResult Function(UserArticleEngagement userArticleEngagement)
         shareOpened,
   }) {
@@ -946,8 +1059,10 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? likeFailure,
-    TResult Function()? likeSuccess,
+    TResult Function()? actionInProgress,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        likeFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
   }) {
     return initial?.call();
@@ -957,8 +1072,10 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? likeFailure,
-    TResult Function()? likeSuccess,
+    TResult Function()? actionInProgress,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        likeFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
     required TResult orElse(),
   }) {
@@ -972,6 +1089,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_ActionInProgress value) actionInProgress,
     required TResult Function(_LikeFailure value) likeFailure,
     required TResult Function(_LikeSuccess value) likeSuccess,
     required TResult Function(_ShareOpened value) shareOpened,
@@ -983,6 +1101,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_ActionInProgress value)? actionInProgress,
     TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_LikeSuccess value)? likeSuccess,
     TResult Function(_ShareOpened value)? shareOpened,
@@ -994,6 +1113,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_ActionInProgress value)? actionInProgress,
     TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_LikeSuccess value)? likeSuccess,
     TResult Function(_ShareOpened value)? shareOpened,
@@ -1011,10 +1131,142 @@ abstract class _Initial implements UserArticleEngagementActorState {
 }
 
 /// @nodoc
+abstract class _$ActionInProgressCopyWith<$Res> {
+  factory _$ActionInProgressCopyWith(
+          _ActionInProgress value, $Res Function(_ActionInProgress) then) =
+      __$ActionInProgressCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$ActionInProgressCopyWithImpl<$Res>
+    extends _$UserArticleEngagementActorStateCopyWithImpl<$Res>
+    implements _$ActionInProgressCopyWith<$Res> {
+  __$ActionInProgressCopyWithImpl(
+      _ActionInProgress _value, $Res Function(_ActionInProgress) _then)
+      : super(_value, (v) => _then(v as _ActionInProgress));
+
+  @override
+  _ActionInProgress get _value => super._value as _ActionInProgress;
+}
+
+/// @nodoc
+
+class _$_ActionInProgress implements _ActionInProgress {
+  const _$_ActionInProgress();
+
+  @override
+  String toString() {
+    return 'UserArticleEngagementActorState.actionInProgress()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _ActionInProgress);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() actionInProgress,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        likeFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        likeSuccess,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        shareOpened,
+  }) {
+    return actionInProgress();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? actionInProgress,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        likeFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
+    TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+  }) {
+    return actionInProgress?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? actionInProgress,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        likeFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
+    TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+    required TResult orElse(),
+  }) {
+    if (actionInProgress != null) {
+      return actionInProgress();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_ActionInProgress value) actionInProgress,
+    required TResult Function(_LikeFailure value) likeFailure,
+    required TResult Function(_LikeSuccess value) likeSuccess,
+    required TResult Function(_ShareOpened value) shareOpened,
+  }) {
+    return actionInProgress(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_ActionInProgress value)? actionInProgress,
+    TResult Function(_LikeFailure value)? likeFailure,
+    TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareOpened value)? shareOpened,
+  }) {
+    return actionInProgress?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_ActionInProgress value)? actionInProgress,
+    TResult Function(_LikeFailure value)? likeFailure,
+    TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareOpened value)? shareOpened,
+    required TResult orElse(),
+  }) {
+    if (actionInProgress != null) {
+      return actionInProgress(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ActionInProgress implements UserArticleEngagementActorState {
+  const factory _ActionInProgress() = _$_ActionInProgress;
+}
+
+/// @nodoc
 abstract class _$LikeFailureCopyWith<$Res> {
   factory _$LikeFailureCopyWith(
           _LikeFailure value, $Res Function(_LikeFailure) then) =
       __$LikeFailureCopyWithImpl<$Res>;
+  $Res call({UserArticleEngagementFailure userArticleEngagementFailure});
+
+  $UserArticleEngagementFailureCopyWith<$Res> get userArticleEngagementFailure;
 }
 
 /// @nodoc
@@ -1027,61 +1279,102 @@ class __$LikeFailureCopyWithImpl<$Res>
 
   @override
   _LikeFailure get _value => super._value as _LikeFailure;
+
+  @override
+  $Res call({
+    Object? userArticleEngagementFailure = freezed,
+  }) {
+    return _then(_LikeFailure(
+      userArticleEngagementFailure == freezed
+          ? _value.userArticleEngagementFailure
+          : userArticleEngagementFailure // ignore: cast_nullable_to_non_nullable
+              as UserArticleEngagementFailure,
+    ));
+  }
+
+  @override
+  $UserArticleEngagementFailureCopyWith<$Res> get userArticleEngagementFailure {
+    return $UserArticleEngagementFailureCopyWith<$Res>(
+        _value.userArticleEngagementFailure, (value) {
+      return _then(_value.copyWith(userArticleEngagementFailure: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_LikeFailure implements _LikeFailure {
-  const _$_LikeFailure();
+  const _$_LikeFailure(this.userArticleEngagementFailure);
+
+  @override
+  final UserArticleEngagementFailure userArticleEngagementFailure;
 
   @override
   String toString() {
-    return 'UserArticleEngagementActorState.likeFailure()';
+    return 'UserArticleEngagementActorState.likeFailure(userArticleEngagementFailure: $userArticleEngagementFailure)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _LikeFailure);
+        (other.runtimeType == runtimeType &&
+            other is _LikeFailure &&
+            (identical(other.userArticleEngagementFailure,
+                    userArticleEngagementFailure) ||
+                other.userArticleEngagementFailure ==
+                    userArticleEngagementFailure));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, userArticleEngagementFailure);
+
+  @JsonKey(ignore: true)
+  @override
+  _$LikeFailureCopyWith<_LikeFailure> get copyWith =>
+      __$LikeFailureCopyWithImpl<_LikeFailure>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() likeFailure,
-    required TResult Function() likeSuccess,
+    required TResult Function() actionInProgress,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        likeFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        likeSuccess,
     required TResult Function(UserArticleEngagement userArticleEngagement)
         shareOpened,
   }) {
-    return likeFailure();
+    return likeFailure(userArticleEngagementFailure);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? likeFailure,
-    TResult Function()? likeSuccess,
+    TResult Function()? actionInProgress,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        likeFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
   }) {
-    return likeFailure?.call();
+    return likeFailure?.call(userArticleEngagementFailure);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? likeFailure,
-    TResult Function()? likeSuccess,
+    TResult Function()? actionInProgress,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        likeFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
     required TResult orElse(),
   }) {
     if (likeFailure != null) {
-      return likeFailure();
+      return likeFailure(userArticleEngagementFailure);
     }
     return orElse();
   }
@@ -1090,6 +1383,7 @@ class _$_LikeFailure implements _LikeFailure {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_ActionInProgress value) actionInProgress,
     required TResult Function(_LikeFailure value) likeFailure,
     required TResult Function(_LikeSuccess value) likeSuccess,
     required TResult Function(_ShareOpened value) shareOpened,
@@ -1101,6 +1395,7 @@ class _$_LikeFailure implements _LikeFailure {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_ActionInProgress value)? actionInProgress,
     TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_LikeSuccess value)? likeSuccess,
     TResult Function(_ShareOpened value)? shareOpened,
@@ -1112,6 +1407,7 @@ class _$_LikeFailure implements _LikeFailure {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_ActionInProgress value)? actionInProgress,
     TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_LikeSuccess value)? likeSuccess,
     TResult Function(_ShareOpened value)? shareOpened,
@@ -1125,7 +1421,14 @@ class _$_LikeFailure implements _LikeFailure {
 }
 
 abstract class _LikeFailure implements UserArticleEngagementActorState {
-  const factory _LikeFailure() = _$_LikeFailure;
+  const factory _LikeFailure(
+          UserArticleEngagementFailure userArticleEngagementFailure) =
+      _$_LikeFailure;
+
+  UserArticleEngagementFailure get userArticleEngagementFailure;
+  @JsonKey(ignore: true)
+  _$LikeFailureCopyWith<_LikeFailure> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1133,6 +1436,9 @@ abstract class _$LikeSuccessCopyWith<$Res> {
   factory _$LikeSuccessCopyWith(
           _LikeSuccess value, $Res Function(_LikeSuccess) then) =
       __$LikeSuccessCopyWithImpl<$Res>;
+  $Res call({UserArticleEngagement userArticleEngagement});
+
+  $UserArticleEngagementCopyWith<$Res> get userArticleEngagement;
 }
 
 /// @nodoc
@@ -1145,61 +1451,100 @@ class __$LikeSuccessCopyWithImpl<$Res>
 
   @override
   _LikeSuccess get _value => super._value as _LikeSuccess;
+
+  @override
+  $Res call({
+    Object? userArticleEngagement = freezed,
+  }) {
+    return _then(_LikeSuccess(
+      userArticleEngagement == freezed
+          ? _value.userArticleEngagement
+          : userArticleEngagement // ignore: cast_nullable_to_non_nullable
+              as UserArticleEngagement,
+    ));
+  }
+
+  @override
+  $UserArticleEngagementCopyWith<$Res> get userArticleEngagement {
+    return $UserArticleEngagementCopyWith<$Res>(_value.userArticleEngagement,
+        (value) {
+      return _then(_value.copyWith(userArticleEngagement: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_LikeSuccess implements _LikeSuccess {
-  const _$_LikeSuccess();
+  const _$_LikeSuccess(this.userArticleEngagement);
+
+  @override
+  final UserArticleEngagement userArticleEngagement;
 
   @override
   String toString() {
-    return 'UserArticleEngagementActorState.likeSuccess()';
+    return 'UserArticleEngagementActorState.likeSuccess(userArticleEngagement: $userArticleEngagement)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _LikeSuccess);
+        (other.runtimeType == runtimeType &&
+            other is _LikeSuccess &&
+            (identical(other.userArticleEngagement, userArticleEngagement) ||
+                other.userArticleEngagement == userArticleEngagement));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, userArticleEngagement);
+
+  @JsonKey(ignore: true)
+  @override
+  _$LikeSuccessCopyWith<_LikeSuccess> get copyWith =>
+      __$LikeSuccessCopyWithImpl<_LikeSuccess>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() likeFailure,
-    required TResult Function() likeSuccess,
+    required TResult Function() actionInProgress,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        likeFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        likeSuccess,
     required TResult Function(UserArticleEngagement userArticleEngagement)
         shareOpened,
   }) {
-    return likeSuccess();
+    return likeSuccess(userArticleEngagement);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? likeFailure,
-    TResult Function()? likeSuccess,
+    TResult Function()? actionInProgress,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        likeFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
   }) {
-    return likeSuccess?.call();
+    return likeSuccess?.call(userArticleEngagement);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? likeFailure,
-    TResult Function()? likeSuccess,
+    TResult Function()? actionInProgress,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        likeFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
     required TResult orElse(),
   }) {
     if (likeSuccess != null) {
-      return likeSuccess();
+      return likeSuccess(userArticleEngagement);
     }
     return orElse();
   }
@@ -1208,6 +1553,7 @@ class _$_LikeSuccess implements _LikeSuccess {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_ActionInProgress value) actionInProgress,
     required TResult Function(_LikeFailure value) likeFailure,
     required TResult Function(_LikeSuccess value) likeSuccess,
     required TResult Function(_ShareOpened value) shareOpened,
@@ -1219,6 +1565,7 @@ class _$_LikeSuccess implements _LikeSuccess {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_ActionInProgress value)? actionInProgress,
     TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_LikeSuccess value)? likeSuccess,
     TResult Function(_ShareOpened value)? shareOpened,
@@ -1230,6 +1577,7 @@ class _$_LikeSuccess implements _LikeSuccess {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_ActionInProgress value)? actionInProgress,
     TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_LikeSuccess value)? likeSuccess,
     TResult Function(_ShareOpened value)? shareOpened,
@@ -1243,7 +1591,13 @@ class _$_LikeSuccess implements _LikeSuccess {
 }
 
 abstract class _LikeSuccess implements UserArticleEngagementActorState {
-  const factory _LikeSuccess() = _$_LikeSuccess;
+  const factory _LikeSuccess(UserArticleEngagement userArticleEngagement) =
+      _$_LikeSuccess;
+
+  UserArticleEngagement get userArticleEngagement;
+  @JsonKey(ignore: true)
+  _$LikeSuccessCopyWith<_LikeSuccess> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1322,8 +1676,12 @@ class _$_ShareOpened implements _ShareOpened {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() likeFailure,
-    required TResult Function() likeSuccess,
+    required TResult Function() actionInProgress,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        likeFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        likeSuccess,
     required TResult Function(UserArticleEngagement userArticleEngagement)
         shareOpened,
   }) {
@@ -1334,8 +1692,10 @@ class _$_ShareOpened implements _ShareOpened {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? likeFailure,
-    TResult Function()? likeSuccess,
+    TResult Function()? actionInProgress,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        likeFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
   }) {
     return shareOpened?.call(userArticleEngagement);
@@ -1345,8 +1705,10 @@ class _$_ShareOpened implements _ShareOpened {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? likeFailure,
-    TResult Function()? likeSuccess,
+    TResult Function()? actionInProgress,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        likeFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
     required TResult orElse(),
   }) {
@@ -1360,6 +1722,7 @@ class _$_ShareOpened implements _ShareOpened {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_ActionInProgress value) actionInProgress,
     required TResult Function(_LikeFailure value) likeFailure,
     required TResult Function(_LikeSuccess value) likeSuccess,
     required TResult Function(_ShareOpened value) shareOpened,
@@ -1371,6 +1734,7 @@ class _$_ShareOpened implements _ShareOpened {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_ActionInProgress value)? actionInProgress,
     TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_LikeSuccess value)? likeSuccess,
     TResult Function(_ShareOpened value)? shareOpened,
@@ -1382,6 +1746,7 @@ class _$_ShareOpened implements _ShareOpened {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_ActionInProgress value)? actionInProgress,
     TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_LikeSuccess value)? likeSuccess,
     TResult Function(_ShareOpened value)? shareOpened,

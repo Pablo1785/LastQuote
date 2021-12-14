@@ -68,3 +68,13 @@ Either<ValueFailure<KtList<T>>, KtList<T>>
     return left(ValueFailure.invalidListContents(failedValues: invalidValues));
   }
 }
+
+Either<ValueFailure<String>, String> validateJunctionId(String input) {
+  if (input.split('_').length <= 1) {
+    return left(
+      ValueFailure.notJunctionId(failedValue: input),
+    );
+  } else {
+    return right(input);
+  }
+}

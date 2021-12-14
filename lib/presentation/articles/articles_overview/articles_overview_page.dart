@@ -65,7 +65,7 @@ class _ArticlesOverviewPageState extends State<ArticlesOverviewPage> {
               UserArticleEngagementActorState>(
             listener: (context, state) {
               state.maybeMap(
-                shareClosed: (_) {},
+                likeSuccess: (_) {},
                 shareOpened: (_) {},
                 orElse: () {},
               );

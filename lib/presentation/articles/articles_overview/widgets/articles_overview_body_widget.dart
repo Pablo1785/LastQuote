@@ -155,6 +155,8 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
             child: ListTile(
               leading: LikeButton(
                 userArticleEngagement: userArticleEngagement!,
+                userArticleEngagementActorBloc:
+                    context.read<UserArticleEngagementActorBloc>(),
               ),
               title: Text(
                 article.title.getOrCrash(),
@@ -180,8 +182,11 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
               onTap: () {
                 AutoRouter.of(context).push(
                   ArticleDetailRoute(
-                      article: article,
-                      userArticleEngagement: userArticleEngagement),
+                    article: article,
+                    userArticleEngagement: userArticleEngagement,
+                    userArticleEngagementActorBloc:
+                        context.read<UserArticleEngagementActorBloc>(),
+                  ),
                 );
               },
             ),
