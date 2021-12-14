@@ -902,10 +902,8 @@ class _$UserArticleEngagementActorStateTearOff {
     );
   }
 
-  _LikeSuccess likeSuccess(UserArticleEngagement userArticleEngagement) {
-    return _LikeSuccess(
-      userArticleEngagement,
-    );
+  _LikeSuccess likeSuccess() {
+    return const _LikeSuccess();
   }
 
   _ShareOpened shareOpened(UserArticleEngagement userArticleEngagement) {
@@ -928,8 +926,7 @@ mixin _$UserArticleEngagementActorState {
     required TResult Function(
             UserArticleEngagementFailure userArticleEngagementFailure)
         likeFailure,
-    required TResult Function(UserArticleEngagement userArticleEngagement)
-        likeSuccess,
+    required TResult Function() likeSuccess,
     required TResult Function(UserArticleEngagement userArticleEngagement)
         shareOpened,
   }) =>
@@ -940,7 +937,7 @@ mixin _$UserArticleEngagementActorState {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
+    TResult Function()? likeSuccess,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
   }) =>
       throw _privateConstructorUsedError;
@@ -950,7 +947,7 @@ mixin _$UserArticleEngagementActorState {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
+    TResult Function()? likeSuccess,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
     required TResult orElse(),
   }) =>
@@ -1047,8 +1044,7 @@ class _$_Initial implements _Initial {
     required TResult Function(
             UserArticleEngagementFailure userArticleEngagementFailure)
         likeFailure,
-    required TResult Function(UserArticleEngagement userArticleEngagement)
-        likeSuccess,
+    required TResult Function() likeSuccess,
     required TResult Function(UserArticleEngagement userArticleEngagement)
         shareOpened,
   }) {
@@ -1062,7 +1058,7 @@ class _$_Initial implements _Initial {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
+    TResult Function()? likeSuccess,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
   }) {
     return initial?.call();
@@ -1075,7 +1071,7 @@ class _$_Initial implements _Initial {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
+    TResult Function()? likeSuccess,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
     required TResult orElse(),
   }) {
@@ -1176,8 +1172,7 @@ class _$_ActionInProgress implements _ActionInProgress {
     required TResult Function(
             UserArticleEngagementFailure userArticleEngagementFailure)
         likeFailure,
-    required TResult Function(UserArticleEngagement userArticleEngagement)
-        likeSuccess,
+    required TResult Function() likeSuccess,
     required TResult Function(UserArticleEngagement userArticleEngagement)
         shareOpened,
   }) {
@@ -1191,7 +1186,7 @@ class _$_ActionInProgress implements _ActionInProgress {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
+    TResult Function()? likeSuccess,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
   }) {
     return actionInProgress?.call();
@@ -1204,7 +1199,7 @@ class _$_ActionInProgress implements _ActionInProgress {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
+    TResult Function()? likeSuccess,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
     required TResult orElse(),
   }) {
@@ -1341,8 +1336,7 @@ class _$_LikeFailure implements _LikeFailure {
     required TResult Function(
             UserArticleEngagementFailure userArticleEngagementFailure)
         likeFailure,
-    required TResult Function(UserArticleEngagement userArticleEngagement)
-        likeSuccess,
+    required TResult Function() likeSuccess,
     required TResult Function(UserArticleEngagement userArticleEngagement)
         shareOpened,
   }) {
@@ -1356,7 +1350,7 @@ class _$_LikeFailure implements _LikeFailure {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
+    TResult Function()? likeSuccess,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
   }) {
     return likeFailure?.call(userArticleEngagementFailure);
@@ -1369,7 +1363,7 @@ class _$_LikeFailure implements _LikeFailure {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
+    TResult Function()? likeSuccess,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
     required TResult orElse(),
   }) {
@@ -1436,9 +1430,6 @@ abstract class _$LikeSuccessCopyWith<$Res> {
   factory _$LikeSuccessCopyWith(
           _LikeSuccess value, $Res Function(_LikeSuccess) then) =
       __$LikeSuccessCopyWithImpl<$Res>;
-  $Res call({UserArticleEngagement userArticleEngagement});
-
-  $UserArticleEngagementCopyWith<$Res> get userArticleEngagement;
 }
 
 /// @nodoc
@@ -1451,57 +1442,26 @@ class __$LikeSuccessCopyWithImpl<$Res>
 
   @override
   _LikeSuccess get _value => super._value as _LikeSuccess;
-
-  @override
-  $Res call({
-    Object? userArticleEngagement = freezed,
-  }) {
-    return _then(_LikeSuccess(
-      userArticleEngagement == freezed
-          ? _value.userArticleEngagement
-          : userArticleEngagement // ignore: cast_nullable_to_non_nullable
-              as UserArticleEngagement,
-    ));
-  }
-
-  @override
-  $UserArticleEngagementCopyWith<$Res> get userArticleEngagement {
-    return $UserArticleEngagementCopyWith<$Res>(_value.userArticleEngagement,
-        (value) {
-      return _then(_value.copyWith(userArticleEngagement: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_LikeSuccess implements _LikeSuccess {
-  const _$_LikeSuccess(this.userArticleEngagement);
-
-  @override
-  final UserArticleEngagement userArticleEngagement;
+  const _$_LikeSuccess();
 
   @override
   String toString() {
-    return 'UserArticleEngagementActorState.likeSuccess(userArticleEngagement: $userArticleEngagement)';
+    return 'UserArticleEngagementActorState.likeSuccess()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _LikeSuccess &&
-            (identical(other.userArticleEngagement, userArticleEngagement) ||
-                other.userArticleEngagement == userArticleEngagement));
+        (other.runtimeType == runtimeType && other is _LikeSuccess);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userArticleEngagement);
-
-  @JsonKey(ignore: true)
-  @override
-  _$LikeSuccessCopyWith<_LikeSuccess> get copyWith =>
-      __$LikeSuccessCopyWithImpl<_LikeSuccess>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
@@ -1511,12 +1471,11 @@ class _$_LikeSuccess implements _LikeSuccess {
     required TResult Function(
             UserArticleEngagementFailure userArticleEngagementFailure)
         likeFailure,
-    required TResult Function(UserArticleEngagement userArticleEngagement)
-        likeSuccess,
+    required TResult Function() likeSuccess,
     required TResult Function(UserArticleEngagement userArticleEngagement)
         shareOpened,
   }) {
-    return likeSuccess(userArticleEngagement);
+    return likeSuccess();
   }
 
   @override
@@ -1526,10 +1485,10 @@ class _$_LikeSuccess implements _LikeSuccess {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
+    TResult Function()? likeSuccess,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
   }) {
-    return likeSuccess?.call(userArticleEngagement);
+    return likeSuccess?.call();
   }
 
   @override
@@ -1539,12 +1498,12 @@ class _$_LikeSuccess implements _LikeSuccess {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
+    TResult Function()? likeSuccess,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
     required TResult orElse(),
   }) {
     if (likeSuccess != null) {
-      return likeSuccess(userArticleEngagement);
+      return likeSuccess();
     }
     return orElse();
   }
@@ -1591,13 +1550,7 @@ class _$_LikeSuccess implements _LikeSuccess {
 }
 
 abstract class _LikeSuccess implements UserArticleEngagementActorState {
-  const factory _LikeSuccess(UserArticleEngagement userArticleEngagement) =
-      _$_LikeSuccess;
-
-  UserArticleEngagement get userArticleEngagement;
-  @JsonKey(ignore: true)
-  _$LikeSuccessCopyWith<_LikeSuccess> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _LikeSuccess() = _$_LikeSuccess;
 }
 
 /// @nodoc
@@ -1680,8 +1633,7 @@ class _$_ShareOpened implements _ShareOpened {
     required TResult Function(
             UserArticleEngagementFailure userArticleEngagementFailure)
         likeFailure,
-    required TResult Function(UserArticleEngagement userArticleEngagement)
-        likeSuccess,
+    required TResult Function() likeSuccess,
     required TResult Function(UserArticleEngagement userArticleEngagement)
         shareOpened,
   }) {
@@ -1695,7 +1647,7 @@ class _$_ShareOpened implements _ShareOpened {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
+    TResult Function()? likeSuccess,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
   }) {
     return shareOpened?.call(userArticleEngagement);
@@ -1708,7 +1660,7 @@ class _$_ShareOpened implements _ShareOpened {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(UserArticleEngagement userArticleEngagement)? likeSuccess,
+    TResult Function()? likeSuccess,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
     required TResult orElse(),
   }) {

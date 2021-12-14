@@ -10,7 +10,7 @@ abstract class UserArticleEngagement with _$UserArticleEngagement {
   const UserArticleEngagement._();
 
   const factory UserArticleEngagement({
-    required UniqueId id,
+    required JunctionUniqueId id,
     required UniqueId articleId,
     required UniqueId userId,
     required bool isDismissed,
@@ -19,13 +19,23 @@ abstract class UserArticleEngagement with _$UserArticleEngagement {
     required bool isOpened,
   }) = _UserArticleEngagement;
 
-  factory UserArticleEngagement.empty() => UserArticleEngagement(
-        id: UniqueId(),
-        articleId: UniqueId(),
-        userId: UniqueId(),
-        isDismissed: false,
-        isLiked: false,
-        isShared: false,
-        isOpened: false,
-      );
+  factory UserArticleEngagement.empty() {
+    final articleId = UniqueId();
+    final userId = UniqueId();
+    final junctionId = JunctionUniqueId(
+      [
+        articleId.getOrCrash(),
+        userId.getOrCrash(),
+      ],
+    );
+    return UserArticleEngagement(
+      id: junctionId,
+      articleId: articleId,
+      userId: userId,
+      isDismissed: false,
+      isLiked: false,
+      isShared: false,
+      isOpened: false,
+    );
+  }
 }

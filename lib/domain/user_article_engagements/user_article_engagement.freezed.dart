@@ -18,7 +18,7 @@ class _$UserArticleEngagementTearOff {
   const _$UserArticleEngagementTearOff();
 
   _UserArticleEngagement call(
-      {required UniqueId id,
+      {required JunctionUniqueId id,
       required UniqueId articleId,
       required UniqueId userId,
       required bool isDismissed,
@@ -42,7 +42,7 @@ const $UserArticleEngagement = _$UserArticleEngagementTearOff();
 
 /// @nodoc
 mixin _$UserArticleEngagement {
-  UniqueId get id => throw _privateConstructorUsedError;
+  JunctionUniqueId get id => throw _privateConstructorUsedError;
   UniqueId get articleId => throw _privateConstructorUsedError;
   UniqueId get userId => throw _privateConstructorUsedError;
   bool get isDismissed => throw _privateConstructorUsedError;
@@ -61,7 +61,7 @@ abstract class $UserArticleEngagementCopyWith<$Res> {
           $Res Function(UserArticleEngagement) then) =
       _$UserArticleEngagementCopyWithImpl<$Res>;
   $Res call(
-      {UniqueId id,
+      {JunctionUniqueId id,
       UniqueId articleId,
       UniqueId userId,
       bool isDismissed,
@@ -93,7 +93,7 @@ class _$UserArticleEngagementCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as UniqueId,
+              as JunctionUniqueId,
       articleId: articleId == freezed
           ? _value.articleId
           : articleId // ignore: cast_nullable_to_non_nullable
@@ -130,7 +130,7 @@ abstract class _$UserArticleEngagementCopyWith<$Res>
       __$UserArticleEngagementCopyWithImpl<$Res>;
   @override
   $Res call(
-      {UniqueId id,
+      {JunctionUniqueId id,
       UniqueId articleId,
       UniqueId userId,
       bool isDismissed,
@@ -164,7 +164,7 @@ class __$UserArticleEngagementCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as UniqueId,
+              as JunctionUniqueId,
       articleId: articleId == freezed
           ? _value.articleId
           : articleId // ignore: cast_nullable_to_non_nullable
@@ -207,7 +207,7 @@ class _$_UserArticleEngagement extends _UserArticleEngagement {
       : super._();
 
   @override
-  final UniqueId id;
+  final JunctionUniqueId id;
   @override
   final UniqueId articleId;
   @override
@@ -257,7 +257,7 @@ class _$_UserArticleEngagement extends _UserArticleEngagement {
 
 abstract class _UserArticleEngagement extends UserArticleEngagement {
   const factory _UserArticleEngagement(
-      {required UniqueId id,
+      {required JunctionUniqueId id,
       required UniqueId articleId,
       required UniqueId userId,
       required bool isDismissed,
@@ -267,7 +267,7 @@ abstract class _UserArticleEngagement extends UserArticleEngagement {
   const _UserArticleEngagement._() : super._();
 
   @override
-  UniqueId get id;
+  JunctionUniqueId get id;
   @override
   UniqueId get articleId;
   @override

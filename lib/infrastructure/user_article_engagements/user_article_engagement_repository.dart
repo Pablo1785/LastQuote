@@ -71,7 +71,7 @@ class UserArticleEngagementRepository
           .toList();
 
       yield* _firestore
-          .collection('user_article_engagements')
+          .collection('user_article_engagement')
           .where('user_id', isEqualTo: userDocRef.id)
           .where('article_id', whereIn: articleIds)
           .snapshots()
@@ -106,6 +106,12 @@ class UserArticleEngagementRepository
                   ),
                   userId: UniqueId.fromUniqueString(
                     userDocRef.id,
+                  ),
+                  id: JunctionUniqueId(
+                    [
+                      articleId,
+                      userDocRef.id,
+                    ],
                   ),
                 ),
               )

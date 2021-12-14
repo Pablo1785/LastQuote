@@ -17,7 +17,7 @@ class UserArticleEngagementActorBloc extends Bloc<
 
   UserArticleEngagementActorBloc(
     this._iUserArticleEngagementRepository,
-  ) : super(_Initial()) {
+  ) : super(const _Initial()) {
     on<UserArticleEngagementActorEvent>((event, emit) async {
       await event.map(
         sharePressed: (_) {},
@@ -40,9 +40,7 @@ class UserArticleEngagementActorBloc extends Bloc<
               ),
             ),
             (_) => emit(
-              UserArticleEngagementActorState.likeSuccess(
-                updatedUserArticleEngagement,
-              ),
+              const UserArticleEngagementActorState.likeSuccess(),
             ),
           );
         },

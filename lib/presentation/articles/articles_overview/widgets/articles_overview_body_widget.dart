@@ -25,11 +25,11 @@ class ArticlesOverviewBody extends StatelessWidget {
           loadInProgress: (_) => const Center(
             child: CircularProgressIndicator(),
           ),
-          loadSuccess: (loadSuccessState) {
+          loadSuccess: (articlesLoadSuccessState) {
             context.read<UserArticleEngagementWatcherBloc>().add(
                   UserArticleEngagementWatcherEvent
                       .watchForCurrentUserAndArticlesStarted(
-                    loadSuccessState.articles,
+                    articlesLoadSuccessState.articles,
                   ),
                 );
             return BlocBuilder<UserArticleEngagementWatcherBloc,
@@ -41,11 +41,29 @@ class ArticlesOverviewBody extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   ),
                   loadSuccess: (userArticleEngagementLoadSuccessState) {
-                    return ArticleLoadSuccessWidget(
-                      articles: loadSuccessState.articles,
-                      userArticleEngagements:
-                          userArticleEngagementLoadSuccessState
-                              .userArticleEngagements,
+                    return BlocListener<UserArticleEngagementActorBloc,
+                        UserArticleEngagementActorState>(
+                      listener: (context, state) {
+                        state.maybeMap(
+                          likeSuccess: (successState) {
+                            context
+                                .read<UserArticleEngagementWatcherBloc>()
+                                .add(
+                                  UserArticleEngagementWatcherEvent
+                                      .watchForCurrentUserAndArticlesStarted(
+                                    articlesLoadSuccessState.articles,
+                                  ),
+                                );
+                          },
+                          orElse: () {},
+                        );
+                      },
+                      child: ArticleLoadSuccessWidget(
+                        articles: articlesLoadSuccessState.articles,
+                        userArticleEngagements:
+                            userArticleEngagementLoadSuccessState
+                                .userArticleEngagements,
+                      ),
                     );
                   },
                   loadFailure: (userArticleEngagementLoadFailureState) {
@@ -155,8 +173,6 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
             child: ListTile(
               leading: LikeButton(
                 userArticleEngagement: userArticleEngagement!,
-                userArticleEngagementActorBloc:
-                    context.read<UserArticleEngagementActorBloc>(),
               ),
               title: Text(
                 article.title.getOrCrash(),

@@ -41,7 +41,7 @@ abstract class UserArticleEngagementDto implements _$UserArticleEngagementDto {
 
   UserArticleEngagement toDomain() {
     return UserArticleEngagement(
-      id: UniqueId.fromUniqueString(id!),
+      id: JunctionUniqueId.fromUniqueString(id!),
       articleId: UniqueId.fromUniqueString(articleId),
       userId: UniqueId.fromUniqueString(userId),
       isDismissed: isDismissed,

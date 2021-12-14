@@ -43,7 +43,8 @@ class UserArticleEngagementWatcherBloc extends Bloc<
                     (failureOrUserArticleEngagements) => add(
                       UserArticleEngagementWatcherEvent
                           .userArticleEngagementsReceived(
-                              failureOrUserArticleEngagements),
+                        failureOrUserArticleEngagements,
+                      ),
                     ),
                   );
         },

@@ -61,16 +61,6 @@ class _ArticlesOverviewPageState extends State<ArticlesOverviewPage> {
               );
             },
           ),
-          BlocListener<UserArticleEngagementActorBloc,
-              UserArticleEngagementActorState>(
-            listener: (context, state) {
-              state.maybeMap(
-                likeSuccess: (_) {},
-                shareOpened: (_) {},
-                orElse: () {},
-              );
-            },
-          ),
         ],
         child: Scaffold(
           key: _scaffoldKey,
