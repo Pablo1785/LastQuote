@@ -1,10 +1,11 @@
 import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:ddd/application/user_article_engagement/user_article_engagement_actor/user_article_engagement_actor_bloc.dart';
+import 'package:ddd/application/user_article_engagement/user_article_engagement_watcher/user_article_engagement_watcher_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/article_sources/article_source_picker/article_source_picker_bloc.dart';
-import '../../../application/articles/article_actor/article_actor_bloc.dart';
 import '../../../application/articles/article_watcher/article_watcher_bloc.dart';
 import '../../../application/auth/auth_bloc.dart';
 import '../../../injection.dart';
@@ -35,8 +36,11 @@ class _ArticlesOverviewPageState extends State<ArticlesOverviewPage> {
               const ArticleWatcherEvent.watchAllStarted(),
             ),
         ),
-        BlocProvider<ArticleActorBloc>(
-          create: (context) => getIt<ArticleActorBloc>(),
+        BlocProvider<UserArticleEngagementWatcherBloc>(
+          create: (context) => getIt<UserArticleEngagementWatcherBloc>(),
+        ),
+        BlocProvider<UserArticleEngagementActorBloc>(
+          create: (context) => getIt<UserArticleEngagementActorBloc>(),
         ),
         BlocProvider<ArticleSourcePickerBloc>(
           create: (context) => getIt<ArticleSourcePickerBloc>()
@@ -57,23 +61,12 @@ class _ArticlesOverviewPageState extends State<ArticlesOverviewPage> {
               );
             },
           ),
-          BlocListener<ArticleActorBloc, ArticleActorState>(
+          BlocListener<UserArticleEngagementActorBloc,
+              UserArticleEngagementActorState>(
             listener: (context, state) {
               state.maybeMap(
-                likeFailure: (likeFailure) {
-                  FlushbarHelper.createError(
-                    duration: const Duration(seconds: 5),
-                    message: likeFailure.articleFailure.map(
-                        unexpected: (_) =>
-                            ':smile: Unexpected error occured. Please restart the app or IMPLEMENT ArticleActorBloc.',
-                        insufficientPermissions: (_) =>
-                            'You don\'t have sufficient permissions to Like this content.',
-                        sourceDisabled: (_) =>
-                            'You can\'t Like recommendations from disabled sources',
-                        noActiveSource: (_) =>
-                            'You don\'t have any recommendations sources enabled. This should not happen. Try restarting the app.'),
-                  ).show(context);
-                },
+                shareClosed: (_) {},
+                shareOpened: (_) {},
                 orElse: () {},
               );
             },

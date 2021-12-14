@@ -181,12 +181,51 @@ void main() {
 
         // act and assert later
         userArticleEngagementRepository
-            .getForCurrentUserAndArticles(articles)
+            .watchForCurrentUserAndArticles(articles)
             .listen(
               expectAsync1(
                 (value) => expected.contains(value),
               ),
             );
+      },
+    );
+  });
+
+  group('create', () {
+    test(
+      'should create a new user-article junction',
+      () async {
+        // arrange
+        final user =
+            await getUserFromFirestore(fakeFirebaseFirestore, 'dummyUserUid0');
+        when(
+          () => getIt<FirestoreHelper>().userDocument(),
+        ).thenAnswer(
+          (_) async => fakeFirebaseFirestore.collection('users').doc(
+                user.id.getOrCrash(),
+              ),
+        );
+        final article = await getArticleFromFirestore(fakeFirebaseFirestore);
+        when(
+          () => getIt<FirestoreHelper>().articleDocument(
+            article.id.getOrCrash(),
+          ),
+        ).thenAnswer(
+          (_) async => fakeFirebaseFirestore.collection('articles').doc(
+                article.id.getOrCrash(),
+              ),
+        );
+
+        final userArticleEngagement = UserArticleEngagement.empty().copyWith(
+          userId: user.id,
+          articleId: article.id,
+        );
+        // act
+        final result = userArticleEngagementRepository.create(
+          userArticleEngagement,
+        );
+
+        // assert
       },
     );
   });

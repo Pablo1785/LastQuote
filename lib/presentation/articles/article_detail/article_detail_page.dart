@@ -1,4 +1,6 @@
 import 'package:ddd/domain/articles/article.dart';
+import 'package:ddd/domain/user_article_engagements/user_article_engagement.dart';
+import 'package:ddd/presentation/articles/widgets/like_button.dart';
 import 'package:ddd/presentation/core/fun_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -9,9 +11,11 @@ class ArticleDetailPage extends HookWidget {
   const ArticleDetailPage({
     Key? key,
     required this.article,
+    required this.userArticleEngagement,
   }) : super(key: key);
 
   final Article article;
+  final UserArticleEngagement userArticleEngagement;
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +23,15 @@ class ArticleDetailPage extends HookWidget {
     final isLoading = useState(true);
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: LikeButton(
+          userArticleEngagement: userArticleEngagement,
+        ),
+      ),
       appBar: AppBar(
         title: Text(article.title.getOrCrash()),
+        actions: [],
       ),
       body: Stack(
         children: [

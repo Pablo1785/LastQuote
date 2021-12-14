@@ -27,12 +27,10 @@ class UserArticleEngagementRepository
       getForCurrentUserAndArticle(Article article) async {
     try {
       final userDocRef = await getIt<FirestoreHelper>().userDocument();
-      final articleDocRef = await getIt<FirestoreHelper>()
-          .articleDocument(article.id.getOrCrash());
       final userArticleDocs = (await _firestore
               .collection('user_article_engagement')
-              .where('user_id', isEqualTo: userDocRef)
-              .where('article_id', isEqualTo: articleDocRef)
+              .where('user_id', isEqualTo: userDocRef.id)
+              .where('article_id', isEqualTo: article.id.getOrCrash())
               .get())
           .docs
           .where((doc) => doc.exists)
@@ -62,24 +60,23 @@ class UserArticleEngagementRepository
   @override
   Stream<
       Either<UserArticleEngagementFailure,
-          KtMap<String, UserArticleEngagement>>> getForCurrentUserAndArticles(
+          KtMap<String, UserArticleEngagement>>> watchForCurrentUserAndArticles(
       KtList<Article> articles) async* {
     try {
       final userDocRef = await getIt<FirestoreHelper>().userDocument();
-      final articleDocRefs = articles.iter
+      final articleIds = articles.iter
           .map(
-            (article) => getIt<FirestoreHelper>()
-                .articleDocument(article.id.getOrCrash()),
+            (article) => article.id.getOrCrash(),
           )
           .toList();
 
       yield* _firestore
           .collection('user_article_engagements')
-          .where('user_id', isEqualTo: userDocRef)
-          .where('article_id', whereIn: articleDocRefs)
+          .where('user_id', isEqualTo: userDocRef.id)
+          .where('article_id', whereIn: articleIds)
           .snapshots()
-          .map(
-        (snapshot) {
+          .asyncMap(
+        (snapshot) async {
           Map<String, UserArticleEngagement> uidUserArticleEngagementMap = {};
           snapshot.docs
               .where(
@@ -95,9 +92,56 @@ class UserArticleEngagementRepository
               );
             },
           );
-          return right<UserArticleEngagementFailure,
-              KtMap<String, UserArticleEngagement>>(
-            uidUserArticleEngagementMap.toImmutableMap(),
+
+          // check articles that do not have a junction with current user
+          final newUserArticleEngagements = articleIds
+              .where(
+                (articleId) =>
+                    !uidUserArticleEngagementMap.keys.contains(articleId),
+              )
+              .map(
+                (articleId) => UserArticleEngagement.empty().copyWith(
+                  articleId: UniqueId.fromUniqueString(
+                    articleId,
+                  ),
+                  userId: UniqueId.fromUniqueString(
+                    userDocRef.id,
+                  ),
+                ),
+              )
+              .toList();
+
+          // create missing articles
+          final failuresOrSuccesses = await Future.wait(
+            newUserArticleEngagements.map(
+              (e) => create(e),
+            ),
+          );
+
+          // check if all creates successful
+          final someFailureOrUnit = failuresOrSuccesses.firstWhere(
+            (element) => element.isLeft(),
+            orElse: () => right<UserArticleEngagementFailure, Unit>(unit),
+          );
+
+          // if any create unsuccessful, pass the creation failure as stream output
+          return someFailureOrUnit.fold(
+            (failure) => left<UserArticleEngagementFailure,
+                KtMap<String, UserArticleEngagement>>(failure),
+            (_) {
+              newUserArticleEngagements.forEach(
+                (newEngagement) {
+                  uidUserArticleEngagementMap.putIfAbsent(
+                    newEngagement.articleId.getOrCrash(),
+                    () => newEngagement,
+                  );
+                },
+              );
+              return right<UserArticleEngagementFailure,
+                  KtMap<String, UserArticleEngagement>>(
+                uidUserArticleEngagementMap.toImmutableMap(),
+              );
+            },
           );
         },
       ).onErrorReturnWith(
@@ -112,14 +156,64 @@ class UserArticleEngagementRepository
   }
 
   Either<UserArticleEngagementFailure, T> _handleException<T>(
-      Object exception, StackTrace stackTrace) {
-    if (exception is PlatformException &&
-        exception.message!.contains('PERMISSION_DENIED')) {
+    Object exception,
+    StackTrace stackTrace,
+  ) {
+    if (exception is FirebaseException &&
+        exception.message!.contains('permission')) {
       return left(const UserArticleEngagementFailure.insufficientPermissions());
+    } else if (exception is FirebaseException &&
+        exception.message!.contains('NOT_FOUND')) {
+      return left(const UserArticleEngagementFailure.documentNotFound());
     } else {
       print(exception.toString());
       print(stackTrace.toString());
       return left(const UserArticleEngagementFailure.unexpected());
+    }
+  }
+
+  @override
+  Future<Either<UserArticleEngagementFailure, Unit>> create(
+    UserArticleEngagement userArticleEngagement,
+  ) async {
+    try {
+      final userArticleEngagementDto = UserArticleEngagementDto.fromDomain(
+        userArticleEngagement,
+      );
+
+      final userArticleEngagementDtoJson = userArticleEngagementDto.toJson();
+      await _firestore
+          .collection('user_article_engagement')
+          .doc(userArticleEngagementDto.id)
+          .set(
+            userArticleEngagementDtoJson,
+          );
+      return right(unit);
+    } on PlatformException catch (e, stacktrace) {
+      return _handleException(e, stacktrace);
+    }
+  }
+
+  @override
+  Future<Either<UserArticleEngagementFailure, Unit>> update(
+    UserArticleEngagement userArticleEngagement,
+  ) async {
+    try {
+      final userArticleEngagementDto = UserArticleEngagementDto.fromDomain(
+        userArticleEngagement,
+      );
+
+      final userArticleEngagementDtoJson = userArticleEngagementDto.toJson();
+      await _firestore
+          .collection('user_article_engagement')
+          .doc(userArticleEngagementDto.id)
+          // update() differs from set() in that it preserves fields that aren't present in new data
+          .update(
+            userArticleEngagementDtoJson,
+          );
+      return right(unit);
+    } on PlatformException catch (e, stacktrace) {
+      return _handleException(e, stacktrace);
     }
   }
 }

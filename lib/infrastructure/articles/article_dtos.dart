@@ -15,7 +15,7 @@ abstract class ArticleDto implements _$ArticleDto {
 
   const factory ArticleDto({
     required String? id,
-    @JsonKey(name: 'source_id') @ReferenceConverter() required String sourceId,
+    @JsonKey(name: 'source_id') required String sourceId,
     required String title,
     required String url,
     @JsonKey(name: 'media_type') required String mediaType,

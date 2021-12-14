@@ -24,14 +24,9 @@ class _$ArticleSourceStatusDtoTearOff {
 
   _ArticleSourceStatusDto call(
       {required String? id,
-      @JsonKey(name: 'article_source_id')
-      @ReferenceConverter()
-          required String articleSourceId,
-      @JsonKey(name: 'user_id')
-      @ReferenceConverter()
-          required String userId,
-      @JsonKey(name: 'is_enabled')
-          required bool isEnabled}) {
+      @JsonKey(name: 'article_source_id') required String articleSourceId,
+      @JsonKey(name: 'user_id') required String userId,
+      @JsonKey(name: 'is_enabled') required bool isEnabled}) {
     return _ArticleSourceStatusDto(
       id: id,
       articleSourceId: articleSourceId,
@@ -52,10 +47,8 @@ const $ArticleSourceStatusDto = _$ArticleSourceStatusDtoTearOff();
 mixin _$ArticleSourceStatusDto {
   String? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'article_source_id')
-  @ReferenceConverter()
   String get articleSourceId => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_id')
-  @ReferenceConverter()
   String get userId => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_enabled')
   bool get isEnabled => throw _privateConstructorUsedError;
@@ -73,14 +66,9 @@ abstract class $ArticleSourceStatusDtoCopyWith<$Res> {
       _$ArticleSourceStatusDtoCopyWithImpl<$Res>;
   $Res call(
       {String? id,
-      @JsonKey(name: 'article_source_id')
-      @ReferenceConverter()
-          String articleSourceId,
-      @JsonKey(name: 'user_id')
-      @ReferenceConverter()
-          String userId,
-      @JsonKey(name: 'is_enabled')
-          bool isEnabled});
+      @JsonKey(name: 'article_source_id') String articleSourceId,
+      @JsonKey(name: 'user_id') String userId,
+      @JsonKey(name: 'is_enabled') bool isEnabled});
 }
 
 /// @nodoc
@@ -129,14 +117,9 @@ abstract class _$ArticleSourceStatusDtoCopyWith<$Res>
   @override
   $Res call(
       {String? id,
-      @JsonKey(name: 'article_source_id')
-      @ReferenceConverter()
-          String articleSourceId,
-      @JsonKey(name: 'user_id')
-      @ReferenceConverter()
-          String userId,
-      @JsonKey(name: 'is_enabled')
-          bool isEnabled});
+      @JsonKey(name: 'article_source_id') String articleSourceId,
+      @JsonKey(name: 'user_id') String userId,
+      @JsonKey(name: 'is_enabled') bool isEnabled});
 }
 
 /// @nodoc
@@ -183,14 +166,9 @@ class __$ArticleSourceStatusDtoCopyWithImpl<$Res>
 class _$_ArticleSourceStatusDto extends _ArticleSourceStatusDto {
   const _$_ArticleSourceStatusDto(
       {required this.id,
-      @JsonKey(name: 'article_source_id')
-      @ReferenceConverter()
-          required this.articleSourceId,
-      @JsonKey(name: 'user_id')
-      @ReferenceConverter()
-          required this.userId,
-      @JsonKey(name: 'is_enabled')
-          required this.isEnabled})
+      @JsonKey(name: 'article_source_id') required this.articleSourceId,
+      @JsonKey(name: 'user_id') required this.userId,
+      @JsonKey(name: 'is_enabled') required this.isEnabled})
       : super._();
 
   factory _$_ArticleSourceStatusDto.fromJson(Map<String, dynamic> json) =>
@@ -200,11 +178,9 @@ class _$_ArticleSourceStatusDto extends _ArticleSourceStatusDto {
   final String? id;
   @override
   @JsonKey(name: 'article_source_id')
-  @ReferenceConverter()
   final String articleSourceId;
   @override
   @JsonKey(name: 'user_id')
-  @ReferenceConverter()
   final String userId;
   @override
   @JsonKey(name: 'is_enabled')
@@ -246,15 +222,11 @@ class _$_ArticleSourceStatusDto extends _ArticleSourceStatusDto {
 
 abstract class _ArticleSourceStatusDto extends ArticleSourceStatusDto {
   const factory _ArticleSourceStatusDto(
-      {required String? id,
-      @JsonKey(name: 'article_source_id')
-      @ReferenceConverter()
-          required String articleSourceId,
-      @JsonKey(name: 'user_id')
-      @ReferenceConverter()
-          required String userId,
-      @JsonKey(name: 'is_enabled')
-          required bool isEnabled}) = _$_ArticleSourceStatusDto;
+          {required String? id,
+          @JsonKey(name: 'article_source_id') required String articleSourceId,
+          @JsonKey(name: 'user_id') required String userId,
+          @JsonKey(name: 'is_enabled') required bool isEnabled}) =
+      _$_ArticleSourceStatusDto;
   const _ArticleSourceStatusDto._() : super._();
 
   factory _ArticleSourceStatusDto.fromJson(Map<String, dynamic> json) =
@@ -264,11 +236,9 @@ abstract class _ArticleSourceStatusDto extends ArticleSourceStatusDto {
   String? get id;
   @override
   @JsonKey(name: 'article_source_id')
-  @ReferenceConverter()
   String get articleSourceId;
   @override
   @JsonKey(name: 'user_id')
-  @ReferenceConverter()
   String get userId;
   @override
   @JsonKey(name: 'is_enabled')

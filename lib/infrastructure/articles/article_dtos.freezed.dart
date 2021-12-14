@@ -23,15 +23,11 @@ class _$ArticleDtoTearOff {
 
   _ArticleDto call(
       {required String? id,
-      @JsonKey(name: 'source_id')
-      @ReferenceConverter()
-          required String sourceId,
+      @JsonKey(name: 'source_id') required String sourceId,
       required String title,
       required String url,
-      @JsonKey(name: 'media_type')
-          required String mediaType,
-      @ServerTimestampConverter()
-          required FieldValue? serverTimestamp}) {
+      @JsonKey(name: 'media_type') required String mediaType,
+      @ServerTimestampConverter() required FieldValue? serverTimestamp}) {
     return _ArticleDto(
       id: id,
       sourceId: sourceId,
@@ -54,7 +50,6 @@ const $ArticleDto = _$ArticleDtoTearOff();
 mixin _$ArticleDto {
   String? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'source_id')
-  @ReferenceConverter()
   String get sourceId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
@@ -76,7 +71,7 @@ abstract class $ArticleDtoCopyWith<$Res> {
       _$ArticleDtoCopyWithImpl<$Res>;
   $Res call(
       {String? id,
-      @JsonKey(name: 'source_id') @ReferenceConverter() String sourceId,
+      @JsonKey(name: 'source_id') String sourceId,
       String title,
       String url,
       @JsonKey(name: 'media_type') String mediaType,
@@ -137,7 +132,7 @@ abstract class _$ArticleDtoCopyWith<$Res> implements $ArticleDtoCopyWith<$Res> {
   @override
   $Res call(
       {String? id,
-      @JsonKey(name: 'source_id') @ReferenceConverter() String sourceId,
+      @JsonKey(name: 'source_id') String sourceId,
       String title,
       String url,
       @JsonKey(name: 'media_type') String mediaType,
@@ -197,7 +192,7 @@ class __$ArticleDtoCopyWithImpl<$Res> extends _$ArticleDtoCopyWithImpl<$Res>
 class _$_ArticleDto extends _ArticleDto {
   const _$_ArticleDto(
       {required this.id,
-      @JsonKey(name: 'source_id') @ReferenceConverter() required this.sourceId,
+      @JsonKey(name: 'source_id') required this.sourceId,
       required this.title,
       required this.url,
       @JsonKey(name: 'media_type') required this.mediaType,
@@ -211,7 +206,6 @@ class _$_ArticleDto extends _ArticleDto {
   final String? id;
   @override
   @JsonKey(name: 'source_id')
-  @ReferenceConverter()
   final String sourceId;
   @override
   final String title;
@@ -262,16 +256,13 @@ class _$_ArticleDto extends _ArticleDto {
 
 abstract class _ArticleDto extends ArticleDto {
   const factory _ArticleDto(
-      {required String? id,
-      @JsonKey(name: 'source_id')
-      @ReferenceConverter()
-          required String sourceId,
-      required String title,
-      required String url,
-      @JsonKey(name: 'media_type')
-          required String mediaType,
-      @ServerTimestampConverter()
-          required FieldValue? serverTimestamp}) = _$_ArticleDto;
+          {required String? id,
+          @JsonKey(name: 'source_id') required String sourceId,
+          required String title,
+          required String url,
+          @JsonKey(name: 'media_type') required String mediaType,
+          @ServerTimestampConverter() required FieldValue? serverTimestamp}) =
+      _$_ArticleDto;
   const _ArticleDto._() : super._();
 
   factory _ArticleDto.fromJson(Map<String, dynamic> json) =
@@ -281,7 +272,6 @@ abstract class _ArticleDto extends ArticleDto {
   String? get id;
   @override
   @JsonKey(name: 'source_id')
-  @ReferenceConverter()
   String get sourceId;
   @override
   String get title;

@@ -27,7 +27,7 @@ class ArticleSourceStatusRepository implements IArticleSourceStatusRepository {
       final userDocRef = await getIt<FirestoreHelper>().userDocument();
       final userArticleSourceStatuses = await _firestore
           .collection('user_article_source_statuses')
-          .where('user_id', isEqualTo: userDocRef)
+          .where('user_id', isEqualTo: userDocRef.id)
           .get();
       return right(
         userArticleSourceStatuses.docs
