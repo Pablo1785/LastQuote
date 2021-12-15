@@ -47,15 +47,60 @@ class DataSourceStatusRepository implements IDataSourceStatusRepository {
 
   @override
   Future<Either<DataSourceFailure, Unit>> create(
-      DataSourceStatus dataSourceStatus) {
-    // TODO: implement create
-    throw UnimplementedError();
+      DataSourceStatus dataSourceStatus) async {
+    try {
+      final dataSourceStatusDto = DataSourceStatusDto.fromDomain(
+        dataSourceStatus,
+      );
+
+      final dataSourceStatusDtoJson = dataSourceStatusDto.toJson();
+      await _firestore
+          .collection('user_data_source_statuses')
+          .doc(dataSourceStatusDto.id)
+          .set(
+            dataSourceStatusDtoJson,
+          );
+      return right(unit);
+    } on PlatformException catch (e, stacktrace) {
+      return _handleException<Unit>(e, stacktrace);
+    }
   }
 
   @override
   Future<Either<DataSourceFailure, Unit>> update(
-      DataSourceStatus dataSourceStatus) {
-    // TODO: implement update
-    throw UnimplementedError();
+      DataSourceStatus dataSourceStatus) async {
+    try {
+      final dataSourceStatusDto = DataSourceStatusDto.fromDomain(
+        dataSourceStatus,
+      );
+
+      final dataSourceStatusDtoJson = dataSourceStatusDto.toJson();
+      await _firestore
+          .collection('user_data_source_statuses')
+          .doc(dataSourceStatusDto.id)
+          .update(
+            dataSourceStatusDtoJson,
+          );
+      return right(unit);
+    } on PlatformException catch (e, stacktrace) {
+      return _handleException<Unit>(e, stacktrace);
+    }
+  }
+
+  Either<DataSourceFailure, T> _handleException<T>(
+    Object exception,
+    StackTrace stackTrace,
+  ) {
+    if (exception is FirebaseException &&
+        exception.message!.contains('permission')) {
+      return left(const DataSourceFailure.insufficientPermissions());
+    } else if (exception is FirebaseException &&
+        exception.message!.contains('found')) {
+      return left(const DataSourceFailure.documentNotFound());
+    } else {
+      print(exception.toString());
+      print(stackTrace.toString());
+      return left(const DataSourceFailure.unexpected());
+    }
   }
 }

@@ -11,15 +11,24 @@ class DataSourceStatusPickerState with _$DataSourceStatusPickerState {
   const factory DataSourceStatusPickerState.loadFailureSources(
     DataSourceFailure dataSourceFailure,
   ) = _LoadFailureSources;
-  const factory DataSourceStatusPickerState.loadInProgressStatuses() =
-      _LoadInProgressStatuses;
+  const factory DataSourceStatusPickerState.loadInProgressStatuses(
+    KtList<DataSource> dataSources,
+  ) = _LoadInProgressStatuses;
   const factory DataSourceStatusPickerState.loadSuccessAll(
     KtList<DataSourceStatus> dataSourceStatuses,
     KtList<DataSource> dataSources,
   ) = _LoadSuccessAll;
   const factory DataSourceStatusPickerState.loadFailureStatuses(
+    KtList<DataSource> dataSources,
     DataSourceFailure dataSourceFailure,
   ) = _LoadFailureStatuses;
-  const factory DataSourceStatusPickerState.updateInProgressStatuses() =
-      _UpdateInProgressStatuses;
+  const factory DataSourceStatusPickerState.updateInProgressStatuses(
+    KtList<DataSource> dataSources,
+    KtList<DataSourceStatus> dataSourceStatuses,
+  ) = _UpdateInProgressStatuses;
+  const factory DataSourceStatusPickerState.updateFailureStatuses(
+    KtList<DataSource> dataSources,
+    KtList<DataSourceStatus> dataSourceStatuses,
+    DataSourceFailure dataSourceFailure,
+  ) = _UpdateFailureStatuses;
 }

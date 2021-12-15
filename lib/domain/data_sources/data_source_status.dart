@@ -20,8 +20,8 @@ abstract class DataSourceStatus with _$DataSourceStatus {
     final sourceId = UniqueId();
     final junctionId = JunctionUniqueId(
       [
-        userId.getOrCrash(),
         sourceId.getOrCrash(),
+        userId.getOrCrash(),
       ],
     );
     return DataSourceStatus(

@@ -11,4 +11,5 @@ abstract class DataSourceFailure with _$DataSourceFailure {
   const factory DataSourceFailure.sourceDisabled(DataSource dataSource) =
       _SourceDisabled;
   const factory DataSourceFailure.noActiveSource() = _NoActiveSource;
+  const factory DataSourceFailure.documentNotFound() = _DocumentNotFound;
 }

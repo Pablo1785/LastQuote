@@ -37,44 +37,81 @@ class DataSourceStatusPickerBloc
         },
         dataSourcesReceived: (e) async {
           emit(
-            e.failureOrDataSources.fold(
+            await e.failureOrDataSources.fold(
               (failure) => DataSourceStatusPickerState.loadFailureSources(
                 failure,
               ),
-              (dataSources) => DataSourceStatusPickerState.loadSuccessSources(
-                dataSources,
-              ),
+              (dataSources) async {
+                add(
+                  DataSourceStatusPickerEvent.loadStartedStatuses(dataSources),
+                );
+                return DataSourceStatusPickerState.loadSuccessSources(
+                  dataSources,
+                );
+              },
+            ),
+          );
+        },
+        loadStartedStatuses: (e) async {
+          emit(
+            DataSourceStatusPickerState.loadInProgressStatuses(
+              e.dataSources,
             ),
           );
 
-          // if successfully loaded dataSources start loading their statuses
-          if (e.failureOrDataSources.isRight()) {
-            emit(
-              const DataSourceStatusPickerState.loadInProgressStatuses(),
-            );
+          final failureOrDataSourceStatuses =
+              await _iDataSourceStatusRepository.getForCurrentUser();
 
-            final failureOrDataSourceStatuses =
-                await _iDataSourceStatusRepository.getForCurrentUser();
+          add(
+            DataSourceStatusPickerEvent.dataSourceStatusesReceived(
+              e.dataSources,
+              failureOrDataSourceStatuses,
+            ),
+          );
+        },
+        dataSourceStatusesReceived: (e) {
+          e.failureOrDataSourceStatuses.fold(
+            (failure) => emit(
+              DataSourceStatusPickerState.loadFailureStatuses(
+                e.dataSources,
+                failure,
+              ),
+            ),
+            (dataSourceStatuses) => emit(
+              DataSourceStatusPickerState.loadSuccessAll(
+                dataSourceStatuses,
+                e.dataSources,
+              ),
+            ),
+          );
+        },
+        statusUpdated: (e) async {
+          emit(
+            DataSourceStatusPickerState.updateInProgressStatuses(
+              e.dataSources,
+              e.dataSourceStatuses,
+            ),
+          );
 
-            emit(
-              failureOrDataSourceStatuses.fold(
-                (failure) => DataSourceStatusPickerState.loadFailureStatuses(
+          final failureOrUnit = await _iDataSourceStatusRepository.update(
+            e.dataSourceStatus,
+          );
+
+          failureOrUnit.fold(
+            (failure) {
+              emit(
+                DataSourceStatusPickerState.updateFailureStatuses(
+                  e.dataSources,
+                  e.dataSourceStatuses,
                   failure,
                 ),
-                (dataSourceStatuses) =>
-                    DataSourceStatusPickerState.loadSuccessAll(
-                  dataSourceStatuses,
-                  e.failureOrDataSources.getOrElse(
-                    () => const KtList.empty(),
-                  ),
-                ),
-              ),
-            );
-          }
-        },
-        statusUpdated: (e) {
-          emit(
-            const DataSourceStatusPickerState.updateInProgressStatuses(),
+              );
+            },
+            (_) {
+              add(
+                DataSourceStatusPickerEvent.loadStartedStatuses(e.dataSources),
+              );
+            },
           );
         },
       );

@@ -34,20 +34,22 @@ class SettingsPage extends StatelessWidget {
             loadFailureSources: (failure) {
               FlushbarHelper.createError(
                 message: failure.dataSourceFailure.map(
-                  unexpected: (_) => 'Unexpected error',
-                  insufficientPermissions: (_) => 'Permission error',
-                  sourceDisabled: (_) => 'Source disabled',
-                  noActiveSource: (_) => 'No active source',
+                  unexpected: (_) => 'Source: Unexpected error',
+                  insufficientPermissions: (_) => 'Source: Permission error',
+                  sourceDisabled: (_) => 'Source: Source disabled',
+                  noActiveSource: (_) => 'Source: No active source',
+                  documentNotFound: (_) => 'Source: Document not found error',
                 ),
               ).show(context);
             },
             loadFailureStatuses: (failure) {
               FlushbarHelper.createError(
                 message: failure.dataSourceFailure.map(
-                  unexpected: (_) => 'Unexpected error',
-                  insufficientPermissions: (_) => 'Permission error',
-                  sourceDisabled: (_) => 'Source disabled',
-                  noActiveSource: (_) => 'No active source',
+                  unexpected: (_) => 'Status: Unexpected error',
+                  insufficientPermissions: (_) => 'Status: Permission error',
+                  sourceDisabled: (_) => 'Status: Source disabled',
+                  noActiveSource: (_) => 'Status: No active source',
+                  documentNotFound: (_) => 'Status: Document not found error',
                 ),
               ).show(context);
             },
@@ -62,15 +64,63 @@ class SettingsPage extends StatelessWidget {
               return state.map(
                 initial: (_) => Container(),
                 loadInProgressSources: (_) => const ShimmeringListWidget(),
-                loadSuccessSources: (_) => const ShimmeringListWidget(),
-                loadFailureSources: (_) => const ShimmeringListWidget(),
-                loadInProgressStatuses: (_) => const ShimmeringListWidget(),
+                loadSuccessSources: (loadSuccessState) =>
+                    DataSourceLoadSuccessWidget(
+                  dataSources: loadSuccessState.dataSources,
+                ),
+                loadFailureSources: (_) => const Center(
+                  child: Icon(
+                    Icons.error_outline,
+                    size: 72,
+                  ),
+                ),
+                loadInProgressStatuses: (loadInProgressStateStatuses) =>
+                    DataSourceLoadSuccessWidget(
+                  dataSources: loadInProgressStateStatuses.dataSources,
+                ),
                 loadSuccessAll: (loadSuccessState) =>
                     DataSourceStatusLoadSuccessWidget(
                   dataSources: loadSuccessState.dataSources,
                   dataSourceStatuses: loadSuccessState.dataSourceStatuses,
                 ),
-                loadFailureStatuses: (_) => const ShimmeringListWidget(),
+                loadFailureStatuses: (loadFailureStateStatuses) {
+                  FlushbarHelper.createError(
+                    message: loadFailureStateStatuses.dataSourceFailure.map(
+                      unexpected: (_) => 'Status: Unexpected error',
+                      insufficientPermissions: (_) =>
+                          'Status: Permission error',
+                      sourceDisabled: (_) => 'Status: Source disabled',
+                      noActiveSource: (_) => 'Status: No active source',
+                      documentNotFound: (_) =>
+                          'Status: Document not found error',
+                    ),
+                  ).show(context);
+                  return DataSourceLoadSuccessWidget(
+                    dataSources: loadFailureStateStatuses.dataSources,
+                  );
+                },
+                updateFailureStatuses: (updateFailureState) {
+                  FlushbarHelper.createError(
+                    message: updateFailureState.dataSourceFailure.map(
+                      unexpected: (_) => 'Status: Unexpected error',
+                      insufficientPermissions: (_) =>
+                          'Status: Permission error',
+                      sourceDisabled: (_) => 'Status: Source disabled',
+                      noActiveSource: (_) => 'Status: No active source',
+                      documentNotFound: (_) =>
+                          'Status: Document not found error',
+                    ),
+                  ).show(context);
+                  return DataSourceStatusLoadSuccessWidget(
+                    dataSources: updateFailureState.dataSources,
+                    dataSourceStatuses: updateFailureState.dataSourceStatuses,
+                  );
+                },
+                updateInProgressStatuses: (updateInProgressState) =>
+                    DataSourceStatusLoadSuccessWidget(
+                  dataSources: updateInProgressState.dataSources,
+                  dataSourceStatuses: updateInProgressState.dataSourceStatuses,
+                ),
               );
             },
           ),
@@ -81,11 +131,100 @@ class SettingsPage extends StatelessWidget {
 }
 
 class DataSourceLoadSuccessWidget extends StatelessWidget {
-  const DataSourceLoadSuccessWidget({Key? key}) : super(key: key);
+  const DataSourceLoadSuccessWidget({
+    Key? key,
+    required this.dataSources,
+  }) : super(key: key);
+
+  final KtList<DataSource> dataSources;
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return ListView.builder(
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        final dataSource = dataSources[index];
+        if (dataSource.failureOption.isSome()) {
+          return Container(
+            color: Colors.red,
+            width: 100,
+            height: 100,
+          );
+        } else {
+          return Card(
+            child: ListTile(
+              leading: IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.check_box_outline_blank_outlined,
+                ),
+              ),
+              title: Text(
+                dataSource.name.getOrCrash(),
+              ),
+              subtitle: Text(
+                dataSource.url.getOrCrash(),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              onTap: () async {
+                await launch(dataSource.url.getOrCrash());
+              },
+            ),
+          );
+        }
+      },
+      itemCount: dataSources.size,
+    );
+  }
+}
+
+class DataSourceStatusLoadInProgressWidget extends StatelessWidget {
+  const DataSourceStatusLoadInProgressWidget({
+    Key? key,
+    required this.dataSources,
+  }) : super(key: key);
+
+  final KtList<DataSource> dataSources;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        final dataSource = dataSources[index];
+        if (dataSource.failureOption.isSome()) {
+          return Container(
+            color: Colors.red,
+            width: 100,
+            height: 100,
+          );
+        } else {
+          return Card(
+            child: ListTile(
+              leading: IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.check_box_outline_blank_outlined,
+                ),
+              ),
+              title: Text(
+                dataSource.name.getOrCrash(),
+              ),
+              subtitle: Text(
+                dataSource.url.getOrCrash(),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              onTap: () async {
+                await launch(dataSource.url.getOrCrash());
+              },
+            ),
+          );
+        }
+      },
+      itemCount: dataSources.size,
+    );
   }
 }
 
@@ -125,11 +264,23 @@ class DataSourceStatusLoadSuccessWidget extends HookWidget {
               DataSourceStatus.empty();
           return Card(
             child: ListTile(
-              leading: Checkbox(
-                value: dataSourceStatus.isEnabled,
-                onChanged: (value) {
-                  checked.value[index] = value ?? false;
+              leading: IconButton(
+                onPressed: () {
+                  context.read<DataSourceStatusPickerBloc>().add(
+                        DataSourceStatusPickerEvent.statusUpdated(
+                          dataSources,
+                          dataSourceStatuses,
+                          dataSourceStatus.copyWith(
+                            isEnabled: !dataSourceStatus.isEnabled,
+                          ),
+                        ),
+                      );
                 },
+                icon: Icon(
+                  dataSourceStatus.isEnabled
+                      ? Icons.check_box
+                      : Icons.check_box_outline_blank_outlined,
+                ),
               ),
               title: Text(
                 dataSource.name.getOrCrash(),
