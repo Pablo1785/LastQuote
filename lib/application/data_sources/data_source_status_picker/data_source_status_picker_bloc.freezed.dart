@@ -28,11 +28,9 @@ class _$DataSourceStatusPickerEventTearOff {
     );
   }
 
-  _UserDataSourceStatusesReceived userDataSourceStatusesReceived(
-      Either<DataSourceFailure, KtList<DataSourceStatus>>
-          failureOrDataSourceStatuses) {
-    return _UserDataSourceStatusesReceived(
-      failureOrDataSourceStatuses,
+  _StatusUpdated statusUpdated(DataSourceStatus dataSourceStatus) {
+    return _StatusUpdated(
+      dataSourceStatus,
     );
   }
 }
@@ -48,10 +46,7 @@ mixin _$DataSourceStatusPickerEvent {
     required TResult Function(
             Either<DataSourceFailure, KtList<DataSource>> failureOrDataSources)
         dataSourcesReceived,
-    required TResult Function(
-            Either<DataSourceFailure, KtList<DataSourceStatus>>
-                failureOrDataSourceStatuses)
-        userDataSourceStatusesReceived,
+    required TResult Function(DataSourceStatus dataSourceStatus) statusUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,10 +55,7 @@ mixin _$DataSourceStatusPickerEvent {
     TResult Function(
             Either<DataSourceFailure, KtList<DataSource>> failureOrDataSources)?
         dataSourcesReceived,
-    TResult Function(
-            Either<DataSourceFailure, KtList<DataSourceStatus>>
-                failureOrDataSourceStatuses)?
-        userDataSourceStatusesReceived,
+    TResult Function(DataSourceStatus dataSourceStatus)? statusUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -72,10 +64,7 @@ mixin _$DataSourceStatusPickerEvent {
     TResult Function(
             Either<DataSourceFailure, KtList<DataSource>> failureOrDataSources)?
         dataSourcesReceived,
-    TResult Function(
-            Either<DataSourceFailure, KtList<DataSourceStatus>>
-                failureOrDataSourceStatuses)?
-        userDataSourceStatusesReceived,
+    TResult Function(DataSourceStatus dataSourceStatus)? statusUpdated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -83,24 +72,21 @@ mixin _$DataSourceStatusPickerEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialLoadStarted value) initialLoadStarted,
     required TResult Function(_DataSourcesReceived value) dataSourcesReceived,
-    required TResult Function(_UserDataSourceStatusesReceived value)
-        userDataSourceStatusesReceived,
+    required TResult Function(_StatusUpdated value) statusUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_InitialLoadStarted value)? initialLoadStarted,
     TResult Function(_DataSourcesReceived value)? dataSourcesReceived,
-    TResult Function(_UserDataSourceStatusesReceived value)?
-        userDataSourceStatusesReceived,
+    TResult Function(_StatusUpdated value)? statusUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialLoadStarted value)? initialLoadStarted,
     TResult Function(_DataSourcesReceived value)? dataSourcesReceived,
-    TResult Function(_UserDataSourceStatusesReceived value)?
-        userDataSourceStatusesReceived,
+    TResult Function(_StatusUpdated value)? statusUpdated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -169,10 +155,7 @@ class _$_InitialLoadStarted implements _InitialLoadStarted {
     required TResult Function(
             Either<DataSourceFailure, KtList<DataSource>> failureOrDataSources)
         dataSourcesReceived,
-    required TResult Function(
-            Either<DataSourceFailure, KtList<DataSourceStatus>>
-                failureOrDataSourceStatuses)
-        userDataSourceStatusesReceived,
+    required TResult Function(DataSourceStatus dataSourceStatus) statusUpdated,
   }) {
     return initialLoadStarted();
   }
@@ -184,10 +167,7 @@ class _$_InitialLoadStarted implements _InitialLoadStarted {
     TResult Function(
             Either<DataSourceFailure, KtList<DataSource>> failureOrDataSources)?
         dataSourcesReceived,
-    TResult Function(
-            Either<DataSourceFailure, KtList<DataSourceStatus>>
-                failureOrDataSourceStatuses)?
-        userDataSourceStatusesReceived,
+    TResult Function(DataSourceStatus dataSourceStatus)? statusUpdated,
   }) {
     return initialLoadStarted?.call();
   }
@@ -199,10 +179,7 @@ class _$_InitialLoadStarted implements _InitialLoadStarted {
     TResult Function(
             Either<DataSourceFailure, KtList<DataSource>> failureOrDataSources)?
         dataSourcesReceived,
-    TResult Function(
-            Either<DataSourceFailure, KtList<DataSourceStatus>>
-                failureOrDataSourceStatuses)?
-        userDataSourceStatusesReceived,
+    TResult Function(DataSourceStatus dataSourceStatus)? statusUpdated,
     required TResult orElse(),
   }) {
     if (initialLoadStarted != null) {
@@ -216,8 +193,7 @@ class _$_InitialLoadStarted implements _InitialLoadStarted {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialLoadStarted value) initialLoadStarted,
     required TResult Function(_DataSourcesReceived value) dataSourcesReceived,
-    required TResult Function(_UserDataSourceStatusesReceived value)
-        userDataSourceStatusesReceived,
+    required TResult Function(_StatusUpdated value) statusUpdated,
   }) {
     return initialLoadStarted(this);
   }
@@ -227,8 +203,7 @@ class _$_InitialLoadStarted implements _InitialLoadStarted {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_InitialLoadStarted value)? initialLoadStarted,
     TResult Function(_DataSourcesReceived value)? dataSourcesReceived,
-    TResult Function(_UserDataSourceStatusesReceived value)?
-        userDataSourceStatusesReceived,
+    TResult Function(_StatusUpdated value)? statusUpdated,
   }) {
     return initialLoadStarted?.call(this);
   }
@@ -238,8 +213,7 @@ class _$_InitialLoadStarted implements _InitialLoadStarted {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialLoadStarted value)? initialLoadStarted,
     TResult Function(_DataSourcesReceived value)? dataSourcesReceived,
-    TResult Function(_UserDataSourceStatusesReceived value)?
-        userDataSourceStatusesReceived,
+    TResult Function(_StatusUpdated value)? statusUpdated,
     required TResult orElse(),
   }) {
     if (initialLoadStarted != null) {
@@ -324,10 +298,7 @@ class _$_DataSourcesReceived implements _DataSourcesReceived {
     required TResult Function(
             Either<DataSourceFailure, KtList<DataSource>> failureOrDataSources)
         dataSourcesReceived,
-    required TResult Function(
-            Either<DataSourceFailure, KtList<DataSourceStatus>>
-                failureOrDataSourceStatuses)
-        userDataSourceStatusesReceived,
+    required TResult Function(DataSourceStatus dataSourceStatus) statusUpdated,
   }) {
     return dataSourcesReceived(failureOrDataSources);
   }
@@ -339,10 +310,7 @@ class _$_DataSourcesReceived implements _DataSourcesReceived {
     TResult Function(
             Either<DataSourceFailure, KtList<DataSource>> failureOrDataSources)?
         dataSourcesReceived,
-    TResult Function(
-            Either<DataSourceFailure, KtList<DataSourceStatus>>
-                failureOrDataSourceStatuses)?
-        userDataSourceStatusesReceived,
+    TResult Function(DataSourceStatus dataSourceStatus)? statusUpdated,
   }) {
     return dataSourcesReceived?.call(failureOrDataSources);
   }
@@ -354,10 +322,7 @@ class _$_DataSourcesReceived implements _DataSourcesReceived {
     TResult Function(
             Either<DataSourceFailure, KtList<DataSource>> failureOrDataSources)?
         dataSourcesReceived,
-    TResult Function(
-            Either<DataSourceFailure, KtList<DataSourceStatus>>
-                failureOrDataSourceStatuses)?
-        userDataSourceStatusesReceived,
+    TResult Function(DataSourceStatus dataSourceStatus)? statusUpdated,
     required TResult orElse(),
   }) {
     if (dataSourcesReceived != null) {
@@ -371,8 +336,7 @@ class _$_DataSourcesReceived implements _DataSourcesReceived {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialLoadStarted value) initialLoadStarted,
     required TResult Function(_DataSourcesReceived value) dataSourcesReceived,
-    required TResult Function(_UserDataSourceStatusesReceived value)
-        userDataSourceStatusesReceived,
+    required TResult Function(_StatusUpdated value) statusUpdated,
   }) {
     return dataSourcesReceived(this);
   }
@@ -382,8 +346,7 @@ class _$_DataSourcesReceived implements _DataSourcesReceived {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_InitialLoadStarted value)? initialLoadStarted,
     TResult Function(_DataSourcesReceived value)? dataSourcesReceived,
-    TResult Function(_UserDataSourceStatusesReceived value)?
-        userDataSourceStatusesReceived,
+    TResult Function(_StatusUpdated value)? statusUpdated,
   }) {
     return dataSourcesReceived?.call(this);
   }
@@ -393,8 +356,7 @@ class _$_DataSourcesReceived implements _DataSourcesReceived {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialLoadStarted value)? initialLoadStarted,
     TResult Function(_DataSourcesReceived value)? dataSourcesReceived,
-    TResult Function(_UserDataSourceStatusesReceived value)?
-        userDataSourceStatusesReceived,
+    TResult Function(_StatusUpdated value)? statusUpdated,
     required TResult orElse(),
   }) {
     if (dataSourcesReceived != null) {
@@ -416,76 +378,75 @@ abstract class _DataSourcesReceived implements DataSourceStatusPickerEvent {
 }
 
 /// @nodoc
-abstract class _$UserDataSourceStatusesReceivedCopyWith<$Res> {
-  factory _$UserDataSourceStatusesReceivedCopyWith(
-          _UserDataSourceStatusesReceived value,
-          $Res Function(_UserDataSourceStatusesReceived) then) =
-      __$UserDataSourceStatusesReceivedCopyWithImpl<$Res>;
-  $Res call(
-      {Either<DataSourceFailure, KtList<DataSourceStatus>>
-          failureOrDataSourceStatuses});
+abstract class _$StatusUpdatedCopyWith<$Res> {
+  factory _$StatusUpdatedCopyWith(
+          _StatusUpdated value, $Res Function(_StatusUpdated) then) =
+      __$StatusUpdatedCopyWithImpl<$Res>;
+  $Res call({DataSourceStatus dataSourceStatus});
+
+  $DataSourceStatusCopyWith<$Res> get dataSourceStatus;
 }
 
 /// @nodoc
-class __$UserDataSourceStatusesReceivedCopyWithImpl<$Res>
+class __$StatusUpdatedCopyWithImpl<$Res>
     extends _$DataSourceStatusPickerEventCopyWithImpl<$Res>
-    implements _$UserDataSourceStatusesReceivedCopyWith<$Res> {
-  __$UserDataSourceStatusesReceivedCopyWithImpl(
-      _UserDataSourceStatusesReceived _value,
-      $Res Function(_UserDataSourceStatusesReceived) _then)
-      : super(_value, (v) => _then(v as _UserDataSourceStatusesReceived));
+    implements _$StatusUpdatedCopyWith<$Res> {
+  __$StatusUpdatedCopyWithImpl(
+      _StatusUpdated _value, $Res Function(_StatusUpdated) _then)
+      : super(_value, (v) => _then(v as _StatusUpdated));
 
   @override
-  _UserDataSourceStatusesReceived get _value =>
-      super._value as _UserDataSourceStatusesReceived;
+  _StatusUpdated get _value => super._value as _StatusUpdated;
 
   @override
   $Res call({
-    Object? failureOrDataSourceStatuses = freezed,
+    Object? dataSourceStatus = freezed,
   }) {
-    return _then(_UserDataSourceStatusesReceived(
-      failureOrDataSourceStatuses == freezed
-          ? _value.failureOrDataSourceStatuses
-          : failureOrDataSourceStatuses // ignore: cast_nullable_to_non_nullable
-              as Either<DataSourceFailure, KtList<DataSourceStatus>>,
+    return _then(_StatusUpdated(
+      dataSourceStatus == freezed
+          ? _value.dataSourceStatus
+          : dataSourceStatus // ignore: cast_nullable_to_non_nullable
+              as DataSourceStatus,
     ));
+  }
+
+  @override
+  $DataSourceStatusCopyWith<$Res> get dataSourceStatus {
+    return $DataSourceStatusCopyWith<$Res>(_value.dataSourceStatus, (value) {
+      return _then(_value.copyWith(dataSourceStatus: value));
+    });
   }
 }
 
 /// @nodoc
 
-class _$_UserDataSourceStatusesReceived
-    implements _UserDataSourceStatusesReceived {
-  const _$_UserDataSourceStatusesReceived(this.failureOrDataSourceStatuses);
+class _$_StatusUpdated implements _StatusUpdated {
+  const _$_StatusUpdated(this.dataSourceStatus);
 
   @override
-  final Either<DataSourceFailure, KtList<DataSourceStatus>>
-      failureOrDataSourceStatuses;
+  final DataSourceStatus dataSourceStatus;
 
   @override
   String toString() {
-    return 'DataSourceStatusPickerEvent.userDataSourceStatusesReceived(failureOrDataSourceStatuses: $failureOrDataSourceStatuses)';
+    return 'DataSourceStatusPickerEvent.statusUpdated(dataSourceStatus: $dataSourceStatus)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _UserDataSourceStatusesReceived &&
-            (identical(other.failureOrDataSourceStatuses,
-                    failureOrDataSourceStatuses) ||
-                other.failureOrDataSourceStatuses ==
-                    failureOrDataSourceStatuses));
+            other is _StatusUpdated &&
+            (identical(other.dataSourceStatus, dataSourceStatus) ||
+                other.dataSourceStatus == dataSourceStatus));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, failureOrDataSourceStatuses);
+  int get hashCode => Object.hash(runtimeType, dataSourceStatus);
 
   @JsonKey(ignore: true)
   @override
-  _$UserDataSourceStatusesReceivedCopyWith<_UserDataSourceStatusesReceived>
-      get copyWith => __$UserDataSourceStatusesReceivedCopyWithImpl<
-          _UserDataSourceStatusesReceived>(this, _$identity);
+  _$StatusUpdatedCopyWith<_StatusUpdated> get copyWith =>
+      __$StatusUpdatedCopyWithImpl<_StatusUpdated>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -494,12 +455,9 @@ class _$_UserDataSourceStatusesReceived
     required TResult Function(
             Either<DataSourceFailure, KtList<DataSource>> failureOrDataSources)
         dataSourcesReceived,
-    required TResult Function(
-            Either<DataSourceFailure, KtList<DataSourceStatus>>
-                failureOrDataSourceStatuses)
-        userDataSourceStatusesReceived,
+    required TResult Function(DataSourceStatus dataSourceStatus) statusUpdated,
   }) {
-    return userDataSourceStatusesReceived(failureOrDataSourceStatuses);
+    return statusUpdated(dataSourceStatus);
   }
 
   @override
@@ -509,12 +467,9 @@ class _$_UserDataSourceStatusesReceived
     TResult Function(
             Either<DataSourceFailure, KtList<DataSource>> failureOrDataSources)?
         dataSourcesReceived,
-    TResult Function(
-            Either<DataSourceFailure, KtList<DataSourceStatus>>
-                failureOrDataSourceStatuses)?
-        userDataSourceStatusesReceived,
+    TResult Function(DataSourceStatus dataSourceStatus)? statusUpdated,
   }) {
-    return userDataSourceStatusesReceived?.call(failureOrDataSourceStatuses);
+    return statusUpdated?.call(dataSourceStatus);
   }
 
   @override
@@ -524,14 +479,11 @@ class _$_UserDataSourceStatusesReceived
     TResult Function(
             Either<DataSourceFailure, KtList<DataSource>> failureOrDataSources)?
         dataSourcesReceived,
-    TResult Function(
-            Either<DataSourceFailure, KtList<DataSourceStatus>>
-                failureOrDataSourceStatuses)?
-        userDataSourceStatusesReceived,
+    TResult Function(DataSourceStatus dataSourceStatus)? statusUpdated,
     required TResult orElse(),
   }) {
-    if (userDataSourceStatusesReceived != null) {
-      return userDataSourceStatusesReceived(failureOrDataSourceStatuses);
+    if (statusUpdated != null) {
+      return statusUpdated(dataSourceStatus);
     }
     return orElse();
   }
@@ -541,10 +493,9 @@ class _$_UserDataSourceStatusesReceived
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialLoadStarted value) initialLoadStarted,
     required TResult Function(_DataSourcesReceived value) dataSourcesReceived,
-    required TResult Function(_UserDataSourceStatusesReceived value)
-        userDataSourceStatusesReceived,
+    required TResult Function(_StatusUpdated value) statusUpdated,
   }) {
-    return userDataSourceStatusesReceived(this);
+    return statusUpdated(this);
   }
 
   @override
@@ -552,10 +503,9 @@ class _$_UserDataSourceStatusesReceived
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_InitialLoadStarted value)? initialLoadStarted,
     TResult Function(_DataSourcesReceived value)? dataSourcesReceived,
-    TResult Function(_UserDataSourceStatusesReceived value)?
-        userDataSourceStatusesReceived,
+    TResult Function(_StatusUpdated value)? statusUpdated,
   }) {
-    return userDataSourceStatusesReceived?.call(this);
+    return statusUpdated?.call(this);
   }
 
   @override
@@ -563,28 +513,24 @@ class _$_UserDataSourceStatusesReceived
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialLoadStarted value)? initialLoadStarted,
     TResult Function(_DataSourcesReceived value)? dataSourcesReceived,
-    TResult Function(_UserDataSourceStatusesReceived value)?
-        userDataSourceStatusesReceived,
+    TResult Function(_StatusUpdated value)? statusUpdated,
     required TResult orElse(),
   }) {
-    if (userDataSourceStatusesReceived != null) {
-      return userDataSourceStatusesReceived(this);
+    if (statusUpdated != null) {
+      return statusUpdated(this);
     }
     return orElse();
   }
 }
 
-abstract class _UserDataSourceStatusesReceived
-    implements DataSourceStatusPickerEvent {
-  const factory _UserDataSourceStatusesReceived(
-      Either<DataSourceFailure, KtList<DataSourceStatus>>
-          failureOrDataSourceStatuses) = _$_UserDataSourceStatusesReceived;
+abstract class _StatusUpdated implements DataSourceStatusPickerEvent {
+  const factory _StatusUpdated(DataSourceStatus dataSourceStatus) =
+      _$_StatusUpdated;
 
-  Either<DataSourceFailure, KtList<DataSourceStatus>>
-      get failureOrDataSourceStatuses;
+  DataSourceStatus get dataSourceStatus;
   @JsonKey(ignore: true)
-  _$UserDataSourceStatusesReceivedCopyWith<_UserDataSourceStatusesReceived>
-      get copyWith => throw _privateConstructorUsedError;
+  _$StatusUpdatedCopyWith<_StatusUpdated> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -629,6 +575,10 @@ class _$DataSourceStatusPickerStateTearOff {
       dataSourceFailure,
     );
   }
+
+  _UpdateInProgressStatuses updateInProgressStatuses() {
+    return const _UpdateInProgressStatuses();
+  }
 }
 
 /// @nodoc
@@ -650,6 +600,7 @@ mixin _$DataSourceStatusPickerState {
         loadSuccessAll,
     required TResult Function(DataSourceFailure dataSourceFailure)
         loadFailureStatuses,
+    required TResult Function() updateInProgressStatuses,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -663,6 +614,7 @@ mixin _$DataSourceStatusPickerState {
             KtList<DataSource> dataSources)?
         loadSuccessAll,
     TResult Function(DataSourceFailure dataSourceFailure)? loadFailureStatuses,
+    TResult Function()? updateInProgressStatuses,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -676,6 +628,7 @@ mixin _$DataSourceStatusPickerState {
             KtList<DataSource> dataSources)?
         loadSuccessAll,
     TResult Function(DataSourceFailure dataSourceFailure)? loadFailureStatuses,
+    TResult Function()? updateInProgressStatuses,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -690,6 +643,8 @@ mixin _$DataSourceStatusPickerState {
         loadInProgressStatuses,
     required TResult Function(_LoadSuccessAll value) loadSuccessAll,
     required TResult Function(_LoadFailureStatuses value) loadFailureStatuses,
+    required TResult Function(_UpdateInProgressStatuses value)
+        updateInProgressStatuses,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -701,6 +656,7 @@ mixin _$DataSourceStatusPickerState {
     TResult Function(_LoadInProgressStatuses value)? loadInProgressStatuses,
     TResult Function(_LoadSuccessAll value)? loadSuccessAll,
     TResult Function(_LoadFailureStatuses value)? loadFailureStatuses,
+    TResult Function(_UpdateInProgressStatuses value)? updateInProgressStatuses,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -712,6 +668,7 @@ mixin _$DataSourceStatusPickerState {
     TResult Function(_LoadInProgressStatuses value)? loadInProgressStatuses,
     TResult Function(_LoadSuccessAll value)? loadSuccessAll,
     TResult Function(_LoadFailureStatuses value)? loadFailureStatuses,
+    TResult Function(_UpdateInProgressStatuses value)? updateInProgressStatuses,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -786,6 +743,7 @@ class _$_Initial implements _Initial {
         loadSuccessAll,
     required TResult Function(DataSourceFailure dataSourceFailure)
         loadFailureStatuses,
+    required TResult Function() updateInProgressStatuses,
   }) {
     return initial();
   }
@@ -802,6 +760,7 @@ class _$_Initial implements _Initial {
             KtList<DataSource> dataSources)?
         loadSuccessAll,
     TResult Function(DataSourceFailure dataSourceFailure)? loadFailureStatuses,
+    TResult Function()? updateInProgressStatuses,
   }) {
     return initial?.call();
   }
@@ -818,6 +777,7 @@ class _$_Initial implements _Initial {
             KtList<DataSource> dataSources)?
         loadSuccessAll,
     TResult Function(DataSourceFailure dataSourceFailure)? loadFailureStatuses,
+    TResult Function()? updateInProgressStatuses,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -838,6 +798,8 @@ class _$_Initial implements _Initial {
         loadInProgressStatuses,
     required TResult Function(_LoadSuccessAll value) loadSuccessAll,
     required TResult Function(_LoadFailureStatuses value) loadFailureStatuses,
+    required TResult Function(_UpdateInProgressStatuses value)
+        updateInProgressStatuses,
   }) {
     return initial(this);
   }
@@ -852,6 +814,7 @@ class _$_Initial implements _Initial {
     TResult Function(_LoadInProgressStatuses value)? loadInProgressStatuses,
     TResult Function(_LoadSuccessAll value)? loadSuccessAll,
     TResult Function(_LoadFailureStatuses value)? loadFailureStatuses,
+    TResult Function(_UpdateInProgressStatuses value)? updateInProgressStatuses,
   }) {
     return initial?.call(this);
   }
@@ -866,6 +829,7 @@ class _$_Initial implements _Initial {
     TResult Function(_LoadInProgressStatuses value)? loadInProgressStatuses,
     TResult Function(_LoadSuccessAll value)? loadSuccessAll,
     TResult Function(_LoadFailureStatuses value)? loadFailureStatuses,
+    TResult Function(_UpdateInProgressStatuses value)? updateInProgressStatuses,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -932,6 +896,7 @@ class _$_LoadInProgressSources implements _LoadInProgressSources {
         loadSuccessAll,
     required TResult Function(DataSourceFailure dataSourceFailure)
         loadFailureStatuses,
+    required TResult Function() updateInProgressStatuses,
   }) {
     return loadInProgressSources();
   }
@@ -948,6 +913,7 @@ class _$_LoadInProgressSources implements _LoadInProgressSources {
             KtList<DataSource> dataSources)?
         loadSuccessAll,
     TResult Function(DataSourceFailure dataSourceFailure)? loadFailureStatuses,
+    TResult Function()? updateInProgressStatuses,
   }) {
     return loadInProgressSources?.call();
   }
@@ -964,6 +930,7 @@ class _$_LoadInProgressSources implements _LoadInProgressSources {
             KtList<DataSource> dataSources)?
         loadSuccessAll,
     TResult Function(DataSourceFailure dataSourceFailure)? loadFailureStatuses,
+    TResult Function()? updateInProgressStatuses,
     required TResult orElse(),
   }) {
     if (loadInProgressSources != null) {
@@ -984,6 +951,8 @@ class _$_LoadInProgressSources implements _LoadInProgressSources {
         loadInProgressStatuses,
     required TResult Function(_LoadSuccessAll value) loadSuccessAll,
     required TResult Function(_LoadFailureStatuses value) loadFailureStatuses,
+    required TResult Function(_UpdateInProgressStatuses value)
+        updateInProgressStatuses,
   }) {
     return loadInProgressSources(this);
   }
@@ -998,6 +967,7 @@ class _$_LoadInProgressSources implements _LoadInProgressSources {
     TResult Function(_LoadInProgressStatuses value)? loadInProgressStatuses,
     TResult Function(_LoadSuccessAll value)? loadSuccessAll,
     TResult Function(_LoadFailureStatuses value)? loadFailureStatuses,
+    TResult Function(_UpdateInProgressStatuses value)? updateInProgressStatuses,
   }) {
     return loadInProgressSources?.call(this);
   }
@@ -1012,6 +982,7 @@ class _$_LoadInProgressSources implements _LoadInProgressSources {
     TResult Function(_LoadInProgressStatuses value)? loadInProgressStatuses,
     TResult Function(_LoadSuccessAll value)? loadSuccessAll,
     TResult Function(_LoadFailureStatuses value)? loadFailureStatuses,
+    TResult Function(_UpdateInProgressStatuses value)? updateInProgressStatuses,
     required TResult orElse(),
   }) {
     if (loadInProgressSources != null) {
@@ -1102,6 +1073,7 @@ class _$_LoadSuccessSources implements _LoadSuccessSources {
         loadSuccessAll,
     required TResult Function(DataSourceFailure dataSourceFailure)
         loadFailureStatuses,
+    required TResult Function() updateInProgressStatuses,
   }) {
     return loadSuccessSources(dataSources);
   }
@@ -1118,6 +1090,7 @@ class _$_LoadSuccessSources implements _LoadSuccessSources {
             KtList<DataSource> dataSources)?
         loadSuccessAll,
     TResult Function(DataSourceFailure dataSourceFailure)? loadFailureStatuses,
+    TResult Function()? updateInProgressStatuses,
   }) {
     return loadSuccessSources?.call(dataSources);
   }
@@ -1134,6 +1107,7 @@ class _$_LoadSuccessSources implements _LoadSuccessSources {
             KtList<DataSource> dataSources)?
         loadSuccessAll,
     TResult Function(DataSourceFailure dataSourceFailure)? loadFailureStatuses,
+    TResult Function()? updateInProgressStatuses,
     required TResult orElse(),
   }) {
     if (loadSuccessSources != null) {
@@ -1154,6 +1128,8 @@ class _$_LoadSuccessSources implements _LoadSuccessSources {
         loadInProgressStatuses,
     required TResult Function(_LoadSuccessAll value) loadSuccessAll,
     required TResult Function(_LoadFailureStatuses value) loadFailureStatuses,
+    required TResult Function(_UpdateInProgressStatuses value)
+        updateInProgressStatuses,
   }) {
     return loadSuccessSources(this);
   }
@@ -1168,6 +1144,7 @@ class _$_LoadSuccessSources implements _LoadSuccessSources {
     TResult Function(_LoadInProgressStatuses value)? loadInProgressStatuses,
     TResult Function(_LoadSuccessAll value)? loadSuccessAll,
     TResult Function(_LoadFailureStatuses value)? loadFailureStatuses,
+    TResult Function(_UpdateInProgressStatuses value)? updateInProgressStatuses,
   }) {
     return loadSuccessSources?.call(this);
   }
@@ -1182,6 +1159,7 @@ class _$_LoadSuccessSources implements _LoadSuccessSources {
     TResult Function(_LoadInProgressStatuses value)? loadInProgressStatuses,
     TResult Function(_LoadSuccessAll value)? loadSuccessAll,
     TResult Function(_LoadFailureStatuses value)? loadFailureStatuses,
+    TResult Function(_UpdateInProgressStatuses value)? updateInProgressStatuses,
     required TResult orElse(),
   }) {
     if (loadSuccessSources != null) {
@@ -1287,6 +1265,7 @@ class _$_LoadFailureSources implements _LoadFailureSources {
         loadSuccessAll,
     required TResult Function(DataSourceFailure dataSourceFailure)
         loadFailureStatuses,
+    required TResult Function() updateInProgressStatuses,
   }) {
     return loadFailureSources(dataSourceFailure);
   }
@@ -1303,6 +1282,7 @@ class _$_LoadFailureSources implements _LoadFailureSources {
             KtList<DataSource> dataSources)?
         loadSuccessAll,
     TResult Function(DataSourceFailure dataSourceFailure)? loadFailureStatuses,
+    TResult Function()? updateInProgressStatuses,
   }) {
     return loadFailureSources?.call(dataSourceFailure);
   }
@@ -1319,6 +1299,7 @@ class _$_LoadFailureSources implements _LoadFailureSources {
             KtList<DataSource> dataSources)?
         loadSuccessAll,
     TResult Function(DataSourceFailure dataSourceFailure)? loadFailureStatuses,
+    TResult Function()? updateInProgressStatuses,
     required TResult orElse(),
   }) {
     if (loadFailureSources != null) {
@@ -1339,6 +1320,8 @@ class _$_LoadFailureSources implements _LoadFailureSources {
         loadInProgressStatuses,
     required TResult Function(_LoadSuccessAll value) loadSuccessAll,
     required TResult Function(_LoadFailureStatuses value) loadFailureStatuses,
+    required TResult Function(_UpdateInProgressStatuses value)
+        updateInProgressStatuses,
   }) {
     return loadFailureSources(this);
   }
@@ -1353,6 +1336,7 @@ class _$_LoadFailureSources implements _LoadFailureSources {
     TResult Function(_LoadInProgressStatuses value)? loadInProgressStatuses,
     TResult Function(_LoadSuccessAll value)? loadSuccessAll,
     TResult Function(_LoadFailureStatuses value)? loadFailureStatuses,
+    TResult Function(_UpdateInProgressStatuses value)? updateInProgressStatuses,
   }) {
     return loadFailureSources?.call(this);
   }
@@ -1367,6 +1351,7 @@ class _$_LoadFailureSources implements _LoadFailureSources {
     TResult Function(_LoadInProgressStatuses value)? loadInProgressStatuses,
     TResult Function(_LoadSuccessAll value)? loadSuccessAll,
     TResult Function(_LoadFailureStatuses value)? loadFailureStatuses,
+    TResult Function(_UpdateInProgressStatuses value)? updateInProgressStatuses,
     required TResult orElse(),
   }) {
     if (loadFailureSources != null) {
@@ -1439,6 +1424,7 @@ class _$_LoadInProgressStatuses implements _LoadInProgressStatuses {
         loadSuccessAll,
     required TResult Function(DataSourceFailure dataSourceFailure)
         loadFailureStatuses,
+    required TResult Function() updateInProgressStatuses,
   }) {
     return loadInProgressStatuses();
   }
@@ -1455,6 +1441,7 @@ class _$_LoadInProgressStatuses implements _LoadInProgressStatuses {
             KtList<DataSource> dataSources)?
         loadSuccessAll,
     TResult Function(DataSourceFailure dataSourceFailure)? loadFailureStatuses,
+    TResult Function()? updateInProgressStatuses,
   }) {
     return loadInProgressStatuses?.call();
   }
@@ -1471,6 +1458,7 @@ class _$_LoadInProgressStatuses implements _LoadInProgressStatuses {
             KtList<DataSource> dataSources)?
         loadSuccessAll,
     TResult Function(DataSourceFailure dataSourceFailure)? loadFailureStatuses,
+    TResult Function()? updateInProgressStatuses,
     required TResult orElse(),
   }) {
     if (loadInProgressStatuses != null) {
@@ -1491,6 +1479,8 @@ class _$_LoadInProgressStatuses implements _LoadInProgressStatuses {
         loadInProgressStatuses,
     required TResult Function(_LoadSuccessAll value) loadSuccessAll,
     required TResult Function(_LoadFailureStatuses value) loadFailureStatuses,
+    required TResult Function(_UpdateInProgressStatuses value)
+        updateInProgressStatuses,
   }) {
     return loadInProgressStatuses(this);
   }
@@ -1505,6 +1495,7 @@ class _$_LoadInProgressStatuses implements _LoadInProgressStatuses {
     TResult Function(_LoadInProgressStatuses value)? loadInProgressStatuses,
     TResult Function(_LoadSuccessAll value)? loadSuccessAll,
     TResult Function(_LoadFailureStatuses value)? loadFailureStatuses,
+    TResult Function(_UpdateInProgressStatuses value)? updateInProgressStatuses,
   }) {
     return loadInProgressStatuses?.call(this);
   }
@@ -1519,6 +1510,7 @@ class _$_LoadInProgressStatuses implements _LoadInProgressStatuses {
     TResult Function(_LoadInProgressStatuses value)? loadInProgressStatuses,
     TResult Function(_LoadSuccessAll value)? loadSuccessAll,
     TResult Function(_LoadFailureStatuses value)? loadFailureStatuses,
+    TResult Function(_UpdateInProgressStatuses value)? updateInProgressStatuses,
     required TResult orElse(),
   }) {
     if (loadInProgressStatuses != null) {
@@ -1620,6 +1612,7 @@ class _$_LoadSuccessAll implements _LoadSuccessAll {
         loadSuccessAll,
     required TResult Function(DataSourceFailure dataSourceFailure)
         loadFailureStatuses,
+    required TResult Function() updateInProgressStatuses,
   }) {
     return loadSuccessAll(dataSourceStatuses, dataSources);
   }
@@ -1636,6 +1629,7 @@ class _$_LoadSuccessAll implements _LoadSuccessAll {
             KtList<DataSource> dataSources)?
         loadSuccessAll,
     TResult Function(DataSourceFailure dataSourceFailure)? loadFailureStatuses,
+    TResult Function()? updateInProgressStatuses,
   }) {
     return loadSuccessAll?.call(dataSourceStatuses, dataSources);
   }
@@ -1652,6 +1646,7 @@ class _$_LoadSuccessAll implements _LoadSuccessAll {
             KtList<DataSource> dataSources)?
         loadSuccessAll,
     TResult Function(DataSourceFailure dataSourceFailure)? loadFailureStatuses,
+    TResult Function()? updateInProgressStatuses,
     required TResult orElse(),
   }) {
     if (loadSuccessAll != null) {
@@ -1672,6 +1667,8 @@ class _$_LoadSuccessAll implements _LoadSuccessAll {
         loadInProgressStatuses,
     required TResult Function(_LoadSuccessAll value) loadSuccessAll,
     required TResult Function(_LoadFailureStatuses value) loadFailureStatuses,
+    required TResult Function(_UpdateInProgressStatuses value)
+        updateInProgressStatuses,
   }) {
     return loadSuccessAll(this);
   }
@@ -1686,6 +1683,7 @@ class _$_LoadSuccessAll implements _LoadSuccessAll {
     TResult Function(_LoadInProgressStatuses value)? loadInProgressStatuses,
     TResult Function(_LoadSuccessAll value)? loadSuccessAll,
     TResult Function(_LoadFailureStatuses value)? loadFailureStatuses,
+    TResult Function(_UpdateInProgressStatuses value)? updateInProgressStatuses,
   }) {
     return loadSuccessAll?.call(this);
   }
@@ -1700,6 +1698,7 @@ class _$_LoadSuccessAll implements _LoadSuccessAll {
     TResult Function(_LoadInProgressStatuses value)? loadInProgressStatuses,
     TResult Function(_LoadSuccessAll value)? loadSuccessAll,
     TResult Function(_LoadFailureStatuses value)? loadFailureStatuses,
+    TResult Function(_UpdateInProgressStatuses value)? updateInProgressStatuses,
     required TResult orElse(),
   }) {
     if (loadSuccessAll != null) {
@@ -1807,6 +1806,7 @@ class _$_LoadFailureStatuses implements _LoadFailureStatuses {
         loadSuccessAll,
     required TResult Function(DataSourceFailure dataSourceFailure)
         loadFailureStatuses,
+    required TResult Function() updateInProgressStatuses,
   }) {
     return loadFailureStatuses(dataSourceFailure);
   }
@@ -1823,6 +1823,7 @@ class _$_LoadFailureStatuses implements _LoadFailureStatuses {
             KtList<DataSource> dataSources)?
         loadSuccessAll,
     TResult Function(DataSourceFailure dataSourceFailure)? loadFailureStatuses,
+    TResult Function()? updateInProgressStatuses,
   }) {
     return loadFailureStatuses?.call(dataSourceFailure);
   }
@@ -1839,6 +1840,7 @@ class _$_LoadFailureStatuses implements _LoadFailureStatuses {
             KtList<DataSource> dataSources)?
         loadSuccessAll,
     TResult Function(DataSourceFailure dataSourceFailure)? loadFailureStatuses,
+    TResult Function()? updateInProgressStatuses,
     required TResult orElse(),
   }) {
     if (loadFailureStatuses != null) {
@@ -1859,6 +1861,8 @@ class _$_LoadFailureStatuses implements _LoadFailureStatuses {
         loadInProgressStatuses,
     required TResult Function(_LoadSuccessAll value) loadSuccessAll,
     required TResult Function(_LoadFailureStatuses value) loadFailureStatuses,
+    required TResult Function(_UpdateInProgressStatuses value)
+        updateInProgressStatuses,
   }) {
     return loadFailureStatuses(this);
   }
@@ -1873,6 +1877,7 @@ class _$_LoadFailureStatuses implements _LoadFailureStatuses {
     TResult Function(_LoadInProgressStatuses value)? loadInProgressStatuses,
     TResult Function(_LoadSuccessAll value)? loadSuccessAll,
     TResult Function(_LoadFailureStatuses value)? loadFailureStatuses,
+    TResult Function(_UpdateInProgressStatuses value)? updateInProgressStatuses,
   }) {
     return loadFailureStatuses?.call(this);
   }
@@ -1887,6 +1892,7 @@ class _$_LoadFailureStatuses implements _LoadFailureStatuses {
     TResult Function(_LoadInProgressStatuses value)? loadInProgressStatuses,
     TResult Function(_LoadSuccessAll value)? loadSuccessAll,
     TResult Function(_LoadFailureStatuses value)? loadFailureStatuses,
+    TResult Function(_UpdateInProgressStatuses value)? updateInProgressStatuses,
     required TResult orElse(),
   }) {
     if (loadFailureStatuses != null) {
@@ -1904,4 +1910,160 @@ abstract class _LoadFailureStatuses implements DataSourceStatusPickerState {
   @JsonKey(ignore: true)
   _$LoadFailureStatusesCopyWith<_LoadFailureStatuses> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$UpdateInProgressStatusesCopyWith<$Res> {
+  factory _$UpdateInProgressStatusesCopyWith(_UpdateInProgressStatuses value,
+          $Res Function(_UpdateInProgressStatuses) then) =
+      __$UpdateInProgressStatusesCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$UpdateInProgressStatusesCopyWithImpl<$Res>
+    extends _$DataSourceStatusPickerStateCopyWithImpl<$Res>
+    implements _$UpdateInProgressStatusesCopyWith<$Res> {
+  __$UpdateInProgressStatusesCopyWithImpl(_UpdateInProgressStatuses _value,
+      $Res Function(_UpdateInProgressStatuses) _then)
+      : super(_value, (v) => _then(v as _UpdateInProgressStatuses));
+
+  @override
+  _UpdateInProgressStatuses get _value =>
+      super._value as _UpdateInProgressStatuses;
+}
+
+/// @nodoc
+
+class _$_UpdateInProgressStatuses implements _UpdateInProgressStatuses {
+  const _$_UpdateInProgressStatuses();
+
+  @override
+  String toString() {
+    return 'DataSourceStatusPickerState.updateInProgressStatuses()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _UpdateInProgressStatuses);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loadInProgressSources,
+    required TResult Function(KtList<DataSource> dataSources)
+        loadSuccessSources,
+    required TResult Function(DataSourceFailure dataSourceFailure)
+        loadFailureSources,
+    required TResult Function() loadInProgressStatuses,
+    required TResult Function(KtList<DataSourceStatus> dataSourceStatuses,
+            KtList<DataSource> dataSources)
+        loadSuccessAll,
+    required TResult Function(DataSourceFailure dataSourceFailure)
+        loadFailureStatuses,
+    required TResult Function() updateInProgressStatuses,
+  }) {
+    return updateInProgressStatuses();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loadInProgressSources,
+    TResult Function(KtList<DataSource> dataSources)? loadSuccessSources,
+    TResult Function(DataSourceFailure dataSourceFailure)? loadFailureSources,
+    TResult Function()? loadInProgressStatuses,
+    TResult Function(KtList<DataSourceStatus> dataSourceStatuses,
+            KtList<DataSource> dataSources)?
+        loadSuccessAll,
+    TResult Function(DataSourceFailure dataSourceFailure)? loadFailureStatuses,
+    TResult Function()? updateInProgressStatuses,
+  }) {
+    return updateInProgressStatuses?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loadInProgressSources,
+    TResult Function(KtList<DataSource> dataSources)? loadSuccessSources,
+    TResult Function(DataSourceFailure dataSourceFailure)? loadFailureSources,
+    TResult Function()? loadInProgressStatuses,
+    TResult Function(KtList<DataSourceStatus> dataSourceStatuses,
+            KtList<DataSource> dataSources)?
+        loadSuccessAll,
+    TResult Function(DataSourceFailure dataSourceFailure)? loadFailureStatuses,
+    TResult Function()? updateInProgressStatuses,
+    required TResult orElse(),
+  }) {
+    if (updateInProgressStatuses != null) {
+      return updateInProgressStatuses();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LoadInProgressSources value)
+        loadInProgressSources,
+    required TResult Function(_LoadSuccessSources value) loadSuccessSources,
+    required TResult Function(_LoadFailureSources value) loadFailureSources,
+    required TResult Function(_LoadInProgressStatuses value)
+        loadInProgressStatuses,
+    required TResult Function(_LoadSuccessAll value) loadSuccessAll,
+    required TResult Function(_LoadFailureStatuses value) loadFailureStatuses,
+    required TResult Function(_UpdateInProgressStatuses value)
+        updateInProgressStatuses,
+  }) {
+    return updateInProgressStatuses(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LoadInProgressSources value)? loadInProgressSources,
+    TResult Function(_LoadSuccessSources value)? loadSuccessSources,
+    TResult Function(_LoadFailureSources value)? loadFailureSources,
+    TResult Function(_LoadInProgressStatuses value)? loadInProgressStatuses,
+    TResult Function(_LoadSuccessAll value)? loadSuccessAll,
+    TResult Function(_LoadFailureStatuses value)? loadFailureStatuses,
+    TResult Function(_UpdateInProgressStatuses value)? updateInProgressStatuses,
+  }) {
+    return updateInProgressStatuses?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LoadInProgressSources value)? loadInProgressSources,
+    TResult Function(_LoadSuccessSources value)? loadSuccessSources,
+    TResult Function(_LoadFailureSources value)? loadFailureSources,
+    TResult Function(_LoadInProgressStatuses value)? loadInProgressStatuses,
+    TResult Function(_LoadSuccessAll value)? loadSuccessAll,
+    TResult Function(_LoadFailureStatuses value)? loadFailureStatuses,
+    TResult Function(_UpdateInProgressStatuses value)? updateInProgressStatuses,
+    required TResult orElse(),
+  }) {
+    if (updateInProgressStatuses != null) {
+      return updateInProgressStatuses(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateInProgressStatuses
+    implements DataSourceStatusPickerState {
+  const factory _UpdateInProgressStatuses() = _$_UpdateInProgressStatuses;
 }

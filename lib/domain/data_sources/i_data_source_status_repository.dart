@@ -7,4 +7,10 @@ abstract class IDataSourceStatusRepository {
   // get article source statuses for given user
   Future<Either<DataSourceFailure, KtList<DataSourceStatus>>>
       getForCurrentUser();
+  Future<Either<DataSourceFailure, Unit>> create(
+    DataSourceStatus dataSourceStatus,
+  );
+  Future<Either<DataSourceFailure, Unit>> update(
+    DataSourceStatus dataSourceStatus,
+  );
 }

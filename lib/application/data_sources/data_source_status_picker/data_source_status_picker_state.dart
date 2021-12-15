@@ -20,4 +20,6 @@ class DataSourceStatusPickerState with _$DataSourceStatusPickerState {
   const factory DataSourceStatusPickerState.loadFailureStatuses(
     DataSourceFailure dataSourceFailure,
   ) = _LoadFailureStatuses;
+  const factory DataSourceStatusPickerState.updateInProgressStatuses() =
+      _UpdateInProgressStatuses;
 }

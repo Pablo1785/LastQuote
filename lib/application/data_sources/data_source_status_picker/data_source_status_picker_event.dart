@@ -7,8 +7,7 @@ class DataSourceStatusPickerEvent with _$DataSourceStatusPickerEvent {
   const factory DataSourceStatusPickerEvent.dataSourcesReceived(
     Either<DataSourceFailure, KtList<DataSource>> failureOrDataSources,
   ) = _DataSourcesReceived;
-  const factory DataSourceStatusPickerEvent.userDataSourceStatusesReceived(
-    Either<DataSourceFailure, KtList<DataSourceStatus>>
-        failureOrDataSourceStatuses,
-  ) = _UserDataSourceStatusesReceived;
+  const factory DataSourceStatusPickerEvent.statusUpdated(
+    DataSourceStatus dataSourceStatus,
+  ) = _StatusUpdated;
 }

@@ -47,30 +47,34 @@ class DataSourceStatusPickerBloc
             ),
           );
 
-          emit(
-            const DataSourceStatusPickerState.loadInProgressStatuses(),
-          );
-          final failureOrDataSourceStatuses =
-              await _iDataSourceStatusRepository.getForCurrentUser();
+          // if successfully loaded dataSources start loading their statuses
+          if (e.failureOrDataSources.isRight()) {
+            emit(
+              const DataSourceStatusPickerState.loadInProgressStatuses(),
+            );
 
-          // Initially no source is picked, signified by negative index
-          add(
-            DataSourceStatusPickerEvent.userDataSourceStatusesReceived(
-              failureOrDataSourceStatuses,
-            ),
-          );
+            final failureOrDataSourceStatuses =
+                await _iDataSourceStatusRepository.getForCurrentUser();
+
+            emit(
+              failureOrDataSourceStatuses.fold(
+                (failure) => DataSourceStatusPickerState.loadFailureStatuses(
+                  failure,
+                ),
+                (dataSourceStatuses) =>
+                    DataSourceStatusPickerState.loadSuccessAll(
+                  dataSourceStatuses,
+                  e.failureOrDataSources.getOrElse(
+                    () => const KtList.empty(),
+                  ),
+                ),
+              ),
+            );
+          }
         },
-        userDataSourceStatusesReceived: (e) {
+        statusUpdated: (e) {
           emit(
-            e.failureOrDataSourceStatuses.fold(
-              (failure) => DataSourceStatusPickerState.loadFailureStatuses(
-                failure,
-              ),
-              (dataSourceStatuses) =>
-                  DataSourceStatusPickerState.loadSuccessStatuses(
-                dataSourceStatuses,
-              ),
-            ),
+            const DataSourceStatusPickerState.updateInProgressStatuses(),
           );
         },
       );

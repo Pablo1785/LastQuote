@@ -44,4 +44,18 @@ class DataSourceStatusRepository implements IDataSourceStatusRepository {
       }
     }
   }
+
+  @override
+  Future<Either<DataSourceFailure, Unit>> create(
+      DataSourceStatus dataSourceStatus) {
+    // TODO: implement create
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<DataSourceFailure, Unit>> update(
+      DataSourceStatus dataSourceStatus) {
+    // TODO: implement update
+    throw UnimplementedError();
+  }
 }

@@ -65,10 +65,10 @@ class SettingsPage extends StatelessWidget {
                 loadSuccessSources: (_) => const ShimmeringListWidget(),
                 loadFailureSources: (_) => const ShimmeringListWidget(),
                 loadInProgressStatuses: (_) => const ShimmeringListWidget(),
-                loadSuccessStatuses: (loadSuccessState) =>
+                loadSuccessAll: (loadSuccessState) =>
                     DataSourceStatusLoadSuccessWidget(
-                  dataSources: dataSources,
-                  dataSourceStatuses: dataSourceStatuses,
+                  dataSources: loadSuccessState.dataSources,
+                  dataSourceStatuses: loadSuccessState.dataSourceStatuses,
                 ),
                 loadFailureStatuses: (_) => const ShimmeringListWidget(),
               );
