@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ddd/domain/terms/i_term_repository.dart';
-import 'package:ddd/infrastructure/terms/term_dtos.dart';
 import 'package:flutter/services.dart';
-import 'package:kt_dart/src/collection/interop.dart';
-import 'package:kt_dart/src/collection/kt_list.dart';
-import 'package:ddd/domain/terms/term_failure.dart';
-import 'package:ddd/domain/terms/term.dart';
-import 'package:rxdart/src/transformers/on_error_resume.dart';
+import 'package:kt_dart/kt.dart';
+import 'package:rxdart/rxdart.dart';
+
+import '../../domain/terms/i_term_repository.dart';
+import '../../domain/terms/term.dart';
+import '../../domain/terms/term_failure.dart';
+import 'term_dtos.dart';
 
 class TermRepository implements ITermRepository {
   final FirebaseFirestore _firestore;

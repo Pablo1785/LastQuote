@@ -20,7 +20,7 @@ class SplashPage extends StatelessWidget {
             await Future.delayed(
               const Duration(seconds: 2),
               () {
-                AutoRouter.of(context).replaceNamed('/articles-overview-page');
+                AutoRouter.of(context).replaceNamed('/tab-view-page');
               },
             );
           },

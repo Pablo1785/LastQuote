@@ -97,6 +97,9 @@ class ArticleSourceFilterOrLoadSuccessList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor.withAlpha(0x00),
+        foregroundColor: Colors.grey[700],
+        elevation: 0.0,
         title: const Text("Select source"),
       ),
       body: Column(

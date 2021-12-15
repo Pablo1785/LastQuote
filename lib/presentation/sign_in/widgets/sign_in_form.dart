@@ -130,8 +130,7 @@ class SignInForm extends StatelessWidget {
                   ).show(context);
                 },
                 (_) {
-                  AutoRouter.of(context)
-                      .replaceNamed('/articles-overview-page');
+                  AutoRouter.of(context).replaceNamed('/tab-view-page');
                   context
                       .read<AuthBloc>()
                       .add(const AuthEvent.authCheckRequested());

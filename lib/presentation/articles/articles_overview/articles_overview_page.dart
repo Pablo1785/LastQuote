@@ -65,13 +65,10 @@ class _ArticlesOverviewPageState extends State<ArticlesOverviewPage> {
         child: Scaffold(
           key: _scaffoldKey,
           appBar: AppBar(
+            backgroundColor: Theme.of(context).primaryColor.withAlpha(0x00),
+            foregroundColor: Colors.grey[700],
+            elevation: 0.0,
             title: const Text('Articles'),
-            leading: IconButton(
-              onPressed: () {
-                context.read<AuthBloc>().add(const AuthEvent.signedOut());
-              },
-              icon: const Icon(Icons.exit_to_app),
-            ),
             actions: <Widget>[
               IconButton(
                 icon: const Icon(Icons.filter_alt_outlined),

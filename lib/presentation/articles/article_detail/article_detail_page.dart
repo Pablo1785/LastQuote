@@ -30,26 +30,8 @@ class ArticleDetailPage extends HookWidget {
     return BlocProvider(
       create: (context) => getIt<UserArticleEngagementActorBloc>(),
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: BlocListener<UserArticleEngagementActorBloc,
-              UserArticleEngagementActorState>(
-            listener: (context, state) {
-              state.maybeMap(
-                likeSuccess: (successState) {
-                  statefulUserArticleEngagement.value =
-                      successState.updatedUserArticleEngagement;
-                  return LikeButton(
-                    userArticleEngagement: statefulUserArticleEngagement.value,
-                  );
-                },
-                orElse: () {},
-              );
-            },
-            child: LikeButton(
-              userArticleEngagement: statefulUserArticleEngagement.value,
-            ),
-          ),
+        floatingActionButton: FloatingLikeButton(
+          statefulUserArticleEngagement: statefulUserArticleEngagement,
         ),
         appBar: AppBar(
           title: Text(article.title.getOrCrash()),
@@ -79,6 +61,40 @@ class ArticleDetailPage extends HookWidget {
                   )
                 : Container(),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class FloatingLikeButton extends StatelessWidget {
+  const FloatingLikeButton({
+    Key? key,
+    required this.statefulUserArticleEngagement,
+  }) : super(key: key);
+
+  final ValueNotifier<UserArticleEngagement> statefulUserArticleEngagement;
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () {},
+      child: BlocListener<UserArticleEngagementActorBloc,
+          UserArticleEngagementActorState>(
+        listener: (context, state) {
+          state.maybeMap(
+            likeSuccess: (successState) {
+              statefulUserArticleEngagement.value =
+                  successState.updatedUserArticleEngagement;
+              return LikeButton(
+                userArticleEngagement: statefulUserArticleEngagement.value,
+              );
+            },
+            orElse: () {},
+          );
+        },
+        child: LikeButton(
+          userArticleEngagement: statefulUserArticleEngagement.value,
         ),
       ),
     );

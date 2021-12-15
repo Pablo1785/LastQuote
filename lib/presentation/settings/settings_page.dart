@@ -61,65 +61,73 @@ class SettingsPage extends StatelessWidget {
           body: BlocBuilder<DataSourceStatusPickerBloc,
               DataSourceStatusPickerState>(
             builder: (context, state) {
-              return state.map(
-                initial: (_) => Container(),
-                loadInProgressSources: (_) => const ShimmeringListWidget(),
-                loadSuccessSources: (loadSuccessState) =>
-                    DataSourceLoadSuccessWidget(
-                  dataSources: loadSuccessState.dataSources,
-                ),
-                loadFailureSources: (_) => const Center(
-                  child: Icon(
-                    Icons.error_outline,
-                    size: 72,
+              return RefreshIndicator(
+                onRefresh: () async {
+                  context.read<DataSourceStatusPickerBloc>().add(
+                        const DataSourceStatusPickerEvent.initialLoadStarted(),
+                      );
+                },
+                child: state.map(
+                  initial: (_) => Container(),
+                  loadInProgressSources: (_) => const ShimmeringListWidget(),
+                  loadSuccessSources: (loadSuccessState) =>
+                      DataSourceLoadSuccessWidget(
+                    dataSources: loadSuccessState.dataSources,
                   ),
-                ),
-                loadInProgressStatuses: (loadInProgressStateStatuses) =>
-                    DataSourceLoadSuccessWidget(
-                  dataSources: loadInProgressStateStatuses.dataSources,
-                ),
-                loadSuccessAll: (loadSuccessState) =>
-                    DataSourceStatusLoadSuccessWidget(
-                  dataSources: loadSuccessState.dataSources,
-                  dataSourceStatuses: loadSuccessState.dataSourceStatuses,
-                ),
-                loadFailureStatuses: (loadFailureStateStatuses) {
-                  FlushbarHelper.createError(
-                    message: loadFailureStateStatuses.dataSourceFailure.map(
-                      unexpected: (_) => 'Status: Unexpected error',
-                      insufficientPermissions: (_) =>
-                          'Status: Permission error',
-                      sourceDisabled: (_) => 'Status: Source disabled',
-                      noActiveSource: (_) => 'Status: No active source',
-                      documentNotFound: (_) =>
-                          'Status: Document not found error',
+                  loadFailureSources: (_) => const Center(
+                    child: Icon(
+                      Icons.error_outline,
+                      size: 72,
                     ),
-                  ).show(context);
-                  return DataSourceLoadSuccessWidget(
-                    dataSources: loadFailureStateStatuses.dataSources,
-                  );
-                },
-                updateFailureStatuses: (updateFailureState) {
-                  FlushbarHelper.createError(
-                    message: updateFailureState.dataSourceFailure.map(
-                      unexpected: (_) => 'Status: Unexpected error',
-                      insufficientPermissions: (_) =>
-                          'Status: Permission error',
-                      sourceDisabled: (_) => 'Status: Source disabled',
-                      noActiveSource: (_) => 'Status: No active source',
-                      documentNotFound: (_) =>
-                          'Status: Document not found error',
-                    ),
-                  ).show(context);
-                  return DataSourceStatusLoadSuccessWidget(
-                    dataSources: updateFailureState.dataSources,
-                    dataSourceStatuses: updateFailureState.dataSourceStatuses,
-                  );
-                },
-                updateInProgressStatuses: (updateInProgressState) =>
-                    DataSourceStatusLoadSuccessWidget(
-                  dataSources: updateInProgressState.dataSources,
-                  dataSourceStatuses: updateInProgressState.dataSourceStatuses,
+                  ),
+                  loadInProgressStatuses: (loadInProgressStateStatuses) =>
+                      DataSourceLoadSuccessWidget(
+                    dataSources: loadInProgressStateStatuses.dataSources,
+                  ),
+                  loadSuccessAll: (loadSuccessState) =>
+                      DataSourceStatusLoadSuccessWidget(
+                    dataSources: loadSuccessState.dataSources,
+                    dataSourceStatuses: loadSuccessState.dataSourceStatuses,
+                  ),
+                  loadFailureStatuses: (loadFailureStateStatuses) {
+                    FlushbarHelper.createError(
+                      message: loadFailureStateStatuses.dataSourceFailure.map(
+                        unexpected: (_) => 'Status: Unexpected error',
+                        insufficientPermissions: (_) =>
+                            'Status: Permission error',
+                        sourceDisabled: (_) => 'Status: Source disabled',
+                        noActiveSource: (_) => 'Status: No active source',
+                        documentNotFound: (_) =>
+                            'Status: Document not found error',
+                      ),
+                    ).show(context);
+                    return DataSourceLoadSuccessWidget(
+                      dataSources: loadFailureStateStatuses.dataSources,
+                    );
+                  },
+                  updateFailureStatuses: (updateFailureState) {
+                    FlushbarHelper.createError(
+                      message: updateFailureState.dataSourceFailure.map(
+                        unexpected: (_) => 'Status: Unexpected error',
+                        insufficientPermissions: (_) =>
+                            'Status: Permission error',
+                        sourceDisabled: (_) => 'Status: Source disabled',
+                        noActiveSource: (_) => 'Status: No active source',
+                        documentNotFound: (_) =>
+                            'Status: Document not found error',
+                      ),
+                    ).show(context);
+                    return DataSourceStatusLoadSuccessWidget(
+                      dataSources: updateFailureState.dataSources,
+                      dataSourceStatuses: updateFailureState.dataSourceStatuses,
+                    );
+                  },
+                  updateInProgressStatuses: (updateInProgressState) =>
+                      DataSourceStatusLoadSuccessWidget(
+                    dataSources: updateInProgressState.dataSources,
+                    dataSourceStatuses:
+                        updateInProgressState.dataSourceStatuses,
+                  ),
                 ),
               );
             },
