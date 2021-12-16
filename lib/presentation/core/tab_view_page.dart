@@ -25,7 +25,7 @@ class TabViewPage extends HookWidget {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            title: const Text("TheLastQuote/MeaningDrop"),
+            title: const Text("The Last Quote"),
             bottom: const TabBar(
               tabs: [
                 Tab(

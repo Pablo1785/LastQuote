@@ -12,7 +12,7 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('TheLastQuote/MeaningDrop'),
+        title: const Text('The Last Quote'),
       ),
       body: BlocProvider(
         create: (context) => getIt<SignInFormBloc>(),

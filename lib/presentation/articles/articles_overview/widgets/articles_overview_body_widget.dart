@@ -287,7 +287,7 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
               },
               onLongPress: () {
                 Share.share(
-                  "Check out this article I found on TheLastQuote" +
+                  "Check out this article I found on The Last Quote: " +
                       article.url.getOrCrash(),
                   subject: article.title.getOrCrash(),
                 );

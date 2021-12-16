@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp.router(
         routerDelegate: _appRouter.delegate(),
         routeInformationParser: _appRouter.defaultRouteParser(),
-        title: 'DDD App',
+        title: 'The Last Quote',
         debugShowCheckedModeBanner: false,
         theme: ThemeData.light().copyWith(
           inputDecorationTheme: InputDecorationTheme(
