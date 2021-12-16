@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ddd/application/article_sources/article_source_picker/article_source_picker_bloc.dart';
+import 'package:ddd/application/article_term_counts/article_term_count_watcher/article_term_count_watcher_bloc.dart';
 import 'package:ddd/application/user_article_engagement/user_article_engagement_actor/user_article_engagement_actor_bloc.dart';
 import 'package:ddd/application/user_article_engagement/user_article_engagement_watcher/user_article_engagement_watcher_bloc.dart';
 import 'package:ddd/domain/articles/article.dart';
@@ -9,6 +10,7 @@ import 'package:ddd/domain/user_article_engagements/user_article_engagement_fail
 import 'package:ddd/presentation/articles/widgets/like_button.dart';
 import 'package:ddd/presentation/routes/app_router.gr.dart';
 import 'package:kt_dart/kt.dart';
+import 'package:share/share.dart';
 
 import '../../../../application/articles/article_watcher/article_watcher_bloc.dart';
 import 'package:flutter/material.dart';
@@ -189,10 +191,36 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
               title: Text(
                 article.title.getOrCrash(),
               ),
-              subtitle: Text(
-                article.url.getOrCrash(),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+              isThreeLine: true,
+              subtitle: Column(
+                children: [
+                  Text(
+                    article.url.getOrCrash(),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  BlocBuilder<ArticleTermCountWatcherBloc,
+                      ArticleTermCountWatcherState>(
+                    builder: (context, state) {
+                      return state.map(
+                        initial: (_) => Container(),
+                        loadInProgress: (_) => const LinearProgressIndicator(),
+                        loadSuccess: (successState) => Text(
+                          'Successfully loaded topics. Topics: ' +
+                              successState.articleTermCounts.iter
+                                  .where((element) =>
+                                      element.articleId.getOrCrash() ==
+                                      article.id.getOrCrash())
+                                  .toString(),
+                        ),
+                        loadFailure: (failureState) => Text(
+                          'Failed to load topics. Reason: ' +
+                              failureState.articleTermCountFailure.toString(),
+                        ),
+                      );
+                    },
+                  )
+                ],
               ),
               trailing: () {
                 switch (article.mediaType.getOrCrash()) {
@@ -213,6 +241,13 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
                     article: article,
                     userArticleEngagement: userArticleEngagement,
                   ),
+                );
+              },
+              onLongPress: () {
+                Share.share(
+                  "Check out this article I found on TheLastQuote" +
+                      article.url.getOrCrash(),
+                  subject: article.title.getOrCrash(),
                 );
               },
             ),

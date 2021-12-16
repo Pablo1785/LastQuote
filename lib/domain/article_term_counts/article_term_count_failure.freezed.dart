@@ -21,6 +21,10 @@ class _$ArticleTermCountFailureTearOff {
     return const _Unexpected();
   }
 
+  _DocumentNotFound documentNotFound() {
+    return const _DocumentNotFound();
+  }
+
   _InsufficientPermissions insufficientPermissions() {
     return const _InsufficientPermissions();
   }
@@ -34,18 +38,21 @@ mixin _$ArticleTermCountFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() unexpected,
+    required TResult Function() documentNotFound,
     required TResult Function() insufficientPermissions,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? unexpected,
+    TResult Function()? documentNotFound,
     TResult Function()? insufficientPermissions,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unexpected,
+    TResult Function()? documentNotFound,
     TResult Function()? insufficientPermissions,
     required TResult orElse(),
   }) =>
@@ -53,6 +60,7 @@ mixin _$ArticleTermCountFailure {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Unexpected value) unexpected,
+    required TResult Function(_DocumentNotFound value) documentNotFound,
     required TResult Function(_InsufficientPermissions value)
         insufficientPermissions,
   }) =>
@@ -60,12 +68,14 @@ mixin _$ArticleTermCountFailure {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_DocumentNotFound value)? documentNotFound,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_DocumentNotFound value)? documentNotFound,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
     required TResult orElse(),
   }) =>
@@ -131,6 +141,7 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() unexpected,
+    required TResult Function() documentNotFound,
     required TResult Function() insufficientPermissions,
   }) {
     return unexpected();
@@ -140,6 +151,7 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? unexpected,
+    TResult Function()? documentNotFound,
     TResult Function()? insufficientPermissions,
   }) {
     return unexpected?.call();
@@ -149,6 +161,7 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unexpected,
+    TResult Function()? documentNotFound,
     TResult Function()? insufficientPermissions,
     required TResult orElse(),
   }) {
@@ -162,6 +175,7 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Unexpected value) unexpected,
+    required TResult Function(_DocumentNotFound value) documentNotFound,
     required TResult Function(_InsufficientPermissions value)
         insufficientPermissions,
   }) {
@@ -172,6 +186,7 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_DocumentNotFound value)? documentNotFound,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
   }) {
     return unexpected?.call(this);
@@ -181,6 +196,7 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_DocumentNotFound value)? documentNotFound,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
     required TResult orElse(),
   }) {
@@ -193,6 +209,118 @@ class _$_Unexpected implements _Unexpected {
 
 abstract class _Unexpected implements ArticleTermCountFailure {
   const factory _Unexpected() = _$_Unexpected;
+}
+
+/// @nodoc
+abstract class _$DocumentNotFoundCopyWith<$Res> {
+  factory _$DocumentNotFoundCopyWith(
+          _DocumentNotFound value, $Res Function(_DocumentNotFound) then) =
+      __$DocumentNotFoundCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$DocumentNotFoundCopyWithImpl<$Res>
+    extends _$ArticleTermCountFailureCopyWithImpl<$Res>
+    implements _$DocumentNotFoundCopyWith<$Res> {
+  __$DocumentNotFoundCopyWithImpl(
+      _DocumentNotFound _value, $Res Function(_DocumentNotFound) _then)
+      : super(_value, (v) => _then(v as _DocumentNotFound));
+
+  @override
+  _DocumentNotFound get _value => super._value as _DocumentNotFound;
+}
+
+/// @nodoc
+
+class _$_DocumentNotFound implements _DocumentNotFound {
+  const _$_DocumentNotFound();
+
+  @override
+  String toString() {
+    return 'ArticleTermCountFailure.documentNotFound()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _DocumentNotFound);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() unexpected,
+    required TResult Function() documentNotFound,
+    required TResult Function() insufficientPermissions,
+  }) {
+    return documentNotFound();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? unexpected,
+    TResult Function()? documentNotFound,
+    TResult Function()? insufficientPermissions,
+  }) {
+    return documentNotFound?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? unexpected,
+    TResult Function()? documentNotFound,
+    TResult Function()? insufficientPermissions,
+    required TResult orElse(),
+  }) {
+    if (documentNotFound != null) {
+      return documentNotFound();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Unexpected value) unexpected,
+    required TResult Function(_DocumentNotFound value) documentNotFound,
+    required TResult Function(_InsufficientPermissions value)
+        insufficientPermissions,
+  }) {
+    return documentNotFound(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_DocumentNotFound value)? documentNotFound,
+    TResult Function(_InsufficientPermissions value)? insufficientPermissions,
+  }) {
+    return documentNotFound?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_DocumentNotFound value)? documentNotFound,
+    TResult Function(_InsufficientPermissions value)? insufficientPermissions,
+    required TResult orElse(),
+  }) {
+    if (documentNotFound != null) {
+      return documentNotFound(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DocumentNotFound implements ArticleTermCountFailure {
+  const factory _DocumentNotFound() = _$_DocumentNotFound;
 }
 
 /// @nodoc
@@ -238,6 +366,7 @@ class _$_InsufficientPermissions implements _InsufficientPermissions {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() unexpected,
+    required TResult Function() documentNotFound,
     required TResult Function() insufficientPermissions,
   }) {
     return insufficientPermissions();
@@ -247,6 +376,7 @@ class _$_InsufficientPermissions implements _InsufficientPermissions {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? unexpected,
+    TResult Function()? documentNotFound,
     TResult Function()? insufficientPermissions,
   }) {
     return insufficientPermissions?.call();
@@ -256,6 +386,7 @@ class _$_InsufficientPermissions implements _InsufficientPermissions {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unexpected,
+    TResult Function()? documentNotFound,
     TResult Function()? insufficientPermissions,
     required TResult orElse(),
   }) {
@@ -269,6 +400,7 @@ class _$_InsufficientPermissions implements _InsufficientPermissions {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Unexpected value) unexpected,
+    required TResult Function(_DocumentNotFound value) documentNotFound,
     required TResult Function(_InsufficientPermissions value)
         insufficientPermissions,
   }) {
@@ -279,6 +411,7 @@ class _$_InsufficientPermissions implements _InsufficientPermissions {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_DocumentNotFound value)? documentNotFound,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
   }) {
     return insufficientPermissions?.call(this);
@@ -288,6 +421,7 @@ class _$_InsufficientPermissions implements _InsufficientPermissions {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_DocumentNotFound value)? documentNotFound,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
     required TResult orElse(),
   }) {

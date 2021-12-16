@@ -1,5 +1,6 @@
 import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:ddd/application/article_term_counts/article_term_count_watcher/article_term_count_watcher_bloc.dart';
 import 'package:ddd/application/user_article_engagement/user_article_engagement_actor/user_article_engagement_actor_bloc.dart';
 import 'package:ddd/application/user_article_engagement/user_article_engagement_watcher/user_article_engagement_watcher_bloc.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +49,9 @@ class _ArticlesOverviewPageState extends State<ArticlesOverviewPage> {
               const ArticleSourcePickerEvent.initialLoadStarted(),
             ),
         ),
+        BlocProvider<ArticleTermCountWatcherBloc>(
+          create: (context) => getIt<ArticleTermCountWatcherBloc>(),
+        ),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -69,6 +73,20 @@ class _ArticlesOverviewPageState extends State<ArticlesOverviewPage> {
             foregroundColor: Colors.grey[700],
             elevation: 0.0,
             title: const Text('Articles'),
+            bottom: PreferredSize(
+              child: Container(
+                alignment: Alignment.topCenter,
+                child: Text(
+                  'Tap to open, long press to share',
+                  style: Theme.of(context).textTheme.caption,
+                ),
+                color:
+                    Theme.of(context).scaffoldBackgroundColor.withAlpha(0x55),
+              ),
+              preferredSize: Size.fromHeight(
+                10.0,
+              ),
+            ),
             actions: <Widget>[
               IconButton(
                 icon: const Icon(Icons.filter_alt_outlined),

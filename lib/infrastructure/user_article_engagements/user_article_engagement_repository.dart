@@ -76,89 +76,133 @@ class UserArticleEngagementRepository
           .where('article_id', whereIn: articleIds)
           .snapshots()
           .asyncMap(
-        (snapshot) async {
-          Map<String, UserArticleEngagement> uidUserArticleEngagementMap = {};
-          snapshot.docs
-              .where(
-            (doc) => doc.exists,
-          )
-              .forEach(
-            (doc) {
-              final userArticleEngagement =
-                  UserArticleEngagementDto.fromFirestore(doc).toDomain();
-              uidUserArticleEngagementMap.putIfAbsent(
-                userArticleEngagement.articleId.getOrCrash(),
-                () => userArticleEngagement,
-              );
-            },
-          );
-
-          // check articles that do not have a junction with current user
-          final newUserArticleEngagements = articleIds
-              .where(
-                (articleId) =>
-                    !uidUserArticleEngagementMap.keys.contains(articleId),
-              )
-              .map(
-                (articleId) => UserArticleEngagement.empty().copyWith(
-                  articleId: UniqueId.fromUniqueString(
-                    articleId,
-                  ),
-                  userId: UniqueId.fromUniqueString(
-                    userDocRef.id,
-                  ),
-                  id: JunctionUniqueId(
-                    [
-                      articleId,
-                      userDocRef.id,
-                    ],
-                  ),
-                ),
-              )
-              .toList();
-
-          // create missing articles
-          final failuresOrSuccesses = await Future.wait(
-            newUserArticleEngagements.map(
-              (e) => create(e),
+            (snapshot) async => _parseJunctionsAndHandleMissing(
+              snapshot: snapshot,
+              articleIds: articleIds,
+              userId: userDocRef.id,
             ),
+          )
+          .onErrorReturnWith(
+            (exception, stacktrace) =>
+                _handleException<KtMap<String, UserArticleEngagement>>(
+                    exception, stacktrace),
           );
-
-          // check if all creates successful
-          final someFailureOrUnit = failuresOrSuccesses.firstWhere(
-            (element) => element.isLeft(),
-            orElse: () => right<UserArticleEngagementFailure, Unit>(unit),
-          );
-
-          // if any create unsuccessful, pass the creation failure as stream output
-          return someFailureOrUnit.fold(
-            (failure) => left<UserArticleEngagementFailure,
-                KtMap<String, UserArticleEngagement>>(failure),
-            (_) {
-              newUserArticleEngagements.forEach(
-                (newEngagement) {
-                  uidUserArticleEngagementMap.putIfAbsent(
-                    newEngagement.articleId.getOrCrash(),
-                    () => newEngagement,
-                  );
-                },
-              );
-              return right<UserArticleEngagementFailure,
-                  KtMap<String, UserArticleEngagement>>(
-                uidUserArticleEngagementMap.toImmutableMap(),
-              );
-            },
-          );
-        },
-      ).onErrorReturnWith(
-        (exception, stacktrace) =>
-            _handleException<KtMap<String, UserArticleEngagement>>(
-                exception, stacktrace),
-      );
     } on PlatformException catch (exception, stacktrace) {
       yield _handleException<KtMap<String, UserArticleEngagement>>(
           exception, stacktrace);
     }
+  }
+
+  Future<
+          Either<UserArticleEngagementFailure,
+              KtMap<String, UserArticleEngagement>>>
+      _parseJunctionsAndHandleMissing({
+    required QuerySnapshot<Map<String, dynamic>> snapshot,
+    required List<String> articleIds,
+    required String userId,
+  }) async {
+    Map<String, UserArticleEngagement> uidUserArticleEngagementMap =
+        _parseJunctionsToUidJunctionMap(
+      snapshot: snapshot,
+    );
+
+    // get loaded articles that do not have a junction with current user
+    final newUserArticleEngagements = _createMissingJunctionEntities(
+      articleIds: articleIds,
+      userId: userId,
+      articleIdsWithExistingJunctions: uidUserArticleEngagementMap.keys,
+    );
+
+    // create missing articles
+    final failuresOrSuccesses = await Future.wait(
+      newUserArticleEngagements.map(
+        (e) => create(e),
+      ),
+    );
+
+    // check if all creates successful
+    final someFailureOrUnit = failuresOrSuccesses.firstWhere(
+      (element) => element.isLeft(),
+      orElse: () => right<UserArticleEngagementFailure, Unit>(unit),
+    );
+
+    // if any create unsuccessful, pass the creation failure as stream output
+    return someFailureOrUnit.fold(
+      (failure) => left<UserArticleEngagementFailure,
+          KtMap<String, UserArticleEngagement>>(failure),
+      (_) => _addEntitiesToResultAndReturnSuccessCase(
+        newUserArticleEngagements: newUserArticleEngagements,
+        uidUserArticleEngagementMap: uidUserArticleEngagementMap,
+      ),
+    );
+  }
+
+  Map<String, UserArticleEngagement> _parseJunctionsToUidJunctionMap({
+    required QuerySnapshot<Map<String, dynamic>> snapshot,
+  }) {
+    Map<String, UserArticleEngagement> uidUserArticleEngagementMap = {};
+    snapshot.docs
+        .where(
+      (doc) => doc.exists,
+    )
+        .forEach(
+      (doc) {
+        final userArticleEngagement =
+            UserArticleEngagementDto.fromFirestore(doc).toDomain();
+        uidUserArticleEngagementMap.putIfAbsent(
+          userArticleEngagement.articleId.getOrCrash(),
+          () => userArticleEngagement,
+        );
+      },
+    );
+    return uidUserArticleEngagementMap;
+  }
+
+  Either<UserArticleEngagementFailure, KtMap<String, UserArticleEngagement>>
+      _addEntitiesToResultAndReturnSuccessCase({
+    required Iterable<UserArticleEngagement> newUserArticleEngagements,
+    required Map<String, UserArticleEngagement> uidUserArticleEngagementMap,
+  }) {
+    newUserArticleEngagements.forEach(
+      (newEngagement) {
+        uidUserArticleEngagementMap.putIfAbsent(
+          newEngagement.articleId.getOrCrash(),
+          () => newEngagement,
+        );
+      },
+    );
+    return right<UserArticleEngagementFailure,
+        KtMap<String, UserArticleEngagement>>(
+      uidUserArticleEngagementMap.toImmutableMap(),
+    );
+  }
+
+  List<UserArticleEngagement> _createMissingJunctionEntities({
+    required Iterable<String> articleIds,
+    required String userId,
+    required Iterable<String> articleIdsWithExistingJunctions,
+  }) {
+    return articleIds
+        .where(
+          (articleId) => !articleIdsWithExistingJunctions.contains(articleId),
+        )
+        .map(
+          (articleId) => UserArticleEngagement.empty().copyWith(
+            articleId: UniqueId.fromUniqueString(
+              articleId,
+            ),
+            userId: UniqueId.fromUniqueString(
+              userId,
+            ),
+            id: JunctionUniqueId(
+              [
+                articleId,
+                userId,
+              ],
+            ),
+          ),
+        )
+        .toList();
   }
 
   Either<UserArticleEngagementFailure, T> _handleException<T>(
