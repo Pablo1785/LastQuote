@@ -6,9 +6,9 @@ part of 'user_article_engagement_dtos.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ArticleSourceStatusDto _$$_ArticleSourceStatusDtoFromJson(
+_$_UserArticleEngagementDto _$$_UserArticleEngagementDtoFromJson(
         Map<String, dynamic> json) =>
-    _$_ArticleSourceStatusDto(
+    _$_UserArticleEngagementDto(
       id: json['id'] as String?,
       articleId: json['article_id'] as String,
       userId: json['user_id'] as String,
@@ -18,8 +18,8 @@ _$_ArticleSourceStatusDto _$$_ArticleSourceStatusDtoFromJson(
       isShared: json['is_shared'] as bool,
     );
 
-Map<String, dynamic> _$$_ArticleSourceStatusDtoToJson(
-        _$_ArticleSourceStatusDto instance) =>
+Map<String, dynamic> _$$_UserArticleEngagementDtoToJson(
+        _$_UserArticleEngagementDto instance) =>
     <String, dynamic>{
       'id': instance.id,
       'article_id': instance.articleId,

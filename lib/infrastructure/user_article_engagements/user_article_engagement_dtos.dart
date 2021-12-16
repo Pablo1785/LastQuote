@@ -24,7 +24,7 @@ abstract class UserArticleEngagementDto implements _$UserArticleEngagementDto {
     @JsonKey(name: 'is_liked') required bool isLiked,
     @JsonKey(name: 'is_opened') required bool isOpened,
     @JsonKey(name: 'is_shared') required bool isShared,
-  }) = _ArticleSourceStatusDto;
+  }) = _UserArticleEngagementDto;
 
   factory UserArticleEngagementDto.fromDomain(
       UserArticleEngagement userArticleEngagement) {

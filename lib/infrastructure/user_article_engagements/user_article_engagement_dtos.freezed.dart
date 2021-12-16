@@ -15,14 +15,14 @@ final _privateConstructorUsedError = UnsupportedError(
 
 UserArticleEngagementDto _$UserArticleEngagementDtoFromJson(
     Map<String, dynamic> json) {
-  return _ArticleSourceStatusDto.fromJson(json);
+  return _UserArticleEngagementDto.fromJson(json);
 }
 
 /// @nodoc
 class _$UserArticleEngagementDtoTearOff {
   const _$UserArticleEngagementDtoTearOff();
 
-  _ArticleSourceStatusDto call(
+  _UserArticleEngagementDto call(
       {required String? id,
       @JsonKey(name: 'article_id') required String articleId,
       @JsonKey(name: 'user_id') required String userId,
@@ -30,7 +30,7 @@ class _$UserArticleEngagementDtoTearOff {
       @JsonKey(name: 'is_liked') required bool isLiked,
       @JsonKey(name: 'is_opened') required bool isOpened,
       @JsonKey(name: 'is_shared') required bool isShared}) {
-    return _ArticleSourceStatusDto(
+    return _UserArticleEngagementDto(
       id: id,
       articleId: articleId,
       userId: userId,
@@ -139,11 +139,11 @@ class _$UserArticleEngagementDtoCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$ArticleSourceStatusDtoCopyWith<$Res>
+abstract class _$UserArticleEngagementDtoCopyWith<$Res>
     implements $UserArticleEngagementDtoCopyWith<$Res> {
-  factory _$ArticleSourceStatusDtoCopyWith(_ArticleSourceStatusDto value,
-          $Res Function(_ArticleSourceStatusDto) then) =
-      __$ArticleSourceStatusDtoCopyWithImpl<$Res>;
+  factory _$UserArticleEngagementDtoCopyWith(_UserArticleEngagementDto value,
+          $Res Function(_UserArticleEngagementDto) then) =
+      __$UserArticleEngagementDtoCopyWithImpl<$Res>;
   @override
   $Res call(
       {String? id,
@@ -156,15 +156,16 @@ abstract class _$ArticleSourceStatusDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$ArticleSourceStatusDtoCopyWithImpl<$Res>
+class __$UserArticleEngagementDtoCopyWithImpl<$Res>
     extends _$UserArticleEngagementDtoCopyWithImpl<$Res>
-    implements _$ArticleSourceStatusDtoCopyWith<$Res> {
-  __$ArticleSourceStatusDtoCopyWithImpl(_ArticleSourceStatusDto _value,
-      $Res Function(_ArticleSourceStatusDto) _then)
-      : super(_value, (v) => _then(v as _ArticleSourceStatusDto));
+    implements _$UserArticleEngagementDtoCopyWith<$Res> {
+  __$UserArticleEngagementDtoCopyWithImpl(_UserArticleEngagementDto _value,
+      $Res Function(_UserArticleEngagementDto) _then)
+      : super(_value, (v) => _then(v as _UserArticleEngagementDto));
 
   @override
-  _ArticleSourceStatusDto get _value => super._value as _ArticleSourceStatusDto;
+  _UserArticleEngagementDto get _value =>
+      super._value as _UserArticleEngagementDto;
 
   @override
   $Res call({
@@ -176,7 +177,7 @@ class __$ArticleSourceStatusDtoCopyWithImpl<$Res>
     Object? isOpened = freezed,
     Object? isShared = freezed,
   }) {
-    return _then(_ArticleSourceStatusDto(
+    return _then(_UserArticleEngagementDto(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -211,8 +212,8 @@ class __$ArticleSourceStatusDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ArticleSourceStatusDto extends _ArticleSourceStatusDto {
-  const _$_ArticleSourceStatusDto(
+class _$_UserArticleEngagementDto extends _UserArticleEngagementDto {
+  const _$_UserArticleEngagementDto(
       {required this.id,
       @JsonKey(name: 'article_id') required this.articleId,
       @JsonKey(name: 'user_id') required this.userId,
@@ -222,8 +223,8 @@ class _$_ArticleSourceStatusDto extends _ArticleSourceStatusDto {
       @JsonKey(name: 'is_shared') required this.isShared})
       : super._();
 
-  factory _$_ArticleSourceStatusDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ArticleSourceStatusDtoFromJson(json);
+  factory _$_UserArticleEngagementDto.fromJson(Map<String, dynamic> json) =>
+      _$$_UserArticleEngagementDtoFromJson(json);
 
   @override
   final String? id;
@@ -255,7 +256,7 @@ class _$_ArticleSourceStatusDto extends _ArticleSourceStatusDto {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ArticleSourceStatusDto &&
+            other is _UserArticleEngagementDto &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.articleId, articleId) ||
                 other.articleId == articleId) &&
@@ -275,18 +276,18 @@ class _$_ArticleSourceStatusDto extends _ArticleSourceStatusDto {
 
   @JsonKey(ignore: true)
   @override
-  _$ArticleSourceStatusDtoCopyWith<_ArticleSourceStatusDto> get copyWith =>
-      __$ArticleSourceStatusDtoCopyWithImpl<_ArticleSourceStatusDto>(
+  _$UserArticleEngagementDtoCopyWith<_UserArticleEngagementDto> get copyWith =>
+      __$UserArticleEngagementDtoCopyWithImpl<_UserArticleEngagementDto>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ArticleSourceStatusDtoToJson(this);
+    return _$$_UserArticleEngagementDtoToJson(this);
   }
 }
 
-abstract class _ArticleSourceStatusDto extends UserArticleEngagementDto {
-  const factory _ArticleSourceStatusDto(
+abstract class _UserArticleEngagementDto extends UserArticleEngagementDto {
+  const factory _UserArticleEngagementDto(
           {required String? id,
           @JsonKey(name: 'article_id') required String articleId,
           @JsonKey(name: 'user_id') required String userId,
@@ -294,11 +295,11 @@ abstract class _ArticleSourceStatusDto extends UserArticleEngagementDto {
           @JsonKey(name: 'is_liked') required bool isLiked,
           @JsonKey(name: 'is_opened') required bool isOpened,
           @JsonKey(name: 'is_shared') required bool isShared}) =
-      _$_ArticleSourceStatusDto;
-  const _ArticleSourceStatusDto._() : super._();
+      _$_UserArticleEngagementDto;
+  const _UserArticleEngagementDto._() : super._();
 
-  factory _ArticleSourceStatusDto.fromJson(Map<String, dynamic> json) =
-      _$_ArticleSourceStatusDto.fromJson;
+  factory _UserArticleEngagementDto.fromJson(Map<String, dynamic> json) =
+      _$_UserArticleEngagementDto.fromJson;
 
   @override
   String? get id;
@@ -322,6 +323,6 @@ abstract class _ArticleSourceStatusDto extends UserArticleEngagementDto {
   bool get isShared;
   @override
   @JsonKey(ignore: true)
-  _$ArticleSourceStatusDtoCopyWith<_ArticleSourceStatusDto> get copyWith =>
+  _$UserArticleEngagementDtoCopyWith<_UserArticleEngagementDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
