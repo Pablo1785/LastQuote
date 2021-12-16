@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:ddd/application/article_sources/article_source_picker/article_source_picker_bloc.dart';
 import 'package:ddd/application/article_term_counts/article_term_count_watcher/article_term_count_watcher_bloc.dart';
@@ -197,12 +198,12 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
               title: Text(
                 article.title.getOrCrash(),
               ),
-              isThreeLine: true,
+              // isThreeLine: true,
               subtitle: Column(
                 children: [
                   Text(
                     article.url.getOrCrash(),
-                    maxLines: 3,
+                    maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                   BlocBuilder<ArticleTermCountWatcherBloc,
@@ -211,21 +212,56 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
                       return state.map(
                         initial: (_) => Container(),
                         loadInProgress: (_) => const LinearProgressIndicator(),
-                        loadSuccess: (successState) => Text(
-                          'Successfully loaded topics. Topics: ' +
-                              successState.articleTermCounts.iter
-                                  .where((element) =>
-                                      element.articleId.getOrCrash() ==
-                                      article.id.getOrCrash())
-                                  .toString(),
-                        ),
+                        loadSuccess: (successState) {
+                          final currArticleTermCounts = successState
+                              .articleTermCounts.iter
+                              .where((element) =>
+                                  element.articleId.getOrCrash() ==
+                                  article.id.getOrCrash())
+                              .toList();
+                          return Container(
+                            alignment: Alignment.topLeft,
+                            height:
+                                currArticleTermCounts.isNotEmpty ? 50.0 : 0.0,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: currArticleTermCounts.length > 3
+                                  ? 3
+                                  : currArticleTermCounts.length,
+                              itemBuilder: (context, index) {
+                                final articleTermCount =
+                                    currArticleTermCounts[index];
+                                return ActionChip(
+                                  label: Text(
+                                    articleTermCount.termId +
+                                        ': ' +
+                                        articleTermCount.count.toString(),
+                                  ),
+                                  onPressed: () {
+                                    FlushbarHelper.createInformation(
+                                      // Title case the sentence
+                                      message: articleTermCount.termId[0]
+                                              .toUpperCase() +
+                                          articleTermCount.termId.substring(1) +
+                                          ' is mentioned ' +
+                                          articleTermCount.count.toString() +
+                                          ' times in the article ' +
+                                          article.title.getOrCrash(),
+                                    ).show(context);
+                                  },
+                                );
+                              },
+                            ),
+                          );
+                        },
                         loadFailure: (failureState) => Text(
                           'Failed to load topics. Reason: ' +
                               failureState.articleTermCountFailure.toString(),
                         ),
                       );
                     },
-                  )
+                  ),
                 ],
               ),
               trailing: () {
