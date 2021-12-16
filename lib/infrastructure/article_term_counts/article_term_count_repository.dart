@@ -8,11 +8,13 @@ import 'package:ddd/domain/articles/article.dart';
 import 'package:ddd/infrastructure/article_term_counts/article_term_count_dtos.dart';
 import 'package:ddd/infrastructure/core/firestore_helpers.dart';
 import 'package:flutter/services.dart';
+import 'package:injectable/injectable.dart';
 import 'package:kt_dart/kt.dart';
 import 'package:rxdart/src/transformers/on_error_resume.dart';
 
 import '../../injection.dart';
 
+@LazySingleton(as: IArticleTermCountRepository)
 class ArticleTermCountRepository implements IArticleTermCountRepository {
   final FirebaseFirestore _firestore;
 

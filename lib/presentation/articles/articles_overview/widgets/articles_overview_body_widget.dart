@@ -53,6 +53,12 @@ class ArticlesOverviewBody extends StatelessWidget {
                       child: CircularProgressIndicator(),
                     ),
                     loadSuccess: (userArticleEngagementLoadSuccessState) {
+                      context.read<ArticleTermCountWatcherBloc>().add(
+                            ArticleTermCountWatcherEvent
+                                .watchForArticlesStarted(
+                              articlesLoadSuccessState.articles,
+                            ),
+                          );
                       return BlocListener<UserArticleEngagementActorBloc,
                           UserArticleEngagementActorState>(
                         listener: (context, state) {
