@@ -1,4 +1,5 @@
 import 'package:ddd/application/user_article_engagement/user_article_engagement_actor/user_article_engagement_actor_bloc.dart';
+import 'package:ddd/application/user_article_engagement/user_article_engagement_watcher/user_article_engagement_watcher_bloc.dart';
 import 'package:ddd/domain/articles/article.dart';
 import 'package:ddd/domain/user_article_engagements/user_article_engagement.dart';
 import 'package:ddd/presentation/articles/widgets/like_button.dart';
@@ -6,6 +7,7 @@ import 'package:ddd/presentation/core/fun_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:kt_dart/kt.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -15,23 +17,37 @@ class ArticleDetailPage extends HookWidget {
   const ArticleDetailPage({
     Key? key,
     required this.article,
-    required this.userArticleEngagement,
   }) : super(key: key);
 
   final Article article;
-  final UserArticleEngagement userArticleEngagement;
 
   @override
   Widget build(BuildContext context) {
     final loadingProgress = useState(0.0);
     final isLoading = useState(true);
-    final statefulUserArticleEngagement = useState(userArticleEngagement);
 
-    return BlocProvider(
-      create: (context) => getIt<UserArticleEngagementActorBloc>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => getIt<UserArticleEngagementActorBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => getIt<UserArticleEngagementWatcherBloc>()
+            ..add(
+              UserArticleEngagementWatcherEvent
+                  .watchForCurrentUserAndArticlesStarted(
+                KtList.from(
+                  [
+                    article,
+                  ],
+                ),
+              ),
+            ),
+        ),
+      ],
       child: Scaffold(
         floatingActionButton: FloatingLikeButton(
-          statefulUserArticleEngagement: statefulUserArticleEngagement,
+          article: article,
         ),
         appBar: AppBar(
           title: Text(article.title.getOrCrash()),
@@ -70,10 +86,10 @@ class ArticleDetailPage extends HookWidget {
 class FloatingLikeButton extends StatelessWidget {
   const FloatingLikeButton({
     Key? key,
-    required this.statefulUserArticleEngagement,
+    required this.article,
   }) : super(key: key);
 
-  final ValueNotifier<UserArticleEngagement> statefulUserArticleEngagement;
+  final Article article;
 
   @override
   Widget build(BuildContext context) {
@@ -81,20 +97,54 @@ class FloatingLikeButton extends StatelessWidget {
       onPressed: () {},
       child: BlocListener<UserArticleEngagementActorBloc,
           UserArticleEngagementActorState>(
-        listener: (context, state) {
-          state.maybeMap(
-            likeSuccess: (successState) {
-              statefulUserArticleEngagement.value =
-                  successState.updatedUserArticleEngagement;
-              return LikeButton(
-                userArticleEngagement: statefulUserArticleEngagement.value,
-              );
-            },
+        listener: (context, actorState) {
+          actorState.maybeWhen(
+            likeSuccess: (_) =>
+                context.read<UserArticleEngagementWatcherBloc>().add(
+                      UserArticleEngagementWatcherEvent
+                          .watchForCurrentUserAndArticlesStarted(
+                        KtList.from(
+                          [
+                            article,
+                          ],
+                        ),
+                      ),
+                    ),
             orElse: () {},
           );
         },
-        child: LikeButton(
-          userArticleEngagement: statefulUserArticleEngagement.value,
+        child: BlocBuilder<UserArticleEngagementWatcherBloc,
+            UserArticleEngagementWatcherState>(
+          builder: (context, engagementWatcherState) {
+            return engagementWatcherState.map(
+              initial: (_) => IconButton(
+                icon: const Icon(
+                  Icons.thumb_up_alt_outlined,
+                ),
+                onPressed: () {},
+              ),
+              loadInProgress: (_) => IconButton(
+                icon: const Icon(
+                  Icons.thumb_up_alt_outlined,
+                  color: Colors.yellow,
+                ),
+                onPressed: () {},
+              ),
+              loadSuccess: (engagementLoadSuccessState) {
+                return LikeButton(
+                  userArticleEngagement: engagementLoadSuccessState
+                      .userArticleEngagements[article.id.getOrCrash()]!,
+                );
+              },
+              loadFailure: (_) => IconButton(
+                icon: const Icon(
+                  Icons.thumb_up_alt_outlined,
+                  color: Colors.red,
+                ),
+                onPressed: () {},
+              ),
+            );
+          },
         ),
       ),
     );

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ddd/infrastructure/core/firestore_helpers.dart';
 import 'package:flutter/services.dart';
+import 'package:injectable/injectable.dart';
 import 'package:kt_dart/kt.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -11,6 +12,7 @@ import '../../domain/recommendations/recommendation_failure.dart';
 import '../../injection.dart';
 import 'recommendation_dtos.dart';
 
+@LazySingleton(as: IRecommendationRepository)
 class RecommendationRepository implements IRecommendationRepository {
   final FirebaseFirestore _firestore;
 
@@ -22,6 +24,7 @@ class RecommendationRepository implements IRecommendationRepository {
     final userDocRef = await getIt<FirestoreHelper>().userDocument();
     yield* userDocRef
         .collection('recommendations')
+        .limit(10)
         .snapshots()
         .map(
           (snapshot) => right<RecommendationFailure, KtList<Recommendation>>(
@@ -54,7 +57,11 @@ class RecommendationRepository implements IRecommendationRepository {
     final userDocRef = await getIt<FirestoreHelper>().userDocument();
     yield* userDocRef
         .collection('recommendations')
-        .where(FieldPath.documentId, whereIn: recommendationIds)
+        .where(
+          FieldPath.documentId,
+          whereIn: recommendationIds,
+        )
+        .limit(10)
         .snapshots()
         .map(
           (snapshot) => right<RecommendationFailure, KtList<Recommendation>>(

@@ -127,7 +127,6 @@ class ArticleRepository implements IArticleRepository {
     } else {
       yield* _firestore
           .collection('articles')
-          .where('source_id', whereIn: userEnabledArticleSourceIds)
           .where(FieldPath.documentId, whereIn: articleIds.asList())
           .snapshots()
           .map(
@@ -136,6 +135,8 @@ class ArticleRepository implements IArticleRepository {
                   .map(
                     (doc) => ArticleDto.fromFirestore(doc).toDomain(),
                   )
+                  .where((article) => userEnabledArticleSourceIds
+                      .contains(article.sourceId.getOrCrash()))
                   .toImmutableList(),
             ),
           )

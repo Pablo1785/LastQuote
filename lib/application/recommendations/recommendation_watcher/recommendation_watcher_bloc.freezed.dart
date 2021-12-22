@@ -30,7 +30,8 @@ class _$RecommendationWatcherEventTearOff {
   }
 
   _RecommendationsReceived recommendationsReceived(
-      dynamic failureOrRecommendations) {
+      Either<RecommendationFailure, KtList<Recommendation>>
+          failureOrRecommendations) {
     return _RecommendationsReceived(
       failureOrRecommendations,
     );
@@ -47,7 +48,9 @@ mixin _$RecommendationWatcherEvent {
     required TResult Function() watchAllForCurrentUserStarted,
     required TResult Function(List<String> recommendationIds)
         watchSpecificRecommendationsForCurrentUserStarted,
-    required TResult Function(dynamic failureOrRecommendations)
+    required TResult Function(
+            Either<RecommendationFailure, KtList<Recommendation>>
+                failureOrRecommendations)
         recommendationsReceived,
   }) =>
       throw _privateConstructorUsedError;
@@ -56,7 +59,10 @@ mixin _$RecommendationWatcherEvent {
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
-    TResult Function(dynamic failureOrRecommendations)? recommendationsReceived,
+    TResult Function(
+            Either<RecommendationFailure, KtList<Recommendation>>
+                failureOrRecommendations)?
+        recommendationsReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,7 +70,10 @@ mixin _$RecommendationWatcherEvent {
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
-    TResult Function(dynamic failureOrRecommendations)? recommendationsReceived,
+    TResult Function(
+            Either<RecommendationFailure, KtList<Recommendation>>
+                failureOrRecommendations)?
+        recommendationsReceived,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -166,7 +175,9 @@ class _$_WatchAllForCurrentUserStarted
     required TResult Function() watchAllForCurrentUserStarted,
     required TResult Function(List<String> recommendationIds)
         watchSpecificRecommendationsForCurrentUserStarted,
-    required TResult Function(dynamic failureOrRecommendations)
+    required TResult Function(
+            Either<RecommendationFailure, KtList<Recommendation>>
+                failureOrRecommendations)
         recommendationsReceived,
   }) {
     return watchAllForCurrentUserStarted();
@@ -178,7 +189,10 @@ class _$_WatchAllForCurrentUserStarted
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
-    TResult Function(dynamic failureOrRecommendations)? recommendationsReceived,
+    TResult Function(
+            Either<RecommendationFailure, KtList<Recommendation>>
+                failureOrRecommendations)?
+        recommendationsReceived,
   }) {
     return watchAllForCurrentUserStarted?.call();
   }
@@ -189,7 +203,10 @@ class _$_WatchAllForCurrentUserStarted
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
-    TResult Function(dynamic failureOrRecommendations)? recommendationsReceived,
+    TResult Function(
+            Either<RecommendationFailure, KtList<Recommendation>>
+                failureOrRecommendations)?
+        recommendationsReceived,
     required TResult orElse(),
   }) {
     if (watchAllForCurrentUserStarted != null) {
@@ -331,7 +348,9 @@ class _$_WatchSpecificRecommendationsForCurrentUserStarted
     required TResult Function() watchAllForCurrentUserStarted,
     required TResult Function(List<String> recommendationIds)
         watchSpecificRecommendationsForCurrentUserStarted,
-    required TResult Function(dynamic failureOrRecommendations)
+    required TResult Function(
+            Either<RecommendationFailure, KtList<Recommendation>>
+                failureOrRecommendations)
         recommendationsReceived,
   }) {
     return watchSpecificRecommendationsForCurrentUserStarted(recommendationIds);
@@ -343,7 +362,10 @@ class _$_WatchSpecificRecommendationsForCurrentUserStarted
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
-    TResult Function(dynamic failureOrRecommendations)? recommendationsReceived,
+    TResult Function(
+            Either<RecommendationFailure, KtList<Recommendation>>
+                failureOrRecommendations)?
+        recommendationsReceived,
   }) {
     return watchSpecificRecommendationsForCurrentUserStarted
         ?.call(recommendationIds);
@@ -355,7 +377,10 @@ class _$_WatchSpecificRecommendationsForCurrentUserStarted
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
-    TResult Function(dynamic failureOrRecommendations)? recommendationsReceived,
+    TResult Function(
+            Either<RecommendationFailure, KtList<Recommendation>>
+                failureOrRecommendations)?
+        recommendationsReceived,
     required TResult orElse(),
   }) {
     if (watchSpecificRecommendationsForCurrentUserStarted != null) {
@@ -426,7 +451,9 @@ abstract class _$RecommendationsReceivedCopyWith<$Res> {
   factory _$RecommendationsReceivedCopyWith(_RecommendationsReceived value,
           $Res Function(_RecommendationsReceived) then) =
       __$RecommendationsReceivedCopyWithImpl<$Res>;
-  $Res call({dynamic failureOrRecommendations});
+  $Res call(
+      {Either<RecommendationFailure, KtList<Recommendation>>
+          failureOrRecommendations});
 }
 
 /// @nodoc
@@ -448,7 +475,8 @@ class __$RecommendationsReceivedCopyWithImpl<$Res>
     return _then(_RecommendationsReceived(
       failureOrRecommendations == freezed
           ? _value.failureOrRecommendations
-          : failureOrRecommendations,
+          : failureOrRecommendations // ignore: cast_nullable_to_non_nullable
+              as Either<RecommendationFailure, KtList<Recommendation>>,
     ));
   }
 }
@@ -459,7 +487,8 @@ class _$_RecommendationsReceived implements _RecommendationsReceived {
   const _$_RecommendationsReceived(this.failureOrRecommendations);
 
   @override
-  final dynamic failureOrRecommendations;
+  final Either<RecommendationFailure, KtList<Recommendation>>
+      failureOrRecommendations;
 
   @override
   String toString() {
@@ -471,13 +500,13 @@ class _$_RecommendationsReceived implements _RecommendationsReceived {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _RecommendationsReceived &&
-            const DeepCollectionEquality().equals(
-                other.failureOrRecommendations, failureOrRecommendations));
+            (identical(
+                    other.failureOrRecommendations, failureOrRecommendations) ||
+                other.failureOrRecommendations == failureOrRecommendations));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(failureOrRecommendations));
+  int get hashCode => Object.hash(runtimeType, failureOrRecommendations);
 
   @JsonKey(ignore: true)
   @override
@@ -491,7 +520,9 @@ class _$_RecommendationsReceived implements _RecommendationsReceived {
     required TResult Function() watchAllForCurrentUserStarted,
     required TResult Function(List<String> recommendationIds)
         watchSpecificRecommendationsForCurrentUserStarted,
-    required TResult Function(dynamic failureOrRecommendations)
+    required TResult Function(
+            Either<RecommendationFailure, KtList<Recommendation>>
+                failureOrRecommendations)
         recommendationsReceived,
   }) {
     return recommendationsReceived(failureOrRecommendations);
@@ -503,7 +534,10 @@ class _$_RecommendationsReceived implements _RecommendationsReceived {
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
-    TResult Function(dynamic failureOrRecommendations)? recommendationsReceived,
+    TResult Function(
+            Either<RecommendationFailure, KtList<Recommendation>>
+                failureOrRecommendations)?
+        recommendationsReceived,
   }) {
     return recommendationsReceived?.call(failureOrRecommendations);
   }
@@ -514,7 +548,10 @@ class _$_RecommendationsReceived implements _RecommendationsReceived {
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
-    TResult Function(dynamic failureOrRecommendations)? recommendationsReceived,
+    TResult Function(
+            Either<RecommendationFailure, KtList<Recommendation>>
+                failureOrRecommendations)?
+        recommendationsReceived,
     required TResult orElse(),
   }) {
     if (recommendationsReceived != null) {
@@ -567,10 +604,12 @@ class _$_RecommendationsReceived implements _RecommendationsReceived {
 }
 
 abstract class _RecommendationsReceived implements RecommendationWatcherEvent {
-  const factory _RecommendationsReceived(dynamic failureOrRecommendations) =
-      _$_RecommendationsReceived;
+  const factory _RecommendationsReceived(
+      Either<RecommendationFailure, KtList<Recommendation>>
+          failureOrRecommendations) = _$_RecommendationsReceived;
 
-  dynamic get failureOrRecommendations;
+  Either<RecommendationFailure, KtList<Recommendation>>
+      get failureOrRecommendations;
   @JsonKey(ignore: true)
   _$RecommendationsReceivedCopyWith<_RecommendationsReceived> get copyWith =>
       throw _privateConstructorUsedError;
@@ -588,7 +627,7 @@ class _$RecommendationWatcherStateTearOff {
     return const _LoadInProgress();
   }
 
-  _LoadSuccess loadSuccess(dynamic recommendations) {
+  _LoadSuccess loadSuccess(KtList<Recommendation> recommendations) {
     return _LoadSuccess(
       recommendations,
     );
@@ -610,7 +649,8 @@ mixin _$RecommendationWatcherState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(dynamic recommendations) loadSuccess,
+    required TResult Function(KtList<Recommendation> recommendations)
+        loadSuccess,
     required TResult Function(RecommendationFailure recommendationFailure)
         loadFailure,
   }) =>
@@ -619,7 +659,7 @@ mixin _$RecommendationWatcherState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(dynamic recommendations)? loadSuccess,
+    TResult Function(KtList<Recommendation> recommendations)? loadSuccess,
     TResult Function(RecommendationFailure recommendationFailure)? loadFailure,
   }) =>
       throw _privateConstructorUsedError;
@@ -627,7 +667,7 @@ mixin _$RecommendationWatcherState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(dynamic recommendations)? loadSuccess,
+    TResult Function(KtList<Recommendation> recommendations)? loadSuccess,
     TResult Function(RecommendationFailure recommendationFailure)? loadFailure,
     required TResult orElse(),
   }) =>
@@ -717,7 +757,8 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(dynamic recommendations) loadSuccess,
+    required TResult Function(KtList<Recommendation> recommendations)
+        loadSuccess,
     required TResult Function(RecommendationFailure recommendationFailure)
         loadFailure,
   }) {
@@ -729,7 +770,7 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(dynamic recommendations)? loadSuccess,
+    TResult Function(KtList<Recommendation> recommendations)? loadSuccess,
     TResult Function(RecommendationFailure recommendationFailure)? loadFailure,
   }) {
     return initial?.call();
@@ -740,7 +781,7 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(dynamic recommendations)? loadSuccess,
+    TResult Function(KtList<Recommendation> recommendations)? loadSuccess,
     TResult Function(RecommendationFailure recommendationFailure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -835,7 +876,8 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(dynamic recommendations) loadSuccess,
+    required TResult Function(KtList<Recommendation> recommendations)
+        loadSuccess,
     required TResult Function(RecommendationFailure recommendationFailure)
         loadFailure,
   }) {
@@ -847,7 +889,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(dynamic recommendations)? loadSuccess,
+    TResult Function(KtList<Recommendation> recommendations)? loadSuccess,
     TResult Function(RecommendationFailure recommendationFailure)? loadFailure,
   }) {
     return loadInProgress?.call();
@@ -858,7 +900,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(dynamic recommendations)? loadSuccess,
+    TResult Function(KtList<Recommendation> recommendations)? loadSuccess,
     TResult Function(RecommendationFailure recommendationFailure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -915,7 +957,7 @@ abstract class _$LoadSuccessCopyWith<$Res> {
   factory _$LoadSuccessCopyWith(
           _LoadSuccess value, $Res Function(_LoadSuccess) then) =
       __$LoadSuccessCopyWithImpl<$Res>;
-  $Res call({dynamic recommendations});
+  $Res call({KtList<Recommendation> recommendations});
 }
 
 /// @nodoc
@@ -934,7 +976,10 @@ class __$LoadSuccessCopyWithImpl<$Res>
     Object? recommendations = freezed,
   }) {
     return _then(_LoadSuccess(
-      recommendations == freezed ? _value.recommendations : recommendations,
+      recommendations == freezed
+          ? _value.recommendations
+          : recommendations // ignore: cast_nullable_to_non_nullable
+              as KtList<Recommendation>,
     ));
   }
 }
@@ -945,7 +990,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   const _$_LoadSuccess(this.recommendations);
 
   @override
-  final dynamic recommendations;
+  final KtList<Recommendation> recommendations;
 
   @override
   String toString() {
@@ -957,13 +1002,12 @@ class _$_LoadSuccess implements _LoadSuccess {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _LoadSuccess &&
-            const DeepCollectionEquality()
-                .equals(other.recommendations, recommendations));
+            (identical(other.recommendations, recommendations) ||
+                other.recommendations == recommendations));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(recommendations));
+  int get hashCode => Object.hash(runtimeType, recommendations);
 
   @JsonKey(ignore: true)
   @override
@@ -975,7 +1019,8 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(dynamic recommendations) loadSuccess,
+    required TResult Function(KtList<Recommendation> recommendations)
+        loadSuccess,
     required TResult Function(RecommendationFailure recommendationFailure)
         loadFailure,
   }) {
@@ -987,7 +1032,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(dynamic recommendations)? loadSuccess,
+    TResult Function(KtList<Recommendation> recommendations)? loadSuccess,
     TResult Function(RecommendationFailure recommendationFailure)? loadFailure,
   }) {
     return loadSuccess?.call(recommendations);
@@ -998,7 +1043,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(dynamic recommendations)? loadSuccess,
+    TResult Function(KtList<Recommendation> recommendations)? loadSuccess,
     TResult Function(RecommendationFailure recommendationFailure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -1047,9 +1092,10 @@ class _$_LoadSuccess implements _LoadSuccess {
 }
 
 abstract class _LoadSuccess implements RecommendationWatcherState {
-  const factory _LoadSuccess(dynamic recommendations) = _$_LoadSuccess;
+  const factory _LoadSuccess(KtList<Recommendation> recommendations) =
+      _$_LoadSuccess;
 
-  dynamic get recommendations;
+  KtList<Recommendation> get recommendations;
   @JsonKey(ignore: true)
   _$LoadSuccessCopyWith<_LoadSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1061,6 +1107,8 @@ abstract class _$LoadFailureCopyWith<$Res> {
           _LoadFailure value, $Res Function(_LoadFailure) then) =
       __$LoadFailureCopyWithImpl<$Res>;
   $Res call({RecommendationFailure recommendationFailure});
+
+  $RecommendationFailureCopyWith<$Res> get recommendationFailure;
 }
 
 /// @nodoc
@@ -1085,6 +1133,14 @@ class __$LoadFailureCopyWithImpl<$Res>
               as RecommendationFailure,
     ));
   }
+
+  @override
+  $RecommendationFailureCopyWith<$Res> get recommendationFailure {
+    return $RecommendationFailureCopyWith<$Res>(_value.recommendationFailure,
+        (value) {
+      return _then(_value.copyWith(recommendationFailure: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -1105,13 +1161,12 @@ class _$_LoadFailure implements _LoadFailure {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _LoadFailure &&
-            const DeepCollectionEquality()
-                .equals(other.recommendationFailure, recommendationFailure));
+            (identical(other.recommendationFailure, recommendationFailure) ||
+                other.recommendationFailure == recommendationFailure));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(recommendationFailure));
+  int get hashCode => Object.hash(runtimeType, recommendationFailure);
 
   @JsonKey(ignore: true)
   @override
@@ -1123,7 +1178,8 @@ class _$_LoadFailure implements _LoadFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(dynamic recommendations) loadSuccess,
+    required TResult Function(KtList<Recommendation> recommendations)
+        loadSuccess,
     required TResult Function(RecommendationFailure recommendationFailure)
         loadFailure,
   }) {
@@ -1135,7 +1191,7 @@ class _$_LoadFailure implements _LoadFailure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(dynamic recommendations)? loadSuccess,
+    TResult Function(KtList<Recommendation> recommendations)? loadSuccess,
     TResult Function(RecommendationFailure recommendationFailure)? loadFailure,
   }) {
     return loadFailure?.call(recommendationFailure);
@@ -1146,7 +1202,7 @@ class _$_LoadFailure implements _LoadFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(dynamic recommendations)? loadSuccess,
+    TResult Function(KtList<Recommendation> recommendations)? loadSuccess,
     TResult Function(RecommendationFailure recommendationFailure)? loadFailure,
     required TResult orElse(),
   }) {

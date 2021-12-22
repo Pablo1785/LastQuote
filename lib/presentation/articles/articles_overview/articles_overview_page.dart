@@ -1,6 +1,7 @@
 import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:ddd/application/article_term_counts/article_term_count_watcher/article_term_count_watcher_bloc.dart';
+import 'package:ddd/application/recommendations/recommendation_watcher/recommendation_watcher_bloc.dart';
 import 'package:ddd/application/user_article_engagement/user_article_engagement_actor/user_article_engagement_actor_bloc.dart';
 import 'package:ddd/application/user_article_engagement/user_article_engagement_watcher/user_article_engagement_watcher_bloc.dart';
 import 'package:flutter/material.dart';
@@ -31,11 +32,14 @@ class _ArticlesOverviewPageState extends State<ArticlesOverviewPage> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<ArticleWatcherBloc>(
-          create: (context) => getIt<ArticleWatcherBloc>()
+        BlocProvider<RecommendationWatcherBloc>(
+          create: (context) => getIt<RecommendationWatcherBloc>()
             ..add(
-              const ArticleWatcherEvent.watchAllStarted(),
+              const RecommendationWatcherEvent.watchAllForCurrentUserStarted(),
             ),
+        ),
+        BlocProvider<ArticleWatcherBloc>(
+          create: (context) => getIt<ArticleWatcherBloc>(),
         ),
         BlocProvider<UserArticleEngagementWatcherBloc>(
           create: (context) => getIt<UserArticleEngagementWatcherBloc>(),
