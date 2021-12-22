@@ -33,6 +33,7 @@ class ArticleRepository implements IArticleRepository {
       yield* _firestore
           .collection('articles')
           .where('source_id', whereIn: userEnabledArticleSourceIds)
+          .limit(10)
           .snapshots()
           .map(
             (snapshot) => right<ArticleFailure, KtList<Article>>(
@@ -86,6 +87,7 @@ class ArticleRepository implements IArticleRepository {
             'source_id',
             isEqualTo: userEnabledArticleSourceIds[pickedSourceIndex],
           )
+          .limit(10)
           .snapshots()
           .map(
             (snapshot) => right<ArticleFailure, KtList<Article>>(
@@ -104,6 +106,47 @@ class ArticleRepository implements IArticleRepository {
           } else {
             // log.error(exception.toString())
             print(exception.toString());
+            return left(const ArticleFailure.unexpected());
+          }
+        },
+      );
+    }
+  }
+
+  @override
+  Stream<Either<ArticleFailure, KtList<Article>>> watchById(
+    KtList<String> articleIds,
+  ) async* {
+    // articles/{uass = getUserArticleSourceByIdAndUserId(article.source_id, currentUser.id) && uass.is_enabled == true}
+    final userEnabledArticleSourceIds =
+        (await getIt<FirestoreHelper>().userEnabledArticleSources())
+            .map((docRef) => docRef.id)
+            .toList();
+    if (userEnabledArticleSourceIds.isEmpty) {
+      yield left(const ArticleFailure.noActiveSource());
+    } else {
+      yield* _firestore
+          .collection('articles')
+          .where('source_id', whereIn: userEnabledArticleSourceIds)
+          .where(FieldPath.documentId, whereIn: articleIds.asList())
+          .snapshots()
+          .map(
+            (snapshot) => right<ArticleFailure, KtList<Article>>(
+              snapshot.docs
+                  .map(
+                    (doc) => ArticleDto.fromFirestore(doc).toDomain(),
+                  )
+                  .toImmutableList(),
+            ),
+          )
+          .onErrorReturnWith(
+        (exception, stacktrace) {
+          if (exception is PlatformException &&
+              exception.message!.contains('permission')) {
+            return left(const ArticleFailure.insufficientPermissions());
+          } else {
+            print(exception.toString());
+            print(stacktrace.toString());
             return left(const ArticleFailure.unexpected());
           }
         },

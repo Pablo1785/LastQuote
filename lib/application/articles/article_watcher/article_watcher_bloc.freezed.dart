@@ -27,6 +27,12 @@ class _$ArticleWatcherEventTearOff {
     );
   }
 
+  _WatchByIdStarted watchByIdStarted(KtList<String> articleIds) {
+    return _WatchByIdStarted(
+      articleIds,
+    );
+  }
+
   _ArticlesReceived articlesReceived(
       Either<ArticleFailure, KtList<Article>> failureOrArticles) {
     return _ArticlesReceived(
@@ -45,6 +51,7 @@ mixin _$ArticleWatcherEvent {
     required TResult Function() watchAllStarted,
     required TResult Function(ArticleSource articleSource)
         watchFromSourceStarted,
+    required TResult Function(KtList<String> articleIds) watchByIdStarted,
     required TResult Function(
             Either<ArticleFailure, KtList<Article>> failureOrArticles)
         articlesReceived,
@@ -54,6 +61,7 @@ mixin _$ArticleWatcherEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? watchAllStarted,
     TResult Function(ArticleSource articleSource)? watchFromSourceStarted,
+    TResult Function(KtList<String> articleIds)? watchByIdStarted,
     TResult Function(Either<ArticleFailure, KtList<Article>> failureOrArticles)?
         articlesReceived,
   }) =>
@@ -62,6 +70,7 @@ mixin _$ArticleWatcherEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? watchAllStarted,
     TResult Function(ArticleSource articleSource)? watchFromSourceStarted,
+    TResult Function(KtList<String> articleIds)? watchByIdStarted,
     TResult Function(Either<ArticleFailure, KtList<Article>> failureOrArticles)?
         articlesReceived,
     required TResult orElse(),
@@ -72,6 +81,7 @@ mixin _$ArticleWatcherEvent {
     required TResult Function(_WatchAllStarted value) watchAllStarted,
     required TResult Function(_WatchFromSourceStarted value)
         watchFromSourceStarted,
+    required TResult Function(_WatchByIdStarted value) watchByIdStarted,
     required TResult Function(_ArticlesReceived value) articlesReceived,
   }) =>
       throw _privateConstructorUsedError;
@@ -79,6 +89,7 @@ mixin _$ArticleWatcherEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_WatchAllStarted value)? watchAllStarted,
     TResult Function(_WatchFromSourceStarted value)? watchFromSourceStarted,
+    TResult Function(_WatchByIdStarted value)? watchByIdStarted,
     TResult Function(_ArticlesReceived value)? articlesReceived,
   }) =>
       throw _privateConstructorUsedError;
@@ -86,6 +97,7 @@ mixin _$ArticleWatcherEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_WatchAllStarted value)? watchAllStarted,
     TResult Function(_WatchFromSourceStarted value)? watchFromSourceStarted,
+    TResult Function(_WatchByIdStarted value)? watchByIdStarted,
     TResult Function(_ArticlesReceived value)? articlesReceived,
     required TResult orElse(),
   }) =>
@@ -153,6 +165,7 @@ class _$_WatchAllStarted implements _WatchAllStarted {
     required TResult Function() watchAllStarted,
     required TResult Function(ArticleSource articleSource)
         watchFromSourceStarted,
+    required TResult Function(KtList<String> articleIds) watchByIdStarted,
     required TResult Function(
             Either<ArticleFailure, KtList<Article>> failureOrArticles)
         articlesReceived,
@@ -165,6 +178,7 @@ class _$_WatchAllStarted implements _WatchAllStarted {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? watchAllStarted,
     TResult Function(ArticleSource articleSource)? watchFromSourceStarted,
+    TResult Function(KtList<String> articleIds)? watchByIdStarted,
     TResult Function(Either<ArticleFailure, KtList<Article>> failureOrArticles)?
         articlesReceived,
   }) {
@@ -176,6 +190,7 @@ class _$_WatchAllStarted implements _WatchAllStarted {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? watchAllStarted,
     TResult Function(ArticleSource articleSource)? watchFromSourceStarted,
+    TResult Function(KtList<String> articleIds)? watchByIdStarted,
     TResult Function(Either<ArticleFailure, KtList<Article>> failureOrArticles)?
         articlesReceived,
     required TResult orElse(),
@@ -192,6 +207,7 @@ class _$_WatchAllStarted implements _WatchAllStarted {
     required TResult Function(_WatchAllStarted value) watchAllStarted,
     required TResult Function(_WatchFromSourceStarted value)
         watchFromSourceStarted,
+    required TResult Function(_WatchByIdStarted value) watchByIdStarted,
     required TResult Function(_ArticlesReceived value) articlesReceived,
   }) {
     return watchAllStarted(this);
@@ -202,6 +218,7 @@ class _$_WatchAllStarted implements _WatchAllStarted {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_WatchAllStarted value)? watchAllStarted,
     TResult Function(_WatchFromSourceStarted value)? watchFromSourceStarted,
+    TResult Function(_WatchByIdStarted value)? watchByIdStarted,
     TResult Function(_ArticlesReceived value)? articlesReceived,
   }) {
     return watchAllStarted?.call(this);
@@ -212,6 +229,7 @@ class _$_WatchAllStarted implements _WatchAllStarted {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_WatchAllStarted value)? watchAllStarted,
     TResult Function(_WatchFromSourceStarted value)? watchFromSourceStarted,
+    TResult Function(_WatchByIdStarted value)? watchByIdStarted,
     TResult Function(_ArticlesReceived value)? articlesReceived,
     required TResult orElse(),
   }) {
@@ -304,6 +322,7 @@ class _$_WatchFromSourceStarted implements _WatchFromSourceStarted {
     required TResult Function() watchAllStarted,
     required TResult Function(ArticleSource articleSource)
         watchFromSourceStarted,
+    required TResult Function(KtList<String> articleIds) watchByIdStarted,
     required TResult Function(
             Either<ArticleFailure, KtList<Article>> failureOrArticles)
         articlesReceived,
@@ -316,6 +335,7 @@ class _$_WatchFromSourceStarted implements _WatchFromSourceStarted {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? watchAllStarted,
     TResult Function(ArticleSource articleSource)? watchFromSourceStarted,
+    TResult Function(KtList<String> articleIds)? watchByIdStarted,
     TResult Function(Either<ArticleFailure, KtList<Article>> failureOrArticles)?
         articlesReceived,
   }) {
@@ -327,6 +347,7 @@ class _$_WatchFromSourceStarted implements _WatchFromSourceStarted {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? watchAllStarted,
     TResult Function(ArticleSource articleSource)? watchFromSourceStarted,
+    TResult Function(KtList<String> articleIds)? watchByIdStarted,
     TResult Function(Either<ArticleFailure, KtList<Article>> failureOrArticles)?
         articlesReceived,
     required TResult orElse(),
@@ -343,6 +364,7 @@ class _$_WatchFromSourceStarted implements _WatchFromSourceStarted {
     required TResult Function(_WatchAllStarted value) watchAllStarted,
     required TResult Function(_WatchFromSourceStarted value)
         watchFromSourceStarted,
+    required TResult Function(_WatchByIdStarted value) watchByIdStarted,
     required TResult Function(_ArticlesReceived value) articlesReceived,
   }) {
     return watchFromSourceStarted(this);
@@ -353,6 +375,7 @@ class _$_WatchFromSourceStarted implements _WatchFromSourceStarted {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_WatchAllStarted value)? watchAllStarted,
     TResult Function(_WatchFromSourceStarted value)? watchFromSourceStarted,
+    TResult Function(_WatchByIdStarted value)? watchByIdStarted,
     TResult Function(_ArticlesReceived value)? articlesReceived,
   }) {
     return watchFromSourceStarted?.call(this);
@@ -363,6 +386,7 @@ class _$_WatchFromSourceStarted implements _WatchFromSourceStarted {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_WatchAllStarted value)? watchAllStarted,
     TResult Function(_WatchFromSourceStarted value)? watchFromSourceStarted,
+    TResult Function(_WatchByIdStarted value)? watchByIdStarted,
     TResult Function(_ArticlesReceived value)? articlesReceived,
     required TResult orElse(),
   }) {
@@ -380,6 +404,159 @@ abstract class _WatchFromSourceStarted implements ArticleWatcherEvent {
   ArticleSource get articleSource;
   @JsonKey(ignore: true)
   _$WatchFromSourceStartedCopyWith<_WatchFromSourceStarted> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$WatchByIdStartedCopyWith<$Res> {
+  factory _$WatchByIdStartedCopyWith(
+          _WatchByIdStarted value, $Res Function(_WatchByIdStarted) then) =
+      __$WatchByIdStartedCopyWithImpl<$Res>;
+  $Res call({KtList<String> articleIds});
+}
+
+/// @nodoc
+class __$WatchByIdStartedCopyWithImpl<$Res>
+    extends _$ArticleWatcherEventCopyWithImpl<$Res>
+    implements _$WatchByIdStartedCopyWith<$Res> {
+  __$WatchByIdStartedCopyWithImpl(
+      _WatchByIdStarted _value, $Res Function(_WatchByIdStarted) _then)
+      : super(_value, (v) => _then(v as _WatchByIdStarted));
+
+  @override
+  _WatchByIdStarted get _value => super._value as _WatchByIdStarted;
+
+  @override
+  $Res call({
+    Object? articleIds = freezed,
+  }) {
+    return _then(_WatchByIdStarted(
+      articleIds == freezed
+          ? _value.articleIds
+          : articleIds // ignore: cast_nullable_to_non_nullable
+              as KtList<String>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_WatchByIdStarted implements _WatchByIdStarted {
+  const _$_WatchByIdStarted(this.articleIds);
+
+  @override
+  final KtList<String> articleIds;
+
+  @override
+  String toString() {
+    return 'ArticleWatcherEvent.watchByIdStarted(articleIds: $articleIds)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _WatchByIdStarted &&
+            (identical(other.articleIds, articleIds) ||
+                other.articleIds == articleIds));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, articleIds);
+
+  @JsonKey(ignore: true)
+  @override
+  _$WatchByIdStartedCopyWith<_WatchByIdStarted> get copyWith =>
+      __$WatchByIdStartedCopyWithImpl<_WatchByIdStarted>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() watchAllStarted,
+    required TResult Function(ArticleSource articleSource)
+        watchFromSourceStarted,
+    required TResult Function(KtList<String> articleIds) watchByIdStarted,
+    required TResult Function(
+            Either<ArticleFailure, KtList<Article>> failureOrArticles)
+        articlesReceived,
+  }) {
+    return watchByIdStarted(articleIds);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchAllStarted,
+    TResult Function(ArticleSource articleSource)? watchFromSourceStarted,
+    TResult Function(KtList<String> articleIds)? watchByIdStarted,
+    TResult Function(Either<ArticleFailure, KtList<Article>> failureOrArticles)?
+        articlesReceived,
+  }) {
+    return watchByIdStarted?.call(articleIds);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchAllStarted,
+    TResult Function(ArticleSource articleSource)? watchFromSourceStarted,
+    TResult Function(KtList<String> articleIds)? watchByIdStarted,
+    TResult Function(Either<ArticleFailure, KtList<Article>> failureOrArticles)?
+        articlesReceived,
+    required TResult orElse(),
+  }) {
+    if (watchByIdStarted != null) {
+      return watchByIdStarted(articleIds);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_WatchAllStarted value) watchAllStarted,
+    required TResult Function(_WatchFromSourceStarted value)
+        watchFromSourceStarted,
+    required TResult Function(_WatchByIdStarted value) watchByIdStarted,
+    required TResult Function(_ArticlesReceived value) articlesReceived,
+  }) {
+    return watchByIdStarted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchAllStarted value)? watchAllStarted,
+    TResult Function(_WatchFromSourceStarted value)? watchFromSourceStarted,
+    TResult Function(_WatchByIdStarted value)? watchByIdStarted,
+    TResult Function(_ArticlesReceived value)? articlesReceived,
+  }) {
+    return watchByIdStarted?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchAllStarted value)? watchAllStarted,
+    TResult Function(_WatchFromSourceStarted value)? watchFromSourceStarted,
+    TResult Function(_WatchByIdStarted value)? watchByIdStarted,
+    TResult Function(_ArticlesReceived value)? articlesReceived,
+    required TResult orElse(),
+  }) {
+    if (watchByIdStarted != null) {
+      return watchByIdStarted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _WatchByIdStarted implements ArticleWatcherEvent {
+  const factory _WatchByIdStarted(KtList<String> articleIds) =
+      _$_WatchByIdStarted;
+
+  KtList<String> get articleIds;
+  @JsonKey(ignore: true)
+  _$WatchByIdStartedCopyWith<_WatchByIdStarted> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -451,6 +628,7 @@ class _$_ArticlesReceived implements _ArticlesReceived {
     required TResult Function() watchAllStarted,
     required TResult Function(ArticleSource articleSource)
         watchFromSourceStarted,
+    required TResult Function(KtList<String> articleIds) watchByIdStarted,
     required TResult Function(
             Either<ArticleFailure, KtList<Article>> failureOrArticles)
         articlesReceived,
@@ -463,6 +641,7 @@ class _$_ArticlesReceived implements _ArticlesReceived {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? watchAllStarted,
     TResult Function(ArticleSource articleSource)? watchFromSourceStarted,
+    TResult Function(KtList<String> articleIds)? watchByIdStarted,
     TResult Function(Either<ArticleFailure, KtList<Article>> failureOrArticles)?
         articlesReceived,
   }) {
@@ -474,6 +653,7 @@ class _$_ArticlesReceived implements _ArticlesReceived {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? watchAllStarted,
     TResult Function(ArticleSource articleSource)? watchFromSourceStarted,
+    TResult Function(KtList<String> articleIds)? watchByIdStarted,
     TResult Function(Either<ArticleFailure, KtList<Article>> failureOrArticles)?
         articlesReceived,
     required TResult orElse(),
@@ -490,6 +670,7 @@ class _$_ArticlesReceived implements _ArticlesReceived {
     required TResult Function(_WatchAllStarted value) watchAllStarted,
     required TResult Function(_WatchFromSourceStarted value)
         watchFromSourceStarted,
+    required TResult Function(_WatchByIdStarted value) watchByIdStarted,
     required TResult Function(_ArticlesReceived value) articlesReceived,
   }) {
     return articlesReceived(this);
@@ -500,6 +681,7 @@ class _$_ArticlesReceived implements _ArticlesReceived {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_WatchAllStarted value)? watchAllStarted,
     TResult Function(_WatchFromSourceStarted value)? watchFromSourceStarted,
+    TResult Function(_WatchByIdStarted value)? watchByIdStarted,
     TResult Function(_ArticlesReceived value)? articlesReceived,
   }) {
     return articlesReceived?.call(this);
@@ -510,6 +692,7 @@ class _$_ArticlesReceived implements _ArticlesReceived {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_WatchAllStarted value)? watchAllStarted,
     TResult Function(_WatchFromSourceStarted value)? watchFromSourceStarted,
+    TResult Function(_WatchByIdStarted value)? watchByIdStarted,
     TResult Function(_ArticlesReceived value)? articlesReceived,
     required TResult orElse(),
   }) {

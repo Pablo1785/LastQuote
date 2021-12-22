@@ -6,11 +6,16 @@ import 'article.dart';
 import 'article_failure.dart';
 
 abstract class IArticleRepository {
-  // get articles
+  // listen for articles
   Stream<Either<ArticleFailure, KtList<Article>>> watchAll();
 
-  // get articles from source
+  // listen for articles from source
   Stream<Either<ArticleFailure, KtList<Article>>> watchFromSource(
     ArticleSource articleSource,
+  );
+
+  // listen for articles by id
+  Stream<Either<ArticleFailure, KtList<Article>>> watchById(
+    KtList<String> articleIds,
   );
 }
