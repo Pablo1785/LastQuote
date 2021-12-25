@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ddd/domain/core/value_objects.dart';
+import 'package:ddd/domain/data_sources/data_source.dart';
 import 'package:ddd/domain/data_sources/data_source_failure.dart';
 import 'package:ddd/domain/data_sources/data_source_status.dart';
+import 'package:ddd/domain/data_sources/i_data_source_repository.dart';
 import 'package:ddd/domain/data_sources/i_data_source_status_repository.dart';
 import 'package:ddd/infrastructure/core/firestore_helpers.dart';
 import 'package:ddd/infrastructure/data_sources/data_source_dtos.dart';
@@ -26,14 +28,19 @@ class DataSourceStatusRepository implements IDataSourceStatusRepository {
     try {
       final userDocRef = await getIt<FirestoreHelper>().userDocument();
 
-      final userDataSourceStatuses = await _firestore
+      final userDataSourceStatusesSnapshot = await _firestore
           .collection('user_data_source_statuses')
           .where('user_id', isEqualTo: userDocRef.id)
           .get();
-      return _parseJunctionsAndHandleMissing(
-        snapshot: userDataSourceStatuses,
-        dataSourceIds: dataSourceIds,
-        userId: userDocRef.id,
+      return right<DataSourceFailure, KtList<DataSourceStatus>>(
+        userDataSourceStatusesSnapshot.docs
+            .where(
+              (doc) => doc.exists,
+            )
+            .map(
+              (doc) => DataSourceStatusDto.fromFirestore(doc).toDomain(),
+            )
+            .toImmutableList(),
       );
     } on PlatformException catch (exception, stacktrace) {
       if (exception.message!.contains('permission')) {
@@ -46,72 +53,21 @@ class DataSourceStatusRepository implements IDataSourceStatusRepository {
     }
   }
 
-  Future<Either<DataSourceFailure, KtList<DataSourceStatus>>>
-      _parseJunctionsAndHandleMissing({
-    required QuerySnapshot<Map<String, dynamic>> snapshot,
-    required List<String> dataSourceIds,
+  @override
+  KtList<DataSourceStatus> createMissingJunctionEntities({
+    required KtList<DataSource> dataSources,
     required String userId,
-  }) async {
-    List<DataSourceStatus> dataSourceStatuses = snapshot.docs
-        .where(
-          (doc) => doc.exists,
-        )
-        .map(
-          (doc) => DataSourceStatusDto.fromFirestore(doc).toDomain(),
-        )
-        .toList();
-
-    // get loaded dataSources that do not have a junction with current user
-    final newDataSourceStatuses = _createMissingJunctionEntities(
-      dataSourceIds: dataSourceIds,
-      userId: userId,
-      dataSourceIdsWithExistingJunctions: dataSourceStatuses
-          .map(
-            (status) => status.dataSourceId.getOrCrash(),
-          )
-          .toList(),
-    );
-
-    // create missing dataSources
-    final failuresOrSuccesses = await Future.wait(
-      newDataSourceStatuses.map(
-        (e) => create(e),
-      ),
-    );
-
-    // check if all creates successful
-    final someFailureOrUnit = failuresOrSuccesses.firstWhere(
-      (element) => element.isLeft(),
-      orElse: () => right<DataSourceFailure, Unit>(unit),
-    );
-
-    // if any create unsuccessful, pass the creation failure as stream output
-    return someFailureOrUnit.fold(
-      (failure) => left<DataSourceFailure, KtList<DataSourceStatus>>(failure),
-      (_) => _addEntitiesToResultAndReturnSuccessCase(
-        newDataSourceStatuses: newDataSourceStatuses,
-        existingDataSourceStatuses: dataSourceStatuses,
-      ),
-    );
-  }
-
-  Either<DataSourceFailure, KtList<DataSourceStatus>>
-      _addEntitiesToResultAndReturnSuccessCase({
-    required List<DataSourceStatus> newDataSourceStatuses,
-    required List<DataSourceStatus> existingDataSourceStatuses,
+    required KtList<DataSourceStatus> dataSourceStatuses,
   }) {
-    existingDataSourceStatuses.addAll(newDataSourceStatuses);
-    return right<DataSourceFailure, KtList<DataSourceStatus>>(
-      existingDataSourceStatuses.toImmutableList(),
+    final dataSourceIds = dataSources.map(
+      (ds) => ds.id.getOrCrash(),
     );
-  }
+    final dataSourceIdsWithExistingJunctions = dataSourceStatuses.map(
+      (dss) => dss.dataSourceId.getOrCrash(),
+    );
 
-  List<DataSourceStatus> _createMissingJunctionEntities({
-    required List<String> dataSourceIds,
-    required String userId,
-    required List<String> dataSourceIdsWithExistingJunctions,
-  }) {
     return dataSourceIds
+        .asList()
         .where(
           (dataSourceId) =>
               !dataSourceIdsWithExistingJunctions.contains(dataSourceId),
@@ -132,7 +88,7 @@ class DataSourceStatusRepository implements IDataSourceStatusRepository {
             ),
           ),
         )
-        .toList();
+        .toImmutableList();
   }
 
   Either<DataSourceFailure, T> _handleException<T>(
@@ -154,7 +110,8 @@ class DataSourceStatusRepository implements IDataSourceStatusRepository {
 
   @override
   Future<Either<DataSourceFailure, Unit>> create(
-      DataSourceStatus dataSourceStatus) async {
+    DataSourceStatus dataSourceStatus,
+  ) async {
     try {
       final dataSourceStatusDto = DataSourceStatusDto.fromDomain(
         dataSourceStatus,
@@ -191,6 +148,39 @@ class DataSourceStatusRepository implements IDataSourceStatusRepository {
       return right(unit);
     } on Exception catch (e, stacktrace) {
       return _handleException<Unit>(e, stacktrace);
+    }
+  }
+
+  @override
+  Future<Either<DataSourceFailure, Unit>> batchCreate(
+    KtList<DataSourceStatus> dataSourceStatuses,
+  ) async {
+    try {
+      await _firestore.runTransaction(
+        (transaction) async {
+          for (var i = 0; i < dataSourceStatuses.size; i++) {
+            // Parse junction entity to json
+            final dataSourceStatusDto = DataSourceStatusDto.fromDomain(
+              dataSourceStatuses[i],
+            );
+            final dataSourceStatusDtoJson = dataSourceStatusDto.toJson();
+
+            // Add creation action to transaction
+            final userDataSourceStatusDocRef = _firestore
+                .collection('user_data_source_statuses')
+                .doc(dataSourceStatusDto.id);
+            transaction.set(
+              userDataSourceStatusDocRef,
+              dataSourceStatusDtoJson,
+            );
+          }
+        },
+      );
+      return right(unit);
+    } on Exception catch (_, __) {
+      return left(
+        const DataSourceFailure.unexpected(),
+      );
     }
   }
 }

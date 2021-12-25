@@ -11,32 +11,32 @@ import 'package:google_sign_in/google_sign_in.dart' as _i5;
 import 'package:injectable/injectable.dart' as _i2;
 
 import 'application/article_sources/article_source_picker/article_source_picker_bloc.dart'
-    as _i32;
-import 'application/article_term_counts/article_term_count_watcher/article_term_count_watcher_bloc.dart'
-    as _i24;
-import 'application/articles/article_watcher/article_watcher_bloc.dart' as _i25;
-import 'application/auth/auth_bloc.dart' as _i26;
-import 'application/auth/sign_in_form/sign_in_form_bloc.dart' as _i21;
-import 'application/data_sources/data_source_status_picker/data_source_status_picker_bloc.dart'
     as _i33;
+import 'application/article_term_counts/article_term_count_watcher/article_term_count_watcher_bloc.dart'
+    as _i26;
+import 'application/articles/article_watcher/article_watcher_bloc.dart' as _i27;
+import 'application/auth/auth_bloc.dart' as _i28;
+import 'application/auth/sign_in_form/sign_in_form_bloc.dart' as _i23;
+import 'application/data_sources/data_source_status_picker/data_source_status_picker_bloc.dart'
+    as _i29;
 import 'application/recommendations/recommendation_watcher/recommendation_watcher_bloc.dart'
-    as _i20;
-import 'application/user_article_engagement/user_article_engagement_actor/user_article_engagement_actor_bloc.dart'
     as _i22;
+import 'application/user_article_engagement/user_article_engagement_actor/user_article_engagement_actor_bloc.dart'
+    as _i24;
 import 'application/user_article_engagement/user_article_engagement_watcher/user_article_engagement_watcher_bloc.dart'
-    as _i23;
-import 'domain/article_sources/i_article_source_repository.dart' as _i28;
+    as _i25;
+import 'domain/article_sources/i_article_source_repository.dart' as _i31;
 import 'domain/article_sources/i_article_source_status_repository.dart' as _i8;
 import 'domain/article_term_counts/i_article_term_count_repository.dart'
     as _i10;
 import 'domain/articles/i_article_repository.dart' as _i6;
 import 'domain/auth/i_auth_facade.dart' as _i12;
-import 'domain/data_sources/i_data_source_repository.dart' as _i30;
-import 'domain/data_sources/i_data_source_status_repository.dart' as _i14;
-import 'domain/recommendations/i_recommendation_repository.dart' as _i16;
+import 'domain/data_sources/i_data_source_repository.dart' as _i14;
+import 'domain/data_sources/i_data_source_status_repository.dart' as _i16;
+import 'domain/recommendations/i_recommendation_repository.dart' as _i18;
 import 'domain/user_article_engagements/i_user_article_engagement_repository.dart'
-    as _i18;
-import 'infrastructure/article_sources/article_source_repository.dart' as _i29;
+    as _i20;
+import 'infrastructure/article_sources/article_source_repository.dart' as _i32;
 import 'infrastructure/article_sources/article_source_status_repository.dart'
     as _i9;
 import 'infrastructure/article_term_counts/article_term_count_repository.dart'
@@ -44,12 +44,12 @@ import 'infrastructure/article_term_counts/article_term_count_repository.dart'
 import 'infrastructure/articles/article_repository.dart' as _i7;
 import 'infrastructure/auth/firebase_auth_facade.dart' as _i13;
 import 'infrastructure/core/firebase_injectable_module.dart' as _i34;
-import 'infrastructure/core/firestore_helpers.dart' as _i27;
-import 'infrastructure/data_sources/data_source_repository.dart' as _i31;
-import 'infrastructure/data_sources/data_source_status_repository.dart' as _i15;
-import 'infrastructure/recommendations/recommendation_repository.dart' as _i17;
+import 'infrastructure/core/firestore_helpers.dart' as _i30;
+import 'infrastructure/data_sources/data_source_repository.dart' as _i15;
+import 'infrastructure/data_sources/data_source_status_repository.dart' as _i17;
+import 'infrastructure/recommendations/recommendation_repository.dart' as _i19;
 import 'infrastructure/user_article_engagements/user_article_engagement_repository.dart'
-    as _i19; // ignore_for_file: unnecessary_lambdas
+    as _i21; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -71,40 +71,40 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => _i11.ArticleTermCountRepository(get<_i4.FirebaseFirestore>()));
   gh.lazySingleton<_i12.IAuthFacade>(() => _i13.FirebaseAuthFacade(
       get<_i3.FirebaseAuth>(), get<_i5.GoogleSignIn>()));
-  gh.lazySingleton<_i14.IDataSourceStatusRepository>(
-      () => _i15.DataSourceStatusRepository(get<_i4.FirebaseFirestore>()));
-  gh.lazySingleton<_i16.IRecommendationRepository>(
-      () => _i17.RecommendationRepository(get<_i4.FirebaseFirestore>()));
-  gh.lazySingleton<_i18.IUserArticleEngagementRepository>(
-      () => _i19.UserArticleEngagementRepository(get<_i4.FirebaseFirestore>()));
-  gh.factory<_i20.RecommendationWatcherBloc>(() =>
-      _i20.RecommendationWatcherBloc(get<_i16.IRecommendationRepository>()));
-  gh.factory<_i21.SignInFormBloc>(
-      () => _i21.SignInFormBloc(get<_i12.IAuthFacade>()));
-  gh.factory<_i22.UserArticleEngagementActorBloc>(() =>
-      _i22.UserArticleEngagementActorBloc(
-          get<_i18.IUserArticleEngagementRepository>()));
-  gh.factory<_i23.UserArticleEngagementWatcherBloc>(() =>
-      _i23.UserArticleEngagementWatcherBloc(
-          get<_i18.IUserArticleEngagementRepository>()));
-  gh.factory<_i24.ArticleTermCountWatcherBloc>(() =>
-      _i24.ArticleTermCountWatcherBloc(
+  gh.lazySingleton<_i14.IDataSourceRepository>(
+      () => _i15.DataSourceRepository(get<_i4.FirebaseFirestore>()));
+  gh.lazySingleton<_i16.IDataSourceStatusRepository>(
+      () => _i17.DataSourceStatusRepository(get<_i4.FirebaseFirestore>()));
+  gh.lazySingleton<_i18.IRecommendationRepository>(
+      () => _i19.RecommendationRepository(get<_i4.FirebaseFirestore>()));
+  gh.lazySingleton<_i20.IUserArticleEngagementRepository>(
+      () => _i21.UserArticleEngagementRepository(get<_i4.FirebaseFirestore>()));
+  gh.factory<_i22.RecommendationWatcherBloc>(() =>
+      _i22.RecommendationWatcherBloc(get<_i18.IRecommendationRepository>()));
+  gh.factory<_i23.SignInFormBloc>(
+      () => _i23.SignInFormBloc(get<_i12.IAuthFacade>()));
+  gh.factory<_i24.UserArticleEngagementActorBloc>(() =>
+      _i24.UserArticleEngagementActorBloc(
+          get<_i20.IUserArticleEngagementRepository>()));
+  gh.factory<_i25.UserArticleEngagementWatcherBloc>(() =>
+      _i25.UserArticleEngagementWatcherBloc(
+          get<_i20.IUserArticleEngagementRepository>()));
+  gh.factory<_i26.ArticleTermCountWatcherBloc>(() =>
+      _i26.ArticleTermCountWatcherBloc(
           get<_i10.IArticleTermCountRepository>()));
-  gh.factory<_i25.ArticleWatcherBloc>(
-      () => _i25.ArticleWatcherBloc(get<_i6.IArticleRepository>()));
-  gh.factory<_i26.AuthBloc>(() => _i26.AuthBloc(get<_i12.IAuthFacade>()));
-  gh.factory<_i27.FirestoreHelper>(() => _i27.FirestoreHelper(
+  gh.factory<_i27.ArticleWatcherBloc>(
+      () => _i27.ArticleWatcherBloc(get<_i6.IArticleRepository>()));
+  gh.factory<_i28.AuthBloc>(() => _i28.AuthBloc(get<_i12.IAuthFacade>()));
+  gh.factory<_i29.DataSourceStatusPickerBloc>(() =>
+      _i29.DataSourceStatusPickerBloc(get<_i14.IDataSourceRepository>(),
+          get<_i16.IDataSourceStatusRepository>()));
+  gh.factory<_i30.FirestoreHelper>(() => _i30.FirestoreHelper(
       get<_i12.IAuthFacade>(), get<_i4.FirebaseFirestore>()));
-  gh.lazySingleton<_i28.IArticleSourceRepository>(() =>
-      _i29.ArticleSourceRepository(get<_i4.FirebaseFirestore>(),
+  gh.lazySingleton<_i31.IArticleSourceRepository>(() =>
+      _i32.ArticleSourceRepository(get<_i4.FirebaseFirestore>(),
           get<_i8.IArticleSourceStatusRepository>()));
-  gh.lazySingleton<_i30.IDataSourceRepository>(() => _i31.DataSourceRepository(
-      get<_i4.FirebaseFirestore>(), get<_i14.IDataSourceStatusRepository>()));
-  gh.factory<_i32.ArticleSourcePickerBloc>(
-      () => _i32.ArticleSourcePickerBloc(get<_i28.IArticleSourceRepository>()));
-  gh.factory<_i33.DataSourceStatusPickerBloc>(() =>
-      _i33.DataSourceStatusPickerBloc(get<_i30.IDataSourceRepository>(),
-          get<_i14.IDataSourceStatusRepository>()));
+  gh.factory<_i33.ArticleSourcePickerBloc>(
+      () => _i33.ArticleSourcePickerBloc(get<_i31.IArticleSourceRepository>()));
   return get;
 }
 

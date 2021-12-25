@@ -124,6 +124,8 @@ class ArticleRepository implements IArticleRepository {
             .toList();
     if (userEnabledArticleSourceIds.isEmpty) {
       yield left(const ArticleFailure.noActiveSource());
+    } else if (articleIds.isEmpty()) {
+      yield left(const ArticleFailure.noArticles());
     } else {
       yield* _firestore
           .collection('articles')

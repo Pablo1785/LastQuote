@@ -126,7 +126,6 @@ class FloatingLikeButton extends StatelessWidget {
               loadInProgress: (_) => IconButton(
                 icon: const Icon(
                   Icons.thumb_up_alt_outlined,
-                  color: Colors.yellow,
                 ),
                 onPressed: () {},
               ),

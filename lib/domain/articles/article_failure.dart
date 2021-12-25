@@ -11,5 +11,6 @@ abstract class ArticleFailure with _$ArticleFailure {
       _InsufficientPermissions;
   const factory ArticleFailure.sourceDisabled(ArticleSource articleSource) =
       _SourceDisabled;
+  const factory ArticleFailure.noArticles() = _NoArticles;
   const factory ArticleFailure.noActiveSource() = _NoActiveSource;
 }

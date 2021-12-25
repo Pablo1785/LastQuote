@@ -66,12 +66,14 @@ class RecommendationBasedBodyWidget extends StatelessWidget {
                       child: CircularProgressIndicator(),
                     ),
                     loadSuccess: (articlesLoadSuccessState) {
-                      context.read<UserArticleEngagementWatcherBloc>().add(
-                            UserArticleEngagementWatcherEvent
-                                .watchForCurrentUserAndArticlesStarted(
-                              articlesLoadSuccessState.articles,
-                            ),
-                          );
+                      if (articlesLoadSuccessState.articles.size > 0) {
+                        context.read<UserArticleEngagementWatcherBloc>().add(
+                              UserArticleEngagementWatcherEvent
+                                  .watchForCurrentUserAndArticlesStarted(
+                                articlesLoadSuccessState.articles,
+                              ),
+                            );
+                      }
                       return ArticleLoadSuccessWidget(
                         articles: articlesLoadSuccessState.articles,
                       );
@@ -146,7 +148,19 @@ class ArticleLoadFailureWidget extends StatelessWidget {
             height: 8,
           ),
           Text(
-            articleFailure.toString(),
+            articleFailure.map(
+              unexpected: (_) =>
+                  "Unexpected failure while loading your recommendations. Please, restart the application.",
+              insufficientPermissions: (_) =>
+                  "You don't have permission to view this content.",
+              sourceDisabled: (_) =>
+                  "You have disabled critical sources for displaying recommendations. Try enabling some recommendation sources so we can show you content.",
+              noActiveSource: (_) =>
+                  "We have not detected any enabled recommendation source for your account. Try enabling some sources in your settings or restart the application.",
+              noArticles: (_) =>
+                  "No recommendations match the selected criteria",
+            ),
+            textAlign: TextAlign.center,
           ),
         ],
       ),
@@ -193,6 +207,7 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      shrinkWrap: true,
       itemBuilder: (context, index) {
         final article = articles[index];
         if (article.failureOption.isSome()) {
@@ -231,7 +246,6 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
                       loadInProgress: (_) => IconButton(
                         icon: const Icon(
                           Icons.thumb_up_alt_outlined,
-                          color: Colors.yellow,
                         ),
                         onPressed: () {},
                       ),
@@ -244,7 +258,6 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
                       loadFailure: (_) => IconButton(
                         icon: const Icon(
                           Icons.thumb_up_alt_outlined,
-                          color: Colors.red,
                         ),
                         onPressed: () {},
                       ),

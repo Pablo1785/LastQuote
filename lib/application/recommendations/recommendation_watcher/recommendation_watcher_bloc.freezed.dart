@@ -29,6 +29,13 @@ class _$RecommendationWatcherEventTearOff {
     );
   }
 
+  _WatchFromSourceForCurrentUserStarted watchFromSourceForCurrentUserStarted(
+      ArticleSource articleSource) {
+    return _WatchFromSourceForCurrentUserStarted(
+      articleSource,
+    );
+  }
+
   _RecommendationsReceived recommendationsReceived(
       Either<RecommendationFailure, KtList<Recommendation>>
           failureOrRecommendations) {
@@ -48,6 +55,8 @@ mixin _$RecommendationWatcherEvent {
     required TResult Function() watchAllForCurrentUserStarted,
     required TResult Function(List<String> recommendationIds)
         watchSpecificRecommendationsForCurrentUserStarted,
+    required TResult Function(ArticleSource articleSource)
+        watchFromSourceForCurrentUserStarted,
     required TResult Function(
             Either<RecommendationFailure, KtList<Recommendation>>
                 failureOrRecommendations)
@@ -59,6 +68,8 @@ mixin _$RecommendationWatcherEvent {
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(ArticleSource articleSource)?
+        watchFromSourceForCurrentUserStarted,
     TResult Function(
             Either<RecommendationFailure, KtList<Recommendation>>
                 failureOrRecommendations)?
@@ -70,6 +81,8 @@ mixin _$RecommendationWatcherEvent {
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(ArticleSource articleSource)?
+        watchFromSourceForCurrentUserStarted,
     TResult Function(
             Either<RecommendationFailure, KtList<Recommendation>>
                 failureOrRecommendations)?
@@ -84,6 +97,8 @@ mixin _$RecommendationWatcherEvent {
     required TResult Function(
             _WatchSpecificRecommendationsForCurrentUserStarted value)
         watchSpecificRecommendationsForCurrentUserStarted,
+    required TResult Function(_WatchFromSourceForCurrentUserStarted value)
+        watchFromSourceForCurrentUserStarted,
     required TResult Function(_RecommendationsReceived value)
         recommendationsReceived,
   }) =>
@@ -94,6 +109,8 @@ mixin _$RecommendationWatcherEvent {
         watchAllForCurrentUserStarted,
     TResult Function(_WatchSpecificRecommendationsForCurrentUserStarted value)?
         watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(_WatchFromSourceForCurrentUserStarted value)?
+        watchFromSourceForCurrentUserStarted,
     TResult Function(_RecommendationsReceived value)? recommendationsReceived,
   }) =>
       throw _privateConstructorUsedError;
@@ -103,6 +120,8 @@ mixin _$RecommendationWatcherEvent {
         watchAllForCurrentUserStarted,
     TResult Function(_WatchSpecificRecommendationsForCurrentUserStarted value)?
         watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(_WatchFromSourceForCurrentUserStarted value)?
+        watchFromSourceForCurrentUserStarted,
     TResult Function(_RecommendationsReceived value)? recommendationsReceived,
     required TResult orElse(),
   }) =>
@@ -175,6 +194,8 @@ class _$_WatchAllForCurrentUserStarted
     required TResult Function() watchAllForCurrentUserStarted,
     required TResult Function(List<String> recommendationIds)
         watchSpecificRecommendationsForCurrentUserStarted,
+    required TResult Function(ArticleSource articleSource)
+        watchFromSourceForCurrentUserStarted,
     required TResult Function(
             Either<RecommendationFailure, KtList<Recommendation>>
                 failureOrRecommendations)
@@ -189,6 +210,8 @@ class _$_WatchAllForCurrentUserStarted
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(ArticleSource articleSource)?
+        watchFromSourceForCurrentUserStarted,
     TResult Function(
             Either<RecommendationFailure, KtList<Recommendation>>
                 failureOrRecommendations)?
@@ -203,6 +226,8 @@ class _$_WatchAllForCurrentUserStarted
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(ArticleSource articleSource)?
+        watchFromSourceForCurrentUserStarted,
     TResult Function(
             Either<RecommendationFailure, KtList<Recommendation>>
                 failureOrRecommendations)?
@@ -223,6 +248,8 @@ class _$_WatchAllForCurrentUserStarted
     required TResult Function(
             _WatchSpecificRecommendationsForCurrentUserStarted value)
         watchSpecificRecommendationsForCurrentUserStarted,
+    required TResult Function(_WatchFromSourceForCurrentUserStarted value)
+        watchFromSourceForCurrentUserStarted,
     required TResult Function(_RecommendationsReceived value)
         recommendationsReceived,
   }) {
@@ -236,6 +263,8 @@ class _$_WatchAllForCurrentUserStarted
         watchAllForCurrentUserStarted,
     TResult Function(_WatchSpecificRecommendationsForCurrentUserStarted value)?
         watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(_WatchFromSourceForCurrentUserStarted value)?
+        watchFromSourceForCurrentUserStarted,
     TResult Function(_RecommendationsReceived value)? recommendationsReceived,
   }) {
     return watchAllForCurrentUserStarted?.call(this);
@@ -248,6 +277,8 @@ class _$_WatchAllForCurrentUserStarted
         watchAllForCurrentUserStarted,
     TResult Function(_WatchSpecificRecommendationsForCurrentUserStarted value)?
         watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(_WatchFromSourceForCurrentUserStarted value)?
+        watchFromSourceForCurrentUserStarted,
     TResult Function(_RecommendationsReceived value)? recommendationsReceived,
     required TResult orElse(),
   }) {
@@ -348,6 +379,8 @@ class _$_WatchSpecificRecommendationsForCurrentUserStarted
     required TResult Function() watchAllForCurrentUserStarted,
     required TResult Function(List<String> recommendationIds)
         watchSpecificRecommendationsForCurrentUserStarted,
+    required TResult Function(ArticleSource articleSource)
+        watchFromSourceForCurrentUserStarted,
     required TResult Function(
             Either<RecommendationFailure, KtList<Recommendation>>
                 failureOrRecommendations)
@@ -362,6 +395,8 @@ class _$_WatchSpecificRecommendationsForCurrentUserStarted
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(ArticleSource articleSource)?
+        watchFromSourceForCurrentUserStarted,
     TResult Function(
             Either<RecommendationFailure, KtList<Recommendation>>
                 failureOrRecommendations)?
@@ -377,6 +412,8 @@ class _$_WatchSpecificRecommendationsForCurrentUserStarted
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(ArticleSource articleSource)?
+        watchFromSourceForCurrentUserStarted,
     TResult Function(
             Either<RecommendationFailure, KtList<Recommendation>>
                 failureOrRecommendations)?
@@ -398,6 +435,8 @@ class _$_WatchSpecificRecommendationsForCurrentUserStarted
     required TResult Function(
             _WatchSpecificRecommendationsForCurrentUserStarted value)
         watchSpecificRecommendationsForCurrentUserStarted,
+    required TResult Function(_WatchFromSourceForCurrentUserStarted value)
+        watchFromSourceForCurrentUserStarted,
     required TResult Function(_RecommendationsReceived value)
         recommendationsReceived,
   }) {
@@ -411,6 +450,8 @@ class _$_WatchSpecificRecommendationsForCurrentUserStarted
         watchAllForCurrentUserStarted,
     TResult Function(_WatchSpecificRecommendationsForCurrentUserStarted value)?
         watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(_WatchFromSourceForCurrentUserStarted value)?
+        watchFromSourceForCurrentUserStarted,
     TResult Function(_RecommendationsReceived value)? recommendationsReceived,
   }) {
     return watchSpecificRecommendationsForCurrentUserStarted?.call(this);
@@ -423,6 +464,8 @@ class _$_WatchSpecificRecommendationsForCurrentUserStarted
         watchAllForCurrentUserStarted,
     TResult Function(_WatchSpecificRecommendationsForCurrentUserStarted value)?
         watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(_WatchFromSourceForCurrentUserStarted value)?
+        watchFromSourceForCurrentUserStarted,
     TResult Function(_RecommendationsReceived value)? recommendationsReceived,
     required TResult orElse(),
   }) {
@@ -443,6 +486,196 @@ abstract class _WatchSpecificRecommendationsForCurrentUserStarted
   @JsonKey(ignore: true)
   _$WatchSpecificRecommendationsForCurrentUserStartedCopyWith<
           _WatchSpecificRecommendationsForCurrentUserStarted>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$WatchFromSourceForCurrentUserStartedCopyWith<$Res> {
+  factory _$WatchFromSourceForCurrentUserStartedCopyWith(
+          _WatchFromSourceForCurrentUserStarted value,
+          $Res Function(_WatchFromSourceForCurrentUserStarted) then) =
+      __$WatchFromSourceForCurrentUserStartedCopyWithImpl<$Res>;
+  $Res call({ArticleSource articleSource});
+
+  $ArticleSourceCopyWith<$Res> get articleSource;
+}
+
+/// @nodoc
+class __$WatchFromSourceForCurrentUserStartedCopyWithImpl<$Res>
+    extends _$RecommendationWatcherEventCopyWithImpl<$Res>
+    implements _$WatchFromSourceForCurrentUserStartedCopyWith<$Res> {
+  __$WatchFromSourceForCurrentUserStartedCopyWithImpl(
+      _WatchFromSourceForCurrentUserStarted _value,
+      $Res Function(_WatchFromSourceForCurrentUserStarted) _then)
+      : super(_value, (v) => _then(v as _WatchFromSourceForCurrentUserStarted));
+
+  @override
+  _WatchFromSourceForCurrentUserStarted get _value =>
+      super._value as _WatchFromSourceForCurrentUserStarted;
+
+  @override
+  $Res call({
+    Object? articleSource = freezed,
+  }) {
+    return _then(_WatchFromSourceForCurrentUserStarted(
+      articleSource == freezed
+          ? _value.articleSource
+          : articleSource // ignore: cast_nullable_to_non_nullable
+              as ArticleSource,
+    ));
+  }
+
+  @override
+  $ArticleSourceCopyWith<$Res> get articleSource {
+    return $ArticleSourceCopyWith<$Res>(_value.articleSource, (value) {
+      return _then(_value.copyWith(articleSource: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_WatchFromSourceForCurrentUserStarted
+    implements _WatchFromSourceForCurrentUserStarted {
+  const _$_WatchFromSourceForCurrentUserStarted(this.articleSource);
+
+  @override
+  final ArticleSource articleSource;
+
+  @override
+  String toString() {
+    return 'RecommendationWatcherEvent.watchFromSourceForCurrentUserStarted(articleSource: $articleSource)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _WatchFromSourceForCurrentUserStarted &&
+            (identical(other.articleSource, articleSource) ||
+                other.articleSource == articleSource));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, articleSource);
+
+  @JsonKey(ignore: true)
+  @override
+  _$WatchFromSourceForCurrentUserStartedCopyWith<
+          _WatchFromSourceForCurrentUserStarted>
+      get copyWith => __$WatchFromSourceForCurrentUserStartedCopyWithImpl<
+          _WatchFromSourceForCurrentUserStarted>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() watchAllForCurrentUserStarted,
+    required TResult Function(List<String> recommendationIds)
+        watchSpecificRecommendationsForCurrentUserStarted,
+    required TResult Function(ArticleSource articleSource)
+        watchFromSourceForCurrentUserStarted,
+    required TResult Function(
+            Either<RecommendationFailure, KtList<Recommendation>>
+                failureOrRecommendations)
+        recommendationsReceived,
+  }) {
+    return watchFromSourceForCurrentUserStarted(articleSource);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchAllForCurrentUserStarted,
+    TResult Function(List<String> recommendationIds)?
+        watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(ArticleSource articleSource)?
+        watchFromSourceForCurrentUserStarted,
+    TResult Function(
+            Either<RecommendationFailure, KtList<Recommendation>>
+                failureOrRecommendations)?
+        recommendationsReceived,
+  }) {
+    return watchFromSourceForCurrentUserStarted?.call(articleSource);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchAllForCurrentUserStarted,
+    TResult Function(List<String> recommendationIds)?
+        watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(ArticleSource articleSource)?
+        watchFromSourceForCurrentUserStarted,
+    TResult Function(
+            Either<RecommendationFailure, KtList<Recommendation>>
+                failureOrRecommendations)?
+        recommendationsReceived,
+    required TResult orElse(),
+  }) {
+    if (watchFromSourceForCurrentUserStarted != null) {
+      return watchFromSourceForCurrentUserStarted(articleSource);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_WatchAllForCurrentUserStarted value)
+        watchAllForCurrentUserStarted,
+    required TResult Function(
+            _WatchSpecificRecommendationsForCurrentUserStarted value)
+        watchSpecificRecommendationsForCurrentUserStarted,
+    required TResult Function(_WatchFromSourceForCurrentUserStarted value)
+        watchFromSourceForCurrentUserStarted,
+    required TResult Function(_RecommendationsReceived value)
+        recommendationsReceived,
+  }) {
+    return watchFromSourceForCurrentUserStarted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchAllForCurrentUserStarted value)?
+        watchAllForCurrentUserStarted,
+    TResult Function(_WatchSpecificRecommendationsForCurrentUserStarted value)?
+        watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(_WatchFromSourceForCurrentUserStarted value)?
+        watchFromSourceForCurrentUserStarted,
+    TResult Function(_RecommendationsReceived value)? recommendationsReceived,
+  }) {
+    return watchFromSourceForCurrentUserStarted?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchAllForCurrentUserStarted value)?
+        watchAllForCurrentUserStarted,
+    TResult Function(_WatchSpecificRecommendationsForCurrentUserStarted value)?
+        watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(_WatchFromSourceForCurrentUserStarted value)?
+        watchFromSourceForCurrentUserStarted,
+    TResult Function(_RecommendationsReceived value)? recommendationsReceived,
+    required TResult orElse(),
+  }) {
+    if (watchFromSourceForCurrentUserStarted != null) {
+      return watchFromSourceForCurrentUserStarted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _WatchFromSourceForCurrentUserStarted
+    implements RecommendationWatcherEvent {
+  const factory _WatchFromSourceForCurrentUserStarted(
+      ArticleSource articleSource) = _$_WatchFromSourceForCurrentUserStarted;
+
+  ArticleSource get articleSource;
+  @JsonKey(ignore: true)
+  _$WatchFromSourceForCurrentUserStartedCopyWith<
+          _WatchFromSourceForCurrentUserStarted>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -520,6 +753,8 @@ class _$_RecommendationsReceived implements _RecommendationsReceived {
     required TResult Function() watchAllForCurrentUserStarted,
     required TResult Function(List<String> recommendationIds)
         watchSpecificRecommendationsForCurrentUserStarted,
+    required TResult Function(ArticleSource articleSource)
+        watchFromSourceForCurrentUserStarted,
     required TResult Function(
             Either<RecommendationFailure, KtList<Recommendation>>
                 failureOrRecommendations)
@@ -534,6 +769,8 @@ class _$_RecommendationsReceived implements _RecommendationsReceived {
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(ArticleSource articleSource)?
+        watchFromSourceForCurrentUserStarted,
     TResult Function(
             Either<RecommendationFailure, KtList<Recommendation>>
                 failureOrRecommendations)?
@@ -548,6 +785,8 @@ class _$_RecommendationsReceived implements _RecommendationsReceived {
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(ArticleSource articleSource)?
+        watchFromSourceForCurrentUserStarted,
     TResult Function(
             Either<RecommendationFailure, KtList<Recommendation>>
                 failureOrRecommendations)?
@@ -568,6 +807,8 @@ class _$_RecommendationsReceived implements _RecommendationsReceived {
     required TResult Function(
             _WatchSpecificRecommendationsForCurrentUserStarted value)
         watchSpecificRecommendationsForCurrentUserStarted,
+    required TResult Function(_WatchFromSourceForCurrentUserStarted value)
+        watchFromSourceForCurrentUserStarted,
     required TResult Function(_RecommendationsReceived value)
         recommendationsReceived,
   }) {
@@ -581,6 +822,8 @@ class _$_RecommendationsReceived implements _RecommendationsReceived {
         watchAllForCurrentUserStarted,
     TResult Function(_WatchSpecificRecommendationsForCurrentUserStarted value)?
         watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(_WatchFromSourceForCurrentUserStarted value)?
+        watchFromSourceForCurrentUserStarted,
     TResult Function(_RecommendationsReceived value)? recommendationsReceived,
   }) {
     return recommendationsReceived?.call(this);
@@ -593,6 +836,8 @@ class _$_RecommendationsReceived implements _RecommendationsReceived {
         watchAllForCurrentUserStarted,
     TResult Function(_WatchSpecificRecommendationsForCurrentUserStarted value)?
         watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(_WatchFromSourceForCurrentUserStarted value)?
+        watchFromSourceForCurrentUserStarted,
     TResult Function(_RecommendationsReceived value)? recommendationsReceived,
     required TResult orElse(),
   }) {

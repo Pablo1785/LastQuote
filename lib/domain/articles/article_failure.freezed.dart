@@ -31,6 +31,10 @@ class _$ArticleFailureTearOff {
     );
   }
 
+  _NoArticles noArticles() {
+    return const _NoArticles();
+  }
+
   _NoActiveSource noActiveSource() {
     return const _NoActiveSource();
   }
@@ -46,6 +50,7 @@ mixin _$ArticleFailure {
     required TResult Function() unexpected,
     required TResult Function() insufficientPermissions,
     required TResult Function(ArticleSource articleSource) sourceDisabled,
+    required TResult Function() noArticles,
     required TResult Function() noActiveSource,
   }) =>
       throw _privateConstructorUsedError;
@@ -54,6 +59,7 @@ mixin _$ArticleFailure {
     TResult Function()? unexpected,
     TResult Function()? insufficientPermissions,
     TResult Function(ArticleSource articleSource)? sourceDisabled,
+    TResult Function()? noArticles,
     TResult Function()? noActiveSource,
   }) =>
       throw _privateConstructorUsedError;
@@ -62,6 +68,7 @@ mixin _$ArticleFailure {
     TResult Function()? unexpected,
     TResult Function()? insufficientPermissions,
     TResult Function(ArticleSource articleSource)? sourceDisabled,
+    TResult Function()? noArticles,
     TResult Function()? noActiveSource,
     required TResult orElse(),
   }) =>
@@ -72,6 +79,7 @@ mixin _$ArticleFailure {
     required TResult Function(_InsufficientPermissions value)
         insufficientPermissions,
     required TResult Function(_SourceDisabled value) sourceDisabled,
+    required TResult Function(_NoArticles value) noArticles,
     required TResult Function(_NoActiveSource value) noActiveSource,
   }) =>
       throw _privateConstructorUsedError;
@@ -80,6 +88,7 @@ mixin _$ArticleFailure {
     TResult Function(_Unexpected value)? unexpected,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
     TResult Function(_SourceDisabled value)? sourceDisabled,
+    TResult Function(_NoArticles value)? noArticles,
     TResult Function(_NoActiveSource value)? noActiveSource,
   }) =>
       throw _privateConstructorUsedError;
@@ -88,6 +97,7 @@ mixin _$ArticleFailure {
     TResult Function(_Unexpected value)? unexpected,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
     TResult Function(_SourceDisabled value)? sourceDisabled,
+    TResult Function(_NoArticles value)? noArticles,
     TResult Function(_NoActiveSource value)? noActiveSource,
     required TResult orElse(),
   }) =>
@@ -154,6 +164,7 @@ class _$_Unexpected implements _Unexpected {
     required TResult Function() unexpected,
     required TResult Function() insufficientPermissions,
     required TResult Function(ArticleSource articleSource) sourceDisabled,
+    required TResult Function() noArticles,
     required TResult Function() noActiveSource,
   }) {
     return unexpected();
@@ -165,6 +176,7 @@ class _$_Unexpected implements _Unexpected {
     TResult Function()? unexpected,
     TResult Function()? insufficientPermissions,
     TResult Function(ArticleSource articleSource)? sourceDisabled,
+    TResult Function()? noArticles,
     TResult Function()? noActiveSource,
   }) {
     return unexpected?.call();
@@ -176,6 +188,7 @@ class _$_Unexpected implements _Unexpected {
     TResult Function()? unexpected,
     TResult Function()? insufficientPermissions,
     TResult Function(ArticleSource articleSource)? sourceDisabled,
+    TResult Function()? noArticles,
     TResult Function()? noActiveSource,
     required TResult orElse(),
   }) {
@@ -192,6 +205,7 @@ class _$_Unexpected implements _Unexpected {
     required TResult Function(_InsufficientPermissions value)
         insufficientPermissions,
     required TResult Function(_SourceDisabled value) sourceDisabled,
+    required TResult Function(_NoArticles value) noArticles,
     required TResult Function(_NoActiveSource value) noActiveSource,
   }) {
     return unexpected(this);
@@ -203,6 +217,7 @@ class _$_Unexpected implements _Unexpected {
     TResult Function(_Unexpected value)? unexpected,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
     TResult Function(_SourceDisabled value)? sourceDisabled,
+    TResult Function(_NoArticles value)? noArticles,
     TResult Function(_NoActiveSource value)? noActiveSource,
   }) {
     return unexpected?.call(this);
@@ -214,6 +229,7 @@ class _$_Unexpected implements _Unexpected {
     TResult Function(_Unexpected value)? unexpected,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
     TResult Function(_SourceDisabled value)? sourceDisabled,
+    TResult Function(_NoArticles value)? noArticles,
     TResult Function(_NoActiveSource value)? noActiveSource,
     required TResult orElse(),
   }) {
@@ -273,6 +289,7 @@ class _$_InsufficientPermissions implements _InsufficientPermissions {
     required TResult Function() unexpected,
     required TResult Function() insufficientPermissions,
     required TResult Function(ArticleSource articleSource) sourceDisabled,
+    required TResult Function() noArticles,
     required TResult Function() noActiveSource,
   }) {
     return insufficientPermissions();
@@ -284,6 +301,7 @@ class _$_InsufficientPermissions implements _InsufficientPermissions {
     TResult Function()? unexpected,
     TResult Function()? insufficientPermissions,
     TResult Function(ArticleSource articleSource)? sourceDisabled,
+    TResult Function()? noArticles,
     TResult Function()? noActiveSource,
   }) {
     return insufficientPermissions?.call();
@@ -295,6 +313,7 @@ class _$_InsufficientPermissions implements _InsufficientPermissions {
     TResult Function()? unexpected,
     TResult Function()? insufficientPermissions,
     TResult Function(ArticleSource articleSource)? sourceDisabled,
+    TResult Function()? noArticles,
     TResult Function()? noActiveSource,
     required TResult orElse(),
   }) {
@@ -311,6 +330,7 @@ class _$_InsufficientPermissions implements _InsufficientPermissions {
     required TResult Function(_InsufficientPermissions value)
         insufficientPermissions,
     required TResult Function(_SourceDisabled value) sourceDisabled,
+    required TResult Function(_NoArticles value) noArticles,
     required TResult Function(_NoActiveSource value) noActiveSource,
   }) {
     return insufficientPermissions(this);
@@ -322,6 +342,7 @@ class _$_InsufficientPermissions implements _InsufficientPermissions {
     TResult Function(_Unexpected value)? unexpected,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
     TResult Function(_SourceDisabled value)? sourceDisabled,
+    TResult Function(_NoArticles value)? noArticles,
     TResult Function(_NoActiveSource value)? noActiveSource,
   }) {
     return insufficientPermissions?.call(this);
@@ -333,6 +354,7 @@ class _$_InsufficientPermissions implements _InsufficientPermissions {
     TResult Function(_Unexpected value)? unexpected,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
     TResult Function(_SourceDisabled value)? sourceDisabled,
+    TResult Function(_NoArticles value)? noArticles,
     TResult Function(_NoActiveSource value)? noActiveSource,
     required TResult orElse(),
   }) {
@@ -424,6 +446,7 @@ class _$_SourceDisabled implements _SourceDisabled {
     required TResult Function() unexpected,
     required TResult Function() insufficientPermissions,
     required TResult Function(ArticleSource articleSource) sourceDisabled,
+    required TResult Function() noArticles,
     required TResult Function() noActiveSource,
   }) {
     return sourceDisabled(articleSource);
@@ -435,6 +458,7 @@ class _$_SourceDisabled implements _SourceDisabled {
     TResult Function()? unexpected,
     TResult Function()? insufficientPermissions,
     TResult Function(ArticleSource articleSource)? sourceDisabled,
+    TResult Function()? noArticles,
     TResult Function()? noActiveSource,
   }) {
     return sourceDisabled?.call(articleSource);
@@ -446,6 +470,7 @@ class _$_SourceDisabled implements _SourceDisabled {
     TResult Function()? unexpected,
     TResult Function()? insufficientPermissions,
     TResult Function(ArticleSource articleSource)? sourceDisabled,
+    TResult Function()? noArticles,
     TResult Function()? noActiveSource,
     required TResult orElse(),
   }) {
@@ -462,6 +487,7 @@ class _$_SourceDisabled implements _SourceDisabled {
     required TResult Function(_InsufficientPermissions value)
         insufficientPermissions,
     required TResult Function(_SourceDisabled value) sourceDisabled,
+    required TResult Function(_NoArticles value) noArticles,
     required TResult Function(_NoActiveSource value) noActiveSource,
   }) {
     return sourceDisabled(this);
@@ -473,6 +499,7 @@ class _$_SourceDisabled implements _SourceDisabled {
     TResult Function(_Unexpected value)? unexpected,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
     TResult Function(_SourceDisabled value)? sourceDisabled,
+    TResult Function(_NoArticles value)? noArticles,
     TResult Function(_NoActiveSource value)? noActiveSource,
   }) {
     return sourceDisabled?.call(this);
@@ -484,6 +511,7 @@ class _$_SourceDisabled implements _SourceDisabled {
     TResult Function(_Unexpected value)? unexpected,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
     TResult Function(_SourceDisabled value)? sourceDisabled,
+    TResult Function(_NoArticles value)? noArticles,
     TResult Function(_NoActiveSource value)? noActiveSource,
     required TResult orElse(),
   }) {
@@ -502,6 +530,129 @@ abstract class _SourceDisabled implements ArticleFailure {
   @JsonKey(ignore: true)
   _$SourceDisabledCopyWith<_SourceDisabled> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$NoArticlesCopyWith<$Res> {
+  factory _$NoArticlesCopyWith(
+          _NoArticles value, $Res Function(_NoArticles) then) =
+      __$NoArticlesCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$NoArticlesCopyWithImpl<$Res> extends _$ArticleFailureCopyWithImpl<$Res>
+    implements _$NoArticlesCopyWith<$Res> {
+  __$NoArticlesCopyWithImpl(
+      _NoArticles _value, $Res Function(_NoArticles) _then)
+      : super(_value, (v) => _then(v as _NoArticles));
+
+  @override
+  _NoArticles get _value => super._value as _NoArticles;
+}
+
+/// @nodoc
+
+class _$_NoArticles implements _NoArticles {
+  const _$_NoArticles();
+
+  @override
+  String toString() {
+    return 'ArticleFailure.noArticles()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _NoArticles);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() unexpected,
+    required TResult Function() insufficientPermissions,
+    required TResult Function(ArticleSource articleSource) sourceDisabled,
+    required TResult Function() noArticles,
+    required TResult Function() noActiveSource,
+  }) {
+    return noArticles();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? unexpected,
+    TResult Function()? insufficientPermissions,
+    TResult Function(ArticleSource articleSource)? sourceDisabled,
+    TResult Function()? noArticles,
+    TResult Function()? noActiveSource,
+  }) {
+    return noArticles?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? unexpected,
+    TResult Function()? insufficientPermissions,
+    TResult Function(ArticleSource articleSource)? sourceDisabled,
+    TResult Function()? noArticles,
+    TResult Function()? noActiveSource,
+    required TResult orElse(),
+  }) {
+    if (noArticles != null) {
+      return noArticles();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Unexpected value) unexpected,
+    required TResult Function(_InsufficientPermissions value)
+        insufficientPermissions,
+    required TResult Function(_SourceDisabled value) sourceDisabled,
+    required TResult Function(_NoArticles value) noArticles,
+    required TResult Function(_NoActiveSource value) noActiveSource,
+  }) {
+    return noArticles(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_InsufficientPermissions value)? insufficientPermissions,
+    TResult Function(_SourceDisabled value)? sourceDisabled,
+    TResult Function(_NoArticles value)? noArticles,
+    TResult Function(_NoActiveSource value)? noActiveSource,
+  }) {
+    return noArticles?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_InsufficientPermissions value)? insufficientPermissions,
+    TResult Function(_SourceDisabled value)? sourceDisabled,
+    TResult Function(_NoArticles value)? noArticles,
+    TResult Function(_NoActiveSource value)? noActiveSource,
+    required TResult orElse(),
+  }) {
+    if (noArticles != null) {
+      return noArticles(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _NoArticles implements ArticleFailure {
+  const factory _NoArticles() = _$_NoArticles;
 }
 
 /// @nodoc
@@ -548,6 +699,7 @@ class _$_NoActiveSource implements _NoActiveSource {
     required TResult Function() unexpected,
     required TResult Function() insufficientPermissions,
     required TResult Function(ArticleSource articleSource) sourceDisabled,
+    required TResult Function() noArticles,
     required TResult Function() noActiveSource,
   }) {
     return noActiveSource();
@@ -559,6 +711,7 @@ class _$_NoActiveSource implements _NoActiveSource {
     TResult Function()? unexpected,
     TResult Function()? insufficientPermissions,
     TResult Function(ArticleSource articleSource)? sourceDisabled,
+    TResult Function()? noArticles,
     TResult Function()? noActiveSource,
   }) {
     return noActiveSource?.call();
@@ -570,6 +723,7 @@ class _$_NoActiveSource implements _NoActiveSource {
     TResult Function()? unexpected,
     TResult Function()? insufficientPermissions,
     TResult Function(ArticleSource articleSource)? sourceDisabled,
+    TResult Function()? noArticles,
     TResult Function()? noActiveSource,
     required TResult orElse(),
   }) {
@@ -586,6 +740,7 @@ class _$_NoActiveSource implements _NoActiveSource {
     required TResult Function(_InsufficientPermissions value)
         insufficientPermissions,
     required TResult Function(_SourceDisabled value) sourceDisabled,
+    required TResult Function(_NoArticles value) noArticles,
     required TResult Function(_NoActiveSource value) noActiveSource,
   }) {
     return noActiveSource(this);
@@ -597,6 +752,7 @@ class _$_NoActiveSource implements _NoActiveSource {
     TResult Function(_Unexpected value)? unexpected,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
     TResult Function(_SourceDisabled value)? sourceDisabled,
+    TResult Function(_NoArticles value)? noArticles,
     TResult Function(_NoActiveSource value)? noActiveSource,
   }) {
     return noActiveSource?.call(this);
@@ -608,6 +764,7 @@ class _$_NoActiveSource implements _NoActiveSource {
     TResult Function(_Unexpected value)? unexpected,
     TResult Function(_InsufficientPermissions value)? insufficientPermissions,
     TResult Function(_SourceDisabled value)? sourceDisabled,
+    TResult Function(_NoArticles value)? noArticles,
     TResult Function(_NoActiveSource value)? noActiveSource,
     required TResult orElse(),
   }) {

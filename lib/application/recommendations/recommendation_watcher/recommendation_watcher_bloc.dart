@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ddd/domain/article_sources/article_source.dart';
 import 'package:ddd/domain/recommendations/i_recommendation_repository.dart';
 import 'package:ddd/domain/recommendations/recommendation.dart';
 import 'package:ddd/domain/recommendations/recommendation_failure.dart';
@@ -47,6 +48,23 @@ class RecommendationWatcherBloc
           _recommendationStreamSubscription = _iRecommendationRepository
               .watchSpecificRecommendationsForCurrentUser(
                 e.recommendationIds,
+              )
+              .listen(
+                (failureOrRecommendations) => add(
+                  RecommendationWatcherEvent.recommendationsReceived(
+                    failureOrRecommendations,
+                  ),
+                ),
+              );
+        },
+        watchFromSourceForCurrentUserStarted: (e) async {
+          emit(
+            const RecommendationWatcherState.loadInProgress(),
+          );
+          await _recommendationStreamSubscription?.cancel();
+          _recommendationStreamSubscription = _iRecommendationRepository
+              .watchFromSourceForCurrentUser(
+                e.articleSource,
               )
               .listen(
                 (failureOrRecommendations) => add(

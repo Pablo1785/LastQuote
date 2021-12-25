@@ -12,9 +12,8 @@ import 'package:kt_dart/kt.dart';
 @LazySingleton(as: IDataSourceRepository)
 class DataSourceRepository implements IDataSourceRepository {
   final FirebaseFirestore _firestore;
-  final IDataSourceStatusRepository _dataSourceStatusRepository;
 
-  DataSourceRepository(this._firestore, this._dataSourceStatusRepository);
+  DataSourceRepository(this._firestore);
 
   @override
   Future<Either<DataSourceFailure, KtList<DataSource>>> getAll() async {
@@ -29,59 +28,6 @@ class DataSourceRepository implements IDataSourceRepository {
               (doc) => DataSourceDto.fromFirestore(doc).toDomain(),
             )
             .toImmutableList(),
-      );
-    } on PlatformException catch (exception, stacktrace) {
-      if (exception.message!.contains('permission')) {
-        return left(const DataSourceFailure.insufficientPermissions());
-      } else {
-        print(exception.toString());
-        print(stacktrace.toString());
-        return left(const DataSourceFailure.unexpected());
-      }
-    }
-  }
-
-  @override
-  Future<Either<DataSourceFailure, KtList<DataSource>>>
-      getEnabledByUser() async {
-    try {
-      final failureOrDataSourceStatuses =
-          await _dataSourceStatusRepository.getForCurrentUser();
-
-      return failureOrDataSourceStatuses.fold(
-        (failure) {
-          return left(failure);
-        },
-        (dataSourceStatuses) async {
-          // convert dataSourceStatus list to list of ids to use list.contains() on DataSources' ids
-          final enabledIds = dataSourceStatuses
-              .asList()
-              .where(
-                (dataSourceStatus) => dataSourceStatus.isEnabled,
-              )
-              .map(
-                (dataSourceStatus) =>
-                    dataSourceStatus.dataSourceId.getOrCrash(),
-              )
-              .toList();
-          final dataSourceQuery =
-              await _firestore.collection('data_sources').get();
-          return right(
-            dataSourceQuery.docs
-                .where(
-                  (doc) => doc.exists,
-                )
-                .map(
-                  (doc) => DataSourceDto.fromFirestore(doc).toDomain(),
-                )
-                .where(
-                  (dataSource) => enabledIds.contains(
-                    dataSource.id.getOrCrash(),
-                  ),
-                )
-                .toImmutableList(),
-          );
-        },
       );
     } on PlatformException catch (exception, stacktrace) {
       if (exception.message!.contains('permission')) {

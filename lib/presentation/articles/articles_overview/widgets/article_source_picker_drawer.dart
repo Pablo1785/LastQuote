@@ -3,6 +3,7 @@ import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ddd/application/article_sources/article_source_picker/article_source_picker_bloc.dart';
 import 'package:ddd/application/articles/article_watcher/article_watcher_bloc.dart';
+import 'package:ddd/application/recommendations/recommendation_watcher/recommendation_watcher_bloc.dart';
 import 'package:ddd/domain/article_sources/article_source.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,9 +42,7 @@ class ArticleSourcePickerDrawer extends HookWidget {
                   -1,
                 );
               },
-              filterInProgress: (_) => const CircularProgressIndicator(
-                color: Colors.orange,
-              ),
+              filterInProgress: (_) => const CircularProgressIndicator(),
               filterFailure: (failure) => Container(
                 height: 30,
                 width: 40,
@@ -52,13 +51,15 @@ class ArticleSourcePickerDrawer extends HookWidget {
                     failure.articleSourceFailure.toString()),
               ),
               filterSuccess: (filterSuccessState) {
-                context.read<ArticleWatcherBloc>().add(
+                context.read<RecommendationWatcherBloc>().add(
                       filterSuccessState.pickedSourceIndex >= 0
-                          ? ArticleWatcherEvent.watchFromSourceStarted(
+                          ? RecommendationWatcherEvent
+                              .watchFromSourceForCurrentUserStarted(
                               filterSuccessState.articleSources[
                                   filterSuccessState.pickedSourceIndex],
                             )
-                          : const ArticleWatcherEvent.watchAllStarted(),
+                          : const RecommendationWatcherEvent
+                              .watchAllForCurrentUserStarted(),
                     );
                 return ArticleSourceFilterOrLoadSuccessList(
                   filterSuccessState.articleSources,
@@ -113,8 +114,9 @@ class ArticleSourceFilterOrLoadSuccessList extends StatelessWidget {
                       ),
                     ),
                   );
-              context.read<ArticleWatcherBloc>().add(
-                    const ArticleWatcherEvent.watchAllStarted(),
+              context.read<RecommendationWatcherBloc>().add(
+                    const RecommendationWatcherEvent
+                        .watchAllForCurrentUserStarted(),
                   );
             },
             child: const Text("Clear selection"),

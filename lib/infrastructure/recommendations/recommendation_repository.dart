@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ddd/domain/article_sources/article_source.dart';
 import 'package:ddd/infrastructure/core/firestore_helpers.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
@@ -60,6 +61,42 @@ class RecommendationRepository implements IRecommendationRepository {
         .where(
           FieldPath.documentId,
           whereIn: recommendationIds,
+        )
+        .limit(10)
+        .snapshots()
+        .map(
+          (snapshot) => right<RecommendationFailure, KtList<Recommendation>>(
+            snapshot.docs
+                .map(
+                  (doc) => RecommendationDto.fromFirestore(doc).toDomain(),
+                )
+                .toImmutableList(),
+          ),
+        )
+        .onErrorReturnWith(
+      (exception, stacktrace) {
+        if (exception is PlatformException &&
+            exception.message!.contains('permission')) {
+          return left(const RecommendationFailure.insufficientPermissions());
+        } else {
+          print(exception.toString());
+          print(stacktrace.toString());
+          return left(const RecommendationFailure.unexpected());
+        }
+      },
+    );
+  }
+
+  Stream<Either<RecommendationFailure, KtList<Recommendation>>>
+      watchFromSourceForCurrentUser(
+    ArticleSource articleSource,
+  ) async* {
+    final userDocRef = await getIt<FirestoreHelper>().userDocument();
+    yield* userDocRef
+        .collection('recommendations')
+        .where(
+          'article_source_id',
+          isEqualTo: articleSource.id.getOrCrash(),
         )
         .limit(10)
         .snapshots()

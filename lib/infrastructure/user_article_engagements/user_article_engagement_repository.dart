@@ -87,7 +87,7 @@ class UserArticleEngagementRepository
                 _handleException<KtMap<String, UserArticleEngagement>>(
                     exception, stacktrace),
           );
-    } on PlatformException catch (exception, stacktrace) {
+    } on Exception catch (exception, stacktrace) {
       yield _handleException<KtMap<String, UserArticleEngagement>>(
           exception, stacktrace);
     }
@@ -215,6 +215,9 @@ class UserArticleEngagementRepository
     } else if (exception is FirebaseException &&
         exception.message!.contains('NOT_FOUND')) {
       return left(const UserArticleEngagementFailure.documentNotFound());
+    } else if (exception is FirebaseException &&
+        exception.message!.contains('empty')) {
+      return left(const UserArticleEngagementFailure.noEngagement());
     } else {
       print(exception.toString());
       print(stackTrace.toString());
