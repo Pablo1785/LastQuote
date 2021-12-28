@@ -13,6 +13,7 @@ abstract class IRecommendationRepository {
       watchSpecificRecommendationsForCurrentUser(
     List<String> recommendationIds,
   );
+
   Stream<Either<RecommendationFailure, KtList<Recommendation>>>
       watchFromSourceForCurrentUser(
     ArticleSource articleSource,

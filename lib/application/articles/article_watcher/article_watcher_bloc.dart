@@ -74,6 +74,36 @@ class ArticleWatcherBloc
                 ),
               );
         },
+        watchFromSourceByIdsStarted: (e) async {
+          emit(
+            const ArticleWatcherState.loadInProgress(),
+          );
+
+          await _articleStreamSubscription?.cancel();
+          _articleStreamSubscription = _iArticleRepository
+              .watchById(
+            e.articleIds,
+          )
+              .listen(
+            (failureOrArticles) {
+              add(
+                ArticleWatcherEvent.articlesReceived(
+                  failureOrArticles.fold(
+                    (failure) => left(failure),
+                    (articles) => right(
+                      articles
+                          .asList()
+                          .where(
+                            (article) => article.sourceId == e.articleSource.id,
+                          )
+                          .toImmutableList(),
+                    ),
+                  ),
+                ),
+              );
+            },
+          );
+        },
       );
     });
   }
