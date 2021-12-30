@@ -87,7 +87,7 @@ class _ArticlesOverviewPageState extends State<ArticlesOverviewPage> {
                 color:
                     Theme.of(context).scaffoldBackgroundColor.withAlpha(0x55),
               ),
-              preferredSize: Size.fromHeight(
+              preferredSize: const Size.fromHeight(
                 10.0,
               ),
             ),

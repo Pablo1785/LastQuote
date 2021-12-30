@@ -20,7 +20,43 @@ class UserArticleEngagementActorBloc extends Bloc<
   ) : super(const _Initial()) {
     on<UserArticleEngagementActorEvent>((event, emit) async {
       await event.map(
-        sharePressed: (_) {},
+        sharePressed: (e) async {
+          emit(
+            const UserArticleEngagementActorState.actionInProgress(),
+          );
+
+          await e.failureOrUserArticleEngagement.fold(
+            (failure) async {
+              emit(
+                UserArticleEngagementActorState.shareFailure(
+                  failure,
+                ),
+              );
+            },
+            (userArticleEngagement) async {
+              if (!userArticleEngagement.isShared) {
+                final updatedUserArticleEngagement =
+                    userArticleEngagement.copyWith(isShared: true);
+
+                (await _iUserArticleEngagementRepository.update(
+                  updatedUserArticleEngagement,
+                ))
+                    .fold(
+                  (failure) => emit(
+                    UserArticleEngagementActorState.shareFailure(
+                      failure,
+                    ),
+                  ),
+                  (_) => emit(
+                    UserArticleEngagementActorState.shareOpened(
+                      updatedUserArticleEngagement,
+                    ),
+                  ),
+                );
+              }
+            },
+          );
+        },
         likePressed: (e) async {
           emit(
             const UserArticleEngagementActorState.actionInProgress(),
@@ -46,8 +82,79 @@ class UserArticleEngagementActorBloc extends Bloc<
             ),
           );
         },
-        dismissPressed: (_) {},
-        openPressed: (_) {},
+        dismissPressed: (e) async {
+          emit(
+            const UserArticleEngagementActorState.actionInProgress(),
+          );
+
+          await e.failureOrUserArticleEngagement.fold(
+            (failure) async {
+              emit(
+                UserArticleEngagementActorState.dismissFailure(
+                  failure,
+                ),
+              );
+            },
+            (userArticleEngagement) async {
+              if (!userArticleEngagement.isDismissed) {
+                final updatedUserArticleEngagement =
+                    userArticleEngagement.copyWith(isDismissed: true);
+                (await _iUserArticleEngagementRepository.update(
+                  updatedUserArticleEngagement,
+                ))
+                    .fold(
+                  (failure) => emit(
+                    UserArticleEngagementActorState.dismissFailure(
+                      failure,
+                    ),
+                  ),
+                  (_) => emit(
+                    UserArticleEngagementActorState.dismissSuccess(
+                      updatedUserArticleEngagement,
+                    ),
+                  ),
+                );
+              }
+            },
+          );
+        },
+        openPressed: (e) async {
+          emit(
+            const UserArticleEngagementActorState.actionInProgress(),
+          );
+
+          await e.failureOrUserArticleEngagement.fold(
+            (failure) async {
+              emit(
+                UserArticleEngagementActorState.openFailure(
+                  failure,
+                ),
+              );
+            },
+            (userArticleEngagement) async {
+              if (!userArticleEngagement.isOpened) {
+                final updatedUserArticleEngagement =
+                    userArticleEngagement.copyWith(isOpened: true);
+
+                (await _iUserArticleEngagementRepository.update(
+                  updatedUserArticleEngagement,
+                ))
+                    .fold(
+                  (failure) => emit(
+                    UserArticleEngagementActorState.openFailure(
+                      failure,
+                    ),
+                  ),
+                  (_) => emit(
+                    UserArticleEngagementActorState.openSuccess(
+                      updatedUserArticleEngagement,
+                    ),
+                  ),
+                );
+              }
+            },
+          );
+        },
       );
     });
   }

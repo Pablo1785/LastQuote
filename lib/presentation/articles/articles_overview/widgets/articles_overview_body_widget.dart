@@ -1,5 +1,6 @@
 import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:dartz/dartz.dart';
 import 'package:ddd/application/article_sources/article_source_picker/article_source_picker_bloc.dart';
 import 'package:ddd/application/article_term_counts/article_term_count_watcher/article_term_count_watcher_bloc.dart';
 import 'package:ddd/application/recommendations/recommendation_watcher/recommendation_watcher_bloc.dart';
@@ -348,6 +349,22 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
                 }
               }(),
               onTap: () {
+                final userArticleEngagementActorBloc =
+                    context.read<UserArticleEngagementActorBloc>();
+                final userArticleEngagementWatcherBloc =
+                    context.read<UserArticleEngagementWatcherBloc>();
+
+                userArticleEngagementWatcherBloc.state.maybeMap(
+                  loadSuccess: (loadSuccessStateUserArticleEngagementActor) {
+                    userArticleEngagementActorBloc.add(
+                      UserArticleEngagementActorEvent.openPressed(
+                        right(loadSuccessStateUserArticleEngagementActor
+                            .userArticleEngagements[article.id.getOrCrash()]!),
+                      ),
+                    );
+                  },
+                  orElse: () {},
+                );
                 AutoRouter.of(context).push(
                   ArticleDetailRoute(
                     article: article,
@@ -355,6 +372,23 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
                 );
               },
               onLongPress: () {
+                final userArticleEngagementActorBloc =
+                    context.read<UserArticleEngagementActorBloc>();
+                final userArticleEngagementWatcherBloc =
+                    context.read<UserArticleEngagementWatcherBloc>();
+
+                userArticleEngagementWatcherBloc.state.maybeMap(
+                  loadSuccess: (loadSuccessStateUserArticleEngagementActor) {
+                    userArticleEngagementActorBloc.add(
+                      UserArticleEngagementActorEvent.sharePressed(
+                        right(loadSuccessStateUserArticleEngagementActor
+                            .userArticleEngagements[article.id.getOrCrash()]!),
+                      ),
+                    );
+                  },
+                  orElse: () {},
+                );
+
                 Share.share(
                   "Check out this article I found on The Last Quote: " +
                       article.url.getOrCrash(),
