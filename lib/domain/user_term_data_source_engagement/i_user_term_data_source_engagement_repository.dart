@@ -34,4 +34,9 @@ abstract class IUserTermDataSourceEngagementRepository {
 
   Future<Either<UserTermDataSourceEngagementFailure, Unit>> update(
       UserTermDataSourceEngagement userTermDataSourceEngagement);
+
+  Future<
+      Either<UserTermDataSourceEngagementFailure,
+          UserTermDataSourceEngagement>> get(
+      UserTermDataSourceEngagement userTermDataSourceEngagement);
 }
