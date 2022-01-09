@@ -206,7 +206,7 @@ class UserTermDataSourceEngagementRepository
   Future<
       Either<UserTermDataSourceEngagementFailure,
           UserTermDataSourceEngagement>> getForCurrentUserAndTerm(
-    Term term,
+    String termId,
   ) {
     // TODO: implement getForCurrentUserAndTerm
     throw UnimplementedError();
@@ -216,15 +216,10 @@ class UserTermDataSourceEngagementRepository
   Stream<
       Either<UserTermDataSourceEngagementFailure,
           KtList<UserTermDataSourceEngagement>>> watchForCurrentUserAndTerms(
-    KtList<Term> terms,
+    KtList<String> termIds,
   ) async* {
     try {
       final userDocRef = await getIt<FirestoreHelper>().userDocument();
-      final termIds = terms.iter
-          .map(
-            (term) => term.idAndValue,
-          )
-          .toImmutableList();
 
       yield* _firestore
           .collection('user_term_data_source_engagement')
@@ -259,62 +254,56 @@ class UserTermDataSourceEngagementRepository
   Stream<
           Either<UserTermDataSourceEngagementFailure,
               KtList<UserTermDataSourceEngagement>>>
-      watchForCurrentUserTermsAndDataSources(
-    KtList<Term> terms,
-    KtList<DataSource> dataSources,
+      watchForCurrentUserTermsAndDataSource(
+    KtList<String> termIds,
+    String dataSourceId,
   ) async* {
-    try {
-      final userDocRef = await getIt<FirestoreHelper>().userDocument();
-      final termIds = terms.iter
-          .map(
-            (term) => term.idAndValue,
-          )
-          .toImmutableList();
-      final dataSourceIds = dataSources.iter
-          .map(
-            (dataSource) => dataSource.id.getOrCrash(),
-          )
-          .toImmutableList();
+    if (termIds.isEmpty()) {
+      yield right(const KtList<UserTermDataSourceEngagement>.empty());
+    } else {
+      try {
+        final userDocRef = await getIt<FirestoreHelper>().userDocument();
 
-      yield* _firestore
-          .collection('user_term_data_source_engagement')
-          .where('user_id', isEqualTo: userDocRef.id)
-          .where('data_source_id', whereIn: dataSourceIds.asList())
-          .where('term_id', whereIn: termIds.asList())
-          .orderBy(
-            'share_count',
-            descending: true,
-          )
-          .orderBy(
-            'like_count',
-            descending: true,
-          )
-          .orderBy(
-            'open_count',
-            descending: true,
-          )
-          .snapshots()
-          .asyncMap(
-            (snapshot) async => right<UserTermDataSourceEngagementFailure,
-                KtList<UserTermDataSourceEngagement>>(
-              snapshot.docs
-                  .map(
-                    (userTermDataSourceEngagementDoc) =>
-                        UserTermDataSourceEngagementDto.fromFirestore(
-                                userTermDataSourceEngagementDoc)
-                            .toDomain(),
-                  )
-                  .toImmutableList(),
-            ),
-          )
-          .onErrorReturnWith(
-            (exception, stacktrace) =>
-                _handleException<KtList<UserTermDataSourceEngagement>>(
-                    exception, stacktrace),
-          );
-    } on Exception catch (exception, stacktrace) {
-      yield _handleException<KtList<UserTermDataSourceEngagement>>(
-          exception, stacktrace);
+        yield* _firestore
+            .collection('user_term_data_source_engagement')
+            .where('user_id', isEqualTo: userDocRef.id)
+            .where('data_source_id', isEqualTo: dataSourceId)
+            .where('term_id', whereIn: termIds.asList())
+            .orderBy(
+              'share_count',
+              descending: true,
+            )
+            .orderBy(
+              'like_count',
+              descending: true,
+            )
+            .orderBy(
+              'open_count',
+              descending: true,
+            )
+            .snapshots()
+            .asyncMap(
+              (snapshot) async => right<UserTermDataSourceEngagementFailure,
+                  KtList<UserTermDataSourceEngagement>>(
+                snapshot.docs
+                    .map(
+                      (userTermDataSourceEngagementDoc) =>
+                          UserTermDataSourceEngagementDto.fromFirestore(
+                                  userTermDataSourceEngagementDoc)
+                              .toDomain(),
+                    )
+                    .toImmutableList(),
+              ),
+            )
+            .onErrorReturnWith(
+              (exception, stacktrace) =>
+                  _handleException<KtList<UserTermDataSourceEngagement>>(
+                      exception, stacktrace),
+            );
+      } on Exception catch (exception, stacktrace) {
+        yield _handleException<KtList<UserTermDataSourceEngagement>>(
+            exception, stacktrace);
+      }
     }
   }
 }

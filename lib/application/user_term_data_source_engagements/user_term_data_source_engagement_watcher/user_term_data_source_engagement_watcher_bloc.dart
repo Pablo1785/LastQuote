@@ -33,7 +33,7 @@ class UserTermDataSourceEngagementWatcherBloc extends Bloc<
     on<UserTermDataSourceEngagementWatcherEvent>(
       (event, emit) async {
         await event.map(
-          watchForCurrentUserTermsAndDataSourcesStarted: (e) async {
+          watchForCurrentUserTermsAndDataSourceStarted: (e) async {
             emit(
               const UserTermDataSourceEngagementWatcherState.loadInProgress(),
             );
@@ -41,9 +41,9 @@ class UserTermDataSourceEngagementWatcherBloc extends Bloc<
             await _userTermDataSourceEngagementStreamSubscription?.cancel();
             _userTermDataSourceEngagementStreamSubscription =
                 _iUserTermDataSourceEngagementRepository
-                    .watchForCurrentUserTermsAndDataSources(
-                      e.terms,
-                      e.dataSources,
+                    .watchForCurrentUserTermsAndDataSource(
+                      e.termIds,
+                      e.dataSourceId,
                     )
                     .listen(
                       (failureOrUserTermDataSourceEngagements) => add(

@@ -17,6 +17,15 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$ArticleTermCountWatcherEventTearOff {
   const _$ArticleTermCountWatcherEventTearOff();
 
+  _GetForEachArticleStarted getForEachArticleStarted(
+      KtList<Article> articles, bool descending, int limitPerArticle) {
+    return _GetForEachArticleStarted(
+      articles,
+      descending,
+      limitPerArticle,
+    );
+  }
+
   _WatchForArticlesStarted watchForArticlesStarted(KtList<Article> articles) {
     return _WatchForArticlesStarted(
       articles,
@@ -39,6 +48,9 @@ const $ArticleTermCountWatcherEvent = _$ArticleTermCountWatcherEventTearOff();
 mixin _$ArticleTermCountWatcherEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            KtList<Article> articles, bool descending, int limitPerArticle)
+        getForEachArticleStarted,
     required TResult Function(KtList<Article> articles) watchForArticlesStarted,
     required TResult Function(
             Either<ArticleTermCountFailure, KtList<ArticleTermCount>>
@@ -48,6 +60,9 @@ mixin _$ArticleTermCountWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(
+            KtList<Article> articles, bool descending, int limitPerArticle)?
+        getForEachArticleStarted,
     TResult Function(KtList<Article> articles)? watchForArticlesStarted,
     TResult Function(
             Either<ArticleTermCountFailure, KtList<ArticleTermCount>>
@@ -57,6 +72,9 @@ mixin _$ArticleTermCountWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            KtList<Article> articles, bool descending, int limitPerArticle)?
+        getForEachArticleStarted,
     TResult Function(KtList<Article> articles)? watchForArticlesStarted,
     TResult Function(
             Either<ArticleTermCountFailure, KtList<ArticleTermCount>>
@@ -67,6 +85,8 @@ mixin _$ArticleTermCountWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_GetForEachArticleStarted value)
+        getForEachArticleStarted,
     required TResult Function(_WatchForArticlesStarted value)
         watchForArticlesStarted,
     required TResult Function(_ArticleTermCountsReceived value)
@@ -75,6 +95,7 @@ mixin _$ArticleTermCountWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_GetForEachArticleStarted value)? getForEachArticleStarted,
     TResult Function(_WatchForArticlesStarted value)? watchForArticlesStarted,
     TResult Function(_ArticleTermCountsReceived value)?
         articleTermCountsReceived,
@@ -82,6 +103,7 @@ mixin _$ArticleTermCountWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetForEachArticleStarted value)? getForEachArticleStarted,
     TResult Function(_WatchForArticlesStarted value)? watchForArticlesStarted,
     TResult Function(_ArticleTermCountsReceived value)?
         articleTermCountsReceived,
@@ -106,6 +128,194 @@ class _$ArticleTermCountWatcherEventCopyWithImpl<$Res>
   final ArticleTermCountWatcherEvent _value;
   // ignore: unused_field
   final $Res Function(ArticleTermCountWatcherEvent) _then;
+}
+
+/// @nodoc
+abstract class _$GetForEachArticleStartedCopyWith<$Res> {
+  factory _$GetForEachArticleStartedCopyWith(_GetForEachArticleStarted value,
+          $Res Function(_GetForEachArticleStarted) then) =
+      __$GetForEachArticleStartedCopyWithImpl<$Res>;
+  $Res call({KtList<Article> articles, bool descending, int limitPerArticle});
+}
+
+/// @nodoc
+class __$GetForEachArticleStartedCopyWithImpl<$Res>
+    extends _$ArticleTermCountWatcherEventCopyWithImpl<$Res>
+    implements _$GetForEachArticleStartedCopyWith<$Res> {
+  __$GetForEachArticleStartedCopyWithImpl(_GetForEachArticleStarted _value,
+      $Res Function(_GetForEachArticleStarted) _then)
+      : super(_value, (v) => _then(v as _GetForEachArticleStarted));
+
+  @override
+  _GetForEachArticleStarted get _value =>
+      super._value as _GetForEachArticleStarted;
+
+  @override
+  $Res call({
+    Object? articles = freezed,
+    Object? descending = freezed,
+    Object? limitPerArticle = freezed,
+  }) {
+    return _then(_GetForEachArticleStarted(
+      articles == freezed
+          ? _value.articles
+          : articles // ignore: cast_nullable_to_non_nullable
+              as KtList<Article>,
+      descending == freezed
+          ? _value.descending
+          : descending // ignore: cast_nullable_to_non_nullable
+              as bool,
+      limitPerArticle == freezed
+          ? _value.limitPerArticle
+          : limitPerArticle // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetForEachArticleStarted implements _GetForEachArticleStarted {
+  const _$_GetForEachArticleStarted(
+      this.articles, this.descending, this.limitPerArticle);
+
+  @override
+  final KtList<Article> articles;
+  @override
+  final bool descending;
+  @override
+  final int limitPerArticle;
+
+  @override
+  String toString() {
+    return 'ArticleTermCountWatcherEvent.getForEachArticleStarted(articles: $articles, descending: $descending, limitPerArticle: $limitPerArticle)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _GetForEachArticleStarted &&
+            (identical(other.articles, articles) ||
+                other.articles == articles) &&
+            (identical(other.descending, descending) ||
+                other.descending == descending) &&
+            (identical(other.limitPerArticle, limitPerArticle) ||
+                other.limitPerArticle == limitPerArticle));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, articles, descending, limitPerArticle);
+
+  @JsonKey(ignore: true)
+  @override
+  _$GetForEachArticleStartedCopyWith<_GetForEachArticleStarted> get copyWith =>
+      __$GetForEachArticleStartedCopyWithImpl<_GetForEachArticleStarted>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            KtList<Article> articles, bool descending, int limitPerArticle)
+        getForEachArticleStarted,
+    required TResult Function(KtList<Article> articles) watchForArticlesStarted,
+    required TResult Function(
+            Either<ArticleTermCountFailure, KtList<ArticleTermCount>>
+                failureOrArticleTermCounts)
+        articleTermCountsReceived,
+  }) {
+    return getForEachArticleStarted(articles, descending, limitPerArticle);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(
+            KtList<Article> articles, bool descending, int limitPerArticle)?
+        getForEachArticleStarted,
+    TResult Function(KtList<Article> articles)? watchForArticlesStarted,
+    TResult Function(
+            Either<ArticleTermCountFailure, KtList<ArticleTermCount>>
+                failureOrArticleTermCounts)?
+        articleTermCountsReceived,
+  }) {
+    return getForEachArticleStarted?.call(
+        articles, descending, limitPerArticle);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            KtList<Article> articles, bool descending, int limitPerArticle)?
+        getForEachArticleStarted,
+    TResult Function(KtList<Article> articles)? watchForArticlesStarted,
+    TResult Function(
+            Either<ArticleTermCountFailure, KtList<ArticleTermCount>>
+                failureOrArticleTermCounts)?
+        articleTermCountsReceived,
+    required TResult orElse(),
+  }) {
+    if (getForEachArticleStarted != null) {
+      return getForEachArticleStarted(articles, descending, limitPerArticle);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetForEachArticleStarted value)
+        getForEachArticleStarted,
+    required TResult Function(_WatchForArticlesStarted value)
+        watchForArticlesStarted,
+    required TResult Function(_ArticleTermCountsReceived value)
+        articleTermCountsReceived,
+  }) {
+    return getForEachArticleStarted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_GetForEachArticleStarted value)? getForEachArticleStarted,
+    TResult Function(_WatchForArticlesStarted value)? watchForArticlesStarted,
+    TResult Function(_ArticleTermCountsReceived value)?
+        articleTermCountsReceived,
+  }) {
+    return getForEachArticleStarted?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetForEachArticleStarted value)? getForEachArticleStarted,
+    TResult Function(_WatchForArticlesStarted value)? watchForArticlesStarted,
+    TResult Function(_ArticleTermCountsReceived value)?
+        articleTermCountsReceived,
+    required TResult orElse(),
+  }) {
+    if (getForEachArticleStarted != null) {
+      return getForEachArticleStarted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetForEachArticleStarted
+    implements ArticleTermCountWatcherEvent {
+  const factory _GetForEachArticleStarted(
+          KtList<Article> articles, bool descending, int limitPerArticle) =
+      _$_GetForEachArticleStarted;
+
+  KtList<Article> get articles;
+  bool get descending;
+  int get limitPerArticle;
+  @JsonKey(ignore: true)
+  _$GetForEachArticleStartedCopyWith<_GetForEachArticleStarted> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -175,6 +385,9 @@ class _$_WatchForArticlesStarted implements _WatchForArticlesStarted {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            KtList<Article> articles, bool descending, int limitPerArticle)
+        getForEachArticleStarted,
     required TResult Function(KtList<Article> articles) watchForArticlesStarted,
     required TResult Function(
             Either<ArticleTermCountFailure, KtList<ArticleTermCount>>
@@ -187,6 +400,9 @@ class _$_WatchForArticlesStarted implements _WatchForArticlesStarted {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(
+            KtList<Article> articles, bool descending, int limitPerArticle)?
+        getForEachArticleStarted,
     TResult Function(KtList<Article> articles)? watchForArticlesStarted,
     TResult Function(
             Either<ArticleTermCountFailure, KtList<ArticleTermCount>>
@@ -199,6 +415,9 @@ class _$_WatchForArticlesStarted implements _WatchForArticlesStarted {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            KtList<Article> articles, bool descending, int limitPerArticle)?
+        getForEachArticleStarted,
     TResult Function(KtList<Article> articles)? watchForArticlesStarted,
     TResult Function(
             Either<ArticleTermCountFailure, KtList<ArticleTermCount>>
@@ -215,6 +434,8 @@ class _$_WatchForArticlesStarted implements _WatchForArticlesStarted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_GetForEachArticleStarted value)
+        getForEachArticleStarted,
     required TResult Function(_WatchForArticlesStarted value)
         watchForArticlesStarted,
     required TResult Function(_ArticleTermCountsReceived value)
@@ -226,6 +447,7 @@ class _$_WatchForArticlesStarted implements _WatchForArticlesStarted {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_GetForEachArticleStarted value)? getForEachArticleStarted,
     TResult Function(_WatchForArticlesStarted value)? watchForArticlesStarted,
     TResult Function(_ArticleTermCountsReceived value)?
         articleTermCountsReceived,
@@ -236,6 +458,7 @@ class _$_WatchForArticlesStarted implements _WatchForArticlesStarted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetForEachArticleStarted value)? getForEachArticleStarted,
     TResult Function(_WatchForArticlesStarted value)? watchForArticlesStarted,
     TResult Function(_ArticleTermCountsReceived value)?
         articleTermCountsReceived,
@@ -332,6 +555,9 @@ class _$_ArticleTermCountsReceived implements _ArticleTermCountsReceived {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            KtList<Article> articles, bool descending, int limitPerArticle)
+        getForEachArticleStarted,
     required TResult Function(KtList<Article> articles) watchForArticlesStarted,
     required TResult Function(
             Either<ArticleTermCountFailure, KtList<ArticleTermCount>>
@@ -344,6 +570,9 @@ class _$_ArticleTermCountsReceived implements _ArticleTermCountsReceived {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(
+            KtList<Article> articles, bool descending, int limitPerArticle)?
+        getForEachArticleStarted,
     TResult Function(KtList<Article> articles)? watchForArticlesStarted,
     TResult Function(
             Either<ArticleTermCountFailure, KtList<ArticleTermCount>>
@@ -356,6 +585,9 @@ class _$_ArticleTermCountsReceived implements _ArticleTermCountsReceived {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            KtList<Article> articles, bool descending, int limitPerArticle)?
+        getForEachArticleStarted,
     TResult Function(KtList<Article> articles)? watchForArticlesStarted,
     TResult Function(
             Either<ArticleTermCountFailure, KtList<ArticleTermCount>>
@@ -372,6 +604,8 @@ class _$_ArticleTermCountsReceived implements _ArticleTermCountsReceived {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_GetForEachArticleStarted value)
+        getForEachArticleStarted,
     required TResult Function(_WatchForArticlesStarted value)
         watchForArticlesStarted,
     required TResult Function(_ArticleTermCountsReceived value)
@@ -383,6 +617,7 @@ class _$_ArticleTermCountsReceived implements _ArticleTermCountsReceived {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_GetForEachArticleStarted value)? getForEachArticleStarted,
     TResult Function(_WatchForArticlesStarted value)? watchForArticlesStarted,
     TResult Function(_ArticleTermCountsReceived value)?
         articleTermCountsReceived,
@@ -393,6 +628,7 @@ class _$_ArticleTermCountsReceived implements _ArticleTermCountsReceived {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetForEachArticleStarted value)? getForEachArticleStarted,
     TResult Function(_WatchForArticlesStarted value)? watchForArticlesStarted,
     TResult Function(_ArticleTermCountsReceived value)?
         articleTermCountsReceived,

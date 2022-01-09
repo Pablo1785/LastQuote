@@ -16,8 +16,18 @@ abstract class IArticleTermCountRepository {
 
   Future<Either<ArticleTermCountFailure, KtList<ArticleTermCount>>>
       getForArticle(
-    Article article,
-  );
+    Article article, {
+    bool descending = false,
+    int limit = 3,
+  });
+
+  // Call getForArticle for each of the articles, sort and limit each group separately according to params
+  Future<Either<ArticleTermCountFailure, KtList<ArticleTermCount>>>
+      getForEachArticle(
+    KtList<Article> articles, {
+    bool descending = false,
+    int limitPerArticle = 3,
+  });
 
   Future<Either<ArticleTermCountFailure, KtList<ArticleTermCount>>> getForTerm(
     Term term,

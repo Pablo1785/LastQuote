@@ -6,6 +6,7 @@ import 'package:ddd/application/article_term_counts/article_term_count_watcher/a
 import 'package:ddd/application/recommendations/recommendation_watcher/recommendation_watcher_bloc.dart';
 import 'package:ddd/application/user_article_engagement/user_article_engagement_actor/user_article_engagement_actor_bloc.dart';
 import 'package:ddd/application/user_article_engagement/user_article_engagement_watcher/user_article_engagement_watcher_bloc.dart';
+import 'package:ddd/application/user_term_data_source_engagements/user_term_data_source_engagement_watcher/user_term_data_source_engagement_watcher_bloc.dart';
 import 'package:ddd/domain/articles/article.dart';
 import 'package:ddd/domain/articles/article_failure.dart';
 import 'package:ddd/domain/recommendations/recommendation_failure.dart';
@@ -68,6 +69,14 @@ class RecommendationBasedBodyWidget extends StatelessWidget {
                     ),
                     loadSuccess: (articlesLoadSuccessState) {
                       if (articlesLoadSuccessState.articles.size > 0) {
+                        context.read<ArticleTermCountWatcherBloc>().add(
+                              ArticleTermCountWatcherEvent
+                                  .getForEachArticleStarted(
+                                articlesLoadSuccessState.articles,
+                                true,
+                                3,
+                              ),
+                            );
                         context.read<UserArticleEngagementWatcherBloc>().add(
                               UserArticleEngagementWatcherEvent
                                   .watchForCurrentUserAndArticlesStarted(
@@ -284,12 +293,17 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
                         initial: (_) => Container(),
                         loadInProgress: (_) => const LinearProgressIndicator(),
                         loadSuccess: (successState) {
+                          // User, DataSources (inside Articles) and ArticleTermCounts loaded - start loading UserTermDataSourceEngagements
+
                           final currArticleTermCounts = successState
                               .articleTermCounts.iter
                               .where((element) =>
                                   element.articleId.getOrCrash() ==
                                   article.id.getOrCrash())
                               .toList();
+                          currArticleTermCounts.sort(
+                            (atc1, atc2) => atc2.count.compareTo(atc1.count),
+                          );
                           return Container(
                             alignment: Alignment.topLeft,
                             height:
@@ -343,6 +357,8 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
                   case 'encyclopedia_entry':
                     return const Icon(Icons.article_outlined);
                     break;
+                  case 'website':
+                    return const Icon(Icons.web_outlined);
                   default:
                     return const Icon(Icons.article_outlined);
                     break;
@@ -449,8 +465,10 @@ class UserArticleEngagementBasedBodyWidget extends StatelessWidget {
                     loadSuccess: (userArticleEngagementLoadSuccessState) {
                       context.read<ArticleTermCountWatcherBloc>().add(
                             ArticleTermCountWatcherEvent
-                                .watchForArticlesStarted(
+                                .getForEachArticleStarted(
                               articlesLoadSuccessState.articles,
+                              true,
+                              3,
                             ),
                           );
                       return BlocListener<UserArticleEngagementActorBloc,

@@ -26,8 +26,14 @@ class AppRouter extends _i7.RootStackRouter {
   @override
   final Map<String, _i7.PageFactory> pagesMap = {
     SplashRoute.name: (routeData) {
+      final args = routeData.argsAs<SplashRouteArgs>(
+          orElse: () => const SplashRouteArgs());
       return _i7.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i1.SplashPage());
+          routeData: routeData,
+          child: _i1.SplashPage(
+              key: args.key,
+              delayBeforeNavigation: args.delayBeforeNavigation,
+              message: args.message));
     },
     SignInRoute.name: (routeData) {
       return _i7.MaterialPageX<dynamic>(
@@ -66,10 +72,33 @@ class AppRouter extends _i7.RootStackRouter {
 }
 
 /// generated route for [_i1.SplashPage]
-class SplashRoute extends _i7.PageRouteInfo<void> {
-  const SplashRoute() : super(name, path: '/');
+class SplashRoute extends _i7.PageRouteInfo<SplashRouteArgs> {
+  SplashRoute(
+      {_i8.Key? key, int delayBeforeNavigation = 2, String message = ''})
+      : super(name,
+            path: '/',
+            args: SplashRouteArgs(
+                key: key,
+                delayBeforeNavigation: delayBeforeNavigation,
+                message: message));
 
   static const String name = 'SplashRoute';
+}
+
+class SplashRouteArgs {
+  const SplashRouteArgs(
+      {this.key, this.delayBeforeNavigation = 2, this.message = ''});
+
+  final _i8.Key? key;
+
+  final int delayBeforeNavigation;
+
+  final String message;
+
+  @override
+  String toString() {
+    return 'SplashRouteArgs{key: $key, delayBeforeNavigation: $delayBeforeNavigation, message: $message}';
+  }
 }
 
 /// generated route for [_i2.SignInPage]

@@ -1,6 +1,9 @@
 import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:ddd/presentation/core/fun_logo.dart';
+import 'package:ddd/presentation/core/quotes_logo.dart';
+import 'package:ddd/presentation/routes/app_router.gr.dart';
+import 'package:ddd/presentation/splash/splash_page.dart';
 import '../../../application/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -25,7 +28,7 @@ class SignInForm extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             children: [
               const Center(
-                child: FunLogo(),
+                child: QuotesLogo(),
               ),
               const SizedBox(
                 height: 8,
@@ -115,7 +118,7 @@ class SignInForm extends StatelessWidget {
         );
       },
       listener: (context, state) {
-        context.read<SignInFormBloc>().state.authFailureOrSuccessOption.fold(
+        context.read<SignInFormBloc>().state.authFailureOrIsNewUserOption.fold(
               () {},
               (either) => either.fold(
                 (failure) {
@@ -129,8 +132,18 @@ class SignInForm extends StatelessWidget {
                     ),
                   ).show(context);
                 },
-                (_) {
-                  AutoRouter.of(context).replaceNamed('/tab-view-page');
+                (isNewUser) {
+                  if (isNewUser) {
+                    // Give the backend a couple of seconds to set up initial user data
+                    AutoRouter.of(context).replace(
+                      SplashRoute(
+                        delayBeforeNavigation: 12,
+                        message: 'Preparing for your first visit...',
+                      ),
+                    );
+                  } else {
+                    AutoRouter.of(context).replaceNamed('/tab-view-page');
+                  }
                   context
                       .read<AuthBloc>()
                       .add(const AuthEvent.authCheckRequested());

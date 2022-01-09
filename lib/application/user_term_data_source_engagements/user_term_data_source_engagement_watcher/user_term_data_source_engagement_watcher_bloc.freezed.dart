@@ -17,12 +17,12 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$UserTermDataSourceEngagementWatcherEventTearOff {
   const _$UserTermDataSourceEngagementWatcherEventTearOff();
 
-  _WatchForCurrentUserTermsAndDataSourcesStarted
-      watchForCurrentUserTermsAndDataSourcesStarted(
-          KtList<Term> terms, KtList<DataSource> dataSources) {
-    return _WatchForCurrentUserTermsAndDataSourcesStarted(
-      terms,
-      dataSources,
+  _WatchForCurrentUserTermsAndDataSourceStarted
+      watchForCurrentUserTermsAndDataSourceStarted(
+          KtList<String> termIds, String dataSourceId) {
+    return _WatchForCurrentUserTermsAndDataSourceStarted(
+      termIds,
+      dataSourceId,
     );
   }
 
@@ -44,9 +44,8 @@ const $UserTermDataSourceEngagementWatcherEvent =
 mixin _$UserTermDataSourceEngagementWatcherEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            KtList<Term> terms, KtList<DataSource> dataSources)
-        watchForCurrentUserTermsAndDataSourcesStarted,
+    required TResult Function(KtList<String> termIds, String dataSourceId)
+        watchForCurrentUserTermsAndDataSourceStarted,
     required TResult Function(
             Either<UserTermDataSourceEngagementFailure,
                     KtList<UserTermDataSourceEngagement>>
@@ -56,8 +55,8 @@ mixin _$UserTermDataSourceEngagementWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(KtList<Term> terms, KtList<DataSource> dataSources)?
-        watchForCurrentUserTermsAndDataSourcesStarted,
+    TResult Function(KtList<String> termIds, String dataSourceId)?
+        watchForCurrentUserTermsAndDataSourceStarted,
     TResult Function(
             Either<UserTermDataSourceEngagementFailure,
                     KtList<UserTermDataSourceEngagement>>
@@ -67,8 +66,8 @@ mixin _$UserTermDataSourceEngagementWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(KtList<Term> terms, KtList<DataSource> dataSources)?
-        watchForCurrentUserTermsAndDataSourcesStarted,
+    TResult Function(KtList<String> termIds, String dataSourceId)?
+        watchForCurrentUserTermsAndDataSourceStarted,
     TResult Function(
             Either<UserTermDataSourceEngagementFailure,
                     KtList<UserTermDataSourceEngagement>>
@@ -80,24 +79,24 @@ mixin _$UserTermDataSourceEngagementWatcherEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(
-            _WatchForCurrentUserTermsAndDataSourcesStarted value)
-        watchForCurrentUserTermsAndDataSourcesStarted,
+            _WatchForCurrentUserTermsAndDataSourceStarted value)
+        watchForCurrentUserTermsAndDataSourceStarted,
     required TResult Function(_UserTermDataSourceEngagementsReceived value)
         userTermDataSourceEngagementsReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_WatchForCurrentUserTermsAndDataSourcesStarted value)?
-        watchForCurrentUserTermsAndDataSourcesStarted,
+    TResult Function(_WatchForCurrentUserTermsAndDataSourceStarted value)?
+        watchForCurrentUserTermsAndDataSourceStarted,
     TResult Function(_UserTermDataSourceEngagementsReceived value)?
         userTermDataSourceEngagementsReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_WatchForCurrentUserTermsAndDataSourcesStarted value)?
-        watchForCurrentUserTermsAndDataSourcesStarted,
+    TResult Function(_WatchForCurrentUserTermsAndDataSourceStarted value)?
+        watchForCurrentUserTermsAndDataSourceStarted,
     TResult Function(_UserTermDataSourceEngagementsReceived value)?
         userTermDataSourceEngagementsReceived,
     required TResult orElse(),
@@ -125,119 +124,118 @@ class _$UserTermDataSourceEngagementWatcherEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$WatchForCurrentUserTermsAndDataSourcesStartedCopyWith<$Res> {
-  factory _$WatchForCurrentUserTermsAndDataSourcesStartedCopyWith(
-          _WatchForCurrentUserTermsAndDataSourcesStarted value,
-          $Res Function(_WatchForCurrentUserTermsAndDataSourcesStarted) then) =
-      __$WatchForCurrentUserTermsAndDataSourcesStartedCopyWithImpl<$Res>;
-  $Res call({KtList<Term> terms, KtList<DataSource> dataSources});
+abstract class _$WatchForCurrentUserTermsAndDataSourceStartedCopyWith<$Res> {
+  factory _$WatchForCurrentUserTermsAndDataSourceStartedCopyWith(
+          _WatchForCurrentUserTermsAndDataSourceStarted value,
+          $Res Function(_WatchForCurrentUserTermsAndDataSourceStarted) then) =
+      __$WatchForCurrentUserTermsAndDataSourceStartedCopyWithImpl<$Res>;
+  $Res call({KtList<String> termIds, String dataSourceId});
 }
 
 /// @nodoc
-class __$WatchForCurrentUserTermsAndDataSourcesStartedCopyWithImpl<$Res>
+class __$WatchForCurrentUserTermsAndDataSourceStartedCopyWithImpl<$Res>
     extends _$UserTermDataSourceEngagementWatcherEventCopyWithImpl<$Res>
-    implements _$WatchForCurrentUserTermsAndDataSourcesStartedCopyWith<$Res> {
-  __$WatchForCurrentUserTermsAndDataSourcesStartedCopyWithImpl(
-      _WatchForCurrentUserTermsAndDataSourcesStarted _value,
-      $Res Function(_WatchForCurrentUserTermsAndDataSourcesStarted) _then)
+    implements _$WatchForCurrentUserTermsAndDataSourceStartedCopyWith<$Res> {
+  __$WatchForCurrentUserTermsAndDataSourceStartedCopyWithImpl(
+      _WatchForCurrentUserTermsAndDataSourceStarted _value,
+      $Res Function(_WatchForCurrentUserTermsAndDataSourceStarted) _then)
       : super(_value,
-            (v) => _then(v as _WatchForCurrentUserTermsAndDataSourcesStarted));
+            (v) => _then(v as _WatchForCurrentUserTermsAndDataSourceStarted));
 
   @override
-  _WatchForCurrentUserTermsAndDataSourcesStarted get _value =>
-      super._value as _WatchForCurrentUserTermsAndDataSourcesStarted;
+  _WatchForCurrentUserTermsAndDataSourceStarted get _value =>
+      super._value as _WatchForCurrentUserTermsAndDataSourceStarted;
 
   @override
   $Res call({
-    Object? terms = freezed,
-    Object? dataSources = freezed,
+    Object? termIds = freezed,
+    Object? dataSourceId = freezed,
   }) {
-    return _then(_WatchForCurrentUserTermsAndDataSourcesStarted(
-      terms == freezed
-          ? _value.terms
-          : terms // ignore: cast_nullable_to_non_nullable
-              as KtList<Term>,
-      dataSources == freezed
-          ? _value.dataSources
-          : dataSources // ignore: cast_nullable_to_non_nullable
-              as KtList<DataSource>,
+    return _then(_WatchForCurrentUserTermsAndDataSourceStarted(
+      termIds == freezed
+          ? _value.termIds
+          : termIds // ignore: cast_nullable_to_non_nullable
+              as KtList<String>,
+      dataSourceId == freezed
+          ? _value.dataSourceId
+          : dataSourceId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_WatchForCurrentUserTermsAndDataSourcesStarted
-    implements _WatchForCurrentUserTermsAndDataSourcesStarted {
-  const _$_WatchForCurrentUserTermsAndDataSourcesStarted(
-      this.terms, this.dataSources);
+class _$_WatchForCurrentUserTermsAndDataSourceStarted
+    implements _WatchForCurrentUserTermsAndDataSourceStarted {
+  const _$_WatchForCurrentUserTermsAndDataSourceStarted(
+      this.termIds, this.dataSourceId);
 
   @override
-  final KtList<Term> terms;
+  final KtList<String> termIds;
   @override
-  final KtList<DataSource> dataSources;
+  final String dataSourceId;
 
   @override
   String toString() {
-    return 'UserTermDataSourceEngagementWatcherEvent.watchForCurrentUserTermsAndDataSourcesStarted(terms: $terms, dataSources: $dataSources)';
+    return 'UserTermDataSourceEngagementWatcherEvent.watchForCurrentUserTermsAndDataSourceStarted(termIds: $termIds, dataSourceId: $dataSourceId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _WatchForCurrentUserTermsAndDataSourcesStarted &&
-            (identical(other.terms, terms) || other.terms == terms) &&
-            (identical(other.dataSources, dataSources) ||
-                other.dataSources == dataSources));
+            other is _WatchForCurrentUserTermsAndDataSourceStarted &&
+            (identical(other.termIds, termIds) || other.termIds == termIds) &&
+            (identical(other.dataSourceId, dataSourceId) ||
+                other.dataSourceId == dataSourceId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, terms, dataSources);
+  int get hashCode => Object.hash(runtimeType, termIds, dataSourceId);
 
   @JsonKey(ignore: true)
   @override
-  _$WatchForCurrentUserTermsAndDataSourcesStartedCopyWith<
-          _WatchForCurrentUserTermsAndDataSourcesStarted>
+  _$WatchForCurrentUserTermsAndDataSourceStartedCopyWith<
+          _WatchForCurrentUserTermsAndDataSourceStarted>
       get copyWith =>
-          __$WatchForCurrentUserTermsAndDataSourcesStartedCopyWithImpl<
-              _WatchForCurrentUserTermsAndDataSourcesStarted>(this, _$identity);
+          __$WatchForCurrentUserTermsAndDataSourceStartedCopyWithImpl<
+              _WatchForCurrentUserTermsAndDataSourceStarted>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            KtList<Term> terms, KtList<DataSource> dataSources)
-        watchForCurrentUserTermsAndDataSourcesStarted,
+    required TResult Function(KtList<String> termIds, String dataSourceId)
+        watchForCurrentUserTermsAndDataSourceStarted,
     required TResult Function(
             Either<UserTermDataSourceEngagementFailure,
                     KtList<UserTermDataSourceEngagement>>
                 failureOrUserTermDataSourceEngagements)
         userTermDataSourceEngagementsReceived,
   }) {
-    return watchForCurrentUserTermsAndDataSourcesStarted(terms, dataSources);
+    return watchForCurrentUserTermsAndDataSourceStarted(termIds, dataSourceId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(KtList<Term> terms, KtList<DataSource> dataSources)?
-        watchForCurrentUserTermsAndDataSourcesStarted,
+    TResult Function(KtList<String> termIds, String dataSourceId)?
+        watchForCurrentUserTermsAndDataSourceStarted,
     TResult Function(
             Either<UserTermDataSourceEngagementFailure,
                     KtList<UserTermDataSourceEngagement>>
                 failureOrUserTermDataSourceEngagements)?
         userTermDataSourceEngagementsReceived,
   }) {
-    return watchForCurrentUserTermsAndDataSourcesStarted?.call(
-        terms, dataSources);
+    return watchForCurrentUserTermsAndDataSourceStarted?.call(
+        termIds, dataSourceId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(KtList<Term> terms, KtList<DataSource> dataSources)?
-        watchForCurrentUserTermsAndDataSourcesStarted,
+    TResult Function(KtList<String> termIds, String dataSourceId)?
+        watchForCurrentUserTermsAndDataSourceStarted,
     TResult Function(
             Either<UserTermDataSourceEngagementFailure,
                     KtList<UserTermDataSourceEngagement>>
@@ -245,8 +243,9 @@ class _$_WatchForCurrentUserTermsAndDataSourcesStarted
         userTermDataSourceEngagementsReceived,
     required TResult orElse(),
   }) {
-    if (watchForCurrentUserTermsAndDataSourcesStarted != null) {
-      return watchForCurrentUserTermsAndDataSourcesStarted(terms, dataSources);
+    if (watchForCurrentUserTermsAndDataSourceStarted != null) {
+      return watchForCurrentUserTermsAndDataSourceStarted(
+          termIds, dataSourceId);
     }
     return orElse();
   }
@@ -255,52 +254,52 @@ class _$_WatchForCurrentUserTermsAndDataSourcesStarted
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(
-            _WatchForCurrentUserTermsAndDataSourcesStarted value)
-        watchForCurrentUserTermsAndDataSourcesStarted,
+            _WatchForCurrentUserTermsAndDataSourceStarted value)
+        watchForCurrentUserTermsAndDataSourceStarted,
     required TResult Function(_UserTermDataSourceEngagementsReceived value)
         userTermDataSourceEngagementsReceived,
   }) {
-    return watchForCurrentUserTermsAndDataSourcesStarted(this);
+    return watchForCurrentUserTermsAndDataSourceStarted(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_WatchForCurrentUserTermsAndDataSourcesStarted value)?
-        watchForCurrentUserTermsAndDataSourcesStarted,
+    TResult Function(_WatchForCurrentUserTermsAndDataSourceStarted value)?
+        watchForCurrentUserTermsAndDataSourceStarted,
     TResult Function(_UserTermDataSourceEngagementsReceived value)?
         userTermDataSourceEngagementsReceived,
   }) {
-    return watchForCurrentUserTermsAndDataSourcesStarted?.call(this);
+    return watchForCurrentUserTermsAndDataSourceStarted?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_WatchForCurrentUserTermsAndDataSourcesStarted value)?
-        watchForCurrentUserTermsAndDataSourcesStarted,
+    TResult Function(_WatchForCurrentUserTermsAndDataSourceStarted value)?
+        watchForCurrentUserTermsAndDataSourceStarted,
     TResult Function(_UserTermDataSourceEngagementsReceived value)?
         userTermDataSourceEngagementsReceived,
     required TResult orElse(),
   }) {
-    if (watchForCurrentUserTermsAndDataSourcesStarted != null) {
-      return watchForCurrentUserTermsAndDataSourcesStarted(this);
+    if (watchForCurrentUserTermsAndDataSourceStarted != null) {
+      return watchForCurrentUserTermsAndDataSourceStarted(this);
     }
     return orElse();
   }
 }
 
-abstract class _WatchForCurrentUserTermsAndDataSourcesStarted
+abstract class _WatchForCurrentUserTermsAndDataSourceStarted
     implements UserTermDataSourceEngagementWatcherEvent {
-  const factory _WatchForCurrentUserTermsAndDataSourcesStarted(
-          KtList<Term> terms, KtList<DataSource> dataSources) =
-      _$_WatchForCurrentUserTermsAndDataSourcesStarted;
+  const factory _WatchForCurrentUserTermsAndDataSourceStarted(
+          KtList<String> termIds, String dataSourceId) =
+      _$_WatchForCurrentUserTermsAndDataSourceStarted;
 
-  KtList<Term> get terms;
-  KtList<DataSource> get dataSources;
+  KtList<String> get termIds;
+  String get dataSourceId;
   @JsonKey(ignore: true)
-  _$WatchForCurrentUserTermsAndDataSourcesStartedCopyWith<
-          _WatchForCurrentUserTermsAndDataSourcesStarted>
+  _$WatchForCurrentUserTermsAndDataSourceStartedCopyWith<
+          _WatchForCurrentUserTermsAndDataSourceStarted>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -386,9 +385,8 @@ class _$_UserTermDataSourceEngagementsReceived
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            KtList<Term> terms, KtList<DataSource> dataSources)
-        watchForCurrentUserTermsAndDataSourcesStarted,
+    required TResult Function(KtList<String> termIds, String dataSourceId)
+        watchForCurrentUserTermsAndDataSourceStarted,
     required TResult Function(
             Either<UserTermDataSourceEngagementFailure,
                     KtList<UserTermDataSourceEngagement>>
@@ -402,8 +400,8 @@ class _$_UserTermDataSourceEngagementsReceived
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(KtList<Term> terms, KtList<DataSource> dataSources)?
-        watchForCurrentUserTermsAndDataSourcesStarted,
+    TResult Function(KtList<String> termIds, String dataSourceId)?
+        watchForCurrentUserTermsAndDataSourceStarted,
     TResult Function(
             Either<UserTermDataSourceEngagementFailure,
                     KtList<UserTermDataSourceEngagement>>
@@ -417,8 +415,8 @@ class _$_UserTermDataSourceEngagementsReceived
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(KtList<Term> terms, KtList<DataSource> dataSources)?
-        watchForCurrentUserTermsAndDataSourcesStarted,
+    TResult Function(KtList<String> termIds, String dataSourceId)?
+        watchForCurrentUserTermsAndDataSourceStarted,
     TResult Function(
             Either<UserTermDataSourceEngagementFailure,
                     KtList<UserTermDataSourceEngagement>>
@@ -437,8 +435,8 @@ class _$_UserTermDataSourceEngagementsReceived
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(
-            _WatchForCurrentUserTermsAndDataSourcesStarted value)
-        watchForCurrentUserTermsAndDataSourcesStarted,
+            _WatchForCurrentUserTermsAndDataSourceStarted value)
+        watchForCurrentUserTermsAndDataSourceStarted,
     required TResult Function(_UserTermDataSourceEngagementsReceived value)
         userTermDataSourceEngagementsReceived,
   }) {
@@ -448,8 +446,8 @@ class _$_UserTermDataSourceEngagementsReceived
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_WatchForCurrentUserTermsAndDataSourcesStarted value)?
-        watchForCurrentUserTermsAndDataSourcesStarted,
+    TResult Function(_WatchForCurrentUserTermsAndDataSourceStarted value)?
+        watchForCurrentUserTermsAndDataSourceStarted,
     TResult Function(_UserTermDataSourceEngagementsReceived value)?
         userTermDataSourceEngagementsReceived,
   }) {
@@ -459,8 +457,8 @@ class _$_UserTermDataSourceEngagementsReceived
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_WatchForCurrentUserTermsAndDataSourcesStarted value)?
-        watchForCurrentUserTermsAndDataSourcesStarted,
+    TResult Function(_WatchForCurrentUserTermsAndDataSourceStarted value)?
+        watchForCurrentUserTermsAndDataSourceStarted,
     TResult Function(_UserTermDataSourceEngagementsReceived value)?
         userTermDataSourceEngagementsReceived,
     required TResult orElse(),

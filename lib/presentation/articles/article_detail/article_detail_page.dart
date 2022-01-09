@@ -4,6 +4,7 @@ import 'package:ddd/domain/articles/article.dart';
 import 'package:ddd/domain/user_article_engagements/user_article_engagement.dart';
 import 'package:ddd/presentation/articles/widgets/like_button.dart';
 import 'package:ddd/presentation/core/fun_logo.dart';
+import 'package:ddd/presentation/core/quotes_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -70,7 +71,7 @@ class ArticleDetailPage extends HookWidget {
                       baseColor: Colors.indigo[400]!,
                       highlightColor: Colors.blue[200]!,
                       enabled: true,
-                      child: const FunLogo(),
+                      child: const QuotesLogo(),
                       direction: ShimmerDirection.btt,
                       period: const Duration(milliseconds: 2000),
                     ),
