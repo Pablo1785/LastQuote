@@ -8,6 +8,7 @@ import 'package:ddd/application/user_article_engagement/user_article_engagement_
 import 'package:ddd/application/user_article_engagement/user_article_engagement_watcher/user_article_engagement_watcher_bloc.dart';
 import 'package:ddd/application/user_term_data_source_engagements/user_term_data_source_engagement_watcher/user_term_data_source_engagement_watcher_bloc.dart';
 import 'package:ddd/presentation/articles/articles_overview/articles_overview_page.dart';
+import 'package:ddd/presentation/routes/app_router.gr.dart';
 import 'package:ddd/presentation/topics/topics_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,7 +54,11 @@ class TabViewPage extends HookWidget {
       child: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           state.maybeMap(
-            unAuthenticated: (_) => AutoRouter.of(context).replaceNamed('/'),
+            unAuthenticated: (_) => AutoRouter.of(context).replace(
+              SplashRoute(
+                delayBeforeNavigation: 1,
+              ),
+            ),
             orElse: () {},
           );
         },
