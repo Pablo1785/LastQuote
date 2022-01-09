@@ -306,4 +306,42 @@ class UserTermDataSourceEngagementRepository
       }
     }
   }
+
+  @override
+  Future<Either<UserTermDataSourceEngagementFailure, KtList<String>>>
+      getMostPopularTerms({
+    int limit = 10,
+  }) async {
+    if (limit <= 0) {
+      return right(const KtList<String>.empty());
+    }
+    try {
+      final engagementSnapshot = await _firestore
+          .collection('user_term_data_source_engagement')
+          .orderBy(
+            'share_count',
+            descending: true,
+          )
+          .orderBy(
+            'like_count',
+            descending: true,
+          )
+          .orderBy(
+            'open_count',
+            descending: true,
+          )
+          .limit(limit)
+          .get();
+      final terms = engagementSnapshot.docs
+          .map(
+            (doc) => UserTermDataSourceEngagementDto.fromFirestore(doc)
+                .toDomain()
+                .termId,
+          )
+          .toImmutableList();
+      return right(terms);
+    } on Exception catch (exception, stacktrace) {
+      return _handleException(exception, stacktrace);
+    }
+  }
 }

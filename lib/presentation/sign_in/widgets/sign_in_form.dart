@@ -24,96 +24,126 @@ class SignInForm extends StatelessWidget {
           key: _signInFormKey,
           autovalidateMode:
               context.read<SignInFormBloc>().state.showErrorMessages,
-          child: ListView(
-            padding: const EdgeInsets.all(8),
-            children: [
-              const Center(
-                child: QuotesLogo(),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.email),
-                  labelText: 'Email',
+          child: Center(
+            child: ListView(
+              shrinkWrap: true,
+              padding: const EdgeInsets.all(8),
+              children: [
+                const Center(
+                  child: QuotesLogo(),
                 ),
-                autocorrect: false,
-                onChanged: (value) => context.read<SignInFormBloc>().add(
-                      SignInFormEvent.emailChanged(value),
+                const Center(
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(
+                      12,
+                      0,
+                      12,
+                      12,
                     ),
-                validator: (_) =>
-                    context.read<SignInFormBloc>().state.emailAddress.isValid()
-                        ? null
-                        : 'Invalid Email',
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.lock),
-                  labelText: 'Password',
-                ),
-                autocorrect: false,
-                obscureText: true,
-                onChanged: (value) => context
-                    .read<SignInFormBloc>()
-                    .add(SignInFormEvent.passwordChanged(value)),
-                validator: (_) =>
-                    context.read<SignInFormBloc>().state.password.isValid()
-                        ? null
-                        : 'Short Password',
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextButton(
-                      onPressed: () {
-                        context.read<SignInFormBloc>().add(
-                              const SignInFormEvent
-                                  .signInWithEmailAndPasswordPressed(),
-                            );
-                      },
-                      child: const Text('SIGN IN'),
+                    child: Text(
+                      'Your automatic web browser',
+                      style: TextStyle(
+                        fontSize: 19,
+                      ),
                     ),
                   ),
-                  Expanded(
-                    child: TextButton(
-                      onPressed: () {
-                        context.read<SignInFormBloc>().add(
-                              const SignInFormEvent
-                                  .registerWithEmailAndPasswordPressed(),
-                            );
-                      },
-                      child: const Text('REGISTER'),
-                    ),
-                  ),
-                ],
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  context.read<SignInFormBloc>().add(
-                        const SignInFormEvent.signInWithGooglePressed(),
-                      );
-                },
-                child: const Text(
-                  'SIGN IN WITH GOOGLE',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
                 ),
-              ),
-              if (state.isSubmitting) ...[
+                const SizedBox(
+                  height: 16,
+                ),
+                // const Divider(
+                //   indent: 100,
+                //   endIndent: 100,
+                //   thickness: 1.5,
+                // ),
+                const SizedBox(
+                  height: 28,
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.email),
+                    labelText: 'Email',
+                  ),
+                  autocorrect: false,
+                  onChanged: (value) => context.read<SignInFormBloc>().add(
+                        SignInFormEvent.emailChanged(value),
+                      ),
+                  validator: (_) => context
+                          .read<SignInFormBloc>()
+                          .state
+                          .emailAddress
+                          .isValid()
+                      ? null
+                      : 'Invalid Email',
+                ),
                 const SizedBox(
                   height: 8,
                 ),
-                const LinearProgressIndicator(
-                  value: null,
+                TextFormField(
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.lock),
+                    labelText: 'Password',
+                  ),
+                  autocorrect: false,
+                  obscureText: true,
+                  onChanged: (value) => context
+                      .read<SignInFormBloc>()
+                      .add(SignInFormEvent.passwordChanged(value)),
+                  validator: (_) =>
+                      context.read<SignInFormBloc>().state.password.isValid()
+                          ? null
+                          : 'Short Password',
                 ),
-              ]
-            ],
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {
+                          context.read<SignInFormBloc>().add(
+                                const SignInFormEvent
+                                    .signInWithEmailAndPasswordPressed(),
+                              );
+                        },
+                        child: const Text('SIGN IN'),
+                      ),
+                    ),
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {
+                          context.read<SignInFormBloc>().add(
+                                const SignInFormEvent
+                                    .registerWithEmailAndPasswordPressed(),
+                              );
+                        },
+                        child: const Text('REGISTER'),
+                      ),
+                    ),
+                  ],
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    context.read<SignInFormBloc>().add(
+                          const SignInFormEvent.signInWithGooglePressed(),
+                        );
+                  },
+                  child: const Text(
+                    'USE YOUR GOOGLE ACCOUNT',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                if (state.isSubmitting) ...[
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  const LinearProgressIndicator(
+                    value: null,
+                  ),
+                ]
+              ],
+            ),
           ),
         );
       },
@@ -135,11 +165,8 @@ class SignInForm extends StatelessWidget {
                 (isNewUser) {
                   if (isNewUser) {
                     // Give the backend a couple of seconds to set up initial user data
-                    AutoRouter.of(context).replace(
-                      SplashRoute(
-                        delayBeforeNavigation: 12,
-                        message: 'Preparing for your first visit...',
-                      ),
+                    AutoRouter.of(context).replaceNamed(
+                      '/initial-interests-page',
                     );
                   } else {
                     AutoRouter.of(context).replaceNamed('/tab-view-page');

@@ -6,6 +6,8 @@ import 'package:ddd/domain/user_term_data_source_engagement/user_term_data_sourc
 import 'package:kt_dart/kt.dart';
 
 abstract class IUserTermDataSourceEngagementRepository {
+  Future<Either<UserTermDataSourceEngagementFailure, KtList<String>>>
+      getMostPopularTerms({int limit = 10});
   // get articles
   Future<
       Either<UserTermDataSourceEngagementFailure,
