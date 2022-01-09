@@ -77,6 +77,13 @@ class FirebaseAuthFacade implements IAuthFacade {
         // log() to CrashLytics
         return left(const AuthFailure.serverError());
       }
+    } on fb.FirebaseAuthException catch (e) {
+      if (e.code == 'wrong-password' || e.code == 'user-not-found') {
+        return left(const AuthFailure.invalidEmailAndPasswordCombination());
+      } else {
+        // log() to CrashLytics
+        return left(const AuthFailure.serverError());
+      }
     }
   }
 
