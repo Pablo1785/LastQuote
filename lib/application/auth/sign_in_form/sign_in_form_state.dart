@@ -7,7 +7,7 @@ abstract class SignInFormState with _$SignInFormState {
     required Password password,
     required AutovalidateMode showErrorMessages,
     required bool isSubmitting,
-    required Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption,
+    required Option<Either<AuthFailure, bool>> authFailureOrIsNewUserOption,
   }) = _SignInFormState;
 
   factory SignInFormState.initial() => SignInFormState(
@@ -15,6 +15,6 @@ abstract class SignInFormState with _$SignInFormState {
         password: Password(''),
         showErrorMessages: AutovalidateMode.disabled,
         isSubmitting: false,
-        authFailureOrSuccessOption: none(),
+        authFailureOrIsNewUserOption: none(),
       );
 }

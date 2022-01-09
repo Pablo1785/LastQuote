@@ -26,6 +26,24 @@ class ArticleTermCountWatcherBloc
   ) : super(const _Initial()) {
     on<ArticleTermCountWatcherEvent>((event, emit) async {
       await event.map(
+        getForEachArticleStarted: (getForEachState) async {
+          emit(
+            const ArticleTermCountWatcherState.loadInProgress(),
+          );
+
+          await _articleTermCountStreamSubscription?.cancel();
+          final failureOrArticleTermCounts =
+              await _iArticleTermCountRepository.getForEachArticle(
+            getForEachState.articles,
+            descending: getForEachState.descending,
+            limitPerArticle: getForEachState.limitPerArticle,
+          );
+
+          add(
+            ArticleTermCountWatcherEvent.articleTermCountsReceived(
+                failureOrArticleTermCounts),
+          );
+        },
         watchForArticlesStarted: (watchStartedState) async {
           emit(
             const ArticleTermCountWatcherState.loadInProgress(),

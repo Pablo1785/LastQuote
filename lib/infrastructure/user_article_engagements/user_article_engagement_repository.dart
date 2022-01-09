@@ -87,7 +87,7 @@ class UserArticleEngagementRepository
                 _handleException<KtMap<String, UserArticleEngagement>>(
                     exception, stacktrace),
           );
-    } on PlatformException catch (exception, stacktrace) {
+    } on Exception catch (exception, stacktrace) {
       yield _handleException<KtMap<String, UserArticleEngagement>>(
           exception, stacktrace);
     }
@@ -213,8 +213,11 @@ class UserArticleEngagementRepository
         exception.message!.contains('permission')) {
       return left(const UserArticleEngagementFailure.insufficientPermissions());
     } else if (exception is FirebaseException &&
-        exception.message!.contains('NOT_FOUND')) {
+        exception.message!.contains('found')) {
       return left(const UserArticleEngagementFailure.documentNotFound());
+    } else if (exception is FirebaseException &&
+        exception.message!.contains('empty')) {
+      return left(const UserArticleEngagementFailure.noEngagement());
     } else {
       print(exception.toString());
       print(stackTrace.toString());

@@ -9,9 +9,24 @@ class UserArticleEngagementActorState with _$UserArticleEngagementActorState {
     UserArticleEngagementFailure userArticleEngagementFailure,
   ) = _LikeFailure;
   const factory UserArticleEngagementActorState.likeSuccess(
-    updatedUserArticleEngagement,
+    UserArticleEngagement updatedUserArticleEngagement,
   ) = _LikeSuccess;
+  const factory UserArticleEngagementActorState.shareFailure(
+    UserArticleEngagementFailure userArticleEngagementFailure,
+  ) = _ShareFailure;
   const factory UserArticleEngagementActorState.shareOpened(
     UserArticleEngagement userArticleEngagement,
   ) = _ShareOpened;
+  const factory UserArticleEngagementActorState.dismissFailure(
+    UserArticleEngagementFailure userArticleEngagementFailure,
+  ) = _DismissFailure;
+  const factory UserArticleEngagementActorState.dismissSuccess(
+    UserArticleEngagement userArticleEngagement,
+  ) = _DismissSuccess;
+  const factory UserArticleEngagementActorState.openFailure(
+    UserArticleEngagementFailure userArticleEngagementFailure,
+  ) = _OpenFailure;
+  const factory UserArticleEngagementActorState.openSuccess(
+    UserArticleEngagement userArticleEngagement,
+  ) = _OpenSuccess;
 }

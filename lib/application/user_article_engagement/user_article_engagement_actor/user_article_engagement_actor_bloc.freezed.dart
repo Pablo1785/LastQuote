@@ -902,14 +902,47 @@ class _$UserArticleEngagementActorStateTearOff {
     );
   }
 
-  _LikeSuccess likeSuccess(dynamic updatedUserArticleEngagement) {
+  _LikeSuccess likeSuccess(UserArticleEngagement updatedUserArticleEngagement) {
     return _LikeSuccess(
       updatedUserArticleEngagement,
     );
   }
 
+  _ShareFailure shareFailure(
+      UserArticleEngagementFailure userArticleEngagementFailure) {
+    return _ShareFailure(
+      userArticleEngagementFailure,
+    );
+  }
+
   _ShareOpened shareOpened(UserArticleEngagement userArticleEngagement) {
     return _ShareOpened(
+      userArticleEngagement,
+    );
+  }
+
+  _DismissFailure dismissFailure(
+      UserArticleEngagementFailure userArticleEngagementFailure) {
+    return _DismissFailure(
+      userArticleEngagementFailure,
+    );
+  }
+
+  _DismissSuccess dismissSuccess(UserArticleEngagement userArticleEngagement) {
+    return _DismissSuccess(
+      userArticleEngagement,
+    );
+  }
+
+  _OpenFailure openFailure(
+      UserArticleEngagementFailure userArticleEngagementFailure) {
+    return _OpenFailure(
+      userArticleEngagementFailure,
+    );
+  }
+
+  _OpenSuccess openSuccess(UserArticleEngagement userArticleEngagement) {
+    return _OpenSuccess(
       userArticleEngagement,
     );
   }
@@ -928,9 +961,24 @@ mixin _$UserArticleEngagementActorState {
     required TResult Function(
             UserArticleEngagementFailure userArticleEngagementFailure)
         likeFailure,
-    required TResult Function(dynamic updatedUserArticleEngagement) likeSuccess,
+    required TResult Function(
+            UserArticleEngagement updatedUserArticleEngagement)
+        likeSuccess,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        shareFailure,
     required TResult Function(UserArticleEngagement userArticleEngagement)
         shareOpened,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        dismissFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        dismissSuccess,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        openFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        openSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -939,8 +987,18 @@ mixin _$UserArticleEngagementActorState {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(dynamic updatedUserArticleEngagement)? likeSuccess,
+    TResult Function(UserArticleEngagement updatedUserArticleEngagement)?
+        likeSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        shareFailure,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        dismissFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)?
+        dismissSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        openFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? openSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -949,8 +1007,18 @@ mixin _$UserArticleEngagementActorState {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(dynamic updatedUserArticleEngagement)? likeSuccess,
+    TResult Function(UserArticleEngagement updatedUserArticleEngagement)?
+        likeSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        shareFailure,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        dismissFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)?
+        dismissSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        openFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? openSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -960,7 +1028,12 @@ mixin _$UserArticleEngagementActorState {
     required TResult Function(_ActionInProgress value) actionInProgress,
     required TResult Function(_LikeFailure value) likeFailure,
     required TResult Function(_LikeSuccess value) likeSuccess,
+    required TResult Function(_ShareFailure value) shareFailure,
     required TResult Function(_ShareOpened value) shareOpened,
+    required TResult Function(_DismissFailure value) dismissFailure,
+    required TResult Function(_DismissSuccess value) dismissSuccess,
+    required TResult Function(_OpenFailure value) openFailure,
+    required TResult Function(_OpenSuccess value) openSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -969,7 +1042,12 @@ mixin _$UserArticleEngagementActorState {
     TResult Function(_ActionInProgress value)? actionInProgress,
     TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareFailure value)? shareFailure,
     TResult Function(_ShareOpened value)? shareOpened,
+    TResult Function(_DismissFailure value)? dismissFailure,
+    TResult Function(_DismissSuccess value)? dismissSuccess,
+    TResult Function(_OpenFailure value)? openFailure,
+    TResult Function(_OpenSuccess value)? openSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -978,7 +1056,12 @@ mixin _$UserArticleEngagementActorState {
     TResult Function(_ActionInProgress value)? actionInProgress,
     TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareFailure value)? shareFailure,
     TResult Function(_ShareOpened value)? shareOpened,
+    TResult Function(_DismissFailure value)? dismissFailure,
+    TResult Function(_DismissSuccess value)? dismissSuccess,
+    TResult Function(_OpenFailure value)? openFailure,
+    TResult Function(_OpenSuccess value)? openSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -1046,9 +1129,24 @@ class _$_Initial implements _Initial {
     required TResult Function(
             UserArticleEngagementFailure userArticleEngagementFailure)
         likeFailure,
-    required TResult Function(dynamic updatedUserArticleEngagement) likeSuccess,
+    required TResult Function(
+            UserArticleEngagement updatedUserArticleEngagement)
+        likeSuccess,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        shareFailure,
     required TResult Function(UserArticleEngagement userArticleEngagement)
         shareOpened,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        dismissFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        dismissSuccess,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        openFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        openSuccess,
   }) {
     return initial();
   }
@@ -1060,8 +1158,18 @@ class _$_Initial implements _Initial {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(dynamic updatedUserArticleEngagement)? likeSuccess,
+    TResult Function(UserArticleEngagement updatedUserArticleEngagement)?
+        likeSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        shareFailure,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        dismissFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)?
+        dismissSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        openFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? openSuccess,
   }) {
     return initial?.call();
   }
@@ -1073,8 +1181,18 @@ class _$_Initial implements _Initial {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(dynamic updatedUserArticleEngagement)? likeSuccess,
+    TResult Function(UserArticleEngagement updatedUserArticleEngagement)?
+        likeSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        shareFailure,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        dismissFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)?
+        dismissSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        openFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? openSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1090,7 +1208,12 @@ class _$_Initial implements _Initial {
     required TResult Function(_ActionInProgress value) actionInProgress,
     required TResult Function(_LikeFailure value) likeFailure,
     required TResult Function(_LikeSuccess value) likeSuccess,
+    required TResult Function(_ShareFailure value) shareFailure,
     required TResult Function(_ShareOpened value) shareOpened,
+    required TResult Function(_DismissFailure value) dismissFailure,
+    required TResult Function(_DismissSuccess value) dismissSuccess,
+    required TResult Function(_OpenFailure value) openFailure,
+    required TResult Function(_OpenSuccess value) openSuccess,
   }) {
     return initial(this);
   }
@@ -1102,7 +1225,12 @@ class _$_Initial implements _Initial {
     TResult Function(_ActionInProgress value)? actionInProgress,
     TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareFailure value)? shareFailure,
     TResult Function(_ShareOpened value)? shareOpened,
+    TResult Function(_DismissFailure value)? dismissFailure,
+    TResult Function(_DismissSuccess value)? dismissSuccess,
+    TResult Function(_OpenFailure value)? openFailure,
+    TResult Function(_OpenSuccess value)? openSuccess,
   }) {
     return initial?.call(this);
   }
@@ -1114,7 +1242,12 @@ class _$_Initial implements _Initial {
     TResult Function(_ActionInProgress value)? actionInProgress,
     TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareFailure value)? shareFailure,
     TResult Function(_ShareOpened value)? shareOpened,
+    TResult Function(_DismissFailure value)? dismissFailure,
+    TResult Function(_DismissSuccess value)? dismissSuccess,
+    TResult Function(_OpenFailure value)? openFailure,
+    TResult Function(_OpenSuccess value)? openSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1174,9 +1307,24 @@ class _$_ActionInProgress implements _ActionInProgress {
     required TResult Function(
             UserArticleEngagementFailure userArticleEngagementFailure)
         likeFailure,
-    required TResult Function(dynamic updatedUserArticleEngagement) likeSuccess,
+    required TResult Function(
+            UserArticleEngagement updatedUserArticleEngagement)
+        likeSuccess,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        shareFailure,
     required TResult Function(UserArticleEngagement userArticleEngagement)
         shareOpened,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        dismissFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        dismissSuccess,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        openFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        openSuccess,
   }) {
     return actionInProgress();
   }
@@ -1188,8 +1336,18 @@ class _$_ActionInProgress implements _ActionInProgress {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(dynamic updatedUserArticleEngagement)? likeSuccess,
+    TResult Function(UserArticleEngagement updatedUserArticleEngagement)?
+        likeSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        shareFailure,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        dismissFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)?
+        dismissSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        openFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? openSuccess,
   }) {
     return actionInProgress?.call();
   }
@@ -1201,8 +1359,18 @@ class _$_ActionInProgress implements _ActionInProgress {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(dynamic updatedUserArticleEngagement)? likeSuccess,
+    TResult Function(UserArticleEngagement updatedUserArticleEngagement)?
+        likeSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        shareFailure,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        dismissFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)?
+        dismissSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        openFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? openSuccess,
     required TResult orElse(),
   }) {
     if (actionInProgress != null) {
@@ -1218,7 +1386,12 @@ class _$_ActionInProgress implements _ActionInProgress {
     required TResult Function(_ActionInProgress value) actionInProgress,
     required TResult Function(_LikeFailure value) likeFailure,
     required TResult Function(_LikeSuccess value) likeSuccess,
+    required TResult Function(_ShareFailure value) shareFailure,
     required TResult Function(_ShareOpened value) shareOpened,
+    required TResult Function(_DismissFailure value) dismissFailure,
+    required TResult Function(_DismissSuccess value) dismissSuccess,
+    required TResult Function(_OpenFailure value) openFailure,
+    required TResult Function(_OpenSuccess value) openSuccess,
   }) {
     return actionInProgress(this);
   }
@@ -1230,7 +1403,12 @@ class _$_ActionInProgress implements _ActionInProgress {
     TResult Function(_ActionInProgress value)? actionInProgress,
     TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareFailure value)? shareFailure,
     TResult Function(_ShareOpened value)? shareOpened,
+    TResult Function(_DismissFailure value)? dismissFailure,
+    TResult Function(_DismissSuccess value)? dismissSuccess,
+    TResult Function(_OpenFailure value)? openFailure,
+    TResult Function(_OpenSuccess value)? openSuccess,
   }) {
     return actionInProgress?.call(this);
   }
@@ -1242,7 +1420,12 @@ class _$_ActionInProgress implements _ActionInProgress {
     TResult Function(_ActionInProgress value)? actionInProgress,
     TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareFailure value)? shareFailure,
     TResult Function(_ShareOpened value)? shareOpened,
+    TResult Function(_DismissFailure value)? dismissFailure,
+    TResult Function(_DismissSuccess value)? dismissSuccess,
+    TResult Function(_OpenFailure value)? openFailure,
+    TResult Function(_OpenSuccess value)? openSuccess,
     required TResult orElse(),
   }) {
     if (actionInProgress != null) {
@@ -1338,9 +1521,24 @@ class _$_LikeFailure implements _LikeFailure {
     required TResult Function(
             UserArticleEngagementFailure userArticleEngagementFailure)
         likeFailure,
-    required TResult Function(dynamic updatedUserArticleEngagement) likeSuccess,
+    required TResult Function(
+            UserArticleEngagement updatedUserArticleEngagement)
+        likeSuccess,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        shareFailure,
     required TResult Function(UserArticleEngagement userArticleEngagement)
         shareOpened,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        dismissFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        dismissSuccess,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        openFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        openSuccess,
   }) {
     return likeFailure(userArticleEngagementFailure);
   }
@@ -1352,8 +1550,18 @@ class _$_LikeFailure implements _LikeFailure {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(dynamic updatedUserArticleEngagement)? likeSuccess,
+    TResult Function(UserArticleEngagement updatedUserArticleEngagement)?
+        likeSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        shareFailure,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        dismissFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)?
+        dismissSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        openFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? openSuccess,
   }) {
     return likeFailure?.call(userArticleEngagementFailure);
   }
@@ -1365,8 +1573,18 @@ class _$_LikeFailure implements _LikeFailure {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(dynamic updatedUserArticleEngagement)? likeSuccess,
+    TResult Function(UserArticleEngagement updatedUserArticleEngagement)?
+        likeSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        shareFailure,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        dismissFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)?
+        dismissSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        openFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? openSuccess,
     required TResult orElse(),
   }) {
     if (likeFailure != null) {
@@ -1382,7 +1600,12 @@ class _$_LikeFailure implements _LikeFailure {
     required TResult Function(_ActionInProgress value) actionInProgress,
     required TResult Function(_LikeFailure value) likeFailure,
     required TResult Function(_LikeSuccess value) likeSuccess,
+    required TResult Function(_ShareFailure value) shareFailure,
     required TResult Function(_ShareOpened value) shareOpened,
+    required TResult Function(_DismissFailure value) dismissFailure,
+    required TResult Function(_DismissSuccess value) dismissSuccess,
+    required TResult Function(_OpenFailure value) openFailure,
+    required TResult Function(_OpenSuccess value) openSuccess,
   }) {
     return likeFailure(this);
   }
@@ -1394,7 +1617,12 @@ class _$_LikeFailure implements _LikeFailure {
     TResult Function(_ActionInProgress value)? actionInProgress,
     TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareFailure value)? shareFailure,
     TResult Function(_ShareOpened value)? shareOpened,
+    TResult Function(_DismissFailure value)? dismissFailure,
+    TResult Function(_DismissSuccess value)? dismissSuccess,
+    TResult Function(_OpenFailure value)? openFailure,
+    TResult Function(_OpenSuccess value)? openSuccess,
   }) {
     return likeFailure?.call(this);
   }
@@ -1406,7 +1634,12 @@ class _$_LikeFailure implements _LikeFailure {
     TResult Function(_ActionInProgress value)? actionInProgress,
     TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareFailure value)? shareFailure,
     TResult Function(_ShareOpened value)? shareOpened,
+    TResult Function(_DismissFailure value)? dismissFailure,
+    TResult Function(_DismissSuccess value)? dismissSuccess,
+    TResult Function(_OpenFailure value)? openFailure,
+    TResult Function(_OpenSuccess value)? openSuccess,
     required TResult orElse(),
   }) {
     if (likeFailure != null) {
@@ -1432,7 +1665,9 @@ abstract class _$LikeSuccessCopyWith<$Res> {
   factory _$LikeSuccessCopyWith(
           _LikeSuccess value, $Res Function(_LikeSuccess) then) =
       __$LikeSuccessCopyWithImpl<$Res>;
-  $Res call({dynamic updatedUserArticleEngagement});
+  $Res call({UserArticleEngagement updatedUserArticleEngagement});
+
+  $UserArticleEngagementCopyWith<$Res> get updatedUserArticleEngagement;
 }
 
 /// @nodoc
@@ -1453,8 +1688,17 @@ class __$LikeSuccessCopyWithImpl<$Res>
     return _then(_LikeSuccess(
       updatedUserArticleEngagement == freezed
           ? _value.updatedUserArticleEngagement
-          : updatedUserArticleEngagement,
+          : updatedUserArticleEngagement // ignore: cast_nullable_to_non_nullable
+              as UserArticleEngagement,
     ));
+  }
+
+  @override
+  $UserArticleEngagementCopyWith<$Res> get updatedUserArticleEngagement {
+    return $UserArticleEngagementCopyWith<$Res>(
+        _value.updatedUserArticleEngagement, (value) {
+      return _then(_value.copyWith(updatedUserArticleEngagement: value));
+    });
   }
 }
 
@@ -1464,7 +1708,7 @@ class _$_LikeSuccess implements _LikeSuccess {
   const _$_LikeSuccess(this.updatedUserArticleEngagement);
 
   @override
-  final dynamic updatedUserArticleEngagement;
+  final UserArticleEngagement updatedUserArticleEngagement;
 
   @override
   String toString() {
@@ -1476,14 +1720,14 @@ class _$_LikeSuccess implements _LikeSuccess {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _LikeSuccess &&
-            const DeepCollectionEquality().equals(
-                other.updatedUserArticleEngagement,
-                updatedUserArticleEngagement));
+            (identical(other.updatedUserArticleEngagement,
+                    updatedUserArticleEngagement) ||
+                other.updatedUserArticleEngagement ==
+                    updatedUserArticleEngagement));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(updatedUserArticleEngagement));
+  int get hashCode => Object.hash(runtimeType, updatedUserArticleEngagement);
 
   @JsonKey(ignore: true)
   @override
@@ -1498,9 +1742,24 @@ class _$_LikeSuccess implements _LikeSuccess {
     required TResult Function(
             UserArticleEngagementFailure userArticleEngagementFailure)
         likeFailure,
-    required TResult Function(dynamic updatedUserArticleEngagement) likeSuccess,
+    required TResult Function(
+            UserArticleEngagement updatedUserArticleEngagement)
+        likeSuccess,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        shareFailure,
     required TResult Function(UserArticleEngagement userArticleEngagement)
         shareOpened,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        dismissFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        dismissSuccess,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        openFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        openSuccess,
   }) {
     return likeSuccess(updatedUserArticleEngagement);
   }
@@ -1512,8 +1771,18 @@ class _$_LikeSuccess implements _LikeSuccess {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(dynamic updatedUserArticleEngagement)? likeSuccess,
+    TResult Function(UserArticleEngagement updatedUserArticleEngagement)?
+        likeSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        shareFailure,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        dismissFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)?
+        dismissSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        openFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? openSuccess,
   }) {
     return likeSuccess?.call(updatedUserArticleEngagement);
   }
@@ -1525,8 +1794,18 @@ class _$_LikeSuccess implements _LikeSuccess {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(dynamic updatedUserArticleEngagement)? likeSuccess,
+    TResult Function(UserArticleEngagement updatedUserArticleEngagement)?
+        likeSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        shareFailure,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        dismissFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)?
+        dismissSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        openFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? openSuccess,
     required TResult orElse(),
   }) {
     if (likeSuccess != null) {
@@ -1542,7 +1821,12 @@ class _$_LikeSuccess implements _LikeSuccess {
     required TResult Function(_ActionInProgress value) actionInProgress,
     required TResult Function(_LikeFailure value) likeFailure,
     required TResult Function(_LikeSuccess value) likeSuccess,
+    required TResult Function(_ShareFailure value) shareFailure,
     required TResult Function(_ShareOpened value) shareOpened,
+    required TResult Function(_DismissFailure value) dismissFailure,
+    required TResult Function(_DismissSuccess value) dismissSuccess,
+    required TResult Function(_OpenFailure value) openFailure,
+    required TResult Function(_OpenSuccess value) openSuccess,
   }) {
     return likeSuccess(this);
   }
@@ -1554,7 +1838,12 @@ class _$_LikeSuccess implements _LikeSuccess {
     TResult Function(_ActionInProgress value)? actionInProgress,
     TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareFailure value)? shareFailure,
     TResult Function(_ShareOpened value)? shareOpened,
+    TResult Function(_DismissFailure value)? dismissFailure,
+    TResult Function(_DismissSuccess value)? dismissSuccess,
+    TResult Function(_OpenFailure value)? openFailure,
+    TResult Function(_OpenSuccess value)? openSuccess,
   }) {
     return likeSuccess?.call(this);
   }
@@ -1566,7 +1855,12 @@ class _$_LikeSuccess implements _LikeSuccess {
     TResult Function(_ActionInProgress value)? actionInProgress,
     TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareFailure value)? shareFailure,
     TResult Function(_ShareOpened value)? shareOpened,
+    TResult Function(_DismissFailure value)? dismissFailure,
+    TResult Function(_DismissSuccess value)? dismissSuccess,
+    TResult Function(_OpenFailure value)? openFailure,
+    TResult Function(_OpenSuccess value)? openSuccess,
     required TResult orElse(),
   }) {
     if (likeSuccess != null) {
@@ -1577,12 +1871,233 @@ class _$_LikeSuccess implements _LikeSuccess {
 }
 
 abstract class _LikeSuccess implements UserArticleEngagementActorState {
-  const factory _LikeSuccess(dynamic updatedUserArticleEngagement) =
-      _$_LikeSuccess;
+  const factory _LikeSuccess(
+      UserArticleEngagement updatedUserArticleEngagement) = _$_LikeSuccess;
 
-  dynamic get updatedUserArticleEngagement;
+  UserArticleEngagement get updatedUserArticleEngagement;
   @JsonKey(ignore: true)
   _$LikeSuccessCopyWith<_LikeSuccess> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$ShareFailureCopyWith<$Res> {
+  factory _$ShareFailureCopyWith(
+          _ShareFailure value, $Res Function(_ShareFailure) then) =
+      __$ShareFailureCopyWithImpl<$Res>;
+  $Res call({UserArticleEngagementFailure userArticleEngagementFailure});
+
+  $UserArticleEngagementFailureCopyWith<$Res> get userArticleEngagementFailure;
+}
+
+/// @nodoc
+class __$ShareFailureCopyWithImpl<$Res>
+    extends _$UserArticleEngagementActorStateCopyWithImpl<$Res>
+    implements _$ShareFailureCopyWith<$Res> {
+  __$ShareFailureCopyWithImpl(
+      _ShareFailure _value, $Res Function(_ShareFailure) _then)
+      : super(_value, (v) => _then(v as _ShareFailure));
+
+  @override
+  _ShareFailure get _value => super._value as _ShareFailure;
+
+  @override
+  $Res call({
+    Object? userArticleEngagementFailure = freezed,
+  }) {
+    return _then(_ShareFailure(
+      userArticleEngagementFailure == freezed
+          ? _value.userArticleEngagementFailure
+          : userArticleEngagementFailure // ignore: cast_nullable_to_non_nullable
+              as UserArticleEngagementFailure,
+    ));
+  }
+
+  @override
+  $UserArticleEngagementFailureCopyWith<$Res> get userArticleEngagementFailure {
+    return $UserArticleEngagementFailureCopyWith<$Res>(
+        _value.userArticleEngagementFailure, (value) {
+      return _then(_value.copyWith(userArticleEngagementFailure: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_ShareFailure implements _ShareFailure {
+  const _$_ShareFailure(this.userArticleEngagementFailure);
+
+  @override
+  final UserArticleEngagementFailure userArticleEngagementFailure;
+
+  @override
+  String toString() {
+    return 'UserArticleEngagementActorState.shareFailure(userArticleEngagementFailure: $userArticleEngagementFailure)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _ShareFailure &&
+            (identical(other.userArticleEngagementFailure,
+                    userArticleEngagementFailure) ||
+                other.userArticleEngagementFailure ==
+                    userArticleEngagementFailure));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userArticleEngagementFailure);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ShareFailureCopyWith<_ShareFailure> get copyWith =>
+      __$ShareFailureCopyWithImpl<_ShareFailure>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() actionInProgress,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        likeFailure,
+    required TResult Function(
+            UserArticleEngagement updatedUserArticleEngagement)
+        likeSuccess,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        shareFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        shareOpened,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        dismissFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        dismissSuccess,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        openFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        openSuccess,
+  }) {
+    return shareFailure(userArticleEngagementFailure);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? actionInProgress,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        likeFailure,
+    TResult Function(UserArticleEngagement updatedUserArticleEngagement)?
+        likeSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        shareFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        dismissFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)?
+        dismissSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        openFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? openSuccess,
+  }) {
+    return shareFailure?.call(userArticleEngagementFailure);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? actionInProgress,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        likeFailure,
+    TResult Function(UserArticleEngagement updatedUserArticleEngagement)?
+        likeSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        shareFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        dismissFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)?
+        dismissSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        openFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? openSuccess,
+    required TResult orElse(),
+  }) {
+    if (shareFailure != null) {
+      return shareFailure(userArticleEngagementFailure);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_ActionInProgress value) actionInProgress,
+    required TResult Function(_LikeFailure value) likeFailure,
+    required TResult Function(_LikeSuccess value) likeSuccess,
+    required TResult Function(_ShareFailure value) shareFailure,
+    required TResult Function(_ShareOpened value) shareOpened,
+    required TResult Function(_DismissFailure value) dismissFailure,
+    required TResult Function(_DismissSuccess value) dismissSuccess,
+    required TResult Function(_OpenFailure value) openFailure,
+    required TResult Function(_OpenSuccess value) openSuccess,
+  }) {
+    return shareFailure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_ActionInProgress value)? actionInProgress,
+    TResult Function(_LikeFailure value)? likeFailure,
+    TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareFailure value)? shareFailure,
+    TResult Function(_ShareOpened value)? shareOpened,
+    TResult Function(_DismissFailure value)? dismissFailure,
+    TResult Function(_DismissSuccess value)? dismissSuccess,
+    TResult Function(_OpenFailure value)? openFailure,
+    TResult Function(_OpenSuccess value)? openSuccess,
+  }) {
+    return shareFailure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_ActionInProgress value)? actionInProgress,
+    TResult Function(_LikeFailure value)? likeFailure,
+    TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareFailure value)? shareFailure,
+    TResult Function(_ShareOpened value)? shareOpened,
+    TResult Function(_DismissFailure value)? dismissFailure,
+    TResult Function(_DismissSuccess value)? dismissSuccess,
+    TResult Function(_OpenFailure value)? openFailure,
+    TResult Function(_OpenSuccess value)? openSuccess,
+    required TResult orElse(),
+  }) {
+    if (shareFailure != null) {
+      return shareFailure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShareFailure implements UserArticleEngagementActorState {
+  const factory _ShareFailure(
+          UserArticleEngagementFailure userArticleEngagementFailure) =
+      _$_ShareFailure;
+
+  UserArticleEngagementFailure get userArticleEngagementFailure;
+  @JsonKey(ignore: true)
+  _$ShareFailureCopyWith<_ShareFailure> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1666,9 +2181,24 @@ class _$_ShareOpened implements _ShareOpened {
     required TResult Function(
             UserArticleEngagementFailure userArticleEngagementFailure)
         likeFailure,
-    required TResult Function(dynamic updatedUserArticleEngagement) likeSuccess,
+    required TResult Function(
+            UserArticleEngagement updatedUserArticleEngagement)
+        likeSuccess,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        shareFailure,
     required TResult Function(UserArticleEngagement userArticleEngagement)
         shareOpened,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        dismissFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        dismissSuccess,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        openFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        openSuccess,
   }) {
     return shareOpened(userArticleEngagement);
   }
@@ -1680,8 +2210,18 @@ class _$_ShareOpened implements _ShareOpened {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(dynamic updatedUserArticleEngagement)? likeSuccess,
+    TResult Function(UserArticleEngagement updatedUserArticleEngagement)?
+        likeSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        shareFailure,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        dismissFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)?
+        dismissSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        openFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? openSuccess,
   }) {
     return shareOpened?.call(userArticleEngagement);
   }
@@ -1693,8 +2233,18 @@ class _$_ShareOpened implements _ShareOpened {
     TResult Function()? actionInProgress,
     TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
         likeFailure,
-    TResult Function(dynamic updatedUserArticleEngagement)? likeSuccess,
+    TResult Function(UserArticleEngagement updatedUserArticleEngagement)?
+        likeSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        shareFailure,
     TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        dismissFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)?
+        dismissSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        openFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? openSuccess,
     required TResult orElse(),
   }) {
     if (shareOpened != null) {
@@ -1710,7 +2260,12 @@ class _$_ShareOpened implements _ShareOpened {
     required TResult Function(_ActionInProgress value) actionInProgress,
     required TResult Function(_LikeFailure value) likeFailure,
     required TResult Function(_LikeSuccess value) likeSuccess,
+    required TResult Function(_ShareFailure value) shareFailure,
     required TResult Function(_ShareOpened value) shareOpened,
+    required TResult Function(_DismissFailure value) dismissFailure,
+    required TResult Function(_DismissSuccess value) dismissSuccess,
+    required TResult Function(_OpenFailure value) openFailure,
+    required TResult Function(_OpenSuccess value) openSuccess,
   }) {
     return shareOpened(this);
   }
@@ -1722,7 +2277,12 @@ class _$_ShareOpened implements _ShareOpened {
     TResult Function(_ActionInProgress value)? actionInProgress,
     TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareFailure value)? shareFailure,
     TResult Function(_ShareOpened value)? shareOpened,
+    TResult Function(_DismissFailure value)? dismissFailure,
+    TResult Function(_DismissSuccess value)? dismissSuccess,
+    TResult Function(_OpenFailure value)? openFailure,
+    TResult Function(_OpenSuccess value)? openSuccess,
   }) {
     return shareOpened?.call(this);
   }
@@ -1734,7 +2294,12 @@ class _$_ShareOpened implements _ShareOpened {
     TResult Function(_ActionInProgress value)? actionInProgress,
     TResult Function(_LikeFailure value)? likeFailure,
     TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareFailure value)? shareFailure,
     TResult Function(_ShareOpened value)? shareOpened,
+    TResult Function(_DismissFailure value)? dismissFailure,
+    TResult Function(_DismissSuccess value)? dismissSuccess,
+    TResult Function(_OpenFailure value)? openFailure,
+    TResult Function(_OpenSuccess value)? openSuccess,
     required TResult orElse(),
   }) {
     if (shareOpened != null) {
@@ -1751,5 +2316,883 @@ abstract class _ShareOpened implements UserArticleEngagementActorState {
   UserArticleEngagement get userArticleEngagement;
   @JsonKey(ignore: true)
   _$ShareOpenedCopyWith<_ShareOpened> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$DismissFailureCopyWith<$Res> {
+  factory _$DismissFailureCopyWith(
+          _DismissFailure value, $Res Function(_DismissFailure) then) =
+      __$DismissFailureCopyWithImpl<$Res>;
+  $Res call({UserArticleEngagementFailure userArticleEngagementFailure});
+
+  $UserArticleEngagementFailureCopyWith<$Res> get userArticleEngagementFailure;
+}
+
+/// @nodoc
+class __$DismissFailureCopyWithImpl<$Res>
+    extends _$UserArticleEngagementActorStateCopyWithImpl<$Res>
+    implements _$DismissFailureCopyWith<$Res> {
+  __$DismissFailureCopyWithImpl(
+      _DismissFailure _value, $Res Function(_DismissFailure) _then)
+      : super(_value, (v) => _then(v as _DismissFailure));
+
+  @override
+  _DismissFailure get _value => super._value as _DismissFailure;
+
+  @override
+  $Res call({
+    Object? userArticleEngagementFailure = freezed,
+  }) {
+    return _then(_DismissFailure(
+      userArticleEngagementFailure == freezed
+          ? _value.userArticleEngagementFailure
+          : userArticleEngagementFailure // ignore: cast_nullable_to_non_nullable
+              as UserArticleEngagementFailure,
+    ));
+  }
+
+  @override
+  $UserArticleEngagementFailureCopyWith<$Res> get userArticleEngagementFailure {
+    return $UserArticleEngagementFailureCopyWith<$Res>(
+        _value.userArticleEngagementFailure, (value) {
+      return _then(_value.copyWith(userArticleEngagementFailure: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_DismissFailure implements _DismissFailure {
+  const _$_DismissFailure(this.userArticleEngagementFailure);
+
+  @override
+  final UserArticleEngagementFailure userArticleEngagementFailure;
+
+  @override
+  String toString() {
+    return 'UserArticleEngagementActorState.dismissFailure(userArticleEngagementFailure: $userArticleEngagementFailure)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _DismissFailure &&
+            (identical(other.userArticleEngagementFailure,
+                    userArticleEngagementFailure) ||
+                other.userArticleEngagementFailure ==
+                    userArticleEngagementFailure));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userArticleEngagementFailure);
+
+  @JsonKey(ignore: true)
+  @override
+  _$DismissFailureCopyWith<_DismissFailure> get copyWith =>
+      __$DismissFailureCopyWithImpl<_DismissFailure>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() actionInProgress,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        likeFailure,
+    required TResult Function(
+            UserArticleEngagement updatedUserArticleEngagement)
+        likeSuccess,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        shareFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        shareOpened,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        dismissFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        dismissSuccess,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        openFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        openSuccess,
+  }) {
+    return dismissFailure(userArticleEngagementFailure);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? actionInProgress,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        likeFailure,
+    TResult Function(UserArticleEngagement updatedUserArticleEngagement)?
+        likeSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        shareFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        dismissFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)?
+        dismissSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        openFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? openSuccess,
+  }) {
+    return dismissFailure?.call(userArticleEngagementFailure);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? actionInProgress,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        likeFailure,
+    TResult Function(UserArticleEngagement updatedUserArticleEngagement)?
+        likeSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        shareFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        dismissFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)?
+        dismissSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        openFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? openSuccess,
+    required TResult orElse(),
+  }) {
+    if (dismissFailure != null) {
+      return dismissFailure(userArticleEngagementFailure);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_ActionInProgress value) actionInProgress,
+    required TResult Function(_LikeFailure value) likeFailure,
+    required TResult Function(_LikeSuccess value) likeSuccess,
+    required TResult Function(_ShareFailure value) shareFailure,
+    required TResult Function(_ShareOpened value) shareOpened,
+    required TResult Function(_DismissFailure value) dismissFailure,
+    required TResult Function(_DismissSuccess value) dismissSuccess,
+    required TResult Function(_OpenFailure value) openFailure,
+    required TResult Function(_OpenSuccess value) openSuccess,
+  }) {
+    return dismissFailure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_ActionInProgress value)? actionInProgress,
+    TResult Function(_LikeFailure value)? likeFailure,
+    TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareFailure value)? shareFailure,
+    TResult Function(_ShareOpened value)? shareOpened,
+    TResult Function(_DismissFailure value)? dismissFailure,
+    TResult Function(_DismissSuccess value)? dismissSuccess,
+    TResult Function(_OpenFailure value)? openFailure,
+    TResult Function(_OpenSuccess value)? openSuccess,
+  }) {
+    return dismissFailure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_ActionInProgress value)? actionInProgress,
+    TResult Function(_LikeFailure value)? likeFailure,
+    TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareFailure value)? shareFailure,
+    TResult Function(_ShareOpened value)? shareOpened,
+    TResult Function(_DismissFailure value)? dismissFailure,
+    TResult Function(_DismissSuccess value)? dismissSuccess,
+    TResult Function(_OpenFailure value)? openFailure,
+    TResult Function(_OpenSuccess value)? openSuccess,
+    required TResult orElse(),
+  }) {
+    if (dismissFailure != null) {
+      return dismissFailure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DismissFailure implements UserArticleEngagementActorState {
+  const factory _DismissFailure(
+          UserArticleEngagementFailure userArticleEngagementFailure) =
+      _$_DismissFailure;
+
+  UserArticleEngagementFailure get userArticleEngagementFailure;
+  @JsonKey(ignore: true)
+  _$DismissFailureCopyWith<_DismissFailure> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$DismissSuccessCopyWith<$Res> {
+  factory _$DismissSuccessCopyWith(
+          _DismissSuccess value, $Res Function(_DismissSuccess) then) =
+      __$DismissSuccessCopyWithImpl<$Res>;
+  $Res call({UserArticleEngagement userArticleEngagement});
+
+  $UserArticleEngagementCopyWith<$Res> get userArticleEngagement;
+}
+
+/// @nodoc
+class __$DismissSuccessCopyWithImpl<$Res>
+    extends _$UserArticleEngagementActorStateCopyWithImpl<$Res>
+    implements _$DismissSuccessCopyWith<$Res> {
+  __$DismissSuccessCopyWithImpl(
+      _DismissSuccess _value, $Res Function(_DismissSuccess) _then)
+      : super(_value, (v) => _then(v as _DismissSuccess));
+
+  @override
+  _DismissSuccess get _value => super._value as _DismissSuccess;
+
+  @override
+  $Res call({
+    Object? userArticleEngagement = freezed,
+  }) {
+    return _then(_DismissSuccess(
+      userArticleEngagement == freezed
+          ? _value.userArticleEngagement
+          : userArticleEngagement // ignore: cast_nullable_to_non_nullable
+              as UserArticleEngagement,
+    ));
+  }
+
+  @override
+  $UserArticleEngagementCopyWith<$Res> get userArticleEngagement {
+    return $UserArticleEngagementCopyWith<$Res>(_value.userArticleEngagement,
+        (value) {
+      return _then(_value.copyWith(userArticleEngagement: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_DismissSuccess implements _DismissSuccess {
+  const _$_DismissSuccess(this.userArticleEngagement);
+
+  @override
+  final UserArticleEngagement userArticleEngagement;
+
+  @override
+  String toString() {
+    return 'UserArticleEngagementActorState.dismissSuccess(userArticleEngagement: $userArticleEngagement)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _DismissSuccess &&
+            (identical(other.userArticleEngagement, userArticleEngagement) ||
+                other.userArticleEngagement == userArticleEngagement));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userArticleEngagement);
+
+  @JsonKey(ignore: true)
+  @override
+  _$DismissSuccessCopyWith<_DismissSuccess> get copyWith =>
+      __$DismissSuccessCopyWithImpl<_DismissSuccess>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() actionInProgress,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        likeFailure,
+    required TResult Function(
+            UserArticleEngagement updatedUserArticleEngagement)
+        likeSuccess,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        shareFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        shareOpened,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        dismissFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        dismissSuccess,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        openFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        openSuccess,
+  }) {
+    return dismissSuccess(userArticleEngagement);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? actionInProgress,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        likeFailure,
+    TResult Function(UserArticleEngagement updatedUserArticleEngagement)?
+        likeSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        shareFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        dismissFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)?
+        dismissSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        openFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? openSuccess,
+  }) {
+    return dismissSuccess?.call(userArticleEngagement);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? actionInProgress,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        likeFailure,
+    TResult Function(UserArticleEngagement updatedUserArticleEngagement)?
+        likeSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        shareFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        dismissFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)?
+        dismissSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        openFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? openSuccess,
+    required TResult orElse(),
+  }) {
+    if (dismissSuccess != null) {
+      return dismissSuccess(userArticleEngagement);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_ActionInProgress value) actionInProgress,
+    required TResult Function(_LikeFailure value) likeFailure,
+    required TResult Function(_LikeSuccess value) likeSuccess,
+    required TResult Function(_ShareFailure value) shareFailure,
+    required TResult Function(_ShareOpened value) shareOpened,
+    required TResult Function(_DismissFailure value) dismissFailure,
+    required TResult Function(_DismissSuccess value) dismissSuccess,
+    required TResult Function(_OpenFailure value) openFailure,
+    required TResult Function(_OpenSuccess value) openSuccess,
+  }) {
+    return dismissSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_ActionInProgress value)? actionInProgress,
+    TResult Function(_LikeFailure value)? likeFailure,
+    TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareFailure value)? shareFailure,
+    TResult Function(_ShareOpened value)? shareOpened,
+    TResult Function(_DismissFailure value)? dismissFailure,
+    TResult Function(_DismissSuccess value)? dismissSuccess,
+    TResult Function(_OpenFailure value)? openFailure,
+    TResult Function(_OpenSuccess value)? openSuccess,
+  }) {
+    return dismissSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_ActionInProgress value)? actionInProgress,
+    TResult Function(_LikeFailure value)? likeFailure,
+    TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareFailure value)? shareFailure,
+    TResult Function(_ShareOpened value)? shareOpened,
+    TResult Function(_DismissFailure value)? dismissFailure,
+    TResult Function(_DismissSuccess value)? dismissSuccess,
+    TResult Function(_OpenFailure value)? openFailure,
+    TResult Function(_OpenSuccess value)? openSuccess,
+    required TResult orElse(),
+  }) {
+    if (dismissSuccess != null) {
+      return dismissSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DismissSuccess implements UserArticleEngagementActorState {
+  const factory _DismissSuccess(UserArticleEngagement userArticleEngagement) =
+      _$_DismissSuccess;
+
+  UserArticleEngagement get userArticleEngagement;
+  @JsonKey(ignore: true)
+  _$DismissSuccessCopyWith<_DismissSuccess> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$OpenFailureCopyWith<$Res> {
+  factory _$OpenFailureCopyWith(
+          _OpenFailure value, $Res Function(_OpenFailure) then) =
+      __$OpenFailureCopyWithImpl<$Res>;
+  $Res call({UserArticleEngagementFailure userArticleEngagementFailure});
+
+  $UserArticleEngagementFailureCopyWith<$Res> get userArticleEngagementFailure;
+}
+
+/// @nodoc
+class __$OpenFailureCopyWithImpl<$Res>
+    extends _$UserArticleEngagementActorStateCopyWithImpl<$Res>
+    implements _$OpenFailureCopyWith<$Res> {
+  __$OpenFailureCopyWithImpl(
+      _OpenFailure _value, $Res Function(_OpenFailure) _then)
+      : super(_value, (v) => _then(v as _OpenFailure));
+
+  @override
+  _OpenFailure get _value => super._value as _OpenFailure;
+
+  @override
+  $Res call({
+    Object? userArticleEngagementFailure = freezed,
+  }) {
+    return _then(_OpenFailure(
+      userArticleEngagementFailure == freezed
+          ? _value.userArticleEngagementFailure
+          : userArticleEngagementFailure // ignore: cast_nullable_to_non_nullable
+              as UserArticleEngagementFailure,
+    ));
+  }
+
+  @override
+  $UserArticleEngagementFailureCopyWith<$Res> get userArticleEngagementFailure {
+    return $UserArticleEngagementFailureCopyWith<$Res>(
+        _value.userArticleEngagementFailure, (value) {
+      return _then(_value.copyWith(userArticleEngagementFailure: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_OpenFailure implements _OpenFailure {
+  const _$_OpenFailure(this.userArticleEngagementFailure);
+
+  @override
+  final UserArticleEngagementFailure userArticleEngagementFailure;
+
+  @override
+  String toString() {
+    return 'UserArticleEngagementActorState.openFailure(userArticleEngagementFailure: $userArticleEngagementFailure)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _OpenFailure &&
+            (identical(other.userArticleEngagementFailure,
+                    userArticleEngagementFailure) ||
+                other.userArticleEngagementFailure ==
+                    userArticleEngagementFailure));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userArticleEngagementFailure);
+
+  @JsonKey(ignore: true)
+  @override
+  _$OpenFailureCopyWith<_OpenFailure> get copyWith =>
+      __$OpenFailureCopyWithImpl<_OpenFailure>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() actionInProgress,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        likeFailure,
+    required TResult Function(
+            UserArticleEngagement updatedUserArticleEngagement)
+        likeSuccess,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        shareFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        shareOpened,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        dismissFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        dismissSuccess,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        openFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        openSuccess,
+  }) {
+    return openFailure(userArticleEngagementFailure);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? actionInProgress,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        likeFailure,
+    TResult Function(UserArticleEngagement updatedUserArticleEngagement)?
+        likeSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        shareFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        dismissFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)?
+        dismissSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        openFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? openSuccess,
+  }) {
+    return openFailure?.call(userArticleEngagementFailure);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? actionInProgress,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        likeFailure,
+    TResult Function(UserArticleEngagement updatedUserArticleEngagement)?
+        likeSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        shareFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        dismissFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)?
+        dismissSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        openFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? openSuccess,
+    required TResult orElse(),
+  }) {
+    if (openFailure != null) {
+      return openFailure(userArticleEngagementFailure);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_ActionInProgress value) actionInProgress,
+    required TResult Function(_LikeFailure value) likeFailure,
+    required TResult Function(_LikeSuccess value) likeSuccess,
+    required TResult Function(_ShareFailure value) shareFailure,
+    required TResult Function(_ShareOpened value) shareOpened,
+    required TResult Function(_DismissFailure value) dismissFailure,
+    required TResult Function(_DismissSuccess value) dismissSuccess,
+    required TResult Function(_OpenFailure value) openFailure,
+    required TResult Function(_OpenSuccess value) openSuccess,
+  }) {
+    return openFailure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_ActionInProgress value)? actionInProgress,
+    TResult Function(_LikeFailure value)? likeFailure,
+    TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareFailure value)? shareFailure,
+    TResult Function(_ShareOpened value)? shareOpened,
+    TResult Function(_DismissFailure value)? dismissFailure,
+    TResult Function(_DismissSuccess value)? dismissSuccess,
+    TResult Function(_OpenFailure value)? openFailure,
+    TResult Function(_OpenSuccess value)? openSuccess,
+  }) {
+    return openFailure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_ActionInProgress value)? actionInProgress,
+    TResult Function(_LikeFailure value)? likeFailure,
+    TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareFailure value)? shareFailure,
+    TResult Function(_ShareOpened value)? shareOpened,
+    TResult Function(_DismissFailure value)? dismissFailure,
+    TResult Function(_DismissSuccess value)? dismissSuccess,
+    TResult Function(_OpenFailure value)? openFailure,
+    TResult Function(_OpenSuccess value)? openSuccess,
+    required TResult orElse(),
+  }) {
+    if (openFailure != null) {
+      return openFailure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OpenFailure implements UserArticleEngagementActorState {
+  const factory _OpenFailure(
+          UserArticleEngagementFailure userArticleEngagementFailure) =
+      _$_OpenFailure;
+
+  UserArticleEngagementFailure get userArticleEngagementFailure;
+  @JsonKey(ignore: true)
+  _$OpenFailureCopyWith<_OpenFailure> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$OpenSuccessCopyWith<$Res> {
+  factory _$OpenSuccessCopyWith(
+          _OpenSuccess value, $Res Function(_OpenSuccess) then) =
+      __$OpenSuccessCopyWithImpl<$Res>;
+  $Res call({UserArticleEngagement userArticleEngagement});
+
+  $UserArticleEngagementCopyWith<$Res> get userArticleEngagement;
+}
+
+/// @nodoc
+class __$OpenSuccessCopyWithImpl<$Res>
+    extends _$UserArticleEngagementActorStateCopyWithImpl<$Res>
+    implements _$OpenSuccessCopyWith<$Res> {
+  __$OpenSuccessCopyWithImpl(
+      _OpenSuccess _value, $Res Function(_OpenSuccess) _then)
+      : super(_value, (v) => _then(v as _OpenSuccess));
+
+  @override
+  _OpenSuccess get _value => super._value as _OpenSuccess;
+
+  @override
+  $Res call({
+    Object? userArticleEngagement = freezed,
+  }) {
+    return _then(_OpenSuccess(
+      userArticleEngagement == freezed
+          ? _value.userArticleEngagement
+          : userArticleEngagement // ignore: cast_nullable_to_non_nullable
+              as UserArticleEngagement,
+    ));
+  }
+
+  @override
+  $UserArticleEngagementCopyWith<$Res> get userArticleEngagement {
+    return $UserArticleEngagementCopyWith<$Res>(_value.userArticleEngagement,
+        (value) {
+      return _then(_value.copyWith(userArticleEngagement: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_OpenSuccess implements _OpenSuccess {
+  const _$_OpenSuccess(this.userArticleEngagement);
+
+  @override
+  final UserArticleEngagement userArticleEngagement;
+
+  @override
+  String toString() {
+    return 'UserArticleEngagementActorState.openSuccess(userArticleEngagement: $userArticleEngagement)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _OpenSuccess &&
+            (identical(other.userArticleEngagement, userArticleEngagement) ||
+                other.userArticleEngagement == userArticleEngagement));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userArticleEngagement);
+
+  @JsonKey(ignore: true)
+  @override
+  _$OpenSuccessCopyWith<_OpenSuccess> get copyWith =>
+      __$OpenSuccessCopyWithImpl<_OpenSuccess>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() actionInProgress,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        likeFailure,
+    required TResult Function(
+            UserArticleEngagement updatedUserArticleEngagement)
+        likeSuccess,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        shareFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        shareOpened,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        dismissFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        dismissSuccess,
+    required TResult Function(
+            UserArticleEngagementFailure userArticleEngagementFailure)
+        openFailure,
+    required TResult Function(UserArticleEngagement userArticleEngagement)
+        openSuccess,
+  }) {
+    return openSuccess(userArticleEngagement);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? actionInProgress,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        likeFailure,
+    TResult Function(UserArticleEngagement updatedUserArticleEngagement)?
+        likeSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        shareFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        dismissFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)?
+        dismissSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        openFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? openSuccess,
+  }) {
+    return openSuccess?.call(userArticleEngagement);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? actionInProgress,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        likeFailure,
+    TResult Function(UserArticleEngagement updatedUserArticleEngagement)?
+        likeSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        shareFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? shareOpened,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        dismissFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)?
+        dismissSuccess,
+    TResult Function(UserArticleEngagementFailure userArticleEngagementFailure)?
+        openFailure,
+    TResult Function(UserArticleEngagement userArticleEngagement)? openSuccess,
+    required TResult orElse(),
+  }) {
+    if (openSuccess != null) {
+      return openSuccess(userArticleEngagement);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_ActionInProgress value) actionInProgress,
+    required TResult Function(_LikeFailure value) likeFailure,
+    required TResult Function(_LikeSuccess value) likeSuccess,
+    required TResult Function(_ShareFailure value) shareFailure,
+    required TResult Function(_ShareOpened value) shareOpened,
+    required TResult Function(_DismissFailure value) dismissFailure,
+    required TResult Function(_DismissSuccess value) dismissSuccess,
+    required TResult Function(_OpenFailure value) openFailure,
+    required TResult Function(_OpenSuccess value) openSuccess,
+  }) {
+    return openSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_ActionInProgress value)? actionInProgress,
+    TResult Function(_LikeFailure value)? likeFailure,
+    TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareFailure value)? shareFailure,
+    TResult Function(_ShareOpened value)? shareOpened,
+    TResult Function(_DismissFailure value)? dismissFailure,
+    TResult Function(_DismissSuccess value)? dismissSuccess,
+    TResult Function(_OpenFailure value)? openFailure,
+    TResult Function(_OpenSuccess value)? openSuccess,
+  }) {
+    return openSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_ActionInProgress value)? actionInProgress,
+    TResult Function(_LikeFailure value)? likeFailure,
+    TResult Function(_LikeSuccess value)? likeSuccess,
+    TResult Function(_ShareFailure value)? shareFailure,
+    TResult Function(_ShareOpened value)? shareOpened,
+    TResult Function(_DismissFailure value)? dismissFailure,
+    TResult Function(_DismissSuccess value)? dismissSuccess,
+    TResult Function(_OpenFailure value)? openFailure,
+    TResult Function(_OpenSuccess value)? openSuccess,
+    required TResult orElse(),
+  }) {
+    if (openSuccess != null) {
+      return openSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OpenSuccess implements UserArticleEngagementActorState {
+  const factory _OpenSuccess(UserArticleEngagement userArticleEngagement) =
+      _$_OpenSuccess;
+
+  UserArticleEngagement get userArticleEngagement;
+  @JsonKey(ignore: true)
+  _$OpenSuccessCopyWith<_OpenSuccess> get copyWith =>
       throw _privateConstructorUsedError;
 }

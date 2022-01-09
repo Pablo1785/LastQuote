@@ -21,11 +21,13 @@ class LikeButton extends StatelessWidget {
             ? Icons.thumb_up_alt
             : Icons.thumb_up_alt_outlined,
       ),
-      onPressed: () => context.read<UserArticleEngagementActorBloc>().add(
-            UserArticleEngagementActorEvent.likePressed(
-              userArticleEngagement,
-            ),
-          ),
+      onPressed: () {
+        return context.read<UserArticleEngagementActorBloc>().add(
+              UserArticleEngagementActorEvent.likePressed(
+                userArticleEngagement,
+              ),
+            );
+      },
     );
   }
 }

@@ -5,9 +5,12 @@ import 'package:ddd/domain/data_sources/data_source_failure.dart';
 import 'package:ddd/domain/data_sources/data_source_status.dart';
 import 'package:ddd/domain/data_sources/i_data_source_repository.dart';
 import 'package:ddd/domain/data_sources/i_data_source_status_repository.dart';
+import 'package:ddd/infrastructure/core/firestore_helpers.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/kt.dart';
+
+import '../../../injection.dart';
 
 part 'data_source_status_picker_event.dart';
 part 'data_source_status_picker_state.dart';
@@ -69,7 +72,45 @@ class DataSourceStatusPickerBloc
             ),
           );
         },
-        dataSourceStatusesReceived: (e) {
+        dataSourceStatusesReceived: (e) async {
+          final newDataSourceStatuses =
+              await e.failureOrDataSourceStatuses.fold(
+            (l) => Future.value(
+              const KtList<DataSourceStatus>.empty(),
+            ),
+            (dataSourceStatuses) =>
+                getIt<FirestoreHelper>().userDocument().then(
+                      (userDocRef) => _iDataSourceStatusRepository
+                          .createMissingJunctionEntities(
+                        dataSources: e.dataSources,
+                        dataSourceStatuses: dataSourceStatuses,
+                        userId: userDocRef.id,
+                      ),
+                    ),
+          );
+
+          // Create any missing junction
+          if (newDataSourceStatuses.size > 0) {
+            final failureOrUnit =
+                await _iDataSourceStatusRepository.batchCreate(
+              newDataSourceStatuses,
+            );
+
+            // If missing junction creation failed, the entire junction loading mechanism should fail
+            if (failureOrUnit.isLeft()) {
+              failureOrUnit.leftMap(
+                (failure) => emit(
+                  DataSourceStatusPickerState.loadFailureStatuses(
+                    e.dataSources,
+                    failure,
+                  ),
+                ),
+              );
+              return;
+            }
+          }
+
+          // After successfully creating junctions/skipping that step
           e.failureOrDataSourceStatuses.fold(
             (failure) => emit(
               DataSourceStatusPickerState.loadFailureStatuses(
@@ -77,12 +118,16 @@ class DataSourceStatusPickerBloc
                 failure,
               ),
             ),
-            (dataSourceStatuses) => emit(
-              DataSourceStatusPickerState.loadSuccessAll(
-                dataSourceStatuses,
-                e.dataSources,
-              ),
-            ),
+            (dataSourceStatuses) {
+              var allDataSourceStatuses = dataSourceStatuses.toMutableList();
+              allDataSourceStatuses.addAll(newDataSourceStatuses);
+              emit(
+                DataSourceStatusPickerState.loadSuccessAll(
+                  allDataSourceStatuses.toList(),
+                  e.dataSources,
+                ),
+              );
+            },
           );
         },
         statusUpdated: (e) async {

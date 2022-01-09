@@ -17,6 +17,7 @@ abstract class IAuthFacade {
     required Password password,
   });
 
-  Future<Either<AuthFailure, Unit>> signInWithGoogle();
+  // Return true if new user to display initial loading animation and interests page, else false
+  Future<Either<AuthFailure, bool>> signInWithGoogle();
   Future<void> signOut();
 }

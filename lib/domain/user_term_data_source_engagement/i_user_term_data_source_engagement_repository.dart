@@ -10,22 +10,22 @@ abstract class IUserTermDataSourceEngagementRepository {
   Future<
       Either<UserTermDataSourceEngagementFailure,
           UserTermDataSourceEngagement>> getForCurrentUserAndTerm(
-    Term term,
+    String termId,
   );
 
   // return ArticleId->UserTermDataSourceEngagement mapping for current User
   Stream<
       Either<UserTermDataSourceEngagementFailure,
           KtList<UserTermDataSourceEngagement>>> watchForCurrentUserAndTerms(
-    KtList<Term> terms,
+    KtList<String> termIds,
   );
 
   Stream<
           Either<UserTermDataSourceEngagementFailure,
               KtList<UserTermDataSourceEngagement>>>
-      watchForCurrentUserTermsAndDataSources(
-    KtList<Term> terms,
-    KtList<DataSource> dataSources,
+      watchForCurrentUserTermsAndDataSource(
+    KtList<String> termIds,
+    String dataSourceId,
   );
 
   Future<Either<UserTermDataSourceEngagementFailure, Unit>> create(
@@ -33,5 +33,10 @@ abstract class IUserTermDataSourceEngagementRepository {
   );
 
   Future<Either<UserTermDataSourceEngagementFailure, Unit>> update(
+      UserTermDataSourceEngagement userTermDataSourceEngagement);
+
+  Future<
+      Either<UserTermDataSourceEngagementFailure,
+          UserTermDataSourceEngagement>> get(
       UserTermDataSourceEngagement userTermDataSourceEngagement);
 }

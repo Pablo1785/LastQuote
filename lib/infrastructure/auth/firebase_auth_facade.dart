@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../../domain/auth/auth_failure.dart';
 import 'package:dartz/dartz.dart';
 import '../../domain/auth/i_auth_facade.dart';
@@ -45,6 +47,12 @@ class FirebaseAuthFacade implements IAuthFacade {
       } else {
         return left(const AuthFailure.serverError());
       }
+    } on fb.FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use') {
+        return left(const AuthFailure.emailAlreadyInUse());
+      } else {
+        return left(const AuthFailure.serverError());
+      }
     }
   }
 
@@ -73,7 +81,7 @@ class FirebaseAuthFacade implements IAuthFacade {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> signInWithGoogle() async {
+  Future<Either<AuthFailure, bool>> signInWithGoogle() async {
     try {
       final googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
@@ -87,9 +95,11 @@ class FirebaseAuthFacade implements IAuthFacade {
         accessToken: googleAuthentication.accessToken,
       );
 
-      await _firebaseAuth.signInWithCredential(authCredential);
+      final providerData =
+          await _firebaseAuth.signInWithCredential(authCredential);
+      final isNewUser = providerData.additionalUserInfo?.isNewUser;
 
-      return right(unit);
+      return right(isNewUser ?? false);
     } on PlatformException catch (_) {
       return left(const AuthFailure.serverError());
     }

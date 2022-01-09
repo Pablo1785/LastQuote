@@ -23,7 +23,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
         emit(
           state.copyWith(
             emailAddress: EmailAddress(event.emailStr),
-            authFailureOrSuccessOption: none(),
+            authFailureOrIsNewUserOption: none(),
           ),
         );
       },
@@ -33,7 +33,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
         emit(
           state.copyWith(
             password: Password(event.passwordStr),
-            authFailureOrSuccessOption: none(),
+            authFailureOrIsNewUserOption: none(),
           ),
         );
       },
@@ -47,7 +47,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
         if (isEmailValid && isPasswordValid) {
           emit(state.copyWith(
             isSubmitting: true,
-            authFailureOrSuccessOption: none(),
+            authFailureOrIsNewUserOption: none(),
           ));
 
           failureOrSuccess = await _authFacade.registerWithEmailAndPassword(
@@ -55,11 +55,18 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
             password: state.password,
           );
         }
-        emit(state.copyWith(
-          isSubmitting: false,
-          showErrorMessages: AutovalidateMode.always,
-          authFailureOrSuccessOption: optionOf(failureOrSuccess),
-        ));
+        emit(
+          state.copyWith(
+            isSubmitting: false,
+            showErrorMessages: AutovalidateMode.always,
+            authFailureOrIsNewUserOption: optionOf(
+              failureOrSuccess?.fold(
+                (failure) => left(failure),
+                (_) => right(true),
+              ),
+            ),
+          ),
+        );
       },
     );
     on<SignInWithEmailAndPasswordPressed>(
@@ -71,7 +78,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
         if (isEmailValid && isPasswordValid) {
           emit(state.copyWith(
             isSubmitting: true,
-            authFailureOrSuccessOption: none(),
+            authFailureOrIsNewUserOption: none(),
           ));
 
           failureOrSuccess = await _authFacade.signInWithEmailAndPassword(
@@ -80,24 +87,31 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
           );
         }
 
-        emit(state.copyWith(
-          isSubmitting: false,
-          showErrorMessages: AutovalidateMode.always,
-          authFailureOrSuccessOption: optionOf(failureOrSuccess),
-        ));
+        emit(
+          state.copyWith(
+            isSubmitting: false,
+            showErrorMessages: AutovalidateMode.always,
+            authFailureOrIsNewUserOption: optionOf(
+              failureOrSuccess?.fold(
+                (failure) => left(failure),
+                (_) => right(false),
+              ),
+            ),
+          ),
+        );
       },
     );
     on<SignInWithGooglePressed>(
       (event, emit) async {
         emit(state.copyWith(
           isSubmitting: true,
-          authFailureOrSuccessOption: none(),
+          authFailureOrIsNewUserOption: none(),
         ));
 
         final failureOrSuccess = await _authFacade.signInWithGoogle();
         emit(state.copyWith(
           isSubmitting: false,
-          authFailureOrSuccessOption: some(failureOrSuccess),
+          authFailureOrIsNewUserOption: some(failureOrSuccess),
         ));
       },
     );
@@ -117,7 +131,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
     if (isEmailValid && isPasswordValid) {
       yield state.copyWith(
         isSubmitting: true,
-        authFailureOrSuccessOption: none(),
+        authFailureOrIsNewUserOption: none(),
       );
 
       failureOrSuccess = await forwardedCall(
@@ -129,7 +143,12 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
     yield state.copyWith(
       isSubmitting: false,
       showErrorMessages: AutovalidateMode.always,
-      authFailureOrSuccessOption: optionOf(failureOrSuccess),
+      authFailureOrIsNewUserOption: optionOf(
+        failureOrSuccess?.fold(
+          (failure) => left(failure),
+          (_) => right(true),
+        ),
+      ),
     );
   }
 }

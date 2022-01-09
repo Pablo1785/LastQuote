@@ -23,10 +23,38 @@ class ArticleTermCountRepository implements IArticleTermCountRepository {
   @override
   Future<Either<ArticleTermCountFailure, KtList<ArticleTermCount>>>
       getForArticle(
-    Article article,
-  ) {
-    // TODO: implement getForArticle
-    throw UnimplementedError();
+    Article article, {
+    bool descending = false,
+    int limit = 3,
+  }) async {
+    try {
+      final articleId = article.id.getOrCrash();
+
+      final articleTermCountSnapshot = await _firestore
+          .collection('article_term_counts')
+          .where(
+            'article_id',
+            isEqualTo: articleId,
+          )
+          .orderBy(
+            'count',
+            descending: descending,
+          )
+          .limit(limit)
+          .get();
+      return right(
+        articleTermCountSnapshot.docs
+            .map(
+              (doc) => ArticleTermCountDto.fromFirestore(doc).toDomain(),
+            )
+            .toImmutableList(),
+      );
+    } on Exception catch (exception, stacktrace) {
+      return _handleException(
+        exception,
+        stacktrace,
+      );
+    }
   }
 
   @override
@@ -123,6 +151,48 @@ class ArticleTermCountRepository implements IArticleTermCountRepository {
       print(stackTrace.toString());
       return left<ArticleTermCountFailure, T>(
           const ArticleTermCountFailure.unexpected());
+    }
+  }
+
+  @override
+  Future<Either<ArticleTermCountFailure, KtList<ArticleTermCount>>>
+      getForEachArticle(
+    KtList<Article> articles, {
+    bool descending = false,
+    int limitPerArticle = 3,
+  }) async {
+    // Guarantee list is non-empty so I can return just the first Failure of all the Futures
+    if (articles.isEmpty())
+      return right(const KtList<ArticleTermCount>.empty());
+    final articleTermCountFutures = articles.map(
+      (article) => getForArticle(
+        article,
+        descending: descending,
+        limit: limitPerArticle,
+      ),
+    );
+    final eithers = await Future.wait(
+      articleTermCountFutures.asList(),
+    );
+
+    if (eithers.any((either) => either.isRight())) {
+      final successEithers = eithers.where((either) => either.isRight());
+      var articleTermCounts = List<ArticleTermCount>.empty(
+        growable: true,
+      );
+      successEithers.forEach(
+        (either) {
+          either.fold(
+            (_) {},
+            (articleTermCountSublist) => articleTermCounts.addAll(
+              articleTermCountSublist.asList(),
+            ),
+          );
+        },
+      );
+      return right(articleTermCounts.toImmutableList());
+    } else {
+      return eithers.first.leftMap((failure) => failure);
     }
   }
 }
