@@ -12,7 +12,7 @@ _$_ArticleTermCountDto _$$_ArticleTermCountDtoFromJson(
       id: json['id'] as String?,
       articleId: json['article_id'] as String,
       termId: json['term_id'] as String,
-      count: json['count'] as num,
+      termImportance: json['term_importance'] as num,
     );
 
 Map<String, dynamic> _$$_ArticleTermCountDtoToJson(
@@ -21,5 +21,5 @@ Map<String, dynamic> _$$_ArticleTermCountDtoToJson(
       'id': instance.id,
       'article_id': instance.articleId,
       'term_id': instance.termId,
-      'count': instance.count,
+      'term_importance': instance.termImportance,
     };

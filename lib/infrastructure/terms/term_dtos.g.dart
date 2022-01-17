@@ -8,11 +8,11 @@ part of 'term_dtos.dart';
 
 _$_TermDto _$$_TermDtoFromJson(Map<String, dynamic> json) => _$_TermDto(
       id: json['id'] as String?,
-      containingDocumentsCount: json['containing_documents_count'] as num,
+      globalTermImportance: json['global_term_importance'] as num,
     );
 
 Map<String, dynamic> _$$_TermDtoToJson(_$_TermDto instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'containing_documents_count': instance.containingDocumentsCount,
+      'global_term_importance': instance.globalTermImportance,
     };

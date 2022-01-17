@@ -23,11 +23,11 @@ class _$TermDtoTearOff {
 
   _TermDto call(
       {required String? id,
-      @JsonKey(name: 'containing_documents_count')
-          required num containingDocumentsCount}) {
+      @JsonKey(name: 'global_term_importance')
+          required num globalTermImportance}) {
     return _TermDto(
       id: id,
-      containingDocumentsCount: containingDocumentsCount,
+      globalTermImportance: globalTermImportance,
     );
   }
 
@@ -42,8 +42,8 @@ const $TermDto = _$TermDtoTearOff();
 /// @nodoc
 mixin _$TermDto {
   String? get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'containing_documents_count')
-  num get containingDocumentsCount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'global_term_importance')
+  num get globalTermImportance => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -56,8 +56,7 @@ abstract class $TermDtoCopyWith<$Res> {
       _$TermDtoCopyWithImpl<$Res>;
   $Res call(
       {String? id,
-      @JsonKey(name: 'containing_documents_count')
-          num containingDocumentsCount});
+      @JsonKey(name: 'global_term_importance') num globalTermImportance});
 }
 
 /// @nodoc
@@ -71,16 +70,16 @@ class _$TermDtoCopyWithImpl<$Res> implements $TermDtoCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
-    Object? containingDocumentsCount = freezed,
+    Object? globalTermImportance = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      containingDocumentsCount: containingDocumentsCount == freezed
-          ? _value.containingDocumentsCount
-          : containingDocumentsCount // ignore: cast_nullable_to_non_nullable
+      globalTermImportance: globalTermImportance == freezed
+          ? _value.globalTermImportance
+          : globalTermImportance // ignore: cast_nullable_to_non_nullable
               as num,
     ));
   }
@@ -93,8 +92,7 @@ abstract class _$TermDtoCopyWith<$Res> implements $TermDtoCopyWith<$Res> {
   @override
   $Res call(
       {String? id,
-      @JsonKey(name: 'containing_documents_count')
-          num containingDocumentsCount});
+      @JsonKey(name: 'global_term_importance') num globalTermImportance});
 }
 
 /// @nodoc
@@ -109,16 +107,16 @@ class __$TermDtoCopyWithImpl<$Res> extends _$TermDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? containingDocumentsCount = freezed,
+    Object? globalTermImportance = freezed,
   }) {
     return _then(_TermDto(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      containingDocumentsCount: containingDocumentsCount == freezed
-          ? _value.containingDocumentsCount
-          : containingDocumentsCount // ignore: cast_nullable_to_non_nullable
+      globalTermImportance: globalTermImportance == freezed
+          ? _value.globalTermImportance
+          : globalTermImportance // ignore: cast_nullable_to_non_nullable
               as num,
     ));
   }
@@ -129,8 +127,8 @@ class __$TermDtoCopyWithImpl<$Res> extends _$TermDtoCopyWithImpl<$Res>
 class _$_TermDto extends _TermDto {
   const _$_TermDto(
       {required this.id,
-      @JsonKey(name: 'containing_documents_count')
-          required this.containingDocumentsCount})
+      @JsonKey(name: 'global_term_importance')
+          required this.globalTermImportance})
       : super._();
 
   factory _$_TermDto.fromJson(Map<String, dynamic> json) =>
@@ -139,12 +137,12 @@ class _$_TermDto extends _TermDto {
   @override
   final String? id;
   @override
-  @JsonKey(name: 'containing_documents_count')
-  final num containingDocumentsCount;
+  @JsonKey(name: 'global_term_importance')
+  final num globalTermImportance;
 
   @override
   String toString() {
-    return 'TermDto(id: $id, containingDocumentsCount: $containingDocumentsCount)';
+    return 'TermDto(id: $id, globalTermImportance: $globalTermImportance)';
   }
 
   @override
@@ -153,13 +151,12 @@ class _$_TermDto extends _TermDto {
         (other.runtimeType == runtimeType &&
             other is _TermDto &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(
-                    other.containingDocumentsCount, containingDocumentsCount) ||
-                other.containingDocumentsCount == containingDocumentsCount));
+            (identical(other.globalTermImportance, globalTermImportance) ||
+                other.globalTermImportance == globalTermImportance));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, containingDocumentsCount);
+  int get hashCode => Object.hash(runtimeType, id, globalTermImportance);
 
   @JsonKey(ignore: true)
   @override
@@ -175,8 +172,8 @@ class _$_TermDto extends _TermDto {
 abstract class _TermDto extends TermDto {
   const factory _TermDto(
       {required String? id,
-      @JsonKey(name: 'containing_documents_count')
-          required num containingDocumentsCount}) = _$_TermDto;
+      @JsonKey(name: 'global_term_importance')
+          required num globalTermImportance}) = _$_TermDto;
   const _TermDto._() : super._();
 
   factory _TermDto.fromJson(Map<String, dynamic> json) = _$_TermDto.fromJson;
@@ -184,8 +181,8 @@ abstract class _TermDto extends TermDto {
   @override
   String? get id;
   @override
-  @JsonKey(name: 'containing_documents_count')
-  num get containingDocumentsCount;
+  @JsonKey(name: 'global_term_importance')
+  num get globalTermImportance;
   @override
   @JsonKey(ignore: true)
   _$TermDtoCopyWith<_TermDto> get copyWith =>

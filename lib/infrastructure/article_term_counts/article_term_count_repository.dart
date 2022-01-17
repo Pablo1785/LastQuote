@@ -37,7 +37,7 @@ class ArticleTermCountRepository implements IArticleTermCountRepository {
             isEqualTo: articleId,
           )
           .orderBy(
-            'count',
+            'term_importance',
             descending: descending,
           )
           .limit(limit)
