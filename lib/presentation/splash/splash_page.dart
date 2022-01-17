@@ -21,32 +21,28 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<AuthBloc>().state.map(
-      initial: (_) {
-        print('Initial auth state');
-      },
-      authenticated: (_) async {
-        await Future.delayed(
-          Duration(seconds: delayBeforeNavigation),
-          () {
-            AutoRouter.of(context).replaceNamed('/tab-view-page');
+          initial: (_) {},
+          authenticated: (_) async {
+            await Future.delayed(
+              Duration(seconds: delayBeforeNavigation),
+              () {
+                AutoRouter.of(context).replaceNamed('/tab-view-page');
+              },
+            );
+          },
+          unAuthenticated: (_) async {
+            await Future.delayed(
+              Duration(seconds: delayBeforeNavigation),
+              () {
+                AutoRouter.of(context).replaceNamed('/sign-in-page');
+              },
+            );
           },
         );
-      },
-      unAuthenticated: (_) async {
-        await Future.delayed(
-          Duration(seconds: delayBeforeNavigation),
-          () {
-            AutoRouter.of(context).replaceNamed('/sign-in-page');
-          },
-        );
-      },
-    );
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         state.map(
-          initial: (_) {
-            print('Initial auth state');
-          },
+          initial: (_) {},
           authenticated: (_) async {
             await Future.delayed(
               Duration(seconds: delayBeforeNavigation),
