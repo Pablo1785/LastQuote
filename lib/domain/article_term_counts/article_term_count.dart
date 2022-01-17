@@ -11,7 +11,7 @@ abstract class ArticleTermCount with _$ArticleTermCount {
     required JunctionUniqueId id,
     required UniqueId articleId,
     required String termId,
-    required int count,
+    required double termImportance,
   }) = _ArticleTermCount;
 
   factory ArticleTermCount.empty() {
@@ -28,7 +28,7 @@ abstract class ArticleTermCount with _$ArticleTermCount {
       id: junctionId,
       articleId: articleId,
       termId: termId,
-      count: 0,
+      termImportance: 0.0,
     );
   }
 }

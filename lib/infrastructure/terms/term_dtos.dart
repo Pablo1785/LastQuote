@@ -12,21 +12,20 @@ abstract class TermDto implements _$TermDto {
 
   const factory TermDto({
     required String? id,
-    @JsonKey(name: 'containing_documents_count')
-        required num containingDocumentsCount,
+    @JsonKey(name: 'global_term_importance') required num globalTermImportance,
   }) = _TermDto;
 
   factory TermDto.fromDomain(Term term) {
     return TermDto(
       id: term.idAndValue,
-      containingDocumentsCount: term.containingDocumentsCount,
+      globalTermImportance: term.globalTermImportance,
     );
   }
 
   Term toDomain() {
     return Term(
       idAndValue: id!,
-      containingDocumentsCount: containingDocumentsCount.toInt(),
+      globalTermImportance: globalTermImportance.toDouble(),
     );
   }
 

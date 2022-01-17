@@ -57,8 +57,8 @@ class _ArticlesOverviewPageState extends State<ArticlesOverviewPage> {
                   articleTermCountSuccessState.articleTermCounts.asList(),
                 );
                 articleTermCountsSorted.sort(
-                  (atc1, atc2) => atc2.count.compareTo(
-                    atc1.count,
+                  (atc1, atc2) => atc2.termImportance.compareTo(
+                    atc1.termImportance,
                   ),
                 );
                 final termIds = articleTermCountsSorted

@@ -21,12 +21,12 @@ class _$ArticleTermCountTearOff {
       {required JunctionUniqueId id,
       required UniqueId articleId,
       required String termId,
-      required int count}) {
+      required double termImportance}) {
     return _ArticleTermCount(
       id: id,
       articleId: articleId,
       termId: termId,
-      count: count,
+      termImportance: termImportance,
     );
   }
 }
@@ -39,7 +39,7 @@ mixin _$ArticleTermCount {
   JunctionUniqueId get id => throw _privateConstructorUsedError;
   UniqueId get articleId => throw _privateConstructorUsedError;
   String get termId => throw _privateConstructorUsedError;
-  int get count => throw _privateConstructorUsedError;
+  double get termImportance => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ArticleTermCountCopyWith<ArticleTermCount> get copyWith =>
@@ -52,7 +52,10 @@ abstract class $ArticleTermCountCopyWith<$Res> {
           ArticleTermCount value, $Res Function(ArticleTermCount) then) =
       _$ArticleTermCountCopyWithImpl<$Res>;
   $Res call(
-      {JunctionUniqueId id, UniqueId articleId, String termId, int count});
+      {JunctionUniqueId id,
+      UniqueId articleId,
+      String termId,
+      double termImportance});
 }
 
 /// @nodoc
@@ -69,7 +72,7 @@ class _$ArticleTermCountCopyWithImpl<$Res>
     Object? id = freezed,
     Object? articleId = freezed,
     Object? termId = freezed,
-    Object? count = freezed,
+    Object? termImportance = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -84,10 +87,10 @@ class _$ArticleTermCountCopyWithImpl<$Res>
           ? _value.termId
           : termId // ignore: cast_nullable_to_non_nullable
               as String,
-      count: count == freezed
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int,
+      termImportance: termImportance == freezed
+          ? _value.termImportance
+          : termImportance // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -100,7 +103,10 @@ abstract class _$ArticleTermCountCopyWith<$Res>
       __$ArticleTermCountCopyWithImpl<$Res>;
   @override
   $Res call(
-      {JunctionUniqueId id, UniqueId articleId, String termId, int count});
+      {JunctionUniqueId id,
+      UniqueId articleId,
+      String termId,
+      double termImportance});
 }
 
 /// @nodoc
@@ -119,7 +125,7 @@ class __$ArticleTermCountCopyWithImpl<$Res>
     Object? id = freezed,
     Object? articleId = freezed,
     Object? termId = freezed,
-    Object? count = freezed,
+    Object? termImportance = freezed,
   }) {
     return _then(_ArticleTermCount(
       id: id == freezed
@@ -134,10 +140,10 @@ class __$ArticleTermCountCopyWithImpl<$Res>
           ? _value.termId
           : termId // ignore: cast_nullable_to_non_nullable
               as String,
-      count: count == freezed
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int,
+      termImportance: termImportance == freezed
+          ? _value.termImportance
+          : termImportance // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -149,7 +155,7 @@ class _$_ArticleTermCount extends _ArticleTermCount {
       {required this.id,
       required this.articleId,
       required this.termId,
-      required this.count})
+      required this.termImportance})
       : super._();
 
   @override
@@ -159,11 +165,11 @@ class _$_ArticleTermCount extends _ArticleTermCount {
   @override
   final String termId;
   @override
-  final int count;
+  final double termImportance;
 
   @override
   String toString() {
-    return 'ArticleTermCount(id: $id, articleId: $articleId, termId: $termId, count: $count)';
+    return 'ArticleTermCount(id: $id, articleId: $articleId, termId: $termId, termImportance: $termImportance)';
   }
 
   @override
@@ -175,11 +181,13 @@ class _$_ArticleTermCount extends _ArticleTermCount {
             (identical(other.articleId, articleId) ||
                 other.articleId == articleId) &&
             (identical(other.termId, termId) || other.termId == termId) &&
-            (identical(other.count, count) || other.count == count));
+            (identical(other.termImportance, termImportance) ||
+                other.termImportance == termImportance));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, articleId, termId, count);
+  int get hashCode =>
+      Object.hash(runtimeType, id, articleId, termId, termImportance);
 
   @JsonKey(ignore: true)
   @override
@@ -192,7 +200,7 @@ abstract class _ArticleTermCount extends ArticleTermCount {
       {required JunctionUniqueId id,
       required UniqueId articleId,
       required String termId,
-      required int count}) = _$_ArticleTermCount;
+      required double termImportance}) = _$_ArticleTermCount;
   const _ArticleTermCount._() : super._();
 
   @override
@@ -202,7 +210,7 @@ abstract class _ArticleTermCount extends ArticleTermCount {
   @override
   String get termId;
   @override
-  int get count;
+  double get termImportance;
   @override
   @JsonKey(ignore: true)
   _$ArticleTermCountCopyWith<_ArticleTermCount> get copyWith =>
