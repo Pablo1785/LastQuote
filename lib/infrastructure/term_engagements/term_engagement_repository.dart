@@ -15,10 +15,17 @@ class TermEngagementRepository implements ITermEngagementRepository {
   TermEngagementRepository(this._firestore);
 
   @override
-  Stream<Either<TermEngagementFailure, KtList<TermEngagement>>>
-      watchAll() async* {
+  Stream<Either<TermEngagementFailure, KtList<TermEngagement>>> watchAll({
+    int limit = 10,
+  }) async* {
     yield* _firestore
         .collection('term_engagement')
+        .orderBy('initial_interest_count', descending: true)
+        .orderBy('share_count', descending: true)
+        .orderBy('like_count', descending: true)
+        .orderBy('open_count', descending: true)
+        .orderBy('dismiss_count', descending: false)
+        .limit(limit)
         .snapshots()
         .map(
           (snapshot) => right<TermEngagementFailure, KtList<TermEngagement>>(
@@ -51,6 +58,11 @@ class TermEngagementRepository implements ITermEngagementRepository {
     yield* _firestore
         .collection('term_engagement')
         .where(FieldPath.documentId, whereIn: termIds)
+        .orderBy('initial_interest_count', descending: true)
+        .orderBy('share_count', descending: true)
+        .orderBy('like_count', descending: true)
+        .orderBy('open_count', descending: true)
+        .orderBy('dismiss_count', descending: false)
         .snapshots()
         .map(
           (snapshot) => right<TermEngagementFailure, KtList<TermEngagement>>(

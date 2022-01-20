@@ -6,7 +6,9 @@ import 'term_engagement_failure.dart';
 
 abstract class ITermEngagementRepository {
   // get all terms
-  Stream<Either<TermEngagementFailure, KtList<TermEngagement>>> watchAll();
+  Stream<Either<TermEngagementFailure, KtList<TermEngagement>>> watchAll({
+    int limit = 10,
+  });
 
   Stream<Either<TermEngagementFailure, KtList<TermEngagement>>>
       watchSpecificTerms(
