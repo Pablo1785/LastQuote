@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/services.dart';
+import 'package:injectable/injectable.dart';
 import 'package:kt_dart/kt.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -9,6 +10,7 @@ import '../../domain/term_engagements/term_engagement.dart';
 import '../../domain/term_engagements/term_engagement_failure.dart';
 import 'term_engagement_dtos.dart';
 
+@LazySingleton(as: ITermEngagementRepository)
 class TermEngagementRepository implements ITermEngagementRepository {
   final FirebaseFirestore _firestore;
 

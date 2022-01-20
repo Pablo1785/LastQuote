@@ -3,6 +3,7 @@ import 'package:ddd/domain/data_sources/data_source.dart';
 import 'package:ddd/domain/terms/term.dart';
 import 'package:ddd/domain/user_term_data_source_engagement/user_term_data_source_engagement.dart';
 import 'package:ddd/domain/user_term_data_source_engagement/user_term_data_source_engagement_failure.dart';
+import 'package:injectable/injectable.dart';
 import 'package:kt_dart/kt.dart';
 
 abstract class IUserTermDataSourceEngagementRepository {
@@ -41,4 +42,15 @@ abstract class IUserTermDataSourceEngagementRepository {
       Either<UserTermDataSourceEngagementFailure,
           UserTermDataSourceEngagement>> get(
       UserTermDataSourceEngagement userTermDataSourceEngagement);
+
+  Future<Either<UserTermDataSourceEngagementFailure, Unit>>
+      updateInitialInterest(
+    String termId,
+    bool isInitialInterest,
+  );
+
+  Future<Either<UserTermDataSourceEngagementFailure, Unit>>
+      batchUpdateInitialInterests(
+    Map<String, bool> termInitialInterestStatuses,
+  );
 }

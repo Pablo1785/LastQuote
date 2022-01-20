@@ -344,4 +344,58 @@ class UserTermDataSourceEngagementRepository
       return _handleException(exception, stacktrace);
     }
   }
+
+  @override
+  Future<Either<UserTermDataSourceEngagementFailure, Unit>>
+      updateInitialInterest(
+    String termId,
+    bool isInitialInterest,
+  ) async {
+    try {
+      final userDocRef = await getIt<FirestoreHelper>().userDocument();
+      final userId = userDocRef.id;
+      await _firestore
+          .collection('user_term_data_source_engagement')
+          .doc('CLIENT_APP_' + termId + '_' + userId)
+          .update(
+        {
+          'is_initial_interest': isInitialInterest,
+        },
+      );
+      return right(unit);
+    } on PlatformException catch (e, stacktrace) {
+      return _handleException(e, stacktrace);
+    }
+  }
+
+  @override
+  Future<Either<UserTermDataSourceEngagementFailure, Unit>>
+      batchUpdateInitialInterests(
+    Map<String, bool> termInitialInterestStatuses,
+  ) async {
+    try {
+      final userDocRef = await getIt<FirestoreHelper>().userDocument();
+      final userId = userDocRef.id;
+      final engagementColRef =
+          _firestore.collection('user_term_data_source_engagement');
+      await _firestore.runTransaction((transaction) async {
+        termInitialInterestStatuses.entries.forEach(
+          (element) {
+            final docRef = engagementColRef
+                .doc('CLIENT_APP_' + element.key + '_' + userId);
+            transaction.update(
+              docRef,
+              {
+                'is_initial_interest': element.value,
+              },
+            );
+          },
+        );
+        return transaction;
+      });
+      return right(unit);
+    } on PlatformException catch (e, stacktrace) {
+      return _handleException(e, stacktrace);
+    }
+  }
 }
