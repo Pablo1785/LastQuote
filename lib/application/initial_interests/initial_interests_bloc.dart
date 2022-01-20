@@ -33,7 +33,7 @@ class InitialInterestsBloc
           await _streamSubscription?.cancel();
           _streamSubscription = _iTermEngagementRepository
               .watchAll(
-                limit: 45,
+                limit: 50,
               )
               .listen(
                 (failureOrTermEngagements) => add(
