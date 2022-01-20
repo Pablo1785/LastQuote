@@ -319,6 +319,10 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
                                 final articleTermCount =
                                     currArticleTermCounts[index];
                                 return ActionChip(
+                                  elevation: 4.0,
+                                  backgroundColor: Colors.indigo[400]!
+                                      .withOpacity(
+                                          articleTermCount.termImportance),
                                   label: Text(
                                     articleTermCount.termId +
                                         ': ' +
@@ -326,6 +330,12 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
                                             .toInt()
                                             .toString() +
                                         "%",
+                                    style: TextStyle(
+                                      color:
+                                          articleTermCount.termImportance > 0.45
+                                              ? Colors.white
+                                              : Colors.black,
+                                    ),
                                   ),
                                   onPressed: () {
                                     FlushbarHelper.createInformation(
