@@ -31,14 +31,16 @@ class InitialInterestsBloc
             const InitialInterestsState.loadInProgress(),
           );
           await _streamSubscription?.cancel();
-          _streamSubscription = _iTermEngagementRepository.watchAll().listen(
-            (failureOrTermEngagements) {
-              add(
-                InitialInterestsEvent.interestsReceived(
-                    failureOrTermEngagements),
+          _streamSubscription = _iTermEngagementRepository
+              .watchAll(
+                limit: 45,
+              )
+              .listen(
+                (failureOrTermEngagements) => add(
+                  InitialInterestsEvent.interestsReceived(
+                      failureOrTermEngagements),
+                ),
               );
-            },
-          );
         },
         interestsReceived: (e) async {
           emit(
