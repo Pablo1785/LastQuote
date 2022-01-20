@@ -25,8 +25,12 @@ class _$InitialInterestsEventTearOff {
     return const _GetMostPopularTermsStarted();
   }
 
-  _InterestsReceived interestsReceived() {
-    return const _InterestsReceived();
+  _InterestsReceived interestsReceived(
+      Either<TermEngagementFailure, KtList<TermEngagement>>
+          failureOrTermEngagements) {
+    return _InterestsReceived(
+      failureOrTermEngagements,
+    );
   }
 }
 
@@ -39,21 +43,30 @@ mixin _$InitialInterestsEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getMostPopularTermsStarted,
-    required TResult Function() interestsReceived,
+    required TResult Function(
+            Either<TermEngagementFailure, KtList<TermEngagement>>
+                failureOrTermEngagements)
+        interestsReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getMostPopularTermsStarted,
-    TResult Function()? interestsReceived,
+    TResult Function(
+            Either<TermEngagementFailure, KtList<TermEngagement>>
+                failureOrTermEngagements)?
+        interestsReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getMostPopularTermsStarted,
-    TResult Function()? interestsReceived,
+    TResult Function(
+            Either<TermEngagementFailure, KtList<TermEngagement>>
+                failureOrTermEngagements)?
+        interestsReceived,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -142,7 +155,10 @@ class _$_Started implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getMostPopularTermsStarted,
-    required TResult Function() interestsReceived,
+    required TResult Function(
+            Either<TermEngagementFailure, KtList<TermEngagement>>
+                failureOrTermEngagements)
+        interestsReceived,
   }) {
     return started();
   }
@@ -152,7 +168,10 @@ class _$_Started implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getMostPopularTermsStarted,
-    TResult Function()? interestsReceived,
+    TResult Function(
+            Either<TermEngagementFailure, KtList<TermEngagement>>
+                failureOrTermEngagements)?
+        interestsReceived,
   }) {
     return started?.call();
   }
@@ -162,7 +181,10 @@ class _$_Started implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getMostPopularTermsStarted,
-    TResult Function()? interestsReceived,
+    TResult Function(
+            Either<TermEngagementFailure, KtList<TermEngagement>>
+                failureOrTermEngagements)?
+        interestsReceived,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -259,7 +281,10 @@ class _$_GetMostPopularTermsStarted implements _GetMostPopularTermsStarted {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getMostPopularTermsStarted,
-    required TResult Function() interestsReceived,
+    required TResult Function(
+            Either<TermEngagementFailure, KtList<TermEngagement>>
+                failureOrTermEngagements)
+        interestsReceived,
   }) {
     return getMostPopularTermsStarted();
   }
@@ -269,7 +294,10 @@ class _$_GetMostPopularTermsStarted implements _GetMostPopularTermsStarted {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getMostPopularTermsStarted,
-    TResult Function()? interestsReceived,
+    TResult Function(
+            Either<TermEngagementFailure, KtList<TermEngagement>>
+                failureOrTermEngagements)?
+        interestsReceived,
   }) {
     return getMostPopularTermsStarted?.call();
   }
@@ -279,7 +307,10 @@ class _$_GetMostPopularTermsStarted implements _GetMostPopularTermsStarted {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getMostPopularTermsStarted,
-    TResult Function()? interestsReceived,
+    TResult Function(
+            Either<TermEngagementFailure, KtList<TermEngagement>>
+                failureOrTermEngagements)?
+        interestsReceived,
     required TResult orElse(),
   }) {
     if (getMostPopularTermsStarted != null) {
@@ -335,6 +366,9 @@ abstract class _$InterestsReceivedCopyWith<$Res> {
   factory _$InterestsReceivedCopyWith(
           _InterestsReceived value, $Res Function(_InterestsReceived) then) =
       __$InterestsReceivedCopyWithImpl<$Res>;
+  $Res call(
+      {Either<TermEngagementFailure, KtList<TermEngagement>>
+          failureOrTermEngagements});
 }
 
 /// @nodoc
@@ -347,35 +381,63 @@ class __$InterestsReceivedCopyWithImpl<$Res>
 
   @override
   _InterestsReceived get _value => super._value as _InterestsReceived;
+
+  @override
+  $Res call({
+    Object? failureOrTermEngagements = freezed,
+  }) {
+    return _then(_InterestsReceived(
+      failureOrTermEngagements == freezed
+          ? _value.failureOrTermEngagements
+          : failureOrTermEngagements // ignore: cast_nullable_to_non_nullable
+              as Either<TermEngagementFailure, KtList<TermEngagement>>,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_InterestsReceived implements _InterestsReceived {
-  const _$_InterestsReceived();
+  const _$_InterestsReceived(this.failureOrTermEngagements);
+
+  @override
+  final Either<TermEngagementFailure, KtList<TermEngagement>>
+      failureOrTermEngagements;
 
   @override
   String toString() {
-    return 'InitialInterestsEvent.interestsReceived()';
+    return 'InitialInterestsEvent.interestsReceived(failureOrTermEngagements: $failureOrTermEngagements)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _InterestsReceived);
+        (other.runtimeType == runtimeType &&
+            other is _InterestsReceived &&
+            (identical(
+                    other.failureOrTermEngagements, failureOrTermEngagements) ||
+                other.failureOrTermEngagements == failureOrTermEngagements));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, failureOrTermEngagements);
+
+  @JsonKey(ignore: true)
+  @override
+  _$InterestsReceivedCopyWith<_InterestsReceived> get copyWith =>
+      __$InterestsReceivedCopyWithImpl<_InterestsReceived>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getMostPopularTermsStarted,
-    required TResult Function() interestsReceived,
+    required TResult Function(
+            Either<TermEngagementFailure, KtList<TermEngagement>>
+                failureOrTermEngagements)
+        interestsReceived,
   }) {
-    return interestsReceived();
+    return interestsReceived(failureOrTermEngagements);
   }
 
   @override
@@ -383,9 +445,12 @@ class _$_InterestsReceived implements _InterestsReceived {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getMostPopularTermsStarted,
-    TResult Function()? interestsReceived,
+    TResult Function(
+            Either<TermEngagementFailure, KtList<TermEngagement>>
+                failureOrTermEngagements)?
+        interestsReceived,
   }) {
-    return interestsReceived?.call();
+    return interestsReceived?.call(failureOrTermEngagements);
   }
 
   @override
@@ -393,11 +458,14 @@ class _$_InterestsReceived implements _InterestsReceived {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getMostPopularTermsStarted,
-    TResult Function()? interestsReceived,
+    TResult Function(
+            Either<TermEngagementFailure, KtList<TermEngagement>>
+                failureOrTermEngagements)?
+        interestsReceived,
     required TResult orElse(),
   }) {
     if (interestsReceived != null) {
-      return interestsReceived();
+      return interestsReceived(failureOrTermEngagements);
     }
     return orElse();
   }
@@ -441,7 +509,15 @@ class _$_InterestsReceived implements _InterestsReceived {
 }
 
 abstract class _InterestsReceived implements InitialInterestsEvent {
-  const factory _InterestsReceived() = _$_InterestsReceived;
+  const factory _InterestsReceived(
+      Either<TermEngagementFailure, KtList<TermEngagement>>
+          failureOrTermEngagements) = _$_InterestsReceived;
+
+  Either<TermEngagementFailure, KtList<TermEngagement>>
+      get failureOrTermEngagements;
+  @JsonKey(ignore: true)
+  _$InterestsReceivedCopyWith<_InterestsReceived> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -456,12 +532,16 @@ class _$InitialInterestsStateTearOff {
     return const _LoadInProgress();
   }
 
-  _LoadSuccess loadSuccess() {
-    return const _LoadSuccess();
+  _LoadSuccess loadSuccess(KtList<TermEngagement> termEngagements) {
+    return _LoadSuccess(
+      termEngagements,
+    );
   }
 
-  _LoadFailure loadFailure() {
-    return const _LoadFailure();
+  _LoadFailure loadFailure(TermEngagementFailure termEngagementFailure) {
+    return _LoadFailure(
+      termEngagementFailure,
+    );
   }
 }
 
@@ -474,24 +554,26 @@ mixin _$InitialInterestsState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function() loadSuccess,
-    required TResult Function() loadFailure,
+    required TResult Function(KtList<TermEngagement> termEngagements)
+        loadSuccess,
+    required TResult Function(TermEngagementFailure termEngagementFailure)
+        loadFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function()? loadSuccess,
-    TResult Function()? loadFailure,
+    TResult Function(KtList<TermEngagement> termEngagements)? loadSuccess,
+    TResult Function(TermEngagementFailure termEngagementFailure)? loadFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function()? loadSuccess,
-    TResult Function()? loadFailure,
+    TResult Function(KtList<TermEngagement> termEngagements)? loadSuccess,
+    TResult Function(TermEngagementFailure termEngagementFailure)? loadFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -580,8 +662,10 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function() loadSuccess,
-    required TResult Function() loadFailure,
+    required TResult Function(KtList<TermEngagement> termEngagements)
+        loadSuccess,
+    required TResult Function(TermEngagementFailure termEngagementFailure)
+        loadFailure,
   }) {
     return initial();
   }
@@ -591,8 +675,8 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function()? loadSuccess,
-    TResult Function()? loadFailure,
+    TResult Function(KtList<TermEngagement> termEngagements)? loadSuccess,
+    TResult Function(TermEngagementFailure termEngagementFailure)? loadFailure,
   }) {
     return initial?.call();
   }
@@ -602,8 +686,8 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function()? loadSuccess,
-    TResult Function()? loadFailure,
+    TResult Function(KtList<TermEngagement> termEngagements)? loadSuccess,
+    TResult Function(TermEngagementFailure termEngagementFailure)? loadFailure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -697,8 +781,10 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function() loadSuccess,
-    required TResult Function() loadFailure,
+    required TResult Function(KtList<TermEngagement> termEngagements)
+        loadSuccess,
+    required TResult Function(TermEngagementFailure termEngagementFailure)
+        loadFailure,
   }) {
     return loadInProgress();
   }
@@ -708,8 +794,8 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function()? loadSuccess,
-    TResult Function()? loadFailure,
+    TResult Function(KtList<TermEngagement> termEngagements)? loadSuccess,
+    TResult Function(TermEngagementFailure termEngagementFailure)? loadFailure,
   }) {
     return loadInProgress?.call();
   }
@@ -719,8 +805,8 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function()? loadSuccess,
-    TResult Function()? loadFailure,
+    TResult Function(KtList<TermEngagement> termEngagements)? loadSuccess,
+    TResult Function(TermEngagementFailure termEngagementFailure)? loadFailure,
     required TResult orElse(),
   }) {
     if (loadInProgress != null) {
@@ -776,6 +862,7 @@ abstract class _$LoadSuccessCopyWith<$Res> {
   factory _$LoadSuccessCopyWith(
           _LoadSuccess value, $Res Function(_LoadSuccess) then) =
       __$LoadSuccessCopyWithImpl<$Res>;
+  $Res call({KtList<TermEngagement> termEngagements});
 }
 
 /// @nodoc
@@ -788,36 +875,61 @@ class __$LoadSuccessCopyWithImpl<$Res>
 
   @override
   _LoadSuccess get _value => super._value as _LoadSuccess;
+
+  @override
+  $Res call({
+    Object? termEngagements = freezed,
+  }) {
+    return _then(_LoadSuccess(
+      termEngagements == freezed
+          ? _value.termEngagements
+          : termEngagements // ignore: cast_nullable_to_non_nullable
+              as KtList<TermEngagement>,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_LoadSuccess implements _LoadSuccess {
-  const _$_LoadSuccess();
+  const _$_LoadSuccess(this.termEngagements);
+
+  @override
+  final KtList<TermEngagement> termEngagements;
 
   @override
   String toString() {
-    return 'InitialInterestsState.loadSuccess()';
+    return 'InitialInterestsState.loadSuccess(termEngagements: $termEngagements)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _LoadSuccess);
+        (other.runtimeType == runtimeType &&
+            other is _LoadSuccess &&
+            (identical(other.termEngagements, termEngagements) ||
+                other.termEngagements == termEngagements));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, termEngagements);
+
+  @JsonKey(ignore: true)
+  @override
+  _$LoadSuccessCopyWith<_LoadSuccess> get copyWith =>
+      __$LoadSuccessCopyWithImpl<_LoadSuccess>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function() loadSuccess,
-    required TResult Function() loadFailure,
+    required TResult Function(KtList<TermEngagement> termEngagements)
+        loadSuccess,
+    required TResult Function(TermEngagementFailure termEngagementFailure)
+        loadFailure,
   }) {
-    return loadSuccess();
+    return loadSuccess(termEngagements);
   }
 
   @override
@@ -825,10 +937,10 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function()? loadSuccess,
-    TResult Function()? loadFailure,
+    TResult Function(KtList<TermEngagement> termEngagements)? loadSuccess,
+    TResult Function(TermEngagementFailure termEngagementFailure)? loadFailure,
   }) {
-    return loadSuccess?.call();
+    return loadSuccess?.call(termEngagements);
   }
 
   @override
@@ -836,12 +948,12 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function()? loadSuccess,
-    TResult Function()? loadFailure,
+    TResult Function(KtList<TermEngagement> termEngagements)? loadSuccess,
+    TResult Function(TermEngagementFailure termEngagementFailure)? loadFailure,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
-      return loadSuccess();
+      return loadSuccess(termEngagements);
     }
     return orElse();
   }
@@ -885,7 +997,13 @@ class _$_LoadSuccess implements _LoadSuccess {
 }
 
 abstract class _LoadSuccess implements InitialInterestsState {
-  const factory _LoadSuccess() = _$_LoadSuccess;
+  const factory _LoadSuccess(KtList<TermEngagement> termEngagements) =
+      _$_LoadSuccess;
+
+  KtList<TermEngagement> get termEngagements;
+  @JsonKey(ignore: true)
+  _$LoadSuccessCopyWith<_LoadSuccess> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -893,6 +1011,9 @@ abstract class _$LoadFailureCopyWith<$Res> {
   factory _$LoadFailureCopyWith(
           _LoadFailure value, $Res Function(_LoadFailure) then) =
       __$LoadFailureCopyWithImpl<$Res>;
+  $Res call({TermEngagementFailure termEngagementFailure});
+
+  $TermEngagementFailureCopyWith<$Res> get termEngagementFailure;
 }
 
 /// @nodoc
@@ -905,36 +1026,69 @@ class __$LoadFailureCopyWithImpl<$Res>
 
   @override
   _LoadFailure get _value => super._value as _LoadFailure;
+
+  @override
+  $Res call({
+    Object? termEngagementFailure = freezed,
+  }) {
+    return _then(_LoadFailure(
+      termEngagementFailure == freezed
+          ? _value.termEngagementFailure
+          : termEngagementFailure // ignore: cast_nullable_to_non_nullable
+              as TermEngagementFailure,
+    ));
+  }
+
+  @override
+  $TermEngagementFailureCopyWith<$Res> get termEngagementFailure {
+    return $TermEngagementFailureCopyWith<$Res>(_value.termEngagementFailure,
+        (value) {
+      return _then(_value.copyWith(termEngagementFailure: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_LoadFailure implements _LoadFailure {
-  const _$_LoadFailure();
+  const _$_LoadFailure(this.termEngagementFailure);
+
+  @override
+  final TermEngagementFailure termEngagementFailure;
 
   @override
   String toString() {
-    return 'InitialInterestsState.loadFailure()';
+    return 'InitialInterestsState.loadFailure(termEngagementFailure: $termEngagementFailure)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _LoadFailure);
+        (other.runtimeType == runtimeType &&
+            other is _LoadFailure &&
+            (identical(other.termEngagementFailure, termEngagementFailure) ||
+                other.termEngagementFailure == termEngagementFailure));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, termEngagementFailure);
+
+  @JsonKey(ignore: true)
+  @override
+  _$LoadFailureCopyWith<_LoadFailure> get copyWith =>
+      __$LoadFailureCopyWithImpl<_LoadFailure>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function() loadSuccess,
-    required TResult Function() loadFailure,
+    required TResult Function(KtList<TermEngagement> termEngagements)
+        loadSuccess,
+    required TResult Function(TermEngagementFailure termEngagementFailure)
+        loadFailure,
   }) {
-    return loadFailure();
+    return loadFailure(termEngagementFailure);
   }
 
   @override
@@ -942,10 +1096,10 @@ class _$_LoadFailure implements _LoadFailure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function()? loadSuccess,
-    TResult Function()? loadFailure,
+    TResult Function(KtList<TermEngagement> termEngagements)? loadSuccess,
+    TResult Function(TermEngagementFailure termEngagementFailure)? loadFailure,
   }) {
-    return loadFailure?.call();
+    return loadFailure?.call(termEngagementFailure);
   }
 
   @override
@@ -953,12 +1107,12 @@ class _$_LoadFailure implements _LoadFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function()? loadSuccess,
-    TResult Function()? loadFailure,
+    TResult Function(KtList<TermEngagement> termEngagements)? loadSuccess,
+    TResult Function(TermEngagementFailure termEngagementFailure)? loadFailure,
     required TResult orElse(),
   }) {
     if (loadFailure != null) {
-      return loadFailure();
+      return loadFailure(termEngagementFailure);
     }
     return orElse();
   }
@@ -1002,5 +1156,11 @@ class _$_LoadFailure implements _LoadFailure {
 }
 
 abstract class _LoadFailure implements InitialInterestsState {
-  const factory _LoadFailure() = _$_LoadFailure;
+  const factory _LoadFailure(TermEngagementFailure termEngagementFailure) =
+      _$_LoadFailure;
+
+  TermEngagementFailure get termEngagementFailure;
+  @JsonKey(ignore: true)
+  _$LoadFailureCopyWith<_LoadFailure> get copyWith =>
+      throw _privateConstructorUsedError;
 }
