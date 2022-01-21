@@ -21,8 +21,10 @@ class _$InitialInterestsEventTearOff {
     return const _Started();
   }
 
-  _GetMostPopularTermsStarted getMostPopularTermsStarted() {
-    return const _GetMostPopularTermsStarted();
+  _GetMostPopularTermsStarted getMostPopularTermsStarted({int limit = 100}) {
+    return _GetMostPopularTermsStarted(
+      limit: limit,
+    );
   }
 
   _InterestsReceived interestsReceived(
@@ -42,7 +44,7 @@ mixin _$InitialInterestsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getMostPopularTermsStarted,
+    required TResult Function(int limit) getMostPopularTermsStarted,
     required TResult Function(
             Either<TermEngagementFailure, KtList<TermEngagement>>
                 failureOrTermEngagements)
@@ -52,7 +54,7 @@ mixin _$InitialInterestsEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getMostPopularTermsStarted,
+    TResult Function(int limit)? getMostPopularTermsStarted,
     TResult Function(
             Either<TermEngagementFailure, KtList<TermEngagement>>
                 failureOrTermEngagements)?
@@ -62,7 +64,7 @@ mixin _$InitialInterestsEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getMostPopularTermsStarted,
+    TResult Function(int limit)? getMostPopularTermsStarted,
     TResult Function(
             Either<TermEngagementFailure, KtList<TermEngagement>>
                 failureOrTermEngagements)?
@@ -154,7 +156,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getMostPopularTermsStarted,
+    required TResult Function(int limit) getMostPopularTermsStarted,
     required TResult Function(
             Either<TermEngagementFailure, KtList<TermEngagement>>
                 failureOrTermEngagements)
@@ -167,7 +169,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getMostPopularTermsStarted,
+    TResult Function(int limit)? getMostPopularTermsStarted,
     TResult Function(
             Either<TermEngagementFailure, KtList<TermEngagement>>
                 failureOrTermEngagements)?
@@ -180,7 +182,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getMostPopularTermsStarted,
+    TResult Function(int limit)? getMostPopularTermsStarted,
     TResult Function(
             Either<TermEngagementFailure, KtList<TermEngagement>>
                 failureOrTermEngagements)?
@@ -241,6 +243,7 @@ abstract class _$GetMostPopularTermsStartedCopyWith<$Res> {
           _GetMostPopularTermsStarted value,
           $Res Function(_GetMostPopularTermsStarted) then) =
       __$GetMostPopularTermsStartedCopyWithImpl<$Res>;
+  $Res call({int limit});
 }
 
 /// @nodoc
@@ -254,59 +257,82 @@ class __$GetMostPopularTermsStartedCopyWithImpl<$Res>
   @override
   _GetMostPopularTermsStarted get _value =>
       super._value as _GetMostPopularTermsStarted;
+
+  @override
+  $Res call({
+    Object? limit = freezed,
+  }) {
+    return _then(_GetMostPopularTermsStarted(
+      limit: limit == freezed
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_GetMostPopularTermsStarted implements _GetMostPopularTermsStarted {
-  const _$_GetMostPopularTermsStarted();
+  const _$_GetMostPopularTermsStarted({this.limit = 100});
+
+  @JsonKey(defaultValue: 100)
+  @override
+  final int limit;
 
   @override
   String toString() {
-    return 'InitialInterestsEvent.getMostPopularTermsStarted()';
+    return 'InitialInterestsEvent.getMostPopularTermsStarted(limit: $limit)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _GetMostPopularTermsStarted);
+            other is _GetMostPopularTermsStarted &&
+            (identical(other.limit, limit) || other.limit == limit));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, limit);
+
+  @JsonKey(ignore: true)
+  @override
+  _$GetMostPopularTermsStartedCopyWith<_GetMostPopularTermsStarted>
+      get copyWith => __$GetMostPopularTermsStartedCopyWithImpl<
+          _GetMostPopularTermsStarted>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getMostPopularTermsStarted,
+    required TResult Function(int limit) getMostPopularTermsStarted,
     required TResult Function(
             Either<TermEngagementFailure, KtList<TermEngagement>>
                 failureOrTermEngagements)
         interestsReceived,
   }) {
-    return getMostPopularTermsStarted();
+    return getMostPopularTermsStarted(limit);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getMostPopularTermsStarted,
+    TResult Function(int limit)? getMostPopularTermsStarted,
     TResult Function(
             Either<TermEngagementFailure, KtList<TermEngagement>>
                 failureOrTermEngagements)?
         interestsReceived,
   }) {
-    return getMostPopularTermsStarted?.call();
+    return getMostPopularTermsStarted?.call(limit);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getMostPopularTermsStarted,
+    TResult Function(int limit)? getMostPopularTermsStarted,
     TResult Function(
             Either<TermEngagementFailure, KtList<TermEngagement>>
                 failureOrTermEngagements)?
@@ -314,7 +340,7 @@ class _$_GetMostPopularTermsStarted implements _GetMostPopularTermsStarted {
     required TResult orElse(),
   }) {
     if (getMostPopularTermsStarted != null) {
-      return getMostPopularTermsStarted();
+      return getMostPopularTermsStarted(limit);
     }
     return orElse();
   }
@@ -358,7 +384,13 @@ class _$_GetMostPopularTermsStarted implements _GetMostPopularTermsStarted {
 }
 
 abstract class _GetMostPopularTermsStarted implements InitialInterestsEvent {
-  const factory _GetMostPopularTermsStarted() = _$_GetMostPopularTermsStarted;
+  const factory _GetMostPopularTermsStarted({int limit}) =
+      _$_GetMostPopularTermsStarted;
+
+  int get limit;
+  @JsonKey(ignore: true)
+  _$GetMostPopularTermsStartedCopyWith<_GetMostPopularTermsStarted>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -431,7 +463,7 @@ class _$_InterestsReceived implements _InterestsReceived {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getMostPopularTermsStarted,
+    required TResult Function(int limit) getMostPopularTermsStarted,
     required TResult Function(
             Either<TermEngagementFailure, KtList<TermEngagement>>
                 failureOrTermEngagements)
@@ -444,7 +476,7 @@ class _$_InterestsReceived implements _InterestsReceived {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getMostPopularTermsStarted,
+    TResult Function(int limit)? getMostPopularTermsStarted,
     TResult Function(
             Either<TermEngagementFailure, KtList<TermEngagement>>
                 failureOrTermEngagements)?
@@ -457,7 +489,7 @@ class _$_InterestsReceived implements _InterestsReceived {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getMostPopularTermsStarted,
+    TResult Function(int limit)? getMostPopularTermsStarted,
     TResult Function(
             Either<TermEngagementFailure, KtList<TermEngagement>>
                 failureOrTermEngagements)?

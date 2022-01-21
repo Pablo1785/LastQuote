@@ -1,9 +1,9 @@
-import 'package:ddd/application/user_term_data_source_engagements/user_term_data_source_engagement_actor/user_term_data_source_engagement_actor_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../application/initial_interests/initial_interests_bloc.dart';
+import '../../../application/initial_interests/interests_picker/initial_interests_picker_bloc.dart';
 import '../../core/quotes_logo.dart';
 
 class InitialInterestsPickerWidget extends StatelessWidget {
@@ -25,20 +25,48 @@ class InitialInterestsPickerWidget extends StatelessWidget {
               child: const QuotesLogo(),
             ),
           ),
-          loadSuccess: (loadSuccessState) => Wrap(
-            children: loadSuccessState.termEngagements.iter
-                .map(
-                  (termEngagement) => ActionChip(
-                    label: Text(
-                      termEngagement.termId,
-                    ),
-                    onPressed: () {
-                      context.read<UserTermDataSourceEngagementActorBloc>().add(UserTermDataSourceEngagementActorEvent.addedElementToUpdate(termEngagement.termId, true, termInitialInterestStatuses))
+          loadSuccess: (loadSuccessState) {
+            final termInitialInterestStatuses = <String, bool>{};
+            loadSuccessState.termEngagements.iter.forEach((element) {
+              termInitialInterestStatuses[element.termId] = false;
+            });
+            final initialInterestsPickerBloc =
+                context.read<InitialInterestsPickerBloc>();
+            initialInterestsPickerBloc.add(
+              InitialInterestsPickerEvent.termInitialInterestStatusesLoaded(
+                termInitialInterestStatuses,
+              ),
+            );
+            return BlocConsumer<InitialInterestsPickerBloc,
+                InitialInterestsPickerState>(
+              listener: (context, state) {
+                // TODO: implement listener
+              },
+              builder: (context, state) {
+                return Wrap(
+                  children: state.termInitialInterestStatuses.entries.map(
+                    (termStatus) {
+                      final currTermId = termStatus.key;
+                      final currIsInitialInterest = termStatus.value;
+                      return FilterChip(
+                        selected: currIsInitialInterest,
+                        label: Text(
+                          currTermId, // term ID
+                        ),
+                        onSelected: (_) {
+                          initialInterestsPickerBloc.add(
+                            InitialInterestsPickerEvent.termPressed(
+                              currTermId,
+                            ),
+                          );
+                        },
+                      );
                     },
-                  ),
-                )
-                .toList(),
-          ),
+                  ).toList(),
+                );
+              },
+            );
+          },
           loadFailure: (loadFailureState) => Center(
             child: Text(
               loadFailureState.termEngagementFailure.toString(),

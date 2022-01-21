@@ -7,6 +7,10 @@ import 'package:injectable/injectable.dart';
 import 'package:kt_dart/kt.dart';
 
 abstract class IUserTermDataSourceEngagementRepository {
+  Stream<
+          Either<UserTermDataSourceEngagementFailure,
+              KtList<UserTermDataSourceEngagement>>>
+      watchMostPopularTermsForCurrentUser({int limit = 10});
   Future<Either<UserTermDataSourceEngagementFailure, KtList<String>>>
       getMostPopularTerms({int limit = 10});
   // get articles

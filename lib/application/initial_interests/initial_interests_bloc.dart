@@ -33,12 +33,13 @@ class InitialInterestsBloc
           await _streamSubscription?.cancel();
           _streamSubscription = _iTermEngagementRepository
               .watchAll(
-                limit: 100,
+                limit: e.limit,
               )
               .listen(
                 (failureOrTermEngagements) => add(
                   InitialInterestsEvent.interestsReceived(
-                      failureOrTermEngagements),
+                    failureOrTermEngagements,
+                  ),
                 ),
               );
         },
