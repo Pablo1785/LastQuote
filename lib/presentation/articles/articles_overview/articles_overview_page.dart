@@ -61,6 +61,15 @@ class _ArticlesOverviewPageState extends State<ArticlesOverviewPage> {
                     atc1.termImportance,
                   ),
                 );
+                // Get the highest rated term for each article
+                var articleIdsSet = <String>{};
+                articleTermCountsSorted = articleTermCountsSorted.where((atc) {
+                  if (articleIdsSet.contains(atc.articleId.getOrCrash())) {
+                    return false;
+                  }
+                  articleIdsSet.add(atc.articleId.getOrCrash());
+                  return true;
+                }).toList();
                 final termIds = articleTermCountsSorted
                     .map(
                       (atc) => atc.termId,

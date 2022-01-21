@@ -6,6 +6,7 @@ import 'package:ddd/presentation/core/fun_logo.dart';
 import 'package:ddd/presentation/core/quotes_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kt_dart/src/collection/interop.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../injection.dart';
@@ -15,63 +16,71 @@ class TopicsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserTermDataSourceEngagementWatcherBloc,
-        UserTermDataSourceEngagementWatcherState>(
-      builder: (context, state) {
-        return Scaffold(
-          floatingActionButton: FloatingActionButton.extended(
-            icon: const Icon(Icons.add),
-            label: Text('Pick your own'),
-            enableFeedback: true,
-            onPressed: () =>
-                AutoRouter.of(context).replaceNamed('/initial-interests-page'),
-          ),
-          body: state.map(
-            initial: (_) => Container(),
-            loadInProgress: (_) => Center(
-              child: Shimmer.fromColors(
-                baseColor: Colors.indigo[400]!,
-                highlightColor: Colors.blue[200]!,
-                enabled: true,
-                child: const QuotesLogo(),
+    return BlocProvider<UserTermDataSourceEngagementWatcherBloc>(
+        create: (BuildContext context) =>
+            getIt<UserTermDataSourceEngagementWatcherBloc>()
+              ..add(
+                const UserTermDataSourceEngagementWatcherEvent
+                    .watchMostPopularTermsforCurrentUserStarted(limit: 20),
               ),
-            ),
-            loadSuccess: (userTermDataSourceEngagementsSuccessState) {
-              final userTermDataSourceEngagements =
-                  userTermDataSourceEngagementsSuccessState
-                      .userTermDataSourceEngagements;
-              if (userTermDataSourceEngagements.size == 0) {
-                return const NoEngagementsWidget();
-              }
-              return ListView.builder(
-                shrinkWrap: true,
-                itemCount: userTermDataSourceEngagements.size,
-                itemBuilder: (context, index) {
-                  final currUserTermDatasourceEngagement =
-                      userTermDataSourceEngagements[index];
-                  return UserTermDataSourceEngagementListItemWidget(
-                    currUserTermDatasourceEngagement:
-                        currUserTermDatasourceEngagement,
+        child: BlocBuilder<UserTermDataSourceEngagementWatcherBloc,
+            UserTermDataSourceEngagementWatcherState>(
+          builder: (context, state) {
+            return Scaffold(
+              floatingActionButton: FloatingActionButton.extended(
+                icon: const Icon(Icons.add),
+                label: Text('Pick your own'),
+                enableFeedback: true,
+                onPressed: () => AutoRouter.of(context)
+                    .replaceNamed('/initial-interests-page'),
+              ),
+              body: state.map(
+                initial: (_) => Container(),
+                loadInProgress: (_) => Center(
+                  child: Shimmer.fromColors(
+                    baseColor: Colors.indigo[400]!,
+                    highlightColor: Colors.blue[200]!,
+                    enabled: true,
+                    child: const QuotesLogo(),
+                  ),
+                ),
+                loadSuccess: (userTermDataSourceEngagementsSuccessState) {
+                  final userTermDataSourceEngagements =
+                      userTermDataSourceEngagementsSuccessState
+                          .userTermDataSourceEngagements;
+                  if (userTermDataSourceEngagements.size == 0) {
+                    return const NoEngagementsWidget();
+                  }
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: userTermDataSourceEngagements.size,
+                    itemBuilder: (context, index) {
+                      final currUserTermDatasourceEngagement =
+                          userTermDataSourceEngagements[index];
+                      return UserTermDataSourceEngagementListItemWidget(
+                        currUserTermDatasourceEngagement:
+                            currUserTermDatasourceEngagement,
+                      );
+                    },
                   );
                 },
-              );
-            },
-            loadFailure: (userTermDataSourceEngagementFailureState) => Center(
-              child: Column(
-                children: [
-                  Icon(
-                    Icons.error,
-                    size: 60,
+                loadFailure: (userTermDataSourceEngagementFailureState) =>
+                    Center(
+                  child: Column(
+                    children: const [
+                      Icon(
+                        Icons.error,
+                        size: 60,
+                      ),
+                      Text(
+                          'Error loading your activity. Restart the app and try again.'),
+                    ],
                   ),
-                  Text(
-                      'Error loading your activity. Restart the app and try again.'),
-                ],
+                ),
               ),
-            ),
-          ),
-        );
-      },
-    );
+            );
+          },
+        ));
   }
 }
 

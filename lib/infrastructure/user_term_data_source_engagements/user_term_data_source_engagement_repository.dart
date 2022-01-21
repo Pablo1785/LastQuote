@@ -308,6 +308,56 @@ class UserTermDataSourceEngagementRepository
   }
 
   @override
+  Stream<
+          Either<UserTermDataSourceEngagementFailure,
+              KtList<UserTermDataSourceEngagement>>>
+      watchMostPopularTermsForCurrentUser({
+    int limit = 10,
+  }) async* {
+    if (limit <= 0) {
+      yield right(const KtList<UserTermDataSourceEngagement>.empty());
+    }
+    try {
+      final userDocRef = await getIt<FirestoreHelper>().userDocument();
+      yield* _firestore
+          .collection('user_term_data_source_engagement')
+          .orderBy(
+            'is_initial_interest',
+            descending: true,
+          )
+          .orderBy(
+            'share_count',
+            descending: true,
+          )
+          .orderBy(
+            'like_count',
+            descending: true,
+          )
+          .orderBy(
+            'open_count',
+            descending: true,
+          )
+          .where('user_id', isEqualTo: userDocRef.id)
+          .limit(limit)
+          .snapshots()
+          .map(
+        (snapshot) {
+          final engagements = snapshot.docs
+              .where((doc) => doc.exists)
+              .map(
+                (doc) => UserTermDataSourceEngagementDto.fromFirestore(doc)
+                    .toDomain(),
+              )
+              .toImmutableList();
+          return right(engagements);
+        },
+      );
+    } on Exception catch (exception, stacktrace) {
+      yield _handleException(exception, stacktrace);
+    }
+  }
+
+  @override
   Future<Either<UserTermDataSourceEngagementFailure, KtList<String>>>
       getMostPopularTerms({
     int limit = 10,
@@ -342,6 +392,97 @@ class UserTermDataSourceEngagementRepository
       return right(terms);
     } on Exception catch (exception, stacktrace) {
       return _handleException(exception, stacktrace);
+    }
+  }
+
+  @override
+  Future<Either<UserTermDataSourceEngagementFailure, Unit>>
+      updateInitialInterest(
+    String termId,
+    bool isInitialInterest,
+  ) async {
+    try {
+      final userDocRef = await getIt<FirestoreHelper>().userDocument();
+      final userId = userDocRef.id;
+      await _firestore
+          .collection('user_term_data_source_engagement')
+          .doc('CLIENT_APP_' + termId + '_' + userId)
+          .update(
+        {
+          'is_initial_interest': isInitialInterest,
+        },
+      );
+      return right(unit);
+    } on PlatformException catch (e, stacktrace) {
+      return _handleException(e, stacktrace);
+    }
+  }
+
+  @override
+  Future<Either<UserTermDataSourceEngagementFailure, Unit>>
+      batchUpdateInitialInterests(
+    Map<String, bool> termInitialInterestStatuses,
+  ) async {
+    // ONLY SET True VALUES TO True, DO NOT UPDATE False VALUES
+    try {
+      final userDocRef = await getIt<FirestoreHelper>().userDocument();
+      final userId = userDocRef.id;
+      final engagementColRef =
+          _firestore.collection('user_term_data_source_engagement');
+      await _firestore.runTransaction((transaction) async {
+        // Reads, need to be executed before writes
+        final termDocs = <String, DocumentSnapshot<Map<String, dynamic>>>{};
+        await Future.forEach(
+          termInitialInterestStatuses.entries,
+          (MapEntry<String, bool> element) async {
+            final docIdString = 'CLIENT_APP_' + element.key + '_' + userId;
+            final docRef = engagementColRef.doc(docIdString);
+            final doc = await transaction.get(docRef);
+            termDocs[element.key] = doc;
+          },
+        );
+        // Writes, after all reads are finished
+        await Future.forEach(
+          termInitialInterestStatuses.entries,
+          (MapEntry<String, bool> element) async {
+            final docIdString = 'CLIENT_APP_' + element.key + '_' + userId;
+            final docRef = engagementColRef.doc(docIdString);
+            final doc = termDocs[element.key];
+            if (doc?.exists ?? false) {
+              if (element.value) {
+                transaction.update(
+                  docRef,
+                  {
+                    'is_initial_interest': element.value,
+                  },
+                );
+              }
+            } else {
+              final newUserTermDataSourceEng = UserTermDataSourceEngagement(
+                id: JunctionUniqueId.fromUniqueString(docIdString),
+                dataSourceId: UniqueId.fromUniqueString('CLIENT_APP'),
+                termId: element.key,
+                userId: UniqueId.fromUniqueString(userId),
+                isInitialInterest: element.value,
+                dismissCount: 0,
+                likeCount: 0,
+                openCount: 0,
+                shareCount: 0,
+              );
+              transaction.set(
+                docRef,
+                UserTermDataSourceEngagementDto.fromDomain(
+                  newUserTermDataSourceEng,
+                ).toJson(),
+              );
+            }
+          },
+        );
+        return transaction;
+      });
+      return right(unit);
+    } on PlatformException catch (e, stacktrace) {
+      return _handleException(e, stacktrace);
     }
   }
 }
