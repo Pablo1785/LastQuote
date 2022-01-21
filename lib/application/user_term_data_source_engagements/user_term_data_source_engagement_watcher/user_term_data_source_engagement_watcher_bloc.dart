@@ -33,7 +33,7 @@ class UserTermDataSourceEngagementWatcherBloc extends Bloc<
     on<UserTermDataSourceEngagementWatcherEvent>(
       (event, emit) async {
         await event.map(
-          watchMostPopularTermsforCurrentUserStarted: (e) async {
+          watchMostPopularTermsForCurrentUserStarted: (e) async {
             emit(
               const UserTermDataSourceEngagementWatcherState.loadInProgress(),
             );

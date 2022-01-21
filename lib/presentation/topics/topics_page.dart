@@ -21,7 +21,7 @@ class TopicsPage extends StatelessWidget {
             getIt<UserTermDataSourceEngagementWatcherBloc>()
               ..add(
                 const UserTermDataSourceEngagementWatcherEvent
-                    .watchMostPopularTermsforCurrentUserStarted(limit: 20),
+                    .watchMostPopularTermsForCurrentUserStarted(limit: 20),
               ),
         child: BlocBuilder<UserTermDataSourceEngagementWatcherBloc,
             UserTermDataSourceEngagementWatcherState>(
