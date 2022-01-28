@@ -86,6 +86,12 @@ class UserTermDataSourceEngagementWatcherBloc extends Bloc<
               ),
             );
           },
+          watchingCancelled: (e) async {
+            await _userTermDataSourceEngagementStreamSubscription?.cancel();
+            emit(
+              const UserTermDataSourceEngagementWatcherState.initial(),
+            );
+          },
         );
       },
     );

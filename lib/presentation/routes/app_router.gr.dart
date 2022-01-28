@@ -10,9 +10,8 @@
 
 import 'package:auto_route/auto_route.dart' as _i8;
 import 'package:flutter/material.dart' as _i9;
-import 'package:flutter/widgets.dart' as _i10;
 
-import '../../domain/articles/article.dart' as _i11;
+import '../../domain/articles/article.dart' as _i10;
 import '../articles/article_detail/article_detail_page.dart' as _i5;
 import '../articles/articles_overview/articles_overview_page.dart' as _i4;
 import '../core/tab_view_page.dart' as _i3;
@@ -82,7 +81,7 @@ class AppRouter extends _i8.RootStackRouter {
 /// generated route for [_i1.SplashPage]
 class SplashRoute extends _i8.PageRouteInfo<SplashRouteArgs> {
   SplashRoute(
-      {_i10.Key? key, int delayBeforeNavigation = 2, String message = ''})
+      {_i9.Key? key, int delayBeforeNavigation = 2, String message = ''})
       : super(name,
             path: '/',
             args: SplashRouteArgs(
@@ -97,7 +96,7 @@ class SplashRouteArgs {
   const SplashRouteArgs(
       {this.key, this.delayBeforeNavigation = 2, this.message = ''});
 
-  final _i10.Key? key;
+  final _i9.Key? key;
 
   final int delayBeforeNavigation;
 
@@ -132,7 +131,7 @@ class ArticlesOverviewRoute extends _i8.PageRouteInfo<void> {
 
 /// generated route for [_i5.ArticleDetailPage]
 class ArticleDetailRoute extends _i8.PageRouteInfo<ArticleDetailRouteArgs> {
-  ArticleDetailRoute({_i10.Key? key, required _i11.Article article})
+  ArticleDetailRoute({_i9.Key? key, required _i10.Article article})
       : super(name,
             path: '/article-detail-page',
             args: ArticleDetailRouteArgs(key: key, article: article));
@@ -143,9 +142,9 @@ class ArticleDetailRoute extends _i8.PageRouteInfo<ArticleDetailRouteArgs> {
 class ArticleDetailRouteArgs {
   const ArticleDetailRouteArgs({this.key, required this.article});
 
-  final _i10.Key? key;
+  final _i9.Key? key;
 
-  final _i11.Article article;
+  final _i10.Article article;
 
   @override
   String toString() {

@@ -1,9 +1,11 @@
 import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:ddd/application/data_ownership/data_ownership/data_ownership_bloc.dart';
 import 'package:ddd/application/data_sources/data_source_status_picker/data_source_status_picker_bloc.dart';
 import 'package:ddd/domain/data_sources/data_source.dart';
 import 'package:ddd/domain/data_sources/data_source_status.dart';
 import 'package:ddd/presentation/core/shimmering_list.dart';
+import 'package:ddd/presentation/settings/widgets/dialog_manager_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -20,6 +22,9 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<DataOwnershipBloc>(
+          create: (_) => getIt<DataOwnershipBloc>(),
+        ),
         BlocProvider<DataSourceStatusPickerBloc>(
           create: (_) => getIt<DataSourceStatusPickerBloc>()
             ..add(
@@ -27,112 +32,162 @@ class SettingsPage extends StatelessWidget {
             ),
         ),
       ],
-      child:
+      child: MultiBlocListener(
+        listeners: [
           BlocListener<DataSourceStatusPickerBloc, DataSourceStatusPickerState>(
-        listener: (context, state) {
-          state.maybeMap(
-            loadFailureSources: (failure) {
-              FlushbarHelper.createError(
-                message: failure.dataSourceFailure.map(
-                  unexpected: (_) => 'Source: Unexpected error',
-                  insufficientPermissions: (_) => 'Source: Permission error',
-                  sourceDisabled: (_) => 'Source: Source disabled',
-                  noActiveSource: (_) => 'Source: No active source',
-                  documentNotFound: (_) => 'Source: Document not found error',
-                ),
-              ).show(context);
-            },
-            loadFailureStatuses: (failure) {
-              FlushbarHelper.createError(
-                message: failure.dataSourceFailure.map(
-                  unexpected: (_) => 'Status: Unexpected error',
-                  insufficientPermissions: (_) => 'Status: Permission error',
-                  sourceDisabled: (_) => 'Status: Source disabled',
-                  noActiveSource: (_) => 'Status: No active source',
-                  documentNotFound: (_) => 'Status: Document not found error',
-                ),
-              ).show(context);
-            },
-            orElse: () {},
-          );
-        },
-        child: Scaffold(
-          appBar: AppBar(),
-          body: BlocBuilder<DataSourceStatusPickerBloc,
-              DataSourceStatusPickerState>(
-            builder: (context, state) {
-              return RefreshIndicator(
-                onRefresh: () async {
-                  context.read<DataSourceStatusPickerBloc>().add(
-                        const DataSourceStatusPickerEvent.initialLoadStarted(),
-                      );
-                },
-                child: state.map(
-                  initial: (_) => Container(),
-                  loadInProgressSources: (_) => const ShimmeringListWidget(),
-                  loadSuccessSources: (loadSuccessState) =>
-                      DataSourceLoadSuccessWidget(
-                    dataSources: loadSuccessState.dataSources,
-                  ),
-                  loadFailureSources: (_) => const Center(
-                    child: Icon(
-                      Icons.error_outline,
-                      size: 72,
+            listener: (context, state) {
+              state.maybeMap(
+                loadFailureSources: (failure) {
+                  FlushbarHelper.createError(
+                    message: failure.dataSourceFailure.map(
+                      unexpected: (_) => 'Source: Unexpected error',
+                      insufficientPermissions: (_) =>
+                          'Source: Permission error',
+                      sourceDisabled: (_) => 'Source: Source disabled',
+                      noActiveSource: (_) => 'Source: No active source',
+                      documentNotFound: (_) =>
+                          'Source: Document not found error',
                     ),
-                  ),
-                  loadInProgressStatuses: (loadInProgressStateStatuses) =>
-                      DataSourceLoadSuccessWidget(
-                    dataSources: loadInProgressStateStatuses.dataSources,
-                  ),
-                  loadSuccessAll: (loadSuccessState) =>
-                      DataSourceStatusLoadSuccessWidget(
-                    dataSources: loadSuccessState.dataSources,
-                    dataSourceStatuses: loadSuccessState.dataSourceStatuses,
-                  ),
-                  loadFailureStatuses: (loadFailureStateStatuses) {
-                    FlushbarHelper.createError(
-                      message: loadFailureStateStatuses.dataSourceFailure.map(
-                        unexpected: (_) => 'Status: Unexpected error',
-                        insufficientPermissions: (_) =>
-                            'Status: Permission error',
-                        sourceDisabled: (_) => 'Status: Source disabled',
-                        noActiveSource: (_) => 'Status: No active source',
-                        documentNotFound: (_) =>
-                            'Status: Document not found error',
-                      ),
-                    ).show(context);
-                    return DataSourceLoadSuccessWidget(
-                      dataSources: loadFailureStateStatuses.dataSources,
-                    );
-                  },
-                  updateFailureStatuses: (updateFailureState) {
-                    FlushbarHelper.createError(
-                      message: updateFailureState.dataSourceFailure.map(
-                        unexpected: (_) => 'Status: Unexpected error',
-                        insufficientPermissions: (_) =>
-                            'Status: Permission error',
-                        sourceDisabled: (_) => 'Status: Source disabled',
-                        noActiveSource: (_) => 'Status: No active source',
-                        documentNotFound: (_) =>
-                            'Status: Document not found error',
-                      ),
-                    ).show(context);
-                    return DataSourceStatusLoadSuccessWidget(
-                      dataSources: updateFailureState.dataSources,
-                      dataSourceStatuses: updateFailureState.dataSourceStatuses,
-                    );
-                  },
-                  updateInProgressStatuses: (updateInProgressState) =>
-                      DataSourceStatusLoadSuccessWidget(
-                    dataSources: updateInProgressState.dataSources,
-                    dataSourceStatuses:
-                        updateInProgressState.dataSourceStatuses,
-                  ),
-                ),
+                  ).show(context);
+                },
+                loadFailureStatuses: (failure) {
+                  FlushbarHelper.createError(
+                    message: failure.dataSourceFailure.map(
+                      unexpected: (_) => 'Status: Unexpected error',
+                      insufficientPermissions: (_) =>
+                          'Status: Permission error',
+                      sourceDisabled: (_) => 'Status: Source disabled',
+                      noActiveSource: (_) => 'Status: No active source',
+                      documentNotFound: (_) =>
+                          'Status: Document not found error',
+                    ),
+                  ).show(context);
+                },
+                orElse: () {},
               );
             },
           ),
+        ],
+        child: Stack(
+          children: [
+            Scaffold(
+              appBar: AppBar(
+                backgroundColor: Theme.of(context).primaryColor.withAlpha(0x00),
+                foregroundColor: Colors.grey[700],
+                elevation: 0.0,
+                title: const Text('Data & Privacy'),
+                bottom: PreferredSize(
+                  child: Container(
+                    alignment: Alignment.topCenter,
+                    child: Text(
+                      'Manage data gathered about you',
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                    color: Theme.of(context)
+                        .scaffoldBackgroundColor
+                        .withAlpha(0x55),
+                  ),
+                  preferredSize: const Size.fromHeight(
+                    10.0,
+                  ),
+                ),
+              ),
+              body: Column(
+                children: [
+                  BlocBuilder<DataSourceStatusPickerBloc,
+                      DataSourceStatusPickerState>(
+                    builder: (context, state) {
+                      return RefreshIndicator(
+                        onRefresh: () async {
+                          context.read<DataSourceStatusPickerBloc>().add(
+                                const DataSourceStatusPickerEvent
+                                    .initialLoadStarted(),
+                              );
+                        },
+                        child: _mapDataSourceStatusPickerStateToWidget(
+                          state,
+                          context,
+                        ),
+                      );
+                    },
+                  ),
+                  BlocBuilder<DataOwnershipBloc, DataOwnershipState>(
+                    builder: (context, state) {
+                      return TextButton(
+                        onPressed: () {
+                          BlocProvider.of<DataOwnershipBloc>(context).add(
+                            const DataOwnershipEvent.deleteUserDataRequested(),
+                          );
+                        },
+                        child: const Text('Delete ALL your data'),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+            DialogManagerWidget(),
+          ],
         ),
+      ),
+    );
+  }
+
+  Widget _mapDataSourceStatusPickerStateToWidget(
+      DataSourceStatusPickerState state, BuildContext context) {
+    return state.map(
+      initial: (_) => Container(),
+      loadInProgressSources: (_) => const ShimmeringListWidget(),
+      loadSuccessSources: (loadSuccessState) => DataSourceLoadSuccessWidget(
+        dataSources: loadSuccessState.dataSources,
+      ),
+      loadFailureSources: (_) => const Center(
+        child: Icon(
+          Icons.error_outline,
+          size: 72,
+        ),
+      ),
+      loadInProgressStatuses: (loadInProgressStateStatuses) =>
+          DataSourceLoadSuccessWidget(
+        dataSources: loadInProgressStateStatuses.dataSources,
+      ),
+      loadSuccessAll: (loadSuccessState) => DataSourceStatusLoadSuccessWidget(
+        dataSources: loadSuccessState.dataSources,
+        dataSourceStatuses: loadSuccessState.dataSourceStatuses,
+      ),
+      loadFailureStatuses: (loadFailureStateStatuses) {
+        FlushbarHelper.createError(
+          message: loadFailureStateStatuses.dataSourceFailure.map(
+            unexpected: (_) => 'Status: Unexpected error',
+            insufficientPermissions: (_) => 'Status: Permission error',
+            sourceDisabled: (_) => 'Status: Source disabled',
+            noActiveSource: (_) => 'Status: No active source',
+            documentNotFound: (_) => 'Status: Document not found error',
+          ),
+        ).show(context);
+        return DataSourceLoadSuccessWidget(
+          dataSources: loadFailureStateStatuses.dataSources,
+        );
+      },
+      updateFailureStatuses: (updateFailureState) {
+        FlushbarHelper.createError(
+          message: updateFailureState.dataSourceFailure.map(
+            unexpected: (_) => 'Status: Unexpected error',
+            insufficientPermissions: (_) => 'Status: Permission error',
+            sourceDisabled: (_) => 'Status: Source disabled',
+            noActiveSource: (_) => 'Status: No active source',
+            documentNotFound: (_) => 'Status: Document not found error',
+          ),
+        ).show(context);
+        return DataSourceStatusLoadSuccessWidget(
+          dataSources: updateFailureState.dataSources,
+          dataSourceStatuses: updateFailureState.dataSourceStatuses,
+        );
+      },
+      updateInProgressStatuses: (updateInProgressState) =>
+          DataSourceStatusLoadSuccessWidget(
+        dataSources: updateInProgressState.dataSources,
+        dataSourceStatuses: updateInProgressState.dataSourceStatuses,
       ),
     );
   }

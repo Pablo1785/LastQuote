@@ -2,6 +2,8 @@ part of 'article_term_count_watcher_bloc.dart';
 
 @freezed
 class ArticleTermCountWatcherEvent with _$ArticleTermCountWatcherEvent {
+  const factory ArticleTermCountWatcherEvent.watchingCancelled() =
+      _WatchingCancelled;
   const factory ArticleTermCountWatcherEvent.getForEachArticleStarted(
     KtList<Article> articles,
     bool descending,
