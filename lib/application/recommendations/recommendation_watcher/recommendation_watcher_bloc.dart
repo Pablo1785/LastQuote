@@ -86,6 +86,12 @@ class RecommendationWatcherBloc
             ),
           );
         },
+        watchingCancelled: (e) async {
+          await _recommendationStreamSubscription?.cancel();
+          emit(
+            const RecommendationWatcherState.initial(),
+          );
+        },
       );
     });
   }

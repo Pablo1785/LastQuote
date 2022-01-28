@@ -5,6 +5,7 @@ import 'package:ddd/application/data_sources/data_source_status_picker/data_sour
 import 'package:ddd/domain/data_sources/data_source.dart';
 import 'package:ddd/domain/data_sources/data_source_status.dart';
 import 'package:ddd/presentation/core/shimmering_list.dart';
+import 'package:ddd/presentation/settings/widgets/dialog_manager_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -21,79 +22,112 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<DataOwnershipBloc>(
+          create: (_) => getIt<DataOwnershipBloc>(),
+        ),
         BlocProvider<DataSourceStatusPickerBloc>(
           create: (_) => getIt<DataSourceStatusPickerBloc>()
             ..add(
               const DataSourceStatusPickerEvent.initialLoadStarted(),
             ),
         ),
-        BlocProvider<DataOwnershipBloc>(
-          create: (_) => getIt<DataOwnershipBloc>(),
-        ),
       ],
-      child:
+      child: MultiBlocListener(
+        listeners: [
           BlocListener<DataSourceStatusPickerBloc, DataSourceStatusPickerState>(
-        listener: (context, state) {
-          state.maybeMap(
-            loadFailureSources: (failure) {
-              FlushbarHelper.createError(
-                message: failure.dataSourceFailure.map(
-                  unexpected: (_) => 'Source: Unexpected error',
-                  insufficientPermissions: (_) => 'Source: Permission error',
-                  sourceDisabled: (_) => 'Source: Source disabled',
-                  noActiveSource: (_) => 'Source: No active source',
-                  documentNotFound: (_) => 'Source: Document not found error',
-                ),
-              ).show(context);
-            },
-            loadFailureStatuses: (failure) {
-              FlushbarHelper.createError(
-                message: failure.dataSourceFailure.map(
-                  unexpected: (_) => 'Status: Unexpected error',
-                  insufficientPermissions: (_) => 'Status: Permission error',
-                  sourceDisabled: (_) => 'Status: Source disabled',
-                  noActiveSource: (_) => 'Status: No active source',
-                  documentNotFound: (_) => 'Status: Document not found error',
-                ),
-              ).show(context);
-            },
-            orElse: () {},
-          );
-        },
-        child: Scaffold(
-          appBar: AppBar(),
-          body: Column(
-            children: [
-              BlocBuilder<DataSourceStatusPickerBloc,
-                  DataSourceStatusPickerState>(
-                builder: (context, state) {
-                  return RefreshIndicator(
-                    onRefresh: () async {
-                      context.read<DataSourceStatusPickerBloc>().add(
-                            const DataSourceStatusPickerEvent
-                                .initialLoadStarted(),
-                          );
-                    },
-                    child: _mapDataSourceStatusPickerStateToWidget(
-                      state,
-                      context,
+            listener: (context, state) {
+              state.maybeMap(
+                loadFailureSources: (failure) {
+                  FlushbarHelper.createError(
+                    message: failure.dataSourceFailure.map(
+                      unexpected: (_) => 'Source: Unexpected error',
+                      insufficientPermissions: (_) =>
+                          'Source: Permission error',
+                      sourceDisabled: (_) => 'Source: Source disabled',
+                      noActiveSource: (_) => 'Source: No active source',
+                      documentNotFound: (_) =>
+                          'Source: Document not found error',
                     ),
-                  );
+                  ).show(context);
                 },
-              ),
-              BlocListener<DataOwnershipBloc, DataOwnershipState>(
-                listener: (context, state) {
-                  state.map(
-                    initial: (_) {},
-                    deleteUserDataWaitingForConfirmation: (_) {},
-                    deleteUserDataInProgress: (_) {},
-                    deleteUserDataSuccess: (_) {},
-                    deleteUserDataFailure: (_) {},
-                  );
+                loadFailureStatuses: (failure) {
+                  FlushbarHelper.createError(
+                    message: failure.dataSourceFailure.map(
+                      unexpected: (_) => 'Status: Unexpected error',
+                      insufficientPermissions: (_) =>
+                          'Status: Permission error',
+                      sourceDisabled: (_) => 'Status: Source disabled',
+                      noActiveSource: (_) => 'Status: No active source',
+                      documentNotFound: (_) =>
+                          'Status: Document not found error',
+                    ),
+                  ).show(context);
                 },
-              ),
-            ],
+                orElse: () {},
+              );
+            },
           ),
+        ],
+        child: Stack(
+          children: [
+            Scaffold(
+              appBar: AppBar(
+                backgroundColor: Theme.of(context).primaryColor.withAlpha(0x00),
+                foregroundColor: Colors.grey[700],
+                elevation: 0.0,
+                title: const Text('Data & Privacy'),
+                bottom: PreferredSize(
+                  child: Container(
+                    alignment: Alignment.topCenter,
+                    child: Text(
+                      'Manage data gathered about you',
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                    color: Theme.of(context)
+                        .scaffoldBackgroundColor
+                        .withAlpha(0x55),
+                  ),
+                  preferredSize: const Size.fromHeight(
+                    10.0,
+                  ),
+                ),
+              ),
+              body: Column(
+                children: [
+                  BlocBuilder<DataSourceStatusPickerBloc,
+                      DataSourceStatusPickerState>(
+                    builder: (context, state) {
+                      return RefreshIndicator(
+                        onRefresh: () async {
+                          context.read<DataSourceStatusPickerBloc>().add(
+                                const DataSourceStatusPickerEvent
+                                    .initialLoadStarted(),
+                              );
+                        },
+                        child: _mapDataSourceStatusPickerStateToWidget(
+                          state,
+                          context,
+                        ),
+                      );
+                    },
+                  ),
+                  BlocBuilder<DataOwnershipBloc, DataOwnershipState>(
+                    builder: (context, state) {
+                      return TextButton(
+                        onPressed: () {
+                          BlocProvider.of<DataOwnershipBloc>(context).add(
+                            const DataOwnershipEvent.deleteUserDataRequested(),
+                          );
+                        },
+                        child: const Text('Delete ALL your data'),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+            DialogManagerWidget(),
+          ],
         ),
       ),
     );

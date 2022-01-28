@@ -17,6 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$UserTermDataSourceEngagementWatcherEventTearOff {
   const _$UserTermDataSourceEngagementWatcherEventTearOff();
 
+  _WatchingCancelled watchingCancelled() {
+    return const _WatchingCancelled();
+  }
+
   _WatchMostPopularTermsforCurrentUserStarted
       watchMostPopularTermsForCurrentUserStarted({int limit = 10}) {
     return _WatchMostPopularTermsforCurrentUserStarted(
@@ -51,6 +55,7 @@ const $UserTermDataSourceEngagementWatcherEvent =
 mixin _$UserTermDataSourceEngagementWatcherEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() watchingCancelled,
     required TResult Function(int limit)
         watchMostPopularTermsForCurrentUserStarted,
     required TResult Function(KtList<String> termIds, String dataSourceId)
@@ -64,6 +69,7 @@ mixin _$UserTermDataSourceEngagementWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function(int limit)? watchMostPopularTermsForCurrentUserStarted,
     TResult Function(KtList<String> termIds, String dataSourceId)?
         watchForCurrentUserTermsAndDataSourceStarted,
@@ -76,6 +82,7 @@ mixin _$UserTermDataSourceEngagementWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function(int limit)? watchMostPopularTermsForCurrentUserStarted,
     TResult Function(KtList<String> termIds, String dataSourceId)?
         watchForCurrentUserTermsAndDataSourceStarted,
@@ -89,6 +96,7 @@ mixin _$UserTermDataSourceEngagementWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_WatchingCancelled value) watchingCancelled,
     required TResult Function(_WatchMostPopularTermsforCurrentUserStarted value)
         watchMostPopularTermsForCurrentUserStarted,
     required TResult Function(
@@ -100,6 +108,7 @@ mixin _$UserTermDataSourceEngagementWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchMostPopularTermsforCurrentUserStarted value)?
         watchMostPopularTermsForCurrentUserStarted,
     TResult Function(_WatchForCurrentUserTermsAndDataSourceStarted value)?
@@ -110,6 +119,7 @@ mixin _$UserTermDataSourceEngagementWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchMostPopularTermsforCurrentUserStarted value)?
         watchMostPopularTermsForCurrentUserStarted,
     TResult Function(_WatchForCurrentUserTermsAndDataSourceStarted value)?
@@ -138,6 +148,150 @@ class _$UserTermDataSourceEngagementWatcherEventCopyWithImpl<$Res>
   final UserTermDataSourceEngagementWatcherEvent _value;
   // ignore: unused_field
   final $Res Function(UserTermDataSourceEngagementWatcherEvent) _then;
+}
+
+/// @nodoc
+abstract class _$WatchingCancelledCopyWith<$Res> {
+  factory _$WatchingCancelledCopyWith(
+          _WatchingCancelled value, $Res Function(_WatchingCancelled) then) =
+      __$WatchingCancelledCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$WatchingCancelledCopyWithImpl<$Res>
+    extends _$UserTermDataSourceEngagementWatcherEventCopyWithImpl<$Res>
+    implements _$WatchingCancelledCopyWith<$Res> {
+  __$WatchingCancelledCopyWithImpl(
+      _WatchingCancelled _value, $Res Function(_WatchingCancelled) _then)
+      : super(_value, (v) => _then(v as _WatchingCancelled));
+
+  @override
+  _WatchingCancelled get _value => super._value as _WatchingCancelled;
+}
+
+/// @nodoc
+
+class _$_WatchingCancelled implements _WatchingCancelled {
+  const _$_WatchingCancelled();
+
+  @override
+  String toString() {
+    return 'UserTermDataSourceEngagementWatcherEvent.watchingCancelled()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _WatchingCancelled);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() watchingCancelled,
+    required TResult Function(int limit)
+        watchMostPopularTermsForCurrentUserStarted,
+    required TResult Function(KtList<String> termIds, String dataSourceId)
+        watchForCurrentUserTermsAndDataSourceStarted,
+    required TResult Function(
+            Either<UserTermDataSourceEngagementFailure,
+                    KtList<UserTermDataSourceEngagement>>
+                failureOrUserTermDataSourceEngagements)
+        userTermDataSourceEngagementsReceived,
+  }) {
+    return watchingCancelled();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
+    TResult Function(int limit)? watchMostPopularTermsForCurrentUserStarted,
+    TResult Function(KtList<String> termIds, String dataSourceId)?
+        watchForCurrentUserTermsAndDataSourceStarted,
+    TResult Function(
+            Either<UserTermDataSourceEngagementFailure,
+                    KtList<UserTermDataSourceEngagement>>
+                failureOrUserTermDataSourceEngagements)?
+        userTermDataSourceEngagementsReceived,
+  }) {
+    return watchingCancelled?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
+    TResult Function(int limit)? watchMostPopularTermsForCurrentUserStarted,
+    TResult Function(KtList<String> termIds, String dataSourceId)?
+        watchForCurrentUserTermsAndDataSourceStarted,
+    TResult Function(
+            Either<UserTermDataSourceEngagementFailure,
+                    KtList<UserTermDataSourceEngagement>>
+                failureOrUserTermDataSourceEngagements)?
+        userTermDataSourceEngagementsReceived,
+    required TResult orElse(),
+  }) {
+    if (watchingCancelled != null) {
+      return watchingCancelled();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_WatchingCancelled value) watchingCancelled,
+    required TResult Function(_WatchMostPopularTermsforCurrentUserStarted value)
+        watchMostPopularTermsForCurrentUserStarted,
+    required TResult Function(
+            _WatchForCurrentUserTermsAndDataSourceStarted value)
+        watchForCurrentUserTermsAndDataSourceStarted,
+    required TResult Function(_UserTermDataSourceEngagementsReceived value)
+        userTermDataSourceEngagementsReceived,
+  }) {
+    return watchingCancelled(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
+    TResult Function(_WatchMostPopularTermsforCurrentUserStarted value)?
+        watchMostPopularTermsForCurrentUserStarted,
+    TResult Function(_WatchForCurrentUserTermsAndDataSourceStarted value)?
+        watchForCurrentUserTermsAndDataSourceStarted,
+    TResult Function(_UserTermDataSourceEngagementsReceived value)?
+        userTermDataSourceEngagementsReceived,
+  }) {
+    return watchingCancelled?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
+    TResult Function(_WatchMostPopularTermsforCurrentUserStarted value)?
+        watchMostPopularTermsForCurrentUserStarted,
+    TResult Function(_WatchForCurrentUserTermsAndDataSourceStarted value)?
+        watchForCurrentUserTermsAndDataSourceStarted,
+    TResult Function(_UserTermDataSourceEngagementsReceived value)?
+        userTermDataSourceEngagementsReceived,
+    required TResult orElse(),
+  }) {
+    if (watchingCancelled != null) {
+      return watchingCancelled(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _WatchingCancelled
+    implements UserTermDataSourceEngagementWatcherEvent {
+  const factory _WatchingCancelled() = _$_WatchingCancelled;
 }
 
 /// @nodoc
@@ -212,6 +366,7 @@ class _$_WatchMostPopularTermsforCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() watchingCancelled,
     required TResult Function(int limit)
         watchMostPopularTermsForCurrentUserStarted,
     required TResult Function(KtList<String> termIds, String dataSourceId)
@@ -228,6 +383,7 @@ class _$_WatchMostPopularTermsforCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function(int limit)? watchMostPopularTermsForCurrentUserStarted,
     TResult Function(KtList<String> termIds, String dataSourceId)?
         watchForCurrentUserTermsAndDataSourceStarted,
@@ -243,6 +399,7 @@ class _$_WatchMostPopularTermsforCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function(int limit)? watchMostPopularTermsForCurrentUserStarted,
     TResult Function(KtList<String> termIds, String dataSourceId)?
         watchForCurrentUserTermsAndDataSourceStarted,
@@ -262,6 +419,7 @@ class _$_WatchMostPopularTermsforCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_WatchingCancelled value) watchingCancelled,
     required TResult Function(_WatchMostPopularTermsforCurrentUserStarted value)
         watchMostPopularTermsForCurrentUserStarted,
     required TResult Function(
@@ -276,6 +434,7 @@ class _$_WatchMostPopularTermsforCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchMostPopularTermsforCurrentUserStarted value)?
         watchMostPopularTermsForCurrentUserStarted,
     TResult Function(_WatchForCurrentUserTermsAndDataSourceStarted value)?
@@ -289,6 +448,7 @@ class _$_WatchMostPopularTermsforCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchMostPopularTermsforCurrentUserStarted value)?
         watchMostPopularTermsForCurrentUserStarted,
     TResult Function(_WatchForCurrentUserTermsAndDataSourceStarted value)?
@@ -398,6 +558,7 @@ class _$_WatchForCurrentUserTermsAndDataSourceStarted
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() watchingCancelled,
     required TResult Function(int limit)
         watchMostPopularTermsForCurrentUserStarted,
     required TResult Function(KtList<String> termIds, String dataSourceId)
@@ -414,6 +575,7 @@ class _$_WatchForCurrentUserTermsAndDataSourceStarted
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function(int limit)? watchMostPopularTermsForCurrentUserStarted,
     TResult Function(KtList<String> termIds, String dataSourceId)?
         watchForCurrentUserTermsAndDataSourceStarted,
@@ -430,6 +592,7 @@ class _$_WatchForCurrentUserTermsAndDataSourceStarted
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function(int limit)? watchMostPopularTermsForCurrentUserStarted,
     TResult Function(KtList<String> termIds, String dataSourceId)?
         watchForCurrentUserTermsAndDataSourceStarted,
@@ -450,6 +613,7 @@ class _$_WatchForCurrentUserTermsAndDataSourceStarted
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_WatchingCancelled value) watchingCancelled,
     required TResult Function(_WatchMostPopularTermsforCurrentUserStarted value)
         watchMostPopularTermsForCurrentUserStarted,
     required TResult Function(
@@ -464,6 +628,7 @@ class _$_WatchForCurrentUserTermsAndDataSourceStarted
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchMostPopularTermsforCurrentUserStarted value)?
         watchMostPopularTermsForCurrentUserStarted,
     TResult Function(_WatchForCurrentUserTermsAndDataSourceStarted value)?
@@ -477,6 +642,7 @@ class _$_WatchForCurrentUserTermsAndDataSourceStarted
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchMostPopularTermsforCurrentUserStarted value)?
         watchMostPopularTermsForCurrentUserStarted,
     TResult Function(_WatchForCurrentUserTermsAndDataSourceStarted value)?
@@ -588,6 +754,7 @@ class _$_UserTermDataSourceEngagementsReceived
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() watchingCancelled,
     required TResult Function(int limit)
         watchMostPopularTermsForCurrentUserStarted,
     required TResult Function(KtList<String> termIds, String dataSourceId)
@@ -605,6 +772,7 @@ class _$_UserTermDataSourceEngagementsReceived
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function(int limit)? watchMostPopularTermsForCurrentUserStarted,
     TResult Function(KtList<String> termIds, String dataSourceId)?
         watchForCurrentUserTermsAndDataSourceStarted,
@@ -621,6 +789,7 @@ class _$_UserTermDataSourceEngagementsReceived
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function(int limit)? watchMostPopularTermsForCurrentUserStarted,
     TResult Function(KtList<String> termIds, String dataSourceId)?
         watchForCurrentUserTermsAndDataSourceStarted,
@@ -641,6 +810,7 @@ class _$_UserTermDataSourceEngagementsReceived
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_WatchingCancelled value) watchingCancelled,
     required TResult Function(_WatchMostPopularTermsforCurrentUserStarted value)
         watchMostPopularTermsForCurrentUserStarted,
     required TResult Function(
@@ -655,6 +825,7 @@ class _$_UserTermDataSourceEngagementsReceived
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchMostPopularTermsforCurrentUserStarted value)?
         watchMostPopularTermsForCurrentUserStarted,
     TResult Function(_WatchForCurrentUserTermsAndDataSourceStarted value)?
@@ -668,6 +839,7 @@ class _$_UserTermDataSourceEngagementsReceived
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchMostPopularTermsforCurrentUserStarted value)?
         watchMostPopularTermsForCurrentUserStarted,
     TResult Function(_WatchForCurrentUserTermsAndDataSourceStarted value)?

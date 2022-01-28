@@ -114,11 +114,6 @@ class _ArticlesOverviewPageState extends State<ArticlesOverviewPage> {
               icon: const Icon(Icons.filter_alt_outlined),
               onPressed: () => _openEndDrawer(),
             ),
-            IconButton(
-              icon: const Icon(Icons.settings),
-              onPressed: () =>
-                  AutoRouter.of(context).pushNamed('/settings-page'),
-            ),
           ],
         ),
         body: const ArticlesOverviewBody(),

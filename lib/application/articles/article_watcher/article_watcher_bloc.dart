@@ -74,6 +74,12 @@ class ArticleWatcherBloc
                 ),
               );
         },
+        watchingCancelled: (e) async {
+          await _articleStreamSubscription?.cancel();
+          emit(
+            const ArticleWatcherState.initial(),
+          );
+        },
       );
     });
   }

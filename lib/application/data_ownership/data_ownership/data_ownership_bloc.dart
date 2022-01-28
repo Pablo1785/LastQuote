@@ -2,11 +2,13 @@ import 'package:bloc/bloc.dart';
 import 'package:ddd/domain/data_ownership/data_ownership_failures.dart';
 import 'package:ddd/domain/data_ownership/i_data_ownership_facade.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 
 part 'data_ownership_event.dart';
 part 'data_ownership_state.dart';
 part 'data_ownership_bloc.freezed.dart';
 
+@injectable
 class DataOwnershipBloc extends Bloc<DataOwnershipEvent, DataOwnershipState> {
   final IDataOwnershipFacade _iDataOwnershipFacade;
 
@@ -39,6 +41,9 @@ class DataOwnershipBloc extends Bloc<DataOwnershipEvent, DataOwnershipState> {
             const DataOwnershipState.deleteUserDataFailure(
               DataOwnershipFailure.cancelledByUser(),
             ),
+          );
+          emit(
+            const DataOwnershipState.initial(),
           );
         },
       );

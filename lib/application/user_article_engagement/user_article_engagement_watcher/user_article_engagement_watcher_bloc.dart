@@ -61,6 +61,12 @@ class UserArticleEngagementWatcherBloc extends Bloc<
             ),
           );
         },
+        watchingCancelled: (e) async {
+          await _userArticleEngagementStreamSubscription?.cancel();
+          emit(
+            const UserArticleEngagementWatcherState.initial(),
+          );
+        },
       );
     });
   }

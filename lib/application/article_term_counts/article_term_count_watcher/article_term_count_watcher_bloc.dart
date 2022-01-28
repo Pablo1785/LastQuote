@@ -70,6 +70,12 @@ class ArticleTermCountWatcherBloc
             ),
           );
         },
+        watchingCancelled: (e) async {
+          await _articleTermCountStreamSubscription?.cancel();
+          emit(
+            const ArticleTermCountWatcherState.initial(),
+          );
+        },
       );
     });
   }
