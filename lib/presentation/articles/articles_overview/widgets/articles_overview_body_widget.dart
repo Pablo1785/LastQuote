@@ -150,8 +150,11 @@ class ArticleLoadFailureWidget extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          const Icon(
-            Icons.error_outline,
+          Icon(
+            articleFailure.maybeMap(
+              noArticles: (_) => Icons.sync_problem,
+              orElse: () => Icons.error_outline,
+            ),
             size: 72,
           ),
           const SizedBox(
@@ -168,7 +171,7 @@ class ArticleLoadFailureWidget extends StatelessWidget {
               noActiveSource: (_) =>
                   "We have not detected any enabled recommendation source for your account. Try enabling some sources in your settings or restart the application.",
               noArticles: (_) =>
-                  "No recommendations match the selected criteria",
+                  "No suitable recommendations.\n\nWe will prepare new recommendations shortly.",
             ),
             textAlign: TextAlign.center,
           ),
@@ -227,217 +230,268 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
             height: 100,
           );
         } else {
-          return Card(
-            child: ListTile(
-              leading: BlocListener<UserArticleEngagementActorBloc,
-                  UserArticleEngagementActorState>(
-                listener: (context, actorState) {
-                  actorState.maybeWhen(
-                    likeSuccess: (_) =>
-                        context.read<UserArticleEngagementWatcherBloc>().add(
-                              UserArticleEngagementWatcherEvent
-                                  .watchForCurrentUserAndArticlesStarted(
-                                articles,
-                              ),
-                            ),
-                    orElse: () {},
+          return BlocBuilder<UserArticleEngagementWatcherBloc,
+              UserArticleEngagementWatcherState>(
+            builder: (context, state) {
+              return state.maybeMap(
+                loadSuccess:
+                    (userArticleEngagementLoadSuccessStateChecksDismiss) {
+                  if (userArticleEngagementLoadSuccessStateChecksDismiss
+                          .userArticleEngagements[article.id.getOrCrash()]
+                          ?.isDismissed ??
+                      false) {
+                    return Container();
+                  }
+                  return ArticleListItemWidget(
+                    articles: articles,
+                    article: article,
                   );
                 },
-                child: BlocBuilder<UserArticleEngagementWatcherBloc,
-                    UserArticleEngagementWatcherState>(
-                  builder: (context, engagementWatcherState) {
-                    return engagementWatcherState.map(
-                      initial: (_) => IconButton(
-                        icon: const Icon(
-                          Icons.thumb_up_alt_outlined,
-                        ),
-                        onPressed: () {},
-                      ),
-                      loadInProgress: (_) => IconButton(
-                        icon: const Icon(
-                          Icons.thumb_up_alt_outlined,
-                        ),
-                        onPressed: () {},
-                      ),
-                      loadSuccess: (engagementLoadSuccessState) {
-                        return LikeButton(
-                          userArticleEngagement: engagementLoadSuccessState
-                              .userArticleEngagements[article.id.getOrCrash()]!,
-                        );
-                      },
-                      loadFailure: (_) => IconButton(
-                        icon: const Icon(
-                          Icons.thumb_up_alt_outlined,
-                        ),
-                        onPressed: () {},
-                      ),
-                    );
-                  },
-                ),
-              ),
-              title: Text(
-                article.title.getOrCrash(),
-              ),
-              // isThreeLine: true,
-              subtitle: Column(
-                children: [
-                  Text(
-                    article.url.getOrCrash(),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  BlocBuilder<ArticleTermCountWatcherBloc,
-                      ArticleTermCountWatcherState>(
-                    builder: (context, state) {
-                      return state.map(
-                        initial: (_) => Container(),
-                        loadInProgress: (_) => const LinearProgressIndicator(),
-                        loadSuccess: (successState) {
-                          // User, DataSources (inside Articles) and ArticleTermCounts loaded - start loading UserTermDataSourceEngagements
-
-                          final currArticleTermCounts = successState
-                              .articleTermCounts.iter
-                              .where((element) =>
-                                  element.articleId.getOrCrash() ==
-                                  article.id.getOrCrash())
-                              .toList();
-                          currArticleTermCounts.sort(
-                            (atc1, atc2) => atc2.termImportance
-                                .compareTo(atc1.termImportance),
-                          );
-                          return Container(
-                            alignment: Alignment.topLeft,
-                            height:
-                                currArticleTermCounts.isNotEmpty ? 50.0 : 0.0,
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              itemCount: currArticleTermCounts.length > 3
-                                  ? 3
-                                  : currArticleTermCounts.length,
-                              itemBuilder: (context, index) {
-                                final articleTermCount =
-                                    currArticleTermCounts[index];
-                                return ActionChip(
-                                  elevation: 4.0,
-                                  backgroundColor: Colors.indigo[400]!
-                                      .withOpacity(
-                                          articleTermCount.termImportance),
-                                  label: Text(
-                                    articleTermCount.termId +
-                                        ': ' +
-                                        (articleTermCount.termImportance * 100)
-                                            .toInt()
-                                            .toString() +
-                                        "%",
-                                    style: TextStyle(
-                                      color:
-                                          articleTermCount.termImportance > 0.45
-                                              ? Colors.white
-                                              : Colors.black,
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    FlushbarHelper.createInformation(
-                                      // Title case the sentence
-                                      message: 'Saying that article ' +
-                                          article.title.getOrCrash() +
-                                          ' is about ' +
-                                          articleTermCount.termId +
-                                          ' would be ' +
-                                          (articleTermCount.termImportance *
-                                                  100)
-                                              .toInt()
-                                              .toString() +
-                                          '% accurate',
-                                    ).show(context);
-                                    AutoRouter.of(context).push(
-                                      TopicDetailsRoute(
-                                        termId: articleTermCount.termId,
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-                          );
-                        },
-                        loadFailure: (failureState) => Text(
-                          'Failed to load topics. Reason: ' +
-                              failureState.articleTermCountFailure.toString(),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-              trailing: () {
-                switch (article.mediaType.getOrCrash()) {
-                  case 'social_media_post':
-                    return const Icon(Icons.group_outlined);
-                    break;
-                  case 'encyclopedia_entry':
-                    return const Icon(Icons.article_outlined);
-                    break;
-                  case 'website':
-                    return const Icon(Icons.web_outlined);
-                  default:
-                    return const Icon(Icons.article_outlined);
-                    break;
-                }
-              }(),
-              onTap: () {
-                final userArticleEngagementActorBloc =
-                    context.read<UserArticleEngagementActorBloc>();
-                final userArticleEngagementWatcherBloc =
-                    context.read<UserArticleEngagementWatcherBloc>();
-
-                userArticleEngagementWatcherBloc.state.maybeMap(
-                  loadSuccess: (loadSuccessStateUserArticleEngagementActor) {
-                    userArticleEngagementActorBloc.add(
-                      UserArticleEngagementActorEvent.openPressed(
-                        right(loadSuccessStateUserArticleEngagementActor
-                            .userArticleEngagements[article.id.getOrCrash()]!),
-                      ),
-                    );
-                  },
-                  orElse: () {},
-                );
-                AutoRouter.of(context).push(
-                  ArticleDetailRoute(
-                    article: article,
-                  ),
-                );
-              },
-              onLongPress: () {
-                final userArticleEngagementActorBloc =
-                    context.read<UserArticleEngagementActorBloc>();
-                final userArticleEngagementWatcherBloc =
-                    context.read<UserArticleEngagementWatcherBloc>();
-
-                userArticleEngagementWatcherBloc.state.maybeMap(
-                  loadSuccess: (loadSuccessStateUserArticleEngagementActor) {
-                    userArticleEngagementActorBloc.add(
-                      UserArticleEngagementActorEvent.sharePressed(
-                        right(loadSuccessStateUserArticleEngagementActor
-                            .userArticleEngagements[article.id.getOrCrash()]!),
-                      ),
-                    );
-                  },
-                  orElse: () {},
-                );
-
-                Share.share(
-                  "Check out this article I found on The Last Quote: " +
-                      article.url.getOrCrash(),
-                  subject: article.title.getOrCrash(),
-                );
-              },
-            ),
+                orElse: () => Container(),
+              );
+            },
           );
         }
       },
       itemCount: articles.size,
+    );
+  }
+}
+
+
+class ArticleListItemWidget extends StatelessWidget {
+  const ArticleListItemWidget({
+    Key? key,
+    required this.articles,
+    required this.article,
+  }) : super(key: key);
+
+  final KtList<Article> articles;
+  final Article article;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: ListTile(
+        leading: ArticleListItemLeadingWidget(
+          articles: articles,
+          article: article,
+        ),
+        title: Text(
+          article.title.getOrCrash(),
+        ),
+        // isThreeLine: true,
+        subtitle: Column(
+          children: [
+            Text(
+              article.url.getOrCrash(),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            BlocBuilder<ArticleTermCountWatcherBloc,
+                ArticleTermCountWatcherState>(
+              builder: (context, state) {
+                return state.map(
+                  initial: (_) => Container(),
+                  loadInProgress: (_) => const LinearProgressIndicator(),
+                  loadSuccess: (successState) {
+                    // User, DataSources (inside Articles) and ArticleTermCounts loaded - start loading UserTermDataSourceEngagements
+
+                    final currArticleTermCounts = successState
+                        .articleTermCounts.iter
+                        .where((element) =>
+                            element.articleId.getOrCrash() ==
+                            article.id.getOrCrash())
+                        .toList();
+                    currArticleTermCounts.sort(
+                      (atc1, atc2) =>
+                          atc2.termImportance.compareTo(atc1.termImportance),
+                    );
+                    return Container(
+                      alignment: Alignment.topLeft,
+                      height: currArticleTermCounts.isNotEmpty ? 50.0 : 0.0,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: currArticleTermCounts.length > 3
+                            ? 3
+                            : currArticleTermCounts.length,
+                        itemBuilder: (context, index) {
+                          final articleTermCount = currArticleTermCounts[index];
+                          return ActionChip(
+                            elevation: 4.0,
+                            backgroundColor: Colors.indigo[400]!
+                                .withOpacity(articleTermCount.termImportance),
+                            label: Text(
+                              articleTermCount.termId +
+                                  ': ' +
+                                  (articleTermCount.termImportance * 100)
+                                      .toInt()
+                                      .toString() +
+                                  "%",
+                              style: TextStyle(
+                                color: articleTermCount.termImportance > 0.45
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
+                            ),
+                            onPressed: () {
+                              FlushbarHelper.createInformation(
+                                // Title case the sentence
+                                message: 'Saying that article ' +
+                                    article.title.getOrCrash() +
+                                    ' is about ' +
+                                    articleTermCount.termId +
+                                    ' would be ' +
+                                    (articleTermCount.termImportance * 100)
+                                        .toInt()
+                                        .toString() +
+                                    '% accurate',
+                              ).show(context);
+                            },
+                          );
+                        },
+                      ),
+                    );
+                  },
+                  loadFailure: (failureState) => Text(
+                    'Failed to load topics. Reason: ' +
+                        failureState.articleTermCountFailure.toString(),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+        trailing: IconButton(
+          iconSize: 30,
+          onPressed: () {
+            final userArticleEngagement =
+                context.read<UserArticleEngagementWatcherBloc>().state.maybeMap(
+                      loadSuccess: (uaeSuccessState) => uaeSuccessState
+                          .userArticleEngagements[article.id.getOrCrash()],
+                      orElse: () => null,
+                    );
+            if (userArticleEngagement != null) {
+              context.read<UserArticleEngagementActorBloc>().add(
+                    UserArticleEngagementActorEvent.dismissPressed(
+                        right(userArticleEngagement)),
+                  );
+            }
+          },
+          icon: const Icon(
+            Icons.delete_forever_outlined,
+          ),
+        ),
+        onTap: () {
+          final userArticleEngagementActorBloc =
+              context.read<UserArticleEngagementActorBloc>();
+          final userArticleEngagementWatcherBloc =
+              context.read<UserArticleEngagementWatcherBloc>();
+
+          userArticleEngagementWatcherBloc.state.maybeMap(
+            loadSuccess: (loadSuccessStateUserArticleEngagementActor) {
+              userArticleEngagementActorBloc.add(
+                UserArticleEngagementActorEvent.openPressed(
+                  right(loadSuccessStateUserArticleEngagementActor
+                      .userArticleEngagements[article.id.getOrCrash()]!),
+                ),
+              );
+            },
+            orElse: () {},
+          );
+          AutoRouter.of(context).push(
+            ArticleDetailRoute(
+              article: article,
+            ),
+          );
+        },
+        onLongPress: () {
+          final userArticleEngagementActorBloc =
+              context.read<UserArticleEngagementActorBloc>();
+          final userArticleEngagementWatcherBloc =
+              context.read<UserArticleEngagementWatcherBloc>();
+
+          userArticleEngagementWatcherBloc.state.maybeMap(
+            loadSuccess: (loadSuccessStateUserArticleEngagementActor) {
+              userArticleEngagementActorBloc.add(
+                UserArticleEngagementActorEvent.sharePressed(
+                  right(loadSuccessStateUserArticleEngagementActor
+                      .userArticleEngagements[article.id.getOrCrash()]!),
+                ),
+              );
+            },
+            orElse: () {},
+          );
+
+          Share.share(
+            "Check out this article I found on The Last Quote: " +
+                article.url.getOrCrash(),
+            subject: article.title.getOrCrash(),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class ArticleListItemLeadingWidget extends StatelessWidget {
+  const ArticleListItemLeadingWidget({
+    Key? key,
+    required this.articles,
+    required this.article,
+  }) : super(key: key);
+
+  final KtList<Article> articles;
+  final Article article;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<UserArticleEngagementActorBloc,
+        UserArticleEngagementActorState>(
+      listener: (context, actorState) {
+        actorState.maybeWhen(
+          likeSuccess: (_) =>
+              context.read<UserArticleEngagementWatcherBloc>().add(
+                    UserArticleEngagementWatcherEvent
+                        .watchForCurrentUserAndArticlesStarted(
+                      articles,
+                    ),
+                  ),
+          orElse: () {},
+        );
+      },
+      child: BlocBuilder<UserArticleEngagementWatcherBloc,
+          UserArticleEngagementWatcherState>(
+        builder: (context, engagementWatcherState) {
+          return engagementWatcherState.map(
+            initial: (_) => IconButton(
+              icon: const Icon(
+                Icons.thumb_up_alt_outlined,
+              ),
+              onPressed: () {},
+            ),
+            loadInProgress: (_) => IconButton(
+              icon: const Icon(
+                Icons.thumb_up_alt_outlined,
+              ),
+              onPressed: () {},
+            ),
+            loadSuccess: (engagementLoadSuccessState) {
+              return LikeButton(
+                userArticleEngagement: engagementLoadSuccessState
+                    .userArticleEngagements[article.id.getOrCrash()]!,
+              );
+            },
+            loadFailure: (_) => IconButton(
+              icon: const Icon(
+                Icons.thumb_up_alt_outlined,
+              ),
+              onPressed: () {},
+            ),
+          );
+        },
+      ),
     );
   }
 }
