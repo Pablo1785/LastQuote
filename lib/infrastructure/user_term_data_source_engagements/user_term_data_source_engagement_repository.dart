@@ -205,11 +205,42 @@ class UserTermDataSourceEngagementRepository
   @override
   Future<
       Either<UserTermDataSourceEngagementFailure,
-          UserTermDataSourceEngagement>> getForCurrentUserAndTerm(
+          KtList<UserTermDataSourceEngagement>>> getForCurrentUserAndTerm(
     String termId,
-  ) {
-    // TODO: implement getForCurrentUserAndTerm
-    throw UnimplementedError();
+  ) async {
+    try {
+      final userDoc = await getIt<FirestoreHelper>().userDocument();
+      final userTermDataSourceEngagementDocs = await _firestore
+          .collection('user_term_data_source_engagement')
+          .where(
+            'user_id',
+            isEqualTo: userDoc.id,
+          )
+          .where(
+            'term_id',
+            isEqualTo: termId,
+          )
+          .get();
+      final userTermDataSourceEngagements =
+          userTermDataSourceEngagementDocs.docs
+              .where(
+                (doc) => doc.exists,
+              )
+              .map(
+                (doc) => UserTermDataSourceEngagementDto.fromFirestore(
+                  doc,
+                ).toDomain(),
+              )
+              .toImmutableList();
+      if (userTermDataSourceEngagements.size > 0) {
+        return right(
+          userTermDataSourceEngagements,
+        );
+      }
+      return left(const UserTermDataSourceEngagementFailure.noEngagement());
+    } on PlatformException catch (e, stacktrace) {
+      return _handleException(e, stacktrace);
+    }
   }
 
   @override
