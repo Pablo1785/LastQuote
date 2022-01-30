@@ -16,7 +16,7 @@ abstract class IUserTermDataSourceEngagementRepository {
   // get articles
   Future<
       Either<UserTermDataSourceEngagementFailure,
-          UserTermDataSourceEngagement>> getForCurrentUserAndTerm(
+          KtList<UserTermDataSourceEngagement>>> getForCurrentUserAndTerm(
     String termId,
   );
 
