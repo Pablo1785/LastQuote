@@ -9,27 +9,51 @@ import 'package:shimmer/shimmer.dart';
 import '../../injection.dart';
 
 class TopicDetailsPage extends StatelessWidget {
-  const TopicDetailsPage({Key? key}) : super(key: key);
+  const TopicDetailsPage({
+    Key? key,
+    required this.termId,
+  }) : super(key: key);
+
+  final String termId;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<UserTermDataSourceEngagementWatcherBloc>(
-        create: (BuildContext context) =>
-            getIt<UserTermDataSourceEngagementWatcherBloc>()
-              ..add(
-                const UserTermDataSourceEngagementWatcherEvent
-                    .watchMostPopularTermsForCurrentUserStarted(limit: 20),
+      create: (BuildContext context) =>
+          getIt<UserTermDataSourceEngagementWatcherBloc>()
+            ..add(
+              UserTermDataSourceEngagementWatcherEvent
+                  .getForCurrentUserAndTermStarted(
+                termId,
               ),
-        child: BlocBuilder<UserTermDataSourceEngagementWatcherBloc,
-            UserTermDataSourceEngagementWatcherState>(
-          builder: (context, state) {
-            return Scaffold(
-              floatingActionButton: FloatingActionButton.extended(
-                icon: const Icon(Icons.add),
-                label: Text('Pick your own'),
-                enableFeedback: true,
-                onPressed: () => AutoRouter.of(context)
-                    .replaceNamed('/initial-interests-page'),
+            ),
+      child: BlocBuilder<UserTermDataSourceEngagementWatcherBloc,
+          UserTermDataSourceEngagementWatcherState>(
+        builder: (context, state) {
+          return Scaffold(
+            appBar: AppBar(),
+            body: Scaffold(
+              appBar: AppBar(
+                leading: Container(),
+                backgroundColor: Theme.of(context).primaryColor.withAlpha(0x00),
+                foregroundColor: Colors.grey[700],
+                elevation: 0.0,
+                title: Text(termId),
+                bottom: PreferredSize(
+                  child: Container(
+                    alignment: Alignment.topCenter,
+                    child: Text(
+                      'Your interactions with this topic in different sources',
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                    color: Theme.of(context)
+                        .scaffoldBackgroundColor
+                        .withAlpha(0x55),
+                  ),
+                  preferredSize: const Size.fromHeight(
+                    10.0,
+                  ),
+                ),
               ),
               body: state.map(
                 initial: (_) => Container(),
@@ -46,7 +70,7 @@ class TopicDetailsPage extends StatelessWidget {
                       userTermDataSourceEngagementsSuccessState
                           .userTermDataSourceEngagements;
                   if (userTermDataSourceEngagements.size == 0) {
-                    return const NoEngagementsWidget();
+                    return const TopicDetailsNoEngagementsWidget();
                   }
                   return ListView.builder(
                     shrinkWrap: true,
@@ -54,35 +78,47 @@ class TopicDetailsPage extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final currUserTermDatasourceEngagement =
                           userTermDataSourceEngagements[index];
-                      return UserTermDataSourceEngagementListItemWidget(
+                      return TopicDetailsUserTermDataSourceEngagementListItemWidget(
                         currUserTermDatasourceEngagement:
                             currUserTermDatasourceEngagement,
                       );
                     },
                   );
                 },
-                loadFailure: (userTermDataSourceEngagementFailureState) =>
-                    Center(
-                  child: Column(
-                    children: const [
-                      Icon(
-                        Icons.error,
-                        size: 60,
-                      ),
-                      Text(
-                          'Error loading your activity. Restart the app and try again.'),
-                    ],
-                  ),
-                ),
+                loadFailure: (userTermDataSourceEngagementFailureState) {
+                  return userTermDataSourceEngagementFailureState
+                      .userTermDataSourceEngagementFailure
+                      .maybeMap(
+                    noEngagement: (noEngagementState) =>
+                        const TopicDetailsNoEngagementsWidget(),
+                    orElse: () {
+                      return Center(
+                        child: Column(
+                          children: const [
+                            Icon(
+                              Icons.error,
+                              size: 60,
+                            ),
+                            Text(
+                                'Error loading your activity. Restart the app and try again.'),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
-            );
-          },
-        ));
+            ),
+          );
+        },
+      ),
+    );
   }
 }
 
-class UserTermDataSourceEngagementListItemWidget extends StatelessWidget {
-  const UserTermDataSourceEngagementListItemWidget({
+class TopicDetailsUserTermDataSourceEngagementListItemWidget
+    extends StatelessWidget {
+  const TopicDetailsUserTermDataSourceEngagementListItemWidget({
     Key? key,
     required this.currUserTermDatasourceEngagement,
   }) : super(key: key);
@@ -91,6 +127,11 @@ class UserTermDataSourceEngagementListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dataSourceName =
+        currUserTermDatasourceEngagement.dataSourceId.getOrCrash() ==
+                'CLIENT_APP'
+            ? 'Last Quote'
+            : currUserTermDatasourceEngagement.dataSourceId.getOrCrash();
     return Card(
       child: ListTile(
         leading: IconButton(
@@ -99,7 +140,9 @@ class UserTermDataSourceEngagementListItemWidget extends StatelessWidget {
               ? Icons.star
               : Icons.star_border),
         ),
-        title: Text(currUserTermDatasourceEngagement.termId),
+        title: Text(
+          'Interactions in ' + dataSourceName,
+        ),
         subtitle: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -135,8 +178,8 @@ class UserTermDataSourceEngagementListItemWidget extends StatelessWidget {
   }
 }
 
-class NoEngagementsWidget extends StatelessWidget {
-  const NoEngagementsWidget({
+class TopicDetailsNoEngagementsWidget extends StatelessWidget {
+  const TopicDetailsNoEngagementsWidget({
     Key? key,
   }) : super(key: key);
 
@@ -153,7 +196,7 @@ class NoEngagementsWidget extends StatelessWidget {
             ),
           ),
           Text(
-            'No previous activity detected.\n\nTry reading, liking or sharing some of your recommendations and come back.',
+            'No previous interactions with this topic detected.\n\nThey will appear here after you like, read or share recommendations containing this topic.',
             textAlign: TextAlign.center,
           ),
         ],

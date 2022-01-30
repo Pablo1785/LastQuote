@@ -33,6 +33,24 @@ class UserTermDataSourceEngagementWatcherBloc extends Bloc<
     on<UserTermDataSourceEngagementWatcherEvent>(
       (event, emit) async {
         await event.map(
+          getForCurrentUserAndTermStarted: (e) async {
+            emit(
+              const UserTermDataSourceEngagementWatcherState.loadInProgress(),
+            );
+
+            await _userTermDataSourceEngagementStreamSubscription?.cancel();
+            final failureOrUserTermDataSourceEngagements =
+                await _iUserTermDataSourceEngagementRepository
+                    .getForCurrentUserAndTerm(
+              e.termId,
+            );
+            add(
+              UserTermDataSourceEngagementWatcherEvent
+                  .userTermDataSourceEngagementsReceived(
+                failureOrUserTermDataSourceEngagements,
+              ),
+            );
+          },
           watchMostPopularTermsForCurrentUserStarted: (e) async {
             emit(
               const UserTermDataSourceEngagementWatcherState.loadInProgress(),

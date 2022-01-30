@@ -351,6 +351,11 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
                                               .toString() +
                                           '% accurate',
                                     ).show(context);
+                                    AutoRouter.of(context).push(
+                                      TopicDetailsRoute(
+                                        termId: articleTermCount.termId,
+                                      ),
+                                    );
                                   },
                                 );
                               },
@@ -433,102 +438,6 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
         }
       },
       itemCount: articles.size,
-    );
-  }
-}
-
-class UserArticleEngagementBasedBodyWidget extends StatelessWidget {
-  const UserArticleEngagementBasedBodyWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ArticleWatcherBloc, ArticleWatcherState>(
-      builder: (context, state) {
-        return RefreshIndicator(
-          onRefresh: () async {
-            context.read<RecommendationWatcherBloc>().add(
-                  const RecommendationWatcherEvent
-                      .watchAllForCurrentUserStarted(),
-                );
-            context.read<ArticleWatcherBloc>().add(
-                  const ArticleWatcherEvent.watchAllStarted(),
-                );
-            context.read<ArticleSourcePickerBloc>().add(
-                  const ArticleSourcePickerEvent.initialLoadStarted(),
-                );
-          },
-          child: state.map(
-            initial: (_) => Container(),
-            loadInProgress: (_) => const Center(
-              child: CircularProgressIndicator(),
-            ),
-            loadSuccess: (articlesLoadSuccessState) {
-              context.read<UserArticleEngagementWatcherBloc>().add(
-                    UserArticleEngagementWatcherEvent
-                        .watchForCurrentUserAndArticlesStarted(
-                      articlesLoadSuccessState.articles,
-                    ),
-                  );
-              return BlocBuilder<UserArticleEngagementWatcherBloc,
-                  UserArticleEngagementWatcherState>(
-                builder: (context, userArticleEngagementState) {
-                  return userArticleEngagementState.map(
-                    initial: (_) => Container(),
-                    loadInProgress: (_) => const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                    loadSuccess: (userArticleEngagementLoadSuccessState) {
-                      context.read<ArticleTermCountWatcherBloc>().add(
-                            ArticleTermCountWatcherEvent
-                                .getForEachArticleStarted(
-                              articlesLoadSuccessState.articles,
-                              true,
-                              3,
-                            ),
-                          );
-                      return BlocListener<UserArticleEngagementActorBloc,
-                          UserArticleEngagementActorState>(
-                        listener: (context, state) {
-                          state.maybeMap(
-                            likeSuccess: (successState) {
-                              context
-                                  .read<UserArticleEngagementWatcherBloc>()
-                                  .add(
-                                    UserArticleEngagementWatcherEvent
-                                        .watchForCurrentUserAndArticlesStarted(
-                                      articlesLoadSuccessState.articles,
-                                    ),
-                                  );
-                            },
-                            orElse: () {},
-                          );
-                        },
-                        child: ArticleLoadSuccessWidget(
-                          articles: articlesLoadSuccessState.articles,
-                        ),
-                      );
-                    },
-                    loadFailure: (userArticleEngagementLoadFailureState) {
-                      return UserArticleEngagementLoadFailureWidget(
-                        userArticleEngagementFailure:
-                            userArticleEngagementLoadFailureState
-                                .userArticleEngagementFailure,
-                      );
-                    },
-                  );
-                },
-              );
-            },
-            loadFailure: (loadFailureState) {
-              return ArticleLoadFailureWidget(
-                articleFailure: loadFailureState.articleFailure,
-              );
-            },
-          ),
-        );
-      },
     );
   }
 }

@@ -5,7 +5,9 @@ class UserTermDataSourceEngagementWatcherEvent
     with _$UserTermDataSourceEngagementWatcherEvent {
   const factory UserTermDataSourceEngagementWatcherEvent.watchingCancelled() =
       _WatchingCancelled;
-
+  const factory UserTermDataSourceEngagementWatcherEvent.getForCurrentUserAndTermStarted(
+    String termId,
+  ) = _GetForCurrentUserAndTermStarted;
   const factory UserTermDataSourceEngagementWatcherEvent.watchMostPopularTermsForCurrentUserStarted({
     @Default(10) int limit,
   }) = _WatchMostPopularTermsforCurrentUserStarted;
