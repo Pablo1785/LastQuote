@@ -17,6 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$ArticleWatcherEventTearOff {
   const _$ArticleWatcherEventTearOff();
 
+  _WatchingCancelled watchingCancelled() {
+    return const _WatchingCancelled();
+  }
+
   _WatchAllStarted watchAllStarted() {
     return const _WatchAllStarted();
   }
@@ -48,6 +52,7 @@ const $ArticleWatcherEvent = _$ArticleWatcherEventTearOff();
 mixin _$ArticleWatcherEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() watchingCancelled,
     required TResult Function() watchAllStarted,
     required TResult Function(ArticleSource articleSource)
         watchFromSourceStarted,
@@ -59,6 +64,7 @@ mixin _$ArticleWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function()? watchAllStarted,
     TResult Function(ArticleSource articleSource)? watchFromSourceStarted,
     TResult Function(KtList<String> articleIds)? watchByIdStarted,
@@ -68,6 +74,7 @@ mixin _$ArticleWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function()? watchAllStarted,
     TResult Function(ArticleSource articleSource)? watchFromSourceStarted,
     TResult Function(KtList<String> articleIds)? watchByIdStarted,
@@ -78,6 +85,7 @@ mixin _$ArticleWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_WatchingCancelled value) watchingCancelled,
     required TResult Function(_WatchAllStarted value) watchAllStarted,
     required TResult Function(_WatchFromSourceStarted value)
         watchFromSourceStarted,
@@ -87,6 +95,7 @@ mixin _$ArticleWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchAllStarted value)? watchAllStarted,
     TResult Function(_WatchFromSourceStarted value)? watchFromSourceStarted,
     TResult Function(_WatchByIdStarted value)? watchByIdStarted,
@@ -95,6 +104,7 @@ mixin _$ArticleWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchAllStarted value)? watchAllStarted,
     TResult Function(_WatchFromSourceStarted value)? watchFromSourceStarted,
     TResult Function(_WatchByIdStarted value)? watchByIdStarted,
@@ -119,6 +129,135 @@ class _$ArticleWatcherEventCopyWithImpl<$Res>
   final ArticleWatcherEvent _value;
   // ignore: unused_field
   final $Res Function(ArticleWatcherEvent) _then;
+}
+
+/// @nodoc
+abstract class _$WatchingCancelledCopyWith<$Res> {
+  factory _$WatchingCancelledCopyWith(
+          _WatchingCancelled value, $Res Function(_WatchingCancelled) then) =
+      __$WatchingCancelledCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$WatchingCancelledCopyWithImpl<$Res>
+    extends _$ArticleWatcherEventCopyWithImpl<$Res>
+    implements _$WatchingCancelledCopyWith<$Res> {
+  __$WatchingCancelledCopyWithImpl(
+      _WatchingCancelled _value, $Res Function(_WatchingCancelled) _then)
+      : super(_value, (v) => _then(v as _WatchingCancelled));
+
+  @override
+  _WatchingCancelled get _value => super._value as _WatchingCancelled;
+}
+
+/// @nodoc
+
+class _$_WatchingCancelled implements _WatchingCancelled {
+  const _$_WatchingCancelled();
+
+  @override
+  String toString() {
+    return 'ArticleWatcherEvent.watchingCancelled()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _WatchingCancelled);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() watchingCancelled,
+    required TResult Function() watchAllStarted,
+    required TResult Function(ArticleSource articleSource)
+        watchFromSourceStarted,
+    required TResult Function(KtList<String> articleIds) watchByIdStarted,
+    required TResult Function(
+            Either<ArticleFailure, KtList<Article>> failureOrArticles)
+        articlesReceived,
+  }) {
+    return watchingCancelled();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
+    TResult Function()? watchAllStarted,
+    TResult Function(ArticleSource articleSource)? watchFromSourceStarted,
+    TResult Function(KtList<String> articleIds)? watchByIdStarted,
+    TResult Function(Either<ArticleFailure, KtList<Article>> failureOrArticles)?
+        articlesReceived,
+  }) {
+    return watchingCancelled?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
+    TResult Function()? watchAllStarted,
+    TResult Function(ArticleSource articleSource)? watchFromSourceStarted,
+    TResult Function(KtList<String> articleIds)? watchByIdStarted,
+    TResult Function(Either<ArticleFailure, KtList<Article>> failureOrArticles)?
+        articlesReceived,
+    required TResult orElse(),
+  }) {
+    if (watchingCancelled != null) {
+      return watchingCancelled();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_WatchingCancelled value) watchingCancelled,
+    required TResult Function(_WatchAllStarted value) watchAllStarted,
+    required TResult Function(_WatchFromSourceStarted value)
+        watchFromSourceStarted,
+    required TResult Function(_WatchByIdStarted value) watchByIdStarted,
+    required TResult Function(_ArticlesReceived value) articlesReceived,
+  }) {
+    return watchingCancelled(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
+    TResult Function(_WatchAllStarted value)? watchAllStarted,
+    TResult Function(_WatchFromSourceStarted value)? watchFromSourceStarted,
+    TResult Function(_WatchByIdStarted value)? watchByIdStarted,
+    TResult Function(_ArticlesReceived value)? articlesReceived,
+  }) {
+    return watchingCancelled?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
+    TResult Function(_WatchAllStarted value)? watchAllStarted,
+    TResult Function(_WatchFromSourceStarted value)? watchFromSourceStarted,
+    TResult Function(_WatchByIdStarted value)? watchByIdStarted,
+    TResult Function(_ArticlesReceived value)? articlesReceived,
+    required TResult orElse(),
+  }) {
+    if (watchingCancelled != null) {
+      return watchingCancelled(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _WatchingCancelled implements ArticleWatcherEvent {
+  const factory _WatchingCancelled() = _$_WatchingCancelled;
 }
 
 /// @nodoc
@@ -162,6 +301,7 @@ class _$_WatchAllStarted implements _WatchAllStarted {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() watchingCancelled,
     required TResult Function() watchAllStarted,
     required TResult Function(ArticleSource articleSource)
         watchFromSourceStarted,
@@ -176,6 +316,7 @@ class _$_WatchAllStarted implements _WatchAllStarted {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function()? watchAllStarted,
     TResult Function(ArticleSource articleSource)? watchFromSourceStarted,
     TResult Function(KtList<String> articleIds)? watchByIdStarted,
@@ -188,6 +329,7 @@ class _$_WatchAllStarted implements _WatchAllStarted {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function()? watchAllStarted,
     TResult Function(ArticleSource articleSource)? watchFromSourceStarted,
     TResult Function(KtList<String> articleIds)? watchByIdStarted,
@@ -204,6 +346,7 @@ class _$_WatchAllStarted implements _WatchAllStarted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_WatchingCancelled value) watchingCancelled,
     required TResult Function(_WatchAllStarted value) watchAllStarted,
     required TResult Function(_WatchFromSourceStarted value)
         watchFromSourceStarted,
@@ -216,6 +359,7 @@ class _$_WatchAllStarted implements _WatchAllStarted {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchAllStarted value)? watchAllStarted,
     TResult Function(_WatchFromSourceStarted value)? watchFromSourceStarted,
     TResult Function(_WatchByIdStarted value)? watchByIdStarted,
@@ -227,6 +371,7 @@ class _$_WatchAllStarted implements _WatchAllStarted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchAllStarted value)? watchAllStarted,
     TResult Function(_WatchFromSourceStarted value)? watchFromSourceStarted,
     TResult Function(_WatchByIdStarted value)? watchByIdStarted,
@@ -319,6 +464,7 @@ class _$_WatchFromSourceStarted implements _WatchFromSourceStarted {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() watchingCancelled,
     required TResult Function() watchAllStarted,
     required TResult Function(ArticleSource articleSource)
         watchFromSourceStarted,
@@ -333,6 +479,7 @@ class _$_WatchFromSourceStarted implements _WatchFromSourceStarted {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function()? watchAllStarted,
     TResult Function(ArticleSource articleSource)? watchFromSourceStarted,
     TResult Function(KtList<String> articleIds)? watchByIdStarted,
@@ -345,6 +492,7 @@ class _$_WatchFromSourceStarted implements _WatchFromSourceStarted {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function()? watchAllStarted,
     TResult Function(ArticleSource articleSource)? watchFromSourceStarted,
     TResult Function(KtList<String> articleIds)? watchByIdStarted,
@@ -361,6 +509,7 @@ class _$_WatchFromSourceStarted implements _WatchFromSourceStarted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_WatchingCancelled value) watchingCancelled,
     required TResult Function(_WatchAllStarted value) watchAllStarted,
     required TResult Function(_WatchFromSourceStarted value)
         watchFromSourceStarted,
@@ -373,6 +522,7 @@ class _$_WatchFromSourceStarted implements _WatchFromSourceStarted {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchAllStarted value)? watchAllStarted,
     TResult Function(_WatchFromSourceStarted value)? watchFromSourceStarted,
     TResult Function(_WatchByIdStarted value)? watchByIdStarted,
@@ -384,6 +534,7 @@ class _$_WatchFromSourceStarted implements _WatchFromSourceStarted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchAllStarted value)? watchAllStarted,
     TResult Function(_WatchFromSourceStarted value)? watchFromSourceStarted,
     TResult Function(_WatchByIdStarted value)? watchByIdStarted,
@@ -472,6 +623,7 @@ class _$_WatchByIdStarted implements _WatchByIdStarted {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() watchingCancelled,
     required TResult Function() watchAllStarted,
     required TResult Function(ArticleSource articleSource)
         watchFromSourceStarted,
@@ -486,6 +638,7 @@ class _$_WatchByIdStarted implements _WatchByIdStarted {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function()? watchAllStarted,
     TResult Function(ArticleSource articleSource)? watchFromSourceStarted,
     TResult Function(KtList<String> articleIds)? watchByIdStarted,
@@ -498,6 +651,7 @@ class _$_WatchByIdStarted implements _WatchByIdStarted {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function()? watchAllStarted,
     TResult Function(ArticleSource articleSource)? watchFromSourceStarted,
     TResult Function(KtList<String> articleIds)? watchByIdStarted,
@@ -514,6 +668,7 @@ class _$_WatchByIdStarted implements _WatchByIdStarted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_WatchingCancelled value) watchingCancelled,
     required TResult Function(_WatchAllStarted value) watchAllStarted,
     required TResult Function(_WatchFromSourceStarted value)
         watchFromSourceStarted,
@@ -526,6 +681,7 @@ class _$_WatchByIdStarted implements _WatchByIdStarted {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchAllStarted value)? watchAllStarted,
     TResult Function(_WatchFromSourceStarted value)? watchFromSourceStarted,
     TResult Function(_WatchByIdStarted value)? watchByIdStarted,
@@ -537,6 +693,7 @@ class _$_WatchByIdStarted implements _WatchByIdStarted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchAllStarted value)? watchAllStarted,
     TResult Function(_WatchFromSourceStarted value)? watchFromSourceStarted,
     TResult Function(_WatchByIdStarted value)? watchByIdStarted,
@@ -625,6 +782,7 @@ class _$_ArticlesReceived implements _ArticlesReceived {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() watchingCancelled,
     required TResult Function() watchAllStarted,
     required TResult Function(ArticleSource articleSource)
         watchFromSourceStarted,
@@ -639,6 +797,7 @@ class _$_ArticlesReceived implements _ArticlesReceived {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function()? watchAllStarted,
     TResult Function(ArticleSource articleSource)? watchFromSourceStarted,
     TResult Function(KtList<String> articleIds)? watchByIdStarted,
@@ -651,6 +810,7 @@ class _$_ArticlesReceived implements _ArticlesReceived {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function()? watchAllStarted,
     TResult Function(ArticleSource articleSource)? watchFromSourceStarted,
     TResult Function(KtList<String> articleIds)? watchByIdStarted,
@@ -667,6 +827,7 @@ class _$_ArticlesReceived implements _ArticlesReceived {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_WatchingCancelled value) watchingCancelled,
     required TResult Function(_WatchAllStarted value) watchAllStarted,
     required TResult Function(_WatchFromSourceStarted value)
         watchFromSourceStarted,
@@ -679,6 +840,7 @@ class _$_ArticlesReceived implements _ArticlesReceived {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchAllStarted value)? watchAllStarted,
     TResult Function(_WatchFromSourceStarted value)? watchFromSourceStarted,
     TResult Function(_WatchByIdStarted value)? watchByIdStarted,
@@ -690,6 +852,7 @@ class _$_ArticlesReceived implements _ArticlesReceived {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchAllStarted value)? watchAllStarted,
     TResult Function(_WatchFromSourceStarted value)? watchFromSourceStarted,
     TResult Function(_WatchByIdStarted value)? watchByIdStarted,

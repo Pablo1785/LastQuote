@@ -8,7 +8,9 @@ import 'package:ddd/application/user_article_engagement/user_article_engagement_
 import 'package:ddd/application/user_article_engagement/user_article_engagement_watcher/user_article_engagement_watcher_bloc.dart';
 import 'package:ddd/application/user_term_data_source_engagements/user_term_data_source_engagement_watcher/user_term_data_source_engagement_watcher_bloc.dart';
 import 'package:ddd/presentation/articles/articles_overview/articles_overview_page.dart';
+import 'package:ddd/presentation/core/quotes_logo.dart';
 import 'package:ddd/presentation/routes/app_router.gr.dart';
+import 'package:ddd/presentation/settings/settings_page.dart';
 import 'package:ddd/presentation/topics/topics_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -64,11 +66,25 @@ class TabViewPage extends HookWidget {
         },
         child: DefaultTabController(
           initialIndex: 1,
-          length: 2,
+          length: 3,
           child: Scaffold(
             appBar: AppBar(
+              leadingWidth: 42,
+              leading: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: ColorFiltered(
+                  colorFilter: ColorFilter.mode(
+                    Colors.white,
+                    BlendMode.srcATop,
+                  ),
+                  child: QuotesLogo(
+                    size: 25,
+                  ),
+                ),
+              ),
               title: const Text("The Last Quote"),
               bottom: const TabBar(
+                labelPadding: EdgeInsets.all(8.0),
                 tabs: [
                   Tab(
                     icon: Icon(Icons.trending_up_outlined),
@@ -77,6 +93,10 @@ class TabViewPage extends HookWidget {
                   Tab(
                     icon: Icon(Icons.home_filled),
                     text: "Articles",
+                  ),
+                  Tab(
+                    icon: Icon(Icons.privacy_tip),
+                    text: "Data & Privacy",
                   ),
                 ],
               ),
@@ -93,6 +113,7 @@ class TabViewPage extends HookWidget {
               children: [
                 TopicsPage(),
                 ArticlesOverviewPage(),
+                SettingsPage(),
               ],
             ),
           ),

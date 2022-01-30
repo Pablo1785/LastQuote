@@ -17,6 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$RecommendationWatcherEventTearOff {
   const _$RecommendationWatcherEventTearOff();
 
+  _WatchingCancelled watchingCancelled() {
+    return const _WatchingCancelled();
+  }
+
   _WatchAllForCurrentUserStarted watchAllForCurrentUserStarted() {
     return const _WatchAllForCurrentUserStarted();
   }
@@ -52,6 +56,7 @@ const $RecommendationWatcherEvent = _$RecommendationWatcherEventTearOff();
 mixin _$RecommendationWatcherEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() watchingCancelled,
     required TResult Function() watchAllForCurrentUserStarted,
     required TResult Function(List<String> recommendationIds)
         watchSpecificRecommendationsForCurrentUserStarted,
@@ -65,6 +70,7 @@ mixin _$RecommendationWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
@@ -78,6 +84,7 @@ mixin _$RecommendationWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
@@ -92,6 +99,7 @@ mixin _$RecommendationWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_WatchingCancelled value) watchingCancelled,
     required TResult Function(_WatchAllForCurrentUserStarted value)
         watchAllForCurrentUserStarted,
     required TResult Function(
@@ -105,6 +113,7 @@ mixin _$RecommendationWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchAllForCurrentUserStarted value)?
         watchAllForCurrentUserStarted,
     TResult Function(_WatchSpecificRecommendationsForCurrentUserStarted value)?
@@ -116,6 +125,7 @@ mixin _$RecommendationWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchAllForCurrentUserStarted value)?
         watchAllForCurrentUserStarted,
     TResult Function(_WatchSpecificRecommendationsForCurrentUserStarted value)?
@@ -143,6 +153,155 @@ class _$RecommendationWatcherEventCopyWithImpl<$Res>
   final RecommendationWatcherEvent _value;
   // ignore: unused_field
   final $Res Function(RecommendationWatcherEvent) _then;
+}
+
+/// @nodoc
+abstract class _$WatchingCancelledCopyWith<$Res> {
+  factory _$WatchingCancelledCopyWith(
+          _WatchingCancelled value, $Res Function(_WatchingCancelled) then) =
+      __$WatchingCancelledCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$WatchingCancelledCopyWithImpl<$Res>
+    extends _$RecommendationWatcherEventCopyWithImpl<$Res>
+    implements _$WatchingCancelledCopyWith<$Res> {
+  __$WatchingCancelledCopyWithImpl(
+      _WatchingCancelled _value, $Res Function(_WatchingCancelled) _then)
+      : super(_value, (v) => _then(v as _WatchingCancelled));
+
+  @override
+  _WatchingCancelled get _value => super._value as _WatchingCancelled;
+}
+
+/// @nodoc
+
+class _$_WatchingCancelled implements _WatchingCancelled {
+  const _$_WatchingCancelled();
+
+  @override
+  String toString() {
+    return 'RecommendationWatcherEvent.watchingCancelled()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _WatchingCancelled);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() watchingCancelled,
+    required TResult Function() watchAllForCurrentUserStarted,
+    required TResult Function(List<String> recommendationIds)
+        watchSpecificRecommendationsForCurrentUserStarted,
+    required TResult Function(ArticleSource articleSource)
+        watchFromSourceForCurrentUserStarted,
+    required TResult Function(
+            Either<RecommendationFailure, KtList<Recommendation>>
+                failureOrRecommendations)
+        recommendationsReceived,
+  }) {
+    return watchingCancelled();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
+    TResult Function()? watchAllForCurrentUserStarted,
+    TResult Function(List<String> recommendationIds)?
+        watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(ArticleSource articleSource)?
+        watchFromSourceForCurrentUserStarted,
+    TResult Function(
+            Either<RecommendationFailure, KtList<Recommendation>>
+                failureOrRecommendations)?
+        recommendationsReceived,
+  }) {
+    return watchingCancelled?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
+    TResult Function()? watchAllForCurrentUserStarted,
+    TResult Function(List<String> recommendationIds)?
+        watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(ArticleSource articleSource)?
+        watchFromSourceForCurrentUserStarted,
+    TResult Function(
+            Either<RecommendationFailure, KtList<Recommendation>>
+                failureOrRecommendations)?
+        recommendationsReceived,
+    required TResult orElse(),
+  }) {
+    if (watchingCancelled != null) {
+      return watchingCancelled();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_WatchingCancelled value) watchingCancelled,
+    required TResult Function(_WatchAllForCurrentUserStarted value)
+        watchAllForCurrentUserStarted,
+    required TResult Function(
+            _WatchSpecificRecommendationsForCurrentUserStarted value)
+        watchSpecificRecommendationsForCurrentUserStarted,
+    required TResult Function(_WatchFromSourceForCurrentUserStarted value)
+        watchFromSourceForCurrentUserStarted,
+    required TResult Function(_RecommendationsReceived value)
+        recommendationsReceived,
+  }) {
+    return watchingCancelled(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
+    TResult Function(_WatchAllForCurrentUserStarted value)?
+        watchAllForCurrentUserStarted,
+    TResult Function(_WatchSpecificRecommendationsForCurrentUserStarted value)?
+        watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(_WatchFromSourceForCurrentUserStarted value)?
+        watchFromSourceForCurrentUserStarted,
+    TResult Function(_RecommendationsReceived value)? recommendationsReceived,
+  }) {
+    return watchingCancelled?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
+    TResult Function(_WatchAllForCurrentUserStarted value)?
+        watchAllForCurrentUserStarted,
+    TResult Function(_WatchSpecificRecommendationsForCurrentUserStarted value)?
+        watchSpecificRecommendationsForCurrentUserStarted,
+    TResult Function(_WatchFromSourceForCurrentUserStarted value)?
+        watchFromSourceForCurrentUserStarted,
+    TResult Function(_RecommendationsReceived value)? recommendationsReceived,
+    required TResult orElse(),
+  }) {
+    if (watchingCancelled != null) {
+      return watchingCancelled(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _WatchingCancelled implements RecommendationWatcherEvent {
+  const factory _WatchingCancelled() = _$_WatchingCancelled;
 }
 
 /// @nodoc
@@ -191,6 +350,7 @@ class _$_WatchAllForCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() watchingCancelled,
     required TResult Function() watchAllForCurrentUserStarted,
     required TResult Function(List<String> recommendationIds)
         watchSpecificRecommendationsForCurrentUserStarted,
@@ -207,6 +367,7 @@ class _$_WatchAllForCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
@@ -223,6 +384,7 @@ class _$_WatchAllForCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
@@ -243,6 +405,7 @@ class _$_WatchAllForCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_WatchingCancelled value) watchingCancelled,
     required TResult Function(_WatchAllForCurrentUserStarted value)
         watchAllForCurrentUserStarted,
     required TResult Function(
@@ -259,6 +422,7 @@ class _$_WatchAllForCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchAllForCurrentUserStarted value)?
         watchAllForCurrentUserStarted,
     TResult Function(_WatchSpecificRecommendationsForCurrentUserStarted value)?
@@ -273,6 +437,7 @@ class _$_WatchAllForCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchAllForCurrentUserStarted value)?
         watchAllForCurrentUserStarted,
     TResult Function(_WatchSpecificRecommendationsForCurrentUserStarted value)?
@@ -376,6 +541,7 @@ class _$_WatchSpecificRecommendationsForCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() watchingCancelled,
     required TResult Function() watchAllForCurrentUserStarted,
     required TResult Function(List<String> recommendationIds)
         watchSpecificRecommendationsForCurrentUserStarted,
@@ -392,6 +558,7 @@ class _$_WatchSpecificRecommendationsForCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
@@ -409,6 +576,7 @@ class _$_WatchSpecificRecommendationsForCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
@@ -430,6 +598,7 @@ class _$_WatchSpecificRecommendationsForCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_WatchingCancelled value) watchingCancelled,
     required TResult Function(_WatchAllForCurrentUserStarted value)
         watchAllForCurrentUserStarted,
     required TResult Function(
@@ -446,6 +615,7 @@ class _$_WatchSpecificRecommendationsForCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchAllForCurrentUserStarted value)?
         watchAllForCurrentUserStarted,
     TResult Function(_WatchSpecificRecommendationsForCurrentUserStarted value)?
@@ -460,6 +630,7 @@ class _$_WatchSpecificRecommendationsForCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchAllForCurrentUserStarted value)?
         watchAllForCurrentUserStarted,
     TResult Function(_WatchSpecificRecommendationsForCurrentUserStarted value)?
@@ -569,6 +740,7 @@ class _$_WatchFromSourceForCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() watchingCancelled,
     required TResult Function() watchAllForCurrentUserStarted,
     required TResult Function(List<String> recommendationIds)
         watchSpecificRecommendationsForCurrentUserStarted,
@@ -585,6 +757,7 @@ class _$_WatchFromSourceForCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
@@ -601,6 +774,7 @@ class _$_WatchFromSourceForCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
@@ -621,6 +795,7 @@ class _$_WatchFromSourceForCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_WatchingCancelled value) watchingCancelled,
     required TResult Function(_WatchAllForCurrentUserStarted value)
         watchAllForCurrentUserStarted,
     required TResult Function(
@@ -637,6 +812,7 @@ class _$_WatchFromSourceForCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchAllForCurrentUserStarted value)?
         watchAllForCurrentUserStarted,
     TResult Function(_WatchSpecificRecommendationsForCurrentUserStarted value)?
@@ -651,6 +827,7 @@ class _$_WatchFromSourceForCurrentUserStarted
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchAllForCurrentUserStarted value)?
         watchAllForCurrentUserStarted,
     TResult Function(_WatchSpecificRecommendationsForCurrentUserStarted value)?
@@ -750,6 +927,7 @@ class _$_RecommendationsReceived implements _RecommendationsReceived {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() watchingCancelled,
     required TResult Function() watchAllForCurrentUserStarted,
     required TResult Function(List<String> recommendationIds)
         watchSpecificRecommendationsForCurrentUserStarted,
@@ -766,6 +944,7 @@ class _$_RecommendationsReceived implements _RecommendationsReceived {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
@@ -782,6 +961,7 @@ class _$_RecommendationsReceived implements _RecommendationsReceived {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function()? watchAllForCurrentUserStarted,
     TResult Function(List<String> recommendationIds)?
         watchSpecificRecommendationsForCurrentUserStarted,
@@ -802,6 +982,7 @@ class _$_RecommendationsReceived implements _RecommendationsReceived {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_WatchingCancelled value) watchingCancelled,
     required TResult Function(_WatchAllForCurrentUserStarted value)
         watchAllForCurrentUserStarted,
     required TResult Function(
@@ -818,6 +999,7 @@ class _$_RecommendationsReceived implements _RecommendationsReceived {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchAllForCurrentUserStarted value)?
         watchAllForCurrentUserStarted,
     TResult Function(_WatchSpecificRecommendationsForCurrentUserStarted value)?
@@ -832,6 +1014,7 @@ class _$_RecommendationsReceived implements _RecommendationsReceived {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_WatchAllForCurrentUserStarted value)?
         watchAllForCurrentUserStarted,
     TResult Function(_WatchSpecificRecommendationsForCurrentUserStarted value)?

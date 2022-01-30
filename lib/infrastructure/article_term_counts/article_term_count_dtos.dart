@@ -14,7 +14,7 @@ abstract class ArticleTermCountDto implements _$ArticleTermCountDto {
     required String? id,
     @JsonKey(name: 'article_id') required String articleId,
     @JsonKey(name: 'term_id') required String termId,
-    required num count,
+    @JsonKey(name: 'term_importance') required num termImportance,
   }) = _ArticleTermCountDto;
 
   factory ArticleTermCountDto.fromDomain(ArticleTermCount articleTermCount) {
@@ -22,7 +22,7 @@ abstract class ArticleTermCountDto implements _$ArticleTermCountDto {
       id: articleTermCount.id.getOrCrash(),
       articleId: articleTermCount.articleId.getOrCrash(),
       termId: articleTermCount.termId,
-      count: articleTermCount.count,
+      termImportance: articleTermCount.termImportance,
     );
   }
 
@@ -31,7 +31,7 @@ abstract class ArticleTermCountDto implements _$ArticleTermCountDto {
       id: JunctionUniqueId.fromUniqueString(id!),
       articleId: UniqueId.fromUniqueString(articleId),
       termId: termId,
-      count: count.toInt(),
+      termImportance: termImportance.toDouble(),
     );
   }
 

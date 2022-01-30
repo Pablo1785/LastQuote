@@ -33,6 +33,24 @@ class UserTermDataSourceEngagementWatcherBloc extends Bloc<
     on<UserTermDataSourceEngagementWatcherEvent>(
       (event, emit) async {
         await event.map(
+          watchMostPopularTermsForCurrentUserStarted: (e) async {
+            emit(
+              const UserTermDataSourceEngagementWatcherState.loadInProgress(),
+            );
+
+            await _userTermDataSourceEngagementStreamSubscription?.cancel();
+            _userTermDataSourceEngagementStreamSubscription =
+                _iUserTermDataSourceEngagementRepository
+                    .watchMostPopularTermsForCurrentUser(limit: e.limit)
+                    .listen(
+                      (failureOrUserTermDataSourceEngagements) => add(
+                        UserTermDataSourceEngagementWatcherEvent
+                            .userTermDataSourceEngagementsReceived(
+                          failureOrUserTermDataSourceEngagements,
+                        ),
+                      ),
+                    );
+          },
           watchForCurrentUserTermsAndDataSourceStarted: (e) async {
             emit(
               const UserTermDataSourceEngagementWatcherState.loadInProgress(),
@@ -66,6 +84,12 @@ class UserTermDataSourceEngagementWatcherBloc extends Bloc<
                   userTermDataSourceEngagements,
                 ),
               ),
+            );
+          },
+          watchingCancelled: (e) async {
+            await _userTermDataSourceEngagementStreamSubscription?.cancel();
+            emit(
+              const UserTermDataSourceEngagementWatcherState.initial(),
             );
           },
         );

@@ -18,10 +18,10 @@ class _$TermTearOff {
   const _$TermTearOff();
 
   _Term call(
-      {required String idAndValue, required int containingDocumentsCount}) {
+      {required String idAndValue, required double globalTermImportance}) {
     return _Term(
       idAndValue: idAndValue,
-      containingDocumentsCount: containingDocumentsCount,
+      globalTermImportance: globalTermImportance,
     );
   }
 }
@@ -32,7 +32,7 @@ const $Term = _$TermTearOff();
 /// @nodoc
 mixin _$Term {
   String get idAndValue => throw _privateConstructorUsedError;
-  int get containingDocumentsCount => throw _privateConstructorUsedError;
+  double get globalTermImportance => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TermCopyWith<Term> get copyWith => throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ mixin _$Term {
 abstract class $TermCopyWith<$Res> {
   factory $TermCopyWith(Term value, $Res Function(Term) then) =
       _$TermCopyWithImpl<$Res>;
-  $Res call({String idAndValue, int containingDocumentsCount});
+  $Res call({String idAndValue, double globalTermImportance});
 }
 
 /// @nodoc
@@ -56,17 +56,17 @@ class _$TermCopyWithImpl<$Res> implements $TermCopyWith<$Res> {
   @override
   $Res call({
     Object? idAndValue = freezed,
-    Object? containingDocumentsCount = freezed,
+    Object? globalTermImportance = freezed,
   }) {
     return _then(_value.copyWith(
       idAndValue: idAndValue == freezed
           ? _value.idAndValue
           : idAndValue // ignore: cast_nullable_to_non_nullable
               as String,
-      containingDocumentsCount: containingDocumentsCount == freezed
-          ? _value.containingDocumentsCount
-          : containingDocumentsCount // ignore: cast_nullable_to_non_nullable
-              as int,
+      globalTermImportance: globalTermImportance == freezed
+          ? _value.globalTermImportance
+          : globalTermImportance // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -76,7 +76,7 @@ abstract class _$TermCopyWith<$Res> implements $TermCopyWith<$Res> {
   factory _$TermCopyWith(_Term value, $Res Function(_Term) then) =
       __$TermCopyWithImpl<$Res>;
   @override
-  $Res call({String idAndValue, int containingDocumentsCount});
+  $Res call({String idAndValue, double globalTermImportance});
 }
 
 /// @nodoc
@@ -91,17 +91,17 @@ class __$TermCopyWithImpl<$Res> extends _$TermCopyWithImpl<$Res>
   @override
   $Res call({
     Object? idAndValue = freezed,
-    Object? containingDocumentsCount = freezed,
+    Object? globalTermImportance = freezed,
   }) {
     return _then(_Term(
       idAndValue: idAndValue == freezed
           ? _value.idAndValue
           : idAndValue // ignore: cast_nullable_to_non_nullable
               as String,
-      containingDocumentsCount: containingDocumentsCount == freezed
-          ? _value.containingDocumentsCount
-          : containingDocumentsCount // ignore: cast_nullable_to_non_nullable
-              as int,
+      globalTermImportance: globalTermImportance == freezed
+          ? _value.globalTermImportance
+          : globalTermImportance // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -109,18 +109,17 @@ class __$TermCopyWithImpl<$Res> extends _$TermCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Term extends _Term {
-  const _$_Term(
-      {required this.idAndValue, required this.containingDocumentsCount})
+  const _$_Term({required this.idAndValue, required this.globalTermImportance})
       : super._();
 
   @override
   final String idAndValue;
   @override
-  final int containingDocumentsCount;
+  final double globalTermImportance;
 
   @override
   String toString() {
-    return 'Term(idAndValue: $idAndValue, containingDocumentsCount: $containingDocumentsCount)';
+    return 'Term(idAndValue: $idAndValue, globalTermImportance: $globalTermImportance)';
   }
 
   @override
@@ -130,14 +129,13 @@ class _$_Term extends _Term {
             other is _Term &&
             (identical(other.idAndValue, idAndValue) ||
                 other.idAndValue == idAndValue) &&
-            (identical(
-                    other.containingDocumentsCount, containingDocumentsCount) ||
-                other.containingDocumentsCount == containingDocumentsCount));
+            (identical(other.globalTermImportance, globalTermImportance) ||
+                other.globalTermImportance == globalTermImportance));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, idAndValue, containingDocumentsCount);
+      Object.hash(runtimeType, idAndValue, globalTermImportance);
 
   @JsonKey(ignore: true)
   @override
@@ -148,13 +146,13 @@ class _$_Term extends _Term {
 abstract class _Term extends Term {
   const factory _Term(
       {required String idAndValue,
-      required int containingDocumentsCount}) = _$_Term;
+      required double globalTermImportance}) = _$_Term;
   const _Term._() : super._();
 
   @override
   String get idAndValue;
   @override
-  int get containingDocumentsCount;
+  double get globalTermImportance;
   @override
   @JsonKey(ignore: true)
   _$TermCopyWith<_Term> get copyWith => throw _privateConstructorUsedError;

@@ -57,10 +57,19 @@ class _ArticlesOverviewPageState extends State<ArticlesOverviewPage> {
                   articleTermCountSuccessState.articleTermCounts.asList(),
                 );
                 articleTermCountsSorted.sort(
-                  (atc1, atc2) => atc2.count.compareTo(
-                    atc1.count,
+                  (atc1, atc2) => atc2.termImportance.compareTo(
+                    atc1.termImportance,
                   ),
                 );
+                // Get the highest rated term for each article
+                var articleIdsSet = <String>{};
+                articleTermCountsSorted = articleTermCountsSorted.where((atc) {
+                  if (articleIdsSet.contains(atc.articleId.getOrCrash())) {
+                    return false;
+                  }
+                  articleIdsSet.add(atc.articleId.getOrCrash());
+                  return true;
+                }).toList();
                 final termIds = articleTermCountsSorted
                     .map(
                       (atc) => atc.termId,
@@ -104,11 +113,6 @@ class _ArticlesOverviewPageState extends State<ArticlesOverviewPage> {
             IconButton(
               icon: const Icon(Icons.filter_alt_outlined),
               onPressed: () => _openEndDrawer(),
-            ),
-            IconButton(
-              icon: const Icon(Icons.settings),
-              onPressed: () =>
-                  AutoRouter.of(context).pushNamed('/settings-page'),
             ),
           ],
         ),

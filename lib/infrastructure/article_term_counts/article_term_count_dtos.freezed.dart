@@ -25,12 +25,12 @@ class _$ArticleTermCountDtoTearOff {
       {required String? id,
       @JsonKey(name: 'article_id') required String articleId,
       @JsonKey(name: 'term_id') required String termId,
-      required num count}) {
+      @JsonKey(name: 'term_importance') required num termImportance}) {
     return _ArticleTermCountDto(
       id: id,
       articleId: articleId,
       termId: termId,
-      count: count,
+      termImportance: termImportance,
     );
   }
 
@@ -49,7 +49,8 @@ mixin _$ArticleTermCountDto {
   String get articleId => throw _privateConstructorUsedError;
   @JsonKey(name: 'term_id')
   String get termId => throw _privateConstructorUsedError;
-  num get count => throw _privateConstructorUsedError;
+  @JsonKey(name: 'term_importance')
+  num get termImportance => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -66,7 +67,7 @@ abstract class $ArticleTermCountDtoCopyWith<$Res> {
       {String? id,
       @JsonKey(name: 'article_id') String articleId,
       @JsonKey(name: 'term_id') String termId,
-      num count});
+      @JsonKey(name: 'term_importance') num termImportance});
 }
 
 /// @nodoc
@@ -83,7 +84,7 @@ class _$ArticleTermCountDtoCopyWithImpl<$Res>
     Object? id = freezed,
     Object? articleId = freezed,
     Object? termId = freezed,
-    Object? count = freezed,
+    Object? termImportance = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -98,9 +99,9 @@ class _$ArticleTermCountDtoCopyWithImpl<$Res>
           ? _value.termId
           : termId // ignore: cast_nullable_to_non_nullable
               as String,
-      count: count == freezed
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
+      termImportance: termImportance == freezed
+          ? _value.termImportance
+          : termImportance // ignore: cast_nullable_to_non_nullable
               as num,
     ));
   }
@@ -117,7 +118,7 @@ abstract class _$ArticleTermCountDtoCopyWith<$Res>
       {String? id,
       @JsonKey(name: 'article_id') String articleId,
       @JsonKey(name: 'term_id') String termId,
-      num count});
+      @JsonKey(name: 'term_importance') num termImportance});
 }
 
 /// @nodoc
@@ -136,7 +137,7 @@ class __$ArticleTermCountDtoCopyWithImpl<$Res>
     Object? id = freezed,
     Object? articleId = freezed,
     Object? termId = freezed,
-    Object? count = freezed,
+    Object? termImportance = freezed,
   }) {
     return _then(_ArticleTermCountDto(
       id: id == freezed
@@ -151,9 +152,9 @@ class __$ArticleTermCountDtoCopyWithImpl<$Res>
           ? _value.termId
           : termId // ignore: cast_nullable_to_non_nullable
               as String,
-      count: count == freezed
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
+      termImportance: termImportance == freezed
+          ? _value.termImportance
+          : termImportance // ignore: cast_nullable_to_non_nullable
               as num,
     ));
   }
@@ -166,7 +167,7 @@ class _$_ArticleTermCountDto extends _ArticleTermCountDto {
       {required this.id,
       @JsonKey(name: 'article_id') required this.articleId,
       @JsonKey(name: 'term_id') required this.termId,
-      required this.count})
+      @JsonKey(name: 'term_importance') required this.termImportance})
       : super._();
 
   factory _$_ArticleTermCountDto.fromJson(Map<String, dynamic> json) =>
@@ -181,11 +182,12 @@ class _$_ArticleTermCountDto extends _ArticleTermCountDto {
   @JsonKey(name: 'term_id')
   final String termId;
   @override
-  final num count;
+  @JsonKey(name: 'term_importance')
+  final num termImportance;
 
   @override
   String toString() {
-    return 'ArticleTermCountDto(id: $id, articleId: $articleId, termId: $termId, count: $count)';
+    return 'ArticleTermCountDto(id: $id, articleId: $articleId, termId: $termId, termImportance: $termImportance)';
   }
 
   @override
@@ -197,11 +199,13 @@ class _$_ArticleTermCountDto extends _ArticleTermCountDto {
             (identical(other.articleId, articleId) ||
                 other.articleId == articleId) &&
             (identical(other.termId, termId) || other.termId == termId) &&
-            (identical(other.count, count) || other.count == count));
+            (identical(other.termImportance, termImportance) ||
+                other.termImportance == termImportance));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, articleId, termId, count);
+  int get hashCode =>
+      Object.hash(runtimeType, id, articleId, termId, termImportance);
 
   @JsonKey(ignore: true)
   @override
@@ -217,10 +221,11 @@ class _$_ArticleTermCountDto extends _ArticleTermCountDto {
 
 abstract class _ArticleTermCountDto extends ArticleTermCountDto {
   const factory _ArticleTermCountDto(
-      {required String? id,
-      @JsonKey(name: 'article_id') required String articleId,
-      @JsonKey(name: 'term_id') required String termId,
-      required num count}) = _$_ArticleTermCountDto;
+          {required String? id,
+          @JsonKey(name: 'article_id') required String articleId,
+          @JsonKey(name: 'term_id') required String termId,
+          @JsonKey(name: 'term_importance') required num termImportance}) =
+      _$_ArticleTermCountDto;
   const _ArticleTermCountDto._() : super._();
 
   factory _ArticleTermCountDto.fromJson(Map<String, dynamic> json) =
@@ -235,7 +240,8 @@ abstract class _ArticleTermCountDto extends ArticleTermCountDto {
   @JsonKey(name: 'term_id')
   String get termId;
   @override
-  num get count;
+  @JsonKey(name: 'term_importance')
+  num get termImportance;
   @override
   @JsonKey(ignore: true)
   _$ArticleTermCountDtoCopyWith<_ArticleTermCountDto> get copyWith =>

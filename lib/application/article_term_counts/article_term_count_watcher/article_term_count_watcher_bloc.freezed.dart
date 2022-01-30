@@ -17,6 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$ArticleTermCountWatcherEventTearOff {
   const _$ArticleTermCountWatcherEventTearOff();
 
+  _WatchingCancelled watchingCancelled() {
+    return const _WatchingCancelled();
+  }
+
   _GetForEachArticleStarted getForEachArticleStarted(
       KtList<Article> articles, bool descending, int limitPerArticle) {
     return _GetForEachArticleStarted(
@@ -48,6 +52,7 @@ const $ArticleTermCountWatcherEvent = _$ArticleTermCountWatcherEventTearOff();
 mixin _$ArticleTermCountWatcherEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() watchingCancelled,
     required TResult Function(
             KtList<Article> articles, bool descending, int limitPerArticle)
         getForEachArticleStarted,
@@ -60,6 +65,7 @@ mixin _$ArticleTermCountWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function(
             KtList<Article> articles, bool descending, int limitPerArticle)?
         getForEachArticleStarted,
@@ -72,6 +78,7 @@ mixin _$ArticleTermCountWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function(
             KtList<Article> articles, bool descending, int limitPerArticle)?
         getForEachArticleStarted,
@@ -85,6 +92,7 @@ mixin _$ArticleTermCountWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_WatchingCancelled value) watchingCancelled,
     required TResult Function(_GetForEachArticleStarted value)
         getForEachArticleStarted,
     required TResult Function(_WatchForArticlesStarted value)
@@ -95,6 +103,7 @@ mixin _$ArticleTermCountWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_GetForEachArticleStarted value)? getForEachArticleStarted,
     TResult Function(_WatchForArticlesStarted value)? watchForArticlesStarted,
     TResult Function(_ArticleTermCountsReceived value)?
@@ -103,6 +112,7 @@ mixin _$ArticleTermCountWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_GetForEachArticleStarted value)? getForEachArticleStarted,
     TResult Function(_WatchForArticlesStarted value)? watchForArticlesStarted,
     TResult Function(_ArticleTermCountsReceived value)?
@@ -128,6 +138,143 @@ class _$ArticleTermCountWatcherEventCopyWithImpl<$Res>
   final ArticleTermCountWatcherEvent _value;
   // ignore: unused_field
   final $Res Function(ArticleTermCountWatcherEvent) _then;
+}
+
+/// @nodoc
+abstract class _$WatchingCancelledCopyWith<$Res> {
+  factory _$WatchingCancelledCopyWith(
+          _WatchingCancelled value, $Res Function(_WatchingCancelled) then) =
+      __$WatchingCancelledCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$WatchingCancelledCopyWithImpl<$Res>
+    extends _$ArticleTermCountWatcherEventCopyWithImpl<$Res>
+    implements _$WatchingCancelledCopyWith<$Res> {
+  __$WatchingCancelledCopyWithImpl(
+      _WatchingCancelled _value, $Res Function(_WatchingCancelled) _then)
+      : super(_value, (v) => _then(v as _WatchingCancelled));
+
+  @override
+  _WatchingCancelled get _value => super._value as _WatchingCancelled;
+}
+
+/// @nodoc
+
+class _$_WatchingCancelled implements _WatchingCancelled {
+  const _$_WatchingCancelled();
+
+  @override
+  String toString() {
+    return 'ArticleTermCountWatcherEvent.watchingCancelled()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _WatchingCancelled);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() watchingCancelled,
+    required TResult Function(
+            KtList<Article> articles, bool descending, int limitPerArticle)
+        getForEachArticleStarted,
+    required TResult Function(KtList<Article> articles) watchForArticlesStarted,
+    required TResult Function(
+            Either<ArticleTermCountFailure, KtList<ArticleTermCount>>
+                failureOrArticleTermCounts)
+        articleTermCountsReceived,
+  }) {
+    return watchingCancelled();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
+    TResult Function(
+            KtList<Article> articles, bool descending, int limitPerArticle)?
+        getForEachArticleStarted,
+    TResult Function(KtList<Article> articles)? watchForArticlesStarted,
+    TResult Function(
+            Either<ArticleTermCountFailure, KtList<ArticleTermCount>>
+                failureOrArticleTermCounts)?
+        articleTermCountsReceived,
+  }) {
+    return watchingCancelled?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
+    TResult Function(
+            KtList<Article> articles, bool descending, int limitPerArticle)?
+        getForEachArticleStarted,
+    TResult Function(KtList<Article> articles)? watchForArticlesStarted,
+    TResult Function(
+            Either<ArticleTermCountFailure, KtList<ArticleTermCount>>
+                failureOrArticleTermCounts)?
+        articleTermCountsReceived,
+    required TResult orElse(),
+  }) {
+    if (watchingCancelled != null) {
+      return watchingCancelled();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_WatchingCancelled value) watchingCancelled,
+    required TResult Function(_GetForEachArticleStarted value)
+        getForEachArticleStarted,
+    required TResult Function(_WatchForArticlesStarted value)
+        watchForArticlesStarted,
+    required TResult Function(_ArticleTermCountsReceived value)
+        articleTermCountsReceived,
+  }) {
+    return watchingCancelled(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
+    TResult Function(_GetForEachArticleStarted value)? getForEachArticleStarted,
+    TResult Function(_WatchForArticlesStarted value)? watchForArticlesStarted,
+    TResult Function(_ArticleTermCountsReceived value)?
+        articleTermCountsReceived,
+  }) {
+    return watchingCancelled?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
+    TResult Function(_GetForEachArticleStarted value)? getForEachArticleStarted,
+    TResult Function(_WatchForArticlesStarted value)? watchForArticlesStarted,
+    TResult Function(_ArticleTermCountsReceived value)?
+        articleTermCountsReceived,
+    required TResult orElse(),
+  }) {
+    if (watchingCancelled != null) {
+      return watchingCancelled(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _WatchingCancelled implements ArticleTermCountWatcherEvent {
+  const factory _WatchingCancelled() = _$_WatchingCancelled;
 }
 
 /// @nodoc
@@ -217,6 +364,7 @@ class _$_GetForEachArticleStarted implements _GetForEachArticleStarted {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() watchingCancelled,
     required TResult Function(
             KtList<Article> articles, bool descending, int limitPerArticle)
         getForEachArticleStarted,
@@ -232,6 +380,7 @@ class _$_GetForEachArticleStarted implements _GetForEachArticleStarted {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function(
             KtList<Article> articles, bool descending, int limitPerArticle)?
         getForEachArticleStarted,
@@ -248,6 +397,7 @@ class _$_GetForEachArticleStarted implements _GetForEachArticleStarted {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function(
             KtList<Article> articles, bool descending, int limitPerArticle)?
         getForEachArticleStarted,
@@ -267,6 +417,7 @@ class _$_GetForEachArticleStarted implements _GetForEachArticleStarted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_WatchingCancelled value) watchingCancelled,
     required TResult Function(_GetForEachArticleStarted value)
         getForEachArticleStarted,
     required TResult Function(_WatchForArticlesStarted value)
@@ -280,6 +431,7 @@ class _$_GetForEachArticleStarted implements _GetForEachArticleStarted {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_GetForEachArticleStarted value)? getForEachArticleStarted,
     TResult Function(_WatchForArticlesStarted value)? watchForArticlesStarted,
     TResult Function(_ArticleTermCountsReceived value)?
@@ -291,6 +443,7 @@ class _$_GetForEachArticleStarted implements _GetForEachArticleStarted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_GetForEachArticleStarted value)? getForEachArticleStarted,
     TResult Function(_WatchForArticlesStarted value)? watchForArticlesStarted,
     TResult Function(_ArticleTermCountsReceived value)?
@@ -385,6 +538,7 @@ class _$_WatchForArticlesStarted implements _WatchForArticlesStarted {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() watchingCancelled,
     required TResult Function(
             KtList<Article> articles, bool descending, int limitPerArticle)
         getForEachArticleStarted,
@@ -400,6 +554,7 @@ class _$_WatchForArticlesStarted implements _WatchForArticlesStarted {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function(
             KtList<Article> articles, bool descending, int limitPerArticle)?
         getForEachArticleStarted,
@@ -415,6 +570,7 @@ class _$_WatchForArticlesStarted implements _WatchForArticlesStarted {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function(
             KtList<Article> articles, bool descending, int limitPerArticle)?
         getForEachArticleStarted,
@@ -434,6 +590,7 @@ class _$_WatchForArticlesStarted implements _WatchForArticlesStarted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_WatchingCancelled value) watchingCancelled,
     required TResult Function(_GetForEachArticleStarted value)
         getForEachArticleStarted,
     required TResult Function(_WatchForArticlesStarted value)
@@ -447,6 +604,7 @@ class _$_WatchForArticlesStarted implements _WatchForArticlesStarted {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_GetForEachArticleStarted value)? getForEachArticleStarted,
     TResult Function(_WatchForArticlesStarted value)? watchForArticlesStarted,
     TResult Function(_ArticleTermCountsReceived value)?
@@ -458,6 +616,7 @@ class _$_WatchForArticlesStarted implements _WatchForArticlesStarted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_GetForEachArticleStarted value)? getForEachArticleStarted,
     TResult Function(_WatchForArticlesStarted value)? watchForArticlesStarted,
     TResult Function(_ArticleTermCountsReceived value)?
@@ -555,6 +714,7 @@ class _$_ArticleTermCountsReceived implements _ArticleTermCountsReceived {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() watchingCancelled,
     required TResult Function(
             KtList<Article> articles, bool descending, int limitPerArticle)
         getForEachArticleStarted,
@@ -570,6 +730,7 @@ class _$_ArticleTermCountsReceived implements _ArticleTermCountsReceived {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function(
             KtList<Article> articles, bool descending, int limitPerArticle)?
         getForEachArticleStarted,
@@ -585,6 +746,7 @@ class _$_ArticleTermCountsReceived implements _ArticleTermCountsReceived {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchingCancelled,
     TResult Function(
             KtList<Article> articles, bool descending, int limitPerArticle)?
         getForEachArticleStarted,
@@ -604,6 +766,7 @@ class _$_ArticleTermCountsReceived implements _ArticleTermCountsReceived {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_WatchingCancelled value) watchingCancelled,
     required TResult Function(_GetForEachArticleStarted value)
         getForEachArticleStarted,
     required TResult Function(_WatchForArticlesStarted value)
@@ -617,6 +780,7 @@ class _$_ArticleTermCountsReceived implements _ArticleTermCountsReceived {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_GetForEachArticleStarted value)? getForEachArticleStarted,
     TResult Function(_WatchForArticlesStarted value)? watchForArticlesStarted,
     TResult Function(_ArticleTermCountsReceived value)?
@@ -628,6 +792,7 @@ class _$_ArticleTermCountsReceived implements _ArticleTermCountsReceived {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchingCancelled value)? watchingCancelled,
     TResult Function(_GetForEachArticleStarted value)? getForEachArticleStarted,
     TResult Function(_WatchForArticlesStarted value)? watchForArticlesStarted,
     TResult Function(_ArticleTermCountsReceived value)?

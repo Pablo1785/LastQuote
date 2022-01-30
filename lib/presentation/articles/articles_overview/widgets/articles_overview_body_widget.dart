@@ -302,7 +302,8 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
                                   article.id.getOrCrash())
                               .toList();
                           currArticleTermCounts.sort(
-                            (atc1, atc2) => atc2.count.compareTo(atc1.count),
+                            (atc1, atc2) => atc2.termImportance
+                                .compareTo(atc1.termImportance),
                           );
                           return Container(
                             alignment: Alignment.topLeft,
@@ -318,21 +319,37 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
                                 final articleTermCount =
                                     currArticleTermCounts[index];
                                 return ActionChip(
+                                  elevation: 4.0,
+                                  backgroundColor: Colors.indigo[400]!
+                                      .withOpacity(
+                                          articleTermCount.termImportance),
                                   label: Text(
                                     articleTermCount.termId +
                                         ': ' +
-                                        articleTermCount.count.toString(),
+                                        (articleTermCount.termImportance * 100)
+                                            .toInt()
+                                            .toString() +
+                                        "%",
+                                    style: TextStyle(
+                                      color:
+                                          articleTermCount.termImportance > 0.45
+                                              ? Colors.white
+                                              : Colors.black,
+                                    ),
                                   ),
                                   onPressed: () {
                                     FlushbarHelper.createInformation(
                                       // Title case the sentence
-                                      message: articleTermCount.termId[0]
-                                              .toUpperCase() +
-                                          articleTermCount.termId.substring(1) +
-                                          ' is mentioned ' +
-                                          articleTermCount.count.toString() +
-                                          ' times in the article ' +
-                                          article.title.getOrCrash(),
+                                      message: 'Saying that article ' +
+                                          article.title.getOrCrash() +
+                                          ' is about ' +
+                                          articleTermCount.termId +
+                                          ' would be ' +
+                                          (articleTermCount.termImportance *
+                                                  100)
+                                              .toInt()
+                                              .toString() +
+                                          '% accurate',
                                     ).show(context);
                                   },
                                 );

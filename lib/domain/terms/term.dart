@@ -8,11 +8,11 @@ abstract class Term with _$Term {
 
   const factory Term({
     required String idAndValue,
-    required int containingDocumentsCount,
+    required double globalTermImportance,
   }) = _Term;
 
   factory Term.empty() => Term(
         idAndValue: '',
-        containingDocumentsCount: 0,
+        globalTermImportance: 0.0,
       );
 }
