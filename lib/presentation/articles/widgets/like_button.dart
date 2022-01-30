@@ -20,6 +20,7 @@ class LikeButton extends StatelessWidget {
         userArticleEngagement.isLiked
             ? Icons.thumb_up_alt
             : Icons.thumb_up_alt_outlined,
+        color: userArticleEngagement.isLiked ? Colors.indigo[400]! : null,
       ),
       onPressed: () {
         return context.read<UserArticleEngagementActorBloc>().add(

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ddd/infrastructure/user_article_engagements/user_article_engagement_dtos.dart';
 import '../../domain/article_sources/article_source.dart';
 import '../../domain/articles/article_failure.dart';
 import '../../domain/articles/article.dart';
@@ -21,7 +22,9 @@ class ArticleRepository implements IArticleRepository {
   ArticleRepository(this._firestore);
 
   @override
-  Stream<Either<ArticleFailure, KtList<Article>>> watchAll() async* {
+  Stream<Either<ArticleFailure, KtList<Article>>> watchAll({
+    bool includeDismissed = false,
+  }) async* {
     // articles/{uass = getUserArticleSourceByIdAndUserId(article.source_id, currentUser.id) && uass.is_enabled == true}
     final userEnabledArticleSourceIds =
         (await getIt<FirestoreHelper>().userEnabledArticleSources())
@@ -61,7 +64,9 @@ class ArticleRepository implements IArticleRepository {
 
   @override
   Stream<Either<ArticleFailure, KtList<Article>>> watchFromSource(
-      ArticleSource articleSource) async* {
+    ArticleSource articleSource, {
+    bool includeDismissed = false,
+  }) async* {
     // articles/{uass = getUserArticleSourceByIdAndUserId(articleSource.id, currentUser.id) uass.is_enabled == true}
 
     // Make sure there are active sources
@@ -115,8 +120,9 @@ class ArticleRepository implements IArticleRepository {
 
   @override
   Stream<Either<ArticleFailure, KtList<Article>>> watchById(
-    KtList<String> articleIds,
-  ) async* {
+    KtList<String> articleIds, {
+    bool includeDismissed = false,
+  }) async* {
     // articles/{uass = getUserArticleSourceByIdAndUserId(article.source_id, currentUser.id) && uass.is_enabled == true}
     final userEnabledArticleSourceIds =
         (await getIt<FirestoreHelper>().userEnabledArticleSources())
@@ -127,33 +133,71 @@ class ArticleRepository implements IArticleRepository {
     } else if (articleIds.isEmpty()) {
       yield left(const ArticleFailure.noArticles());
     } else {
-      yield* _firestore
-          .collection('articles')
-          .where(FieldPath.documentId, whereIn: articleIds.asList())
-          .snapshots()
-          .map(
-            (snapshot) => right<ArticleFailure, KtList<Article>>(
-              snapshot.docs
-                  .map(
-                    (doc) => ArticleDto.fromFirestore(doc).toDomain(),
-                  )
-                  .where((article) => userEnabledArticleSourceIds
-                      .contains(article.sourceId.getOrCrash()))
-                  .toImmutableList(),
-            ),
-          )
-          .onErrorReturnWith(
-        (exception, stacktrace) {
-          if (exception is PlatformException &&
-              exception.message!.contains('permission')) {
-            return left(const ArticleFailure.insufficientPermissions());
-          } else {
-            print(exception.toString());
-            print(stacktrace.toString());
-            return left(const ArticleFailure.unexpected());
-          }
-        },
-      );
+      // Filter out dismissed articles
+      if (!includeDismissed) {
+        articleIds = await _filterOutDismissedArticles(articleIds);
+      }
+      if (articleIds.isEmpty()) {
+        yield left(const ArticleFailure.noArticles());
+      } else {
+        yield* _firestore
+            .collection('articles')
+            .where(FieldPath.documentId, whereIn: articleIds.asList())
+            .snapshots()
+            .map(
+              (snapshot) => right<ArticleFailure, KtList<Article>>(
+                snapshot.docs
+                    .map(
+                      (doc) => ArticleDto.fromFirestore(doc).toDomain(),
+                    )
+                    .where((article) => userEnabledArticleSourceIds
+                        .contains(article.sourceId.getOrCrash()))
+                    .toImmutableList(),
+              ),
+            )
+            .onErrorReturnWith(
+          (exception, stacktrace) {
+            if (exception is PlatformException &&
+                exception.message!.contains('permission')) {
+              return left(const ArticleFailure.insufficientPermissions());
+            } else {
+              print(exception.toString());
+              print(stacktrace.toString());
+              return left(const ArticleFailure.unexpected());
+            }
+          },
+        );
+      }
     }
+  }
+
+  Future<KtList<String>> _filterOutDismissedArticles(
+    KtList<String> articleIds,
+  ) async {
+    final dismissEngagements = await _firestore
+        .collection('user_article_engagement')
+        .where(
+          'article_id',
+          whereIn: articleIds.asList(),
+        )
+        .where(
+          'is_dismissed',
+          isEqualTo: true,
+        )
+        .get();
+    final dismissTheseArticleIds = dismissEngagements.docs
+        .map(
+          (doc) => UserArticleEngagementDto.fromFirestore(
+            doc,
+          ).toDomain().articleId.getOrCrash(),
+        )
+        .toImmutableList();
+
+    articleIds = articleIds.iter
+        .where(
+          (articleId) => !dismissTheseArticleIds.contains(articleId),
+        )
+        .toImmutableList();
+    return articleIds;
   }
 }
