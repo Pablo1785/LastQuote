@@ -12,30 +12,31 @@ import 'package:google_sign_in/google_sign_in.dart' as _i6;
 import 'package:injectable/injectable.dart' as _i2;
 
 import 'application/article_sources/article_source_picker/article_source_picker_bloc.dart'
-    as _i45;
+    as _i46;
 import 'application/article_term_counts/article_term_count_watcher/article_term_count_watcher_bloc.dart'
-    as _i37;
-import 'application/articles/article_watcher/article_watcher_bloc.dart' as _i38;
-import 'application/auth/auth_bloc.dart' as _i39;
+    as _i38;
+import 'application/articles/article_watcher/article_watcher_bloc.dart' as _i39;
+import 'application/auth/auth_bloc.dart' as _i40;
 import 'application/auth/sign_in_form/sign_in_form_bloc.dart' as _i32;
 import 'application/data_ownership/data_ownership/data_ownership_bloc.dart'
-    as _i40;
-import 'application/data_sources/data_source_status_picker/data_source_status_picker_bloc.dart'
     as _i41;
+import 'application/data_sources/data_source_status_picker/data_source_status_picker_bloc.dart'
+    as _i42;
 import 'application/initial_interests/initial_interests_bloc.dart' as _i29;
 import 'application/initial_interests/interests_picker/initial_interests_picker_bloc.dart'
     as _i30;
 import 'application/recommendations/recommendation_watcher/recommendation_watcher_bloc.dart'
     as _i31;
+import 'application/topic_details/topic_details_charts_bloc.dart' as _i33;
 import 'application/user_article_engagement/user_article_engagement_actor/user_article_engagement_actor_bloc.dart'
-    as _i33;
-import 'application/user_article_engagement/user_article_engagement_watcher/user_article_engagement_watcher_bloc.dart'
     as _i34;
-import 'application/user_term_data_source_engagements/user_term_data_source_engagement_actor/user_term_data_source_engagement_actor_bloc.dart'
+import 'application/user_article_engagement/user_article_engagement_watcher/user_article_engagement_watcher_bloc.dart'
     as _i35;
-import 'application/user_term_data_source_engagements/user_term_data_source_engagement_watcher/user_term_data_source_engagement_watcher_bloc.dart'
+import 'application/user_term_data_source_engagements/user_term_data_source_engagement_actor/user_term_data_source_engagement_actor_bloc.dart'
     as _i36;
-import 'domain/article_sources/i_article_source_repository.dart' as _i43;
+import 'application/user_term_data_source_engagements/user_term_data_source_engagement_watcher/user_term_data_source_engagement_watcher_bloc.dart'
+    as _i37;
+import 'domain/article_sources/i_article_source_repository.dart' as _i44;
 import 'domain/article_sources/i_article_source_status_repository.dart' as _i9;
 import 'domain/article_term_counts/i_article_term_count_repository.dart'
     as _i11;
@@ -50,15 +51,15 @@ import 'domain/user_article_engagements/i_user_article_engagement_repository.dar
     as _i25;
 import 'domain/user_term_data_source_engagement/i_user_term_data_source_engagement_repository.dart'
     as _i27;
-import 'infrastructure/article_sources/article_source_repository.dart' as _i44;
+import 'infrastructure/article_sources/article_source_repository.dart' as _i45;
 import 'infrastructure/article_sources/article_source_status_repository.dart'
     as _i10;
 import 'infrastructure/article_term_counts/article_term_count_repository.dart'
     as _i12;
 import 'infrastructure/articles/article_repository.dart' as _i8;
 import 'infrastructure/auth/firebase_auth_facade.dart' as _i14;
-import 'infrastructure/core/firebase_injectable_module.dart' as _i46;
-import 'infrastructure/core/firestore_helpers.dart' as _i42;
+import 'infrastructure/core/firebase_injectable_module.dart' as _i47;
+import 'infrastructure/core/firestore_helpers.dart' as _i43;
 import 'infrastructure/data_ownership/data_ownership_facade.dart' as _i16;
 import 'infrastructure/data_sources/data_source_repository.dart' as _i18;
 import 'infrastructure/data_sources/data_source_status_repository.dart' as _i20;
@@ -116,37 +117,38 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       _i31.RecommendationWatcherBloc(get<_i21.IRecommendationRepository>()));
   gh.factory<_i32.SignInFormBloc>(
       () => _i32.SignInFormBloc(get<_i13.IAuthFacade>()));
-  gh.factory<_i33.UserArticleEngagementActorBloc>(() =>
-      _i33.UserArticleEngagementActorBloc(
+  gh.factory<_i33.TopicDetailsChartsBloc>(() => _i33.TopicDetailsChartsBloc());
+  gh.factory<_i34.UserArticleEngagementActorBloc>(() =>
+      _i34.UserArticleEngagementActorBloc(
           get<_i25.IUserArticleEngagementRepository>()));
-  gh.factory<_i34.UserArticleEngagementWatcherBloc>(() =>
-      _i34.UserArticleEngagementWatcherBloc(
+  gh.factory<_i35.UserArticleEngagementWatcherBloc>(() =>
+      _i35.UserArticleEngagementWatcherBloc(
           get<_i25.IUserArticleEngagementRepository>()));
-  gh.factory<_i35.UserTermDataSourceEngagementActorBloc>(() =>
-      _i35.UserTermDataSourceEngagementActorBloc(get<_i4.FirebaseFirestore>(),
+  gh.factory<_i36.UserTermDataSourceEngagementActorBloc>(() =>
+      _i36.UserTermDataSourceEngagementActorBloc(get<_i4.FirebaseFirestore>(),
           get<_i27.IUserTermDataSourceEngagementRepository>()));
-  gh.factory<_i36.UserTermDataSourceEngagementWatcherBloc>(() =>
-      _i36.UserTermDataSourceEngagementWatcherBloc(
+  gh.factory<_i37.UserTermDataSourceEngagementWatcherBloc>(() =>
+      _i37.UserTermDataSourceEngagementWatcherBloc(
           get<_i27.IUserTermDataSourceEngagementRepository>()));
-  gh.factory<_i37.ArticleTermCountWatcherBloc>(() =>
-      _i37.ArticleTermCountWatcherBloc(
+  gh.factory<_i38.ArticleTermCountWatcherBloc>(() =>
+      _i38.ArticleTermCountWatcherBloc(
           get<_i11.IArticleTermCountRepository>()));
-  gh.factory<_i38.ArticleWatcherBloc>(
-      () => _i38.ArticleWatcherBloc(get<_i7.IArticleRepository>()));
-  gh.factory<_i39.AuthBloc>(() => _i39.AuthBloc(get<_i13.IAuthFacade>()));
-  gh.factory<_i40.DataOwnershipBloc>(
-      () => _i40.DataOwnershipBloc(get<_i15.IDataOwnershipFacade>()));
-  gh.factory<_i41.DataSourceStatusPickerBloc>(() =>
-      _i41.DataSourceStatusPickerBloc(get<_i17.IDataSourceRepository>(),
+  gh.factory<_i39.ArticleWatcherBloc>(
+      () => _i39.ArticleWatcherBloc(get<_i7.IArticleRepository>()));
+  gh.factory<_i40.AuthBloc>(() => _i40.AuthBloc(get<_i13.IAuthFacade>()));
+  gh.factory<_i41.DataOwnershipBloc>(
+      () => _i41.DataOwnershipBloc(get<_i15.IDataOwnershipFacade>()));
+  gh.factory<_i42.DataSourceStatusPickerBloc>(() =>
+      _i42.DataSourceStatusPickerBloc(get<_i17.IDataSourceRepository>(),
           get<_i19.IDataSourceStatusRepository>()));
-  gh.factory<_i42.FirestoreHelper>(() => _i42.FirestoreHelper(
+  gh.factory<_i43.FirestoreHelper>(() => _i43.FirestoreHelper(
       get<_i13.IAuthFacade>(), get<_i4.FirebaseFirestore>()));
-  gh.lazySingleton<_i43.IArticleSourceRepository>(() =>
-      _i44.ArticleSourceRepository(get<_i4.FirebaseFirestore>(),
+  gh.lazySingleton<_i44.IArticleSourceRepository>(() =>
+      _i45.ArticleSourceRepository(get<_i4.FirebaseFirestore>(),
           get<_i9.IArticleSourceStatusRepository>()));
-  gh.factory<_i45.ArticleSourcePickerBloc>(
-      () => _i45.ArticleSourcePickerBloc(get<_i43.IArticleSourceRepository>()));
+  gh.factory<_i46.ArticleSourcePickerBloc>(
+      () => _i46.ArticleSourcePickerBloc(get<_i44.IArticleSourceRepository>()));
   return get;
 }
 
-class _$FirebaseInjectableModule extends _i46.FirebaseInjectableModule {}
+class _$FirebaseInjectableModule extends _i47.FirebaseInjectableModule {}

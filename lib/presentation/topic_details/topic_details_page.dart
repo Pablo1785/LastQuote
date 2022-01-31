@@ -1,10 +1,17 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:ddd/application/auth/auth_bloc.dart';
+import 'package:ddd/application/topic_details/topic_details_charts_bloc.dart';
 import 'package:ddd/application/user_term_data_source_engagements/user_term_data_source_engagement_watcher/user_term_data_source_engagement_watcher_bloc.dart';
+import 'package:ddd/domain/core/value_objects.dart';
 import 'package:ddd/domain/user_term_data_source_engagement/user_term_data_source_engagement.dart';
+import 'package:ddd/infrastructure/core/firestore_helpers.dart';
 import 'package:ddd/presentation/core/quotes_logo.dart';
+import 'package:ddd/presentation/user_term_data_source_engagement/user_term_data_source_engagement_pie_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kt_dart/src/collection/kt_list.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
 
 import '../../injection.dart';
 
@@ -18,15 +25,27 @@ class TopicDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<UserTermDataSourceEngagementWatcherBloc>(
-      create: (BuildContext context) =>
-          getIt<UserTermDataSourceEngagementWatcherBloc>()
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<UserTermDataSourceEngagementWatcherBloc>(
+          create: (BuildContext context) =>
+              getIt<UserTermDataSourceEngagementWatcherBloc>()
+                ..add(
+                  UserTermDataSourceEngagementWatcherEvent
+                      .getForCurrentUserAndTermStarted(
+                    termId,
+                  ),
+                ),
+        ),
+        BlocProvider(
+          create: (context) => getIt<TopicDetailsChartsBloc>()
             ..add(
-              UserTermDataSourceEngagementWatcherEvent
-                  .getForCurrentUserAndTermStarted(
+              TopicDetailsChartsEvent.termChanged(
                 termId,
               ),
             ),
+        ),
+      ],
       child: BlocBuilder<UserTermDataSourceEngagementWatcherBloc,
           UserTermDataSourceEngagementWatcherState>(
         builder: (context, state) {
@@ -72,20 +91,74 @@ class TopicDetailsPage extends StatelessWidget {
                   final userTermDataSourceEngagements =
                       userTermDataSourceEngagementsSuccessState
                           .userTermDataSourceEngagements;
+
                   if (userTermDataSourceEngagements.size == 0) {
                     return const TopicDetailsNoEngagementsWidget();
                   }
-                  return ListView.builder(
+                  final userId =
+                      userTermDataSourceEngagements.iter.first.userId;
+                  final fakeData = [
+                    UserTermDataSourceEngagement(
+                      dataSourceId: UniqueId.fromUniqueString('Facebook'),
+                      termId: termId,
+                      userId: userId,
+                      id: JunctionUniqueId.fromUniqueString(
+                        'Facebook_' + termId + '_' + userId.getOrCrash(),
+                      ),
+                      isInitialInterest: true,
+                      likeCount: 15,
+                      openCount: 25,
+                      shareCount: 7,
+                      dismissCount: 3,
+                    ),
+                    UserTermDataSourceEngagement(
+                      dataSourceId: UniqueId.fromUniqueString('Twitter'),
+                      termId: termId,
+                      userId: userId,
+                      id: JunctionUniqueId.fromUniqueString(
+                        'Twitter_' + termId + '_' + userId.getOrCrash(),
+                      ),
+                      isInitialInterest: false,
+                      likeCount: 10,
+                      openCount: 40,
+                      shareCount: 10,
+                      dismissCount: 5,
+                    ),
+                    UserTermDataSourceEngagement(
+                      dataSourceId: UniqueId.fromUniqueString('Reddit'),
+                      termId: termId,
+                      userId: userId,
+                      id: JunctionUniqueId.fromUniqueString(
+                        'Reddit_' + termId + '_' + userId.getOrCrash(),
+                      ),
+                      isInitialInterest: false,
+                      likeCount: 5,
+                      openCount: 15,
+                      shareCount: 2,
+                      dismissCount: 1,
+                    ),
+                  ];
+                  fakeData.addAll(userTermDataSourceEngagements.iter);
+
+                  return ListView(
                     shrinkWrap: true,
-                    itemCount: userTermDataSourceEngagements.size,
-                    itemBuilder: (context, index) {
-                      final currUserTermDatasourceEngagement =
-                          userTermDataSourceEngagements[index];
-                      return TopicDetailsUserTermDataSourceEngagementListItemWidget(
-                        currUserTermDatasourceEngagement:
-                            currUserTermDatasourceEngagement,
-                      );
-                    },
+                    children: [
+                      ...fakeData.map(
+                        (currUserTermDataSourceEngagement) {
+                          return TopicDetailsUserTermDataSourceEngagementListItemWidget(
+                            currUserTermDatasourceEngagement:
+                                currUserTermDataSourceEngagement,
+                          );
+                        },
+                      ),
+                      SizedBox(
+                        height: 350,
+                        child: TopicDetailsChartWidget(
+                          userTermDataSourceEngagements:
+                              userTermDataSourceEngagements,
+                        ),
+                      )
+                    ],
                   );
                 },
                 loadFailure: (userTermDataSourceEngagementFailureState) {
@@ -119,6 +192,29 @@ class TopicDetailsPage extends StatelessWidget {
   }
 }
 
+class TopicDetailsChartWidget extends StatelessWidget {
+  const TopicDetailsChartWidget({
+    Key? key,
+    required this.userTermDataSourceEngagements,
+  }) : super(key: key);
+
+  final KtList<UserTermDataSourceEngagement> userTermDataSourceEngagements;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<TopicDetailsChartsBloc, TopicDetailsChartsState>(
+      builder: (context, state) {
+        return UserTermDataSourceEngagementPieChart.featurePreview(
+          engagementType: state.currentEngagementType,
+          termId: state.currentTermId,
+          userId: userTermDataSourceEngagements.iter.first.userId,
+          userTermDataSourceEngagements: userTermDataSourceEngagements,
+        );
+      },
+    );
+  }
+}
+
 class TopicDetailsUserTermDataSourceEngagementListItemWidget
     extends StatelessWidget {
   const TopicDetailsUserTermDataSourceEngagementListItemWidget({
@@ -146,35 +242,124 @@ class TopicDetailsUserTermDataSourceEngagementListItemWidget
         title: Text(
           'Interactions in ' + dataSourceName,
         ),
-        subtitle: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ActionChip(
-              avatar: Icon(Icons.thumb_up),
-              label:
-                  Text(currUserTermDatasourceEngagement.likeCount.toString()),
-              onPressed: () {},
-            ),
-            ActionChip(
-              avatar: Icon(Icons.share),
-              label:
-                  Text(currUserTermDatasourceEngagement.shareCount.toString()),
-              onPressed: () {},
-            ),
-            ActionChip(
-              avatar: Icon(Icons.open_in_browser),
-              label:
-                  Text(currUserTermDatasourceEngagement.openCount.toString()),
-              onPressed: () {},
-            ),
-            ActionChip(
-              avatar: Icon(Icons.delete),
-              label: Text(
-                  currUserTermDatasourceEngagement.dismissCount.toString()),
-              onPressed: () {},
-            ),
-          ],
+        subtitle: BlocBuilder<TopicDetailsChartsBloc, TopicDetailsChartsState>(
+          builder: (context, state) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ...['like', 'share', 'open', 'dismiss'].map(
+                  (engagementType) {
+                    var icon = Icons.thumb_up;
+                    var value = currUserTermDatasourceEngagement.likeCount;
+
+                    switch (engagementType) {
+                      case 'like':
+                        icon = Icons.thumb_up;
+                        value = currUserTermDatasourceEngagement.likeCount;
+                        break;
+                      case 'share':
+                        icon = Icons.share;
+                        value = currUserTermDatasourceEngagement.shareCount;
+                        break;
+                      case 'open':
+                        icon = Icons.open_in_browser;
+                        value = currUserTermDatasourceEngagement.openCount;
+                        break;
+                      case 'dismiss':
+                        icon = Icons.delete;
+                        value = currUserTermDatasourceEngagement.dismissCount;
+                        break;
+                      default:
+                        icon = Icons.thumb_up;
+                        value = currUserTermDatasourceEngagement.likeCount;
+                        break;
+                    }
+                    return ChoiceChip(
+                      selectedColor: Colors.indigo[50],
+                      selected: state.currentEngagementType == engagementType,
+                      avatar: Icon(
+                        icon,
+                        color: state.currentEngagementType == engagementType
+                            ? Colors.indigo[600]
+                            : null,
+                      ),
+                      labelStyle: TextStyle(
+                        color: state.currentEngagementType == engagementType
+                            ? Colors.indigo[600]
+                            : null,
+                      ),
+                      label: Text(value.toString()),
+                      onSelected: (isSelected) {
+                        context.read<TopicDetailsChartsBloc>().add(
+                              TopicDetailsChartsEvent.engagementChanged(
+                                  engagementType),
+                            );
+                      },
+                    );
+                  },
+                ),
+                // ChoiceChip(
+                //   selectedColor: Colors.indigo[50],
+                //   selected: state.currentEngagementType == 'like',
+                //   avatar: Icon(
+                //     Icons.thumb_up,
+                //     color: state.currentEngagementType == 'like'
+                //         ? Colors.indigo[400]
+                //         : null,
+                //   ),
+                //   labelStyle: TextStyle(
+                //     color: state.currentEngagementType == 'like'
+                //         ? Colors.indigo[400]
+                //         : null,
+                //   ),
+                //   label: Text(
+                //       currUserTermDatasourceEngagement.likeCount.toString()),
+                //   onSelected: (isSelected) {
+                //     context.read<TopicDetailsChartsBloc>().add(
+                //           TopicDetailsChartsEvent.engagementChanged('like'),
+                //         );
+                //   },
+                // ),
+                // ChoiceChip(
+                //   selectedColor: Colors.indigo[50],
+                //   selected: state.currentEngagementType == 'share',
+                //   avatar: Icon(Icons.share),
+                //   label: Text(
+                //       currUserTermDatasourceEngagement.shareCount.toString()),
+                //   onSelected: (isSelected) {
+                //     context.read<TopicDetailsChartsBloc>().add(
+                //           TopicDetailsChartsEvent.engagementChanged('share'),
+                //         );
+                //   },
+                // ),
+                // ChoiceChip(
+                //   selectedColor: Colors.indigo[50],
+                //   selected: state.currentEngagementType == 'open',
+                //   avatar: Icon(Icons.open_in_browser),
+                //   label: Text(
+                //       currUserTermDatasourceEngagement.openCount.toString()),
+                //   onSelected: (isSelected) {
+                //     context.read<TopicDetailsChartsBloc>().add(
+                //           TopicDetailsChartsEvent.engagementChanged('open'),
+                //         );
+                //   },
+                // ),
+                // ChoiceChip(
+                //   selectedColor: Colors.indigo[50],
+                //   selected: state.currentEngagementType == 'dismiss',
+                //   avatar: Icon(Icons.delete),
+                //   label: Text(
+                //       currUserTermDatasourceEngagement.dismissCount.toString()),
+                //   onSelected: (isSelected) {
+                //     context.read<TopicDetailsChartsBloc>().add(
+                //           TopicDetailsChartsEvent.engagementChanged('dismiss'),
+                //         );
+                //   },
+                // ),
+              ],
+            );
+          },
         ),
       ),
     );
