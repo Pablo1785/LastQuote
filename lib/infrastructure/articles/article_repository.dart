@@ -200,4 +200,35 @@ class ArticleRepository implements IArticleRepository {
         .toImmutableList();
     return articleIds;
   }
+
+  @override
+  Future<Either<ArticleFailure, KtList<Article>>> getById(
+      KtList<String> articleIds,
+      {bool includeDismissed = false}) async {
+    try {
+      final articles = await _firestore
+          .collection('articles')
+          .where(
+            FieldPath.documentId,
+            whereIn: articleIds.asList(),
+          )
+          .get();
+      return right(
+        articles.docs
+            .map(
+              (doc) => ArticleDto.fromFirestore(doc).toDomain(),
+            )
+            .toImmutableList(),
+      );
+    } on Exception catch (exception, stacktrace) {
+      if (exception is PlatformException &&
+          exception.message!.contains('permission')) {
+        return left(const ArticleFailure.insufficientPermissions());
+      } else {
+        print(exception.toString());
+        print(stacktrace.toString());
+        return left(const ArticleFailure.unexpected());
+      }
+    }
+  }
 }
