@@ -104,9 +104,10 @@ class _ArticlesOverviewPageState extends State<ArticlesOverviewPage> {
                 style: Theme.of(context).textTheme.caption,
               ),
               color: Theme.of(context).scaffoldBackgroundColor.withAlpha(0x55),
+              height: 20.0,
             ),
             preferredSize: const Size.fromHeight(
-              10.0,
+              0.5,
             ),
           ),
           actions: <Widget>[

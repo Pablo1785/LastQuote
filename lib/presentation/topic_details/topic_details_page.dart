@@ -31,14 +31,16 @@ class TopicDetailsPage extends StatelessWidget {
           UserTermDataSourceEngagementWatcherState>(
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(),
+            appBar: AppBar(
+              title: Text(termId),
+            ),
             body: Scaffold(
               appBar: AppBar(
                 leading: Container(),
                 backgroundColor: Theme.of(context).primaryColor.withAlpha(0x00),
                 foregroundColor: Colors.grey[700],
                 elevation: 0.0,
-                title: Text(termId),
+                toolbarHeight: 35,
                 bottom: PreferredSize(
                   child: Container(
                     alignment: Alignment.topCenter,
@@ -49,9 +51,10 @@ class TopicDetailsPage extends StatelessWidget {
                     color: Theme.of(context)
                         .scaffoldBackgroundColor
                         .withAlpha(0x55),
+                    height: 20.0,
                   ),
                   preferredSize: const Size.fromHeight(
-                    10.0,
+                    10,
                   ),
                 ),
               ),
