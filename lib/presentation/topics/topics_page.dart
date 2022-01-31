@@ -4,6 +4,7 @@ import 'package:ddd/application/user_term_data_source_engagements/user_term_data
 import 'package:ddd/domain/user_term_data_source_engagement/user_term_data_source_engagement.dart';
 import 'package:ddd/presentation/core/fun_logo.dart';
 import 'package:ddd/presentation/core/quotes_logo.dart';
+import 'package:ddd/presentation/routes/app_router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kt_dart/src/collection/interop.dart';
@@ -94,13 +95,27 @@ class UserTermDataSourceEngagementListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tileColor = Colors.white;
     return Card(
       child: ListTile(
+        onTap: () {
+          AutoRouter.of(context).push(
+            TopicDetailsRoute(
+              termId: currUserTermDatasourceEngagement.termId,
+            ),
+          );
+        },
+        tileColor: tileColor,
         leading: IconButton(
           onPressed: () {},
-          icon: Icon(currUserTermDatasourceEngagement.isInitialInterest
-              ? Icons.star
-              : Icons.star_border),
+          icon: Icon(
+            currUserTermDatasourceEngagement.isInitialInterest
+                ? Icons.star
+                : Icons.star_border,
+            color: currUserTermDatasourceEngagement.isInitialInterest
+                ? Colors.indigo[600]
+                : null,
+          ),
         ),
         title: Text(currUserTermDatasourceEngagement.termId),
         subtitle: Row(
@@ -108,25 +123,69 @@ class UserTermDataSourceEngagementListItemWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ActionChip(
-              avatar: Icon(Icons.thumb_up),
+              backgroundColor: tileColor,
+              avatar: Icon(
+                Icons.thumb_up_outlined,
+                color: currUserTermDatasourceEngagement.likeCount > 0
+                    ? Colors.indigo[600]
+                    : Colors.grey[600],
+              ),
+              labelStyle: TextStyle(
+                color: currUserTermDatasourceEngagement.likeCount > 0
+                    ? Colors.indigo[600]
+                    : Colors.grey[600],
+              ),
               label:
                   Text(currUserTermDatasourceEngagement.likeCount.toString()),
               onPressed: () {},
             ),
             ActionChip(
-              avatar: Icon(Icons.share),
+              backgroundColor: tileColor,
+              avatar: Icon(
+                Icons.share_outlined,
+                color: currUserTermDatasourceEngagement.shareCount > 0
+                    ? Colors.indigo[600]
+                    : Colors.grey[600],
+              ),
+              labelStyle: TextStyle(
+                color: currUserTermDatasourceEngagement.shareCount > 0
+                    ? Colors.indigo[600]
+                    : Colors.grey[600],
+              ),
               label:
                   Text(currUserTermDatasourceEngagement.shareCount.toString()),
               onPressed: () {},
             ),
             ActionChip(
-              avatar: Icon(Icons.open_in_browser),
+              backgroundColor: tileColor,
+              avatar: Icon(
+                Icons.open_in_browser_outlined,
+                color: currUserTermDatasourceEngagement.openCount > 0
+                    ? Colors.indigo[600]
+                    : Colors.grey[600],
+              ),
+              labelStyle: TextStyle(
+                color: currUserTermDatasourceEngagement.openCount > 0
+                    ? Colors.indigo[600]
+                    : Colors.grey[600],
+              ),
               label:
                   Text(currUserTermDatasourceEngagement.openCount.toString()),
               onPressed: () {},
             ),
             ActionChip(
-              avatar: Icon(Icons.delete),
+              backgroundColor: tileColor,
+              avatar: Icon(
+                Icons.delete_outline,
+                color: currUserTermDatasourceEngagement.dismissCount > 0
+                    ? Colors.indigo[600]
+                    : Colors.grey[600],
+              ),
+              labelStyle: TextStyle(
+                color: currUserTermDatasourceEngagement.dismissCount > 0
+                    ? Colors.indigo[600]
+                    : Colors.grey[600],
+              ),
               label: Text(
                   currUserTermDatasourceEngagement.dismissCount.toString()),
               onPressed: () {},
