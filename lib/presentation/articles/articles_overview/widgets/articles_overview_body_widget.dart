@@ -258,7 +258,6 @@ class ArticleLoadSuccessWidget extends StatelessWidget {
   }
 }
 
-
 class ArticleListItemWidget extends StatelessWidget {
   const ArticleListItemWidget({
     Key? key,
@@ -348,6 +347,11 @@ class ArticleListItemWidget extends StatelessWidget {
                                         .toString() +
                                     '% accurate',
                               ).show(context);
+                              AutoRouter.of(context).push(
+                                TopicDetailsRoute(
+                                  termId: articleTermCount.termId,
+                                ),
+                              );
                             },
                           );
                         },
