@@ -30,8 +30,10 @@ abstract class IArticleTermCountRepository {
   });
 
   Future<Either<ArticleTermCountFailure, KtList<ArticleTermCount>>> getForTerm(
-    Term term,
-  );
+    String termId, {
+    bool descending = true,
+    int limit = 3,
+  });
 
   Stream<Either<ArticleTermCountFailure, KtList<ArticleTermCount>>>
       watchForArticles(

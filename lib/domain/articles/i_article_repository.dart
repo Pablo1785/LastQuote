@@ -22,4 +22,10 @@ abstract class IArticleRepository {
     KtList<String> articleIds, {
     bool includeDismissed = false,
   });
+
+  // get articles by id
+  Future<Either<ArticleFailure, KtList<Article>>> getById(
+    KtList<String> articleIds, {
+    bool includeDismissed = false,
+  });
 }

@@ -299,64 +299,6 @@ class TopicDetailsUserTermDataSourceEngagementListItemWidget
                     );
                   },
                 ),
-                // ChoiceChip(
-                //   selectedColor: Colors.indigo[50],
-                //   selected: state.currentEngagementType == 'like',
-                //   avatar: Icon(
-                //     Icons.thumb_up,
-                //     color: state.currentEngagementType == 'like'
-                //         ? Colors.indigo[400]
-                //         : null,
-                //   ),
-                //   labelStyle: TextStyle(
-                //     color: state.currentEngagementType == 'like'
-                //         ? Colors.indigo[400]
-                //         : null,
-                //   ),
-                //   label: Text(
-                //       currUserTermDatasourceEngagement.likeCount.toString()),
-                //   onSelected: (isSelected) {
-                //     context.read<TopicDetailsChartsBloc>().add(
-                //           TopicDetailsChartsEvent.engagementChanged('like'),
-                //         );
-                //   },
-                // ),
-                // ChoiceChip(
-                //   selectedColor: Colors.indigo[50],
-                //   selected: state.currentEngagementType == 'share',
-                //   avatar: Icon(Icons.share),
-                //   label: Text(
-                //       currUserTermDatasourceEngagement.shareCount.toString()),
-                //   onSelected: (isSelected) {
-                //     context.read<TopicDetailsChartsBloc>().add(
-                //           TopicDetailsChartsEvent.engagementChanged('share'),
-                //         );
-                //   },
-                // ),
-                // ChoiceChip(
-                //   selectedColor: Colors.indigo[50],
-                //   selected: state.currentEngagementType == 'open',
-                //   avatar: Icon(Icons.open_in_browser),
-                //   label: Text(
-                //       currUserTermDatasourceEngagement.openCount.toString()),
-                //   onSelected: (isSelected) {
-                //     context.read<TopicDetailsChartsBloc>().add(
-                //           TopicDetailsChartsEvent.engagementChanged('open'),
-                //         );
-                //   },
-                // ),
-                // ChoiceChip(
-                //   selectedColor: Colors.indigo[50],
-                //   selected: state.currentEngagementType == 'dismiss',
-                //   avatar: Icon(Icons.delete),
-                //   label: Text(
-                //       currUserTermDatasourceEngagement.dismissCount.toString()),
-                //   onSelected: (isSelected) {
-                //     context.read<TopicDetailsChartsBloc>().add(
-                //           TopicDetailsChartsEvent.engagementChanged('dismiss'),
-                //         );
-                //   },
-                // ),
               ],
             );
           },

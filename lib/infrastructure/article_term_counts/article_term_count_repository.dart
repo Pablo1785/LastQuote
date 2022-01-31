@@ -59,10 +59,36 @@ class ArticleTermCountRepository implements IArticleTermCountRepository {
 
   @override
   Future<Either<ArticleTermCountFailure, KtList<ArticleTermCount>>> getForTerm(
-    Term term,
-  ) {
-    // TODO: implement getForTerm
-    throw UnimplementedError();
+    String termId, {
+    bool descending = true,
+    int limit = 3,
+  }) async {
+    try {
+      final articleTermCountSnapshot = await _firestore
+          .collection('article_term_counts')
+          .where(
+            'term_id',
+            isEqualTo: termId,
+          )
+          .orderBy(
+            'term_importance',
+            descending: descending,
+          )
+          .limit(limit)
+          .get();
+      return right(
+        articleTermCountSnapshot.docs
+            .map(
+              (doc) => ArticleTermCountDto.fromFirestore(doc).toDomain(),
+            )
+            .toImmutableList(),
+      );
+    } catch (exception, stacktrace) {
+      return _handleException<KtList<ArticleTermCount>>(
+        exception,
+        stacktrace,
+      );
+    }
   }
 
   @override
